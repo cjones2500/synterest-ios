@@ -64,7 +64,6 @@
     if (appDelegate.session.isOpen) {
         // valid account UI is shown whenever the session is open
         [self.buttonLoginLogout setTitle:@"Log out" forState:UIControlStateNormal];
-
     } else {
         // login-needed account UI is shown whenever the session is closed
         [self.buttonLoginLogout setTitle:@"Log in" forState:UIControlStateNormal];
@@ -91,16 +90,15 @@
         // users will simply close the app or switch away, without logging out; this will
         // cause the implicit cached-token login to occur on next launch of the application
         [appDelegate.session closeAndClearTokenInformation];
+
         
     } else {
         if (appDelegate.session.state != FBSessionStateCreated) {
             // Create a new, logged out session.
+            
             appDelegate.session = [[FBSession alloc] init];
-            //appDelegate.session = [FBSession activeSession];
         }
         
-        //actually activate the session 
-        appDelegate.session = [FBSession activeSession];
         // if the session isn't open, let's open it now and present the login UX to the user
         [appDelegate.session openWithCompletionHandler:^(FBSession *session,
                                                          FBSessionState status,
@@ -109,24 +107,35 @@
             [self updateView];
         }];
         
+        
+        
     }
 }
 
 - (IBAction)fqlQueryAction:(id)sender
 {
-    //NSMutableDictionary * testDic = [[NSMutableDictionary alloc] initWithCapacity:100];
-    //[self fqlRequest:@"SELECT name, location, fan_count, were_here_count FROM page WHERE contains('mcdonalds')"];
-    
     [self queryButtonAction];
-    //NSLog(@"testDic %@\n",result);
 }
 
 - (void)queryButtonAction
 {
-    // Query to fetch the active user's friends, limit to 25.
-    NSString *query =@"SELECT name, location FROM page WHERE contains('mcdonalds')";
+
+    //Standard Location query of facebook FQL
+    NSString *query =@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('London') ORDER BY rand() LIMIT 25 ";
+    
+    NSLog(@"before session active %@\n",[FBSession activeSession]);
+    
+    AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+    
+    
+    NSLog(@"after session active %@\n",[FBSession activeSession]);
+    NSLog(@"after session active %@\n",appDelegate.session);
+    
+    [FBSession setActiveSession:appDelegate.session];
+    
     // Set up the query parameter
     NSDictionary *queryParam = @{ @"q": query };
+    
     // Make the API request that uses FQL
     [FBRequestConnection startWithGraphPath:@"/fql"
                                  parameters:queryParam
@@ -141,7 +150,6 @@
                               }
                           }];
     
-    AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
     if (!appDelegate.session.isOpen) {
         NSLog(@"Session Not Open in FQL Query");
     }
