@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="2">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="5">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
+                <viewController id="2" customClass="ViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3">
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cdz-BG-t0h"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S4v-rq-edQ">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="buttonClickHandler:" destination="2" eventType="touchUpInside" id="T2j-mZ-EaW"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HoA-Lf-P4f">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Fql">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="fqlQueryAction:" destination="2" eventType="touchUpInside" id="Ypa-Tt-Klf"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="HoA-Lf-P4f" firstAttribute="trailing" secondItem="S4v-rq-edQ" secondAttribute="trailing" type="default" id="Bhh-Xq-F8q"/>
+                            <constraint firstItem="Cdz-BG-t0h" firstAttribute="top" secondItem="3" secondAttribute="top" type="default" id="PMp-S4-giD"/>
+                            <constraint firstItem="Cdz-BG-t0h" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="default" id="TYj-A3-7EQ"/>
+                            <constraint firstItem="HoA-Lf-P4f" firstAttribute="top" secondItem="3" secondAttribute="top" constant="84" id="Zz9-Rq-MwS"/>
+                            <constraint firstItem="Cdz-BG-t0h" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="bji-H7-8Rv"/>
+                            <constraint firstItem="S4v-rq-edQ" firstAttribute="top" secondItem="3" secondAttribute="top" constant="20" symbolic="YES" type="default" id="gLZ-TI-Haf"/>
+                            <constraint firstItem="S4v-rq-edQ" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="h8I-Fw-G3l"/>
+                            <constraint firstItem="HoA-Lf-P4f" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="idQ-VF-e38"/>
+                            <constraint firstItem="Cdz-BG-t0h" firstAttribute="bottom" secondItem="3" secondAttribute="bottom" type="default" id="zfw-dg-ga2"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="buttonLoginLogout" destination="S4v-rq-edQ" id="KUf-Rn-6OP"/>
+                        <outlet property="fqlButton" destination="HoA-Lf-P4f" id="Kbj-q2-zfG"/>
+                        <outlet property="mapView" destination="Cdz-BG-t0h" id="XkY-6w-KOe"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="327" y="-50"/>
+        </scene>
+    </scenes>
+    <classes>
+        <class className="FirstResponder">
+            <source key="sourceIdentifier" type="user"/>
+            <relationships>
+                <relationship kind="action" name="action"/>
+            </relationships>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="ViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="buttonClickHandler:"/>
+                <relationship kind="action" name="fqlQueryAction:"/>
+                <relationship kind="outlet" name="buttonLoginLogout" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="fqlButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
+            </relationships>
+        </class>
+    </classes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>
