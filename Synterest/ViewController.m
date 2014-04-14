@@ -28,10 +28,10 @@
 @end
 
 //#define METERS_PER_MILE 1609.344
-#define METERS_PER_MILE 6000.0
+#define METERS_PER_MILE 10000.0
 
 
-@implementation ViewController
+@implementation ViewController 
 
 @synthesize facebookData;
 
@@ -162,7 +162,7 @@
 {
 
     //Standard Location query of facebook FQL
-    NSString *query =@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('London') ORDER BY rand() LIMIT 5 ";
+    NSString *query =@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('London') ORDER BY rand() LIMIT 100 ";
     
     AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
     
@@ -254,31 +254,40 @@
         [_mapView removeAnnotation:annotation];
     }
     
+    NSLog(@"num of dataPoints %u",[responseData count]);
     
     for (NSMutableDictionary *singlePoint in responseData)
     {
-        //NSLog(@"here in loop %@\n",singlePoint);
-        MyLocation *singlePointLocation = [[MyLocation alloc] init];
-        //NSLog(@"here in loop %@\n",singlePoint);
-        [singlePointLocation initWithFacebookData:singlePoint];
-        //NSLog(@"here in loop %@\n",singlePointLocation);
-        NSLog(@"getting called");
-        [_mapView addAnnotation:singlePointLocation];
+        
+        @try{
+            CLLocationCoordinate2D coordinates;
+            coordinates.latitude = [[[singlePoint objectForKey:@"venue"] objectForKey:@"latitude"] doubleValue];
+            coordinates.longitude = [[[singlePoint objectForKey:@"venue"] objectForKey:@"longitude"] doubleValue];
+            NSLog(@"logging...");
+            //NSLog(@" coordinates %f",coordinates.latitude);
+            MyLocation *annotation = [[MyLocation alloc] initWithName:nil address:nil coordinate:coordinates] ;
+            [_mapView addAnnotation:annotation];
+        }
+        @catch (NSException *exception) {
+            NSLog(@"Exception:%@",exception);
+        }
+        @finally {
+            continue;
+        }
+        
     }
     
 }
 
+
+
 //this is the old function that doesn't work properly
 - (void) fqlRequest:(NSString*)fqlQuery
-{
-    //Facebook* facebook = [[Facebook alloc] initWithAppId:@&quot;YOUR_APP_ID&quot;];
-    
+{    
     NSString *query = [NSString stringWithString:fqlQuery];  //begins from SELECT........
-    
     NSMutableDictionary * params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                     query, @"q",
                                     nil];
-    
     FBRequest *request = [FBRequest requestWithGraphPath:@"/fql" parameters:params HTTPMethod:@"GET"];
     
     [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
@@ -288,16 +297,7 @@
         NSLog(@"results %@\n",result);
         
     }];
-    
-    //or you can do it also with the following class method:
-    
-    /*[FBRequestConnection startWithGraphPath:@"/fql" parameters:params HTTPMethod:@"GET" completionHandler:^(FBRequestConnection *connection,id result,NSError *error) {
-        //do your stuff
-        
-        
-    }];*/
-    
-    //return result;
+
 }
 
 

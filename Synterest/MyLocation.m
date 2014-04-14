@@ -7,16 +7,37 @@
 //
 
 #import "MyLocation.h"
-#import <AddressBook/AddressBook.h>
-
-@interface MyLocation ()
-@property (nonatomic, copy) NSString *name;
-@property (nonatomic, copy) NSString *address;
-@property (nonatomic, retain) NSMutableDictionary *facebookData;
-@property (nonatomic, assign) CLLocationCoordinate2D theCoordinates;
-@end
 
 @implementation MyLocation
+@synthesize name = _name;
+@synthesize address = _address;
+@synthesize coordinate = _coordinate;
+
+- (id)initWithName:(NSString*)name address:(NSString*)address coordinate:(CLLocationCoordinate2D)coordinate {
+    if ((self = [super init])) {
+        _name = [name copy];
+        _address = [address copy];
+        _coordinate = coordinate;
+    }
+    return self;
+}
+
+- (NSString *)title {
+    if ([_name isKindOfClass:[NSNull class]])
+        return @"Unknown charge";
+    else
+        return _name;
+}
+
+- (NSString *)subtitle {
+    return _address;
+}
+
+
+
+@end
+
+
 
 /*- (id)initWithName:(NSString*)name address:(NSString*)address coordinate:(CLLocationCoordinate2D)coordinate {
     if ((self = [super init])) {
@@ -31,17 +52,18 @@
     return self;
 }*/
 
-- (void)initWithFacebookData:(NSMutableDictionary*)loadedFacebookData
+/*- (void)initWithFacebookData:(NSMutableDictionary*)loadedFacebookData
 {
     self.facebookData = loadedFacebookData;
     self.theCoordinates = [self coordinate];
-    NSLog(@" coords %@",self.facebookData);
-}
+    NSLog(@"getting called here\n");
+    //NSLog(@" coords %@",self.facebookData);
+}*/
 
-- (CLLocationCoordinate2D)coordinate {
+/*- (CLLocationCoordinate2D)coordinate {
     
     double longitudeValue = [[[self.facebookData objectForKey:@"venue"] objectForKey:@"longitude"] doubleValue];
-    double latitudeValue = [[[self.facebookData objectForKey:@"venue"] objectForKey:@"latitude"] doubleValue];
+    double latitudeValue = [[[self.facebookData objectForKey:@"venue"] objectForKey:@"latitude"] doubleValue];*/
     
     //NSLog(@"before longitude: %f\n",longitudeValue);
     //NSLog(@"before latitude: %f\n",latitudeValue);
@@ -56,19 +78,24 @@
     }*/
     
     
-    NSLog(@"longitude: %f\n",longitudeValue);
-    NSLog(@"latitude: %f\n",latitudeValue);
+    //NSLog(@"longitude: %f\n",longitudeValue);
+    //NSLog(@"latitude: %f\n",latitudeValue);
     
-    _theCoordinates.latitude = longitudeValue;
-    _theCoordinates.longitude = latitudeValue;
+    //_theCoordinates.latitude = longitudeValue;
+    //_theCoordinates.longitude = latitudeValue;
     
     
     //NSLog(@"longitude: %@",[[[self.facebookData objectForKey:@"venue"] objectForKey:@"longitude"] doubleValue]);
    //NSLog(@"latitude: %@",[[[self.facebookData objectForKey:@"venue"] objectForKey:@"latitude"] doubleValue]);
-    return _theCoordinates;
-}
+    //return _theCoordinates;
+//}
 
-- (MKMapItem*)mapItem {
+/*- (NSString *)title {
+    return _name;
+}*/
+
+
+/*- (MKMapItem*)mapItem {
     NSDictionary *addressDict = nil;
     
     MKPlacemark *placemark = [[MKPlacemark alloc]
@@ -79,6 +106,6 @@
     mapItem.name = self.title;
     
     return mapItem;
-}
+}*/
 
-@end
+//@end
