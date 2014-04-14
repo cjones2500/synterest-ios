@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DB2D4F4418FB5D0D004DE5BB /* MyLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = DB2D4F4318FB5D0D004DE5BB /* MyLocation.m */; };
+		DB2D4F4618FB66DA004DE5BB /* arrest.png in Resources */ = {isa = PBXBuildFile; fileRef = DB2D4F4518FB66DA004DE5BB /* arrest.png */; };
 		DB4B8AD018FA1DDB0063F3A3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB4B8ACF18FA1DDB0063F3A3 /* UIKit.framework */; };
 		DB4B8AD218FA1DDB0063F3A3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB4B8AD118FA1DDB0063F3A3 /* Foundation.framework */; };
 		DB4B8AD418FA1DDB0063F3A3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB4B8AD318FA1DDB0063F3A3 /* CoreGraphics.framework */; };
@@ -55,6 +57,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DB2D4F4318FB5D0D004DE5BB /* MyLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyLocation.m; sourceTree = "<group>"; };
+		DB2D4F4518FB66DA004DE5BB /* arrest.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrest.png; sourceTree = "<group>"; };
+		DB2D4F4B18FB68C3004DE5BB /* en */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = en; path = en.lproj/MyLocation.h; sourceTree = "<group>"; };
 		DB4B8ACC18FA1DDB0063F3A3 /* Synterest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Synterest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB4B8ACF18FA1DDB0063F3A3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		DB4B8AD118FA1DDB0063F3A3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -192,6 +197,9 @@
 				DB4B8AEE18FA1DDB0063F3A3 /* ViewController.m */,
 				DB4B8B4118FA3C2B0063F3A3 /* SynterestModel.h */,
 				DB4B8B4218FA3C2C0063F3A3 /* SynterestModel.m */,
+				DB2D4F4A18FB68C3004DE5BB /* MyLocation.h */,
+				DB2D4F4318FB5D0D004DE5BB /* MyLocation.m */,
+				DB2D4F4518FB66DA004DE5BB /* arrest.png */,
 				DB4B8AD618FA1DDB0063F3A3 /* Supporting Files */,
 			);
 			path = Synterest;
@@ -345,6 +353,7 @@
 				DB4B8AE618FA1DDB0063F3A3 /* Default-568h@2x.png in Resources */,
 				DB4B8AE918FA1DDB0063F3A3 /* MainStoryboard_iPhone.storyboard in Resources */,
 				DB4B8AEC18FA1DDB0063F3A3 /* MainStoryboard_iPad.storyboard in Resources */,
+				DB2D4F4618FB66DA004DE5BB /* arrest.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -393,6 +402,7 @@
 				DB4B8B2E18FA23010063F3A3 /* Reachability.m in Sources */,
 				DB4B8B3218FA23430063F3A3 /* MBProgressHUD.m in Sources */,
 				DB4B8B4318FA3C2C0063F3A3 /* SynterestModel.m in Sources */,
+				DB2D4F4418FB5D0D004DE5BB /* MyLocation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -415,6 +425,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		DB2D4F4A18FB68C3004DE5BB /* MyLocation.h */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DB2D4F4B18FB68C3004DE5BB /* en */,
+			);
+			name = MyLocation.h;
+			sourceTree = "<group>";
+		};
 		DB4B8AD818FA1DDB0063F3A3 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -595,6 +613,7 @@
 				DB4B8B0918FA1DDB0063F3A3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DB4B8B0A18FA1DDB0063F3A3 /* Build configuration list for PBXNativeTarget "SynterestTests" */ = {
 			isa = XCConfigurationList;
@@ -603,6 +622,7 @@
 				DB4B8B0C18FA1DDB0063F3A3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

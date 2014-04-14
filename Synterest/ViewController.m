@@ -11,6 +11,9 @@
 #import "AppDelegate.h"
 #import "ViewController.h"
 #import <FacebookSDK/FacebookSDK.h>
+#import <AddressBook/AddressBook.h>
+#import <MapKit/MapKit.h>
+#import "MyLocation.h"
 
 @interface ViewController ()
 
@@ -24,14 +27,52 @@
 
 @end
 
-#define METERS_PER_MILE 1609.344
+//#define METERS_PER_MILE 1609.344
+#define METERS_PER_MILE 6000.0
+
 
 @implementation ViewController
+
+@synthesize facebookData;
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
+    
+    static NSString *identifier = @"MyLocation";
+    if ([annotation isKindOfClass:[MyLocation class]]) {
+        
+        MKPinAnnotationView *annotationView = (MKPinAnnotationView *) [_mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
+        if (annotationView == nil) {
+            annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
+        } else {
+            annotationView.annotation = annotation;
+        }
+        
+        annotationView.enabled = YES;
+        annotationView.canShowCallout = YES;
+        annotationView.image=[UIImage imageNamed:@"arrest.png"];//here we use a nice image instead of the default pins
+        
+        return annotationView;
+    }
+    
+    return nil;
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+
+    //MKMapView *mapView = [[MKMapView alloc] initWithFrame:self.view.frame];
+    
+    //Always center the dot and zoom in to an apropriate zoom level when position changes
+    //[mapView setUserTrackingMode:MKUserTrackingModeFollow];
+    
+    //don't let the user drag around the the map -> just zooming enabled
+    //[mapView setScrollEnabled:NO];
+    
+    //[self.view addSubview:mapView];
+    
+    
     
     [self updateView];
     
@@ -121,15 +162,9 @@
 {
 
     //Standard Location query of facebook FQL
-    NSString *query =@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('London') ORDER BY rand() LIMIT 25 ";
-    
-    NSLog(@"before session active %@\n",[FBSession activeSession]);
+    NSString *query =@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('London') ORDER BY rand() LIMIT 5 ";
     
     AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
-    
-    
-    NSLog(@"after session active %@\n",[FBSession activeSession]);
-    NSLog(@"after session active %@\n",appDelegate.session);
     
     [FBSession setActiveSession:appDelegate.session];
     
@@ -144,9 +179,25 @@
                                               id result,
                                               NSError *error) {
                               if (error) {
+                                  
                                   NSLog(@"Error: %@", [error localizedDescription]);
+                                  
                               } else {
-                                  NSLog(@"Result: %@", result);
+                                  //do things with the result here
+                    
+                                  // result is the json response from a successful request
+                                  NSDictionary *dictionary = (NSDictionary *)result;
+                                  
+                                  NSString *text;
+                                  // we pull the name property out, if there is one, and display it
+                                  text = (NSString *)[dictionary objectForKey:@"data"];
+                                  
+                                  facebookData = [self parseFbFqlResult:result];
+                                  
+                                  [self plotFacebookData:facebookData];
+                                  
+                                  //NSLog(@"json dictionary %@",[[[dictionary objectForKey:@"data"] objectAtIndex:0] objectForKey:@"eid"]);
+                                  
                               }
                           }];
     
@@ -154,11 +205,70 @@
         NSLog(@"Session Not Open in FQL Query");
     }
     else{
-        NSLog(@"Access token is here %@",appDelegate.session.accessTokenData);
+        //do nothing all is good 
+        //NSLog(@"Access token is here %@",appDelegate.session.accessTokenData);
     }
     
 }
 
+- (NSMutableArray*) parseFbFqlResult:(id)result
+{
+    NSMutableArray* facebookResults = [[NSMutableArray alloc] init];
+    
+    // result is the json response from a successful request
+    NSDictionary *dictionary = (NSDictionary *)result;
+    
+    NSString *text;
+    // we pull the name property out, if there is one, and display it
+    text = (NSString *)[dictionary objectForKey:@"data"];
+    
+    //NSLog(@"json dictionary %@",[[[dictionary objectForKey:@"data"] objectAtIndex:0] objectForKey:@"eid"]);
+    
+    unsigned int i = 0;
+    //count the number of objects in the request 
+    unsigned int cnt = [[dictionary objectForKey:@"data"] count];
+    
+    //eid, name,location,description, venue, start_time, update_time, end_time, pic
+    
+    for(i =0;i<cnt;i++){
+    
+        NSMutableDictionary* singleResult = [[NSMutableDictionary alloc] init];
+        [singleResult setObject:[[[dictionary objectForKey:@"data"] objectAtIndex:i] objectForKey:@"eid"] forKey:@"eid"];
+        [singleResult setObject:[[[dictionary objectForKey:@"data"] objectAtIndex:i] objectForKey:@"name"] forKey:@"name"];
+        [singleResult setObject:[[[dictionary objectForKey:@"data"] objectAtIndex:i] objectForKey:@"description"] forKey:@"description"];
+        [singleResult setObject:[[[dictionary objectForKey:@"data"] objectAtIndex:i] objectForKey:@"start_time"] forKey:@"start_time"];
+        [singleResult setObject:[[[dictionary objectForKey:@"data"] objectAtIndex:i] objectForKey:@"end_time"] forKey:@"end_time"];
+        [singleResult setObject:[[[dictionary objectForKey:@"data"] objectAtIndex:i] objectForKey:@"pic"] forKey:@"pic"];
+        [singleResult setObject:[[[dictionary objectForKey:@"data"] objectAtIndex:i] objectForKey:@"venue"] forKey:@"venue"];
+        //NSLog(@" venue data %@\n",[singleResult objectForKey:@"venue"]);
+        [facebookResults addObject:singleResult];
+    }
+    
+    return facebookResults;
+    
+}
+
+- (void)plotFacebookData:(NSMutableArray *)responseData
+{
+    for (id<MKAnnotation> annotation in _mapView.annotations) {
+        [_mapView removeAnnotation:annotation];
+    }
+    
+    
+    for (NSMutableDictionary *singlePoint in responseData)
+    {
+        //NSLog(@"here in loop %@\n",singlePoint);
+        MyLocation *singlePointLocation = [[MyLocation alloc] init];
+        //NSLog(@"here in loop %@\n",singlePoint);
+        [singlePointLocation initWithFacebookData:singlePoint];
+        //NSLog(@"here in loop %@\n",singlePointLocation);
+        NSLog(@"getting called");
+        [_mapView addAnnotation:singlePointLocation];
+    }
+    
+}
+
+//this is the old function that doesn't work properly
 - (void) fqlRequest:(NSString*)fqlQuery
 {
     //Facebook* facebook = [[Facebook alloc] initWithAppId:@&quot;YOUR_APP_ID&quot;];
@@ -212,8 +322,8 @@
 {
     // 1
     CLLocationCoordinate2D zoomLocation;
-    zoomLocation.latitude = 39.281516;
-    zoomLocation.longitude= -76.580806;
+    zoomLocation.latitude = 51.50722;
+    zoomLocation.longitude= -0.12750;
     
     // 2
     MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 0.5*METERS_PER_MILE, 0.5*METERS_PER_MILE);

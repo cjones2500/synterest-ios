@@ -10,10 +10,14 @@
 #import <MapKit/MapKit.h>
 
 @interface ViewController : UIViewController
+
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UIButton *fqlButton;
+@property (weak, nonatomic) NSMutableArray *facebookData;
 
 - (void)viewWillAppear:(BOOL)animated;
+- (NSMutableArray*) parseFbFqlResult:(id)result;
+- (void)plotFacebookData:(NSMutableArray *)responseData;
 //- (IBAction)onFbLoginClick:(id)sender;
 
 @end
