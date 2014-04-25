@@ -12,7 +12,7 @@
 @interface ViewController : UIViewController <MKMapViewDelegate>{
     BOOL _doneInitialZoom;
 }
-
+//@property (weak, nonatomic) IBOutlet MKMapView *_mapView;//This was auto-added by Xcode :]
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UIButton *fqlButton;
 @property (weak, nonatomic) NSMutableArray *facebookData;

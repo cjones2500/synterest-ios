@@ -35,7 +35,15 @@
 
 @synthesize facebookData;
 
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Release any cached data, images, etc that aren't in use.
+}
+
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
+    
+    NSLog(@"here");
     
     static NSString *identifier = @"MyLocation";
     if ([annotation isKindOfClass:[MyLocation class]]) {
@@ -60,20 +68,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-
-    //MKMapView *mapView = [[MKMapView alloc] initWithFrame:self.view.frame];
-    
-    //Always center the dot and zoom in to an apropriate zoom level when position changes
-    //[mapView setUserTrackingMode:MKUserTrackingModeFollow];
-    
-    //don't let the user drag around the the map -> just zooming enabled
-    //[mapView setScrollEnabled:NO];
-    
-    //[self.view addSubview:mapView];
-    
-    
-    
     [self updateView];
     
     AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
@@ -111,12 +105,6 @@
     }
 }
 
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 // FBSample logic
 // handler for button click, logs sessions in or out
@@ -162,7 +150,7 @@
 {
 
     //Standard Location query of facebook FQL
-    NSString *query =@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('London') ORDER BY rand() LIMIT 100 ";
+    NSString *query =@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('london') ORDER BY rand() LIMIT 100 ";
     
     AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
     
@@ -184,7 +172,8 @@
                                   
                               } else {
                                   //do things with the result here
-                    
+                                  //NSLog(@"Result: %@",[connection description]);
+                                  
                                   // result is the json response from a successful request
                                   NSDictionary *dictionary = (NSDictionary *)result;
                                   
@@ -263,10 +252,12 @@
             CLLocationCoordinate2D coordinates;
             coordinates.latitude = [[[singlePoint objectForKey:@"venue"] objectForKey:@"latitude"] doubleValue];
             coordinates.longitude = [[[singlePoint objectForKey:@"venue"] objectForKey:@"longitude"] doubleValue];
-            NSLog(@"logging...");
+            //NSLog(@"logging...");
             //NSLog(@" coordinates %f",coordinates.latitude);
-            MyLocation *annotation = [[MyLocation alloc] initWithName:nil address:nil coordinate:coordinates] ;
+            //InitWithName gives a description
+            MyLocation *annotation = [[MyLocation alloc] initWithName:[singlePoint objectForKey:@"name"] address:nil coordinate:coordinates] ;
             [_mapView addAnnotation:annotation];
+        
         }
         @catch (NSException *exception) {
             NSLog(@"Exception:%@",exception);
