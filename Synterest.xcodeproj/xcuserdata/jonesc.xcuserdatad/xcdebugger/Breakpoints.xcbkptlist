@@ -8,11 +8,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Synterest/ViewController.m"
-         timestampString = "420078109.096124"
+         timestampString = "420079103.244571"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "283"
-         endingLineNumber = "283"
+         startingLineNumber = "287"
+         endingLineNumber = "287"
          landmarkName = "-fqlRequest:"
          landmarkType = "5">
       </FileBreakpoint>

@@ -43,8 +43,6 @@
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
     
-    NSLog(@"here");
-    
     static NSString *identifier = @"MyLocation";
     if ([annotation isKindOfClass:[MyLocation class]]) {
         
@@ -54,6 +52,9 @@
         } else {
             annotationView.annotation = annotation;
         }
+        
+        //used to access the information on the annotation
+        //NSLog(@"test value %@\n",[annotation title]);
         
         annotationView.enabled = YES;
         annotationView.canShowCallout = YES;
@@ -69,6 +70,9 @@
 {
     [super viewDidLoad];
     [self updateView];
+    
+    //Magic line that makes the mapView call the annotation script
+    _mapView.delegate=self;
     
     AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
     if (!appDelegate.session.isOpen) {
@@ -150,7 +154,7 @@
 {
 
     //Standard Location query of facebook FQL
-    NSString *query =@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('london') ORDER BY rand() LIMIT 100 ";
+    NSString *query =@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('london') ORDER BY rand() LIMIT 10 ";
     
     AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
     
