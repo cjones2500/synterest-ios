@@ -12,14 +12,16 @@
 @interface MyLocation : NSObject <MKAnnotation> {
     NSString *_name;
     NSString *_address;
+    NSNumber *_eventType;
     CLLocationCoordinate2D _coordinate;
 }
 
 @property (copy) NSString *name;
 @property (copy) NSString *address;
+@property (copy) NSNumber *eventType;
 @property (nonatomic, readonly) CLLocationCoordinate2D coordinate;
 
-- (id)initWithName:(NSString*)name address:(NSString*)address coordinate:(CLLocationCoordinate2D)coordinate;
-
+- (id)initWithName:(NSString*)name address:(NSString*)address coordinate:(CLLocationCoordinate2D)coordinate typeOfEvent:(int)anEventType;
 @end
+
 

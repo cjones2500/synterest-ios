@@ -12,12 +12,14 @@
 @synthesize name = _name;
 @synthesize address = _address;
 @synthesize coordinate = _coordinate;
+@synthesize eventType = _eventType;
 
-- (id)initWithName:(NSString*)name address:(NSString*)address coordinate:(CLLocationCoordinate2D)coordinate {
+- (id)initWithName:(NSString*)name address:(NSString*)address coordinate:(CLLocationCoordinate2D)coordinate typeOfEvent:(int)anEventType {
     if ((self = [super init])) {
         _name = [name copy];
         _address = [address copy];
         _coordinate = coordinate;
+        _eventType = [NSNumber numberWithInt:anEventType];
     }
     return self;
 }
@@ -33,6 +35,8 @@
     return _address;
 }
 
-
+- (NSNumber*) eventCatagory{
+    return _eventType;
+}
 
 @end

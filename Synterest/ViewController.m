@@ -41,7 +41,8 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
-- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(MyLocation*)annotation {
     
     static NSString *identifier = @"MyLocation";
     if ([annotation isKindOfClass:[MyLocation class]]) {
@@ -53,13 +54,16 @@
             annotationView.annotation = annotation;
         }
         
-        //used to access the information on the annotation
-        //NSLog(@"test value %@\n",[annotation title]);
-        
         annotationView.enabled = YES;
         annotationView.canShowCallout = YES;
-        annotationView.image=[UIImage imageNamed:@"arrest.png"];//here we use a nice image instead of the default pins
         
+        //here I can play around with different icons for different types of event
+        if([[annotation eventType] intValue] == 0){
+            annotationView.image=[UIImage imageNamed:@"arrest.png"];//here we use a nice image instead of the default pins
+        }
+        else{
+            //use the default value
+        }
         return annotationView;
     }
     
@@ -259,7 +263,7 @@
             //NSLog(@"logging...");
             //NSLog(@" coordinates %f",coordinates.latitude);
             //InitWithName gives a description
-            MyLocation *annotation = [[MyLocation alloc] initWithName:[singlePoint objectForKey:@"name"] address:nil coordinate:coordinates] ;
+            MyLocation *annotation = [[MyLocation alloc] initWithName:[singlePoint objectForKey:@"name"] address:nil coordinate:coordinates typeOfEvent:0];
             [_mapView addAnnotation:annotation];
         
         }
