@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 Chris Jones. All rights reserved.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 
-@interface SynterestTests : SenTestCase
+@interface SynterestTests : XCTestCase
 
 @end

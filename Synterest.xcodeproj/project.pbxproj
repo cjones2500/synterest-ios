@@ -21,7 +21,6 @@
 		DB4B8AE918FA1DDB0063F3A3 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB4B8AE718FA1DDB0063F3A3 /* MainStoryboard_iPhone.storyboard */; };
 		DB4B8AEC18FA1DDB0063F3A3 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB4B8AEA18FA1DDB0063F3A3 /* MainStoryboard_iPad.storyboard */; };
 		DB4B8AEF18FA1DDB0063F3A3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB4B8AEE18FA1DDB0063F3A3 /* ViewController.m */; };
-		DB4B8AF718FA1DDB0063F3A3 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB4B8AF618FA1DDB0063F3A3 /* SenTestingKit.framework */; };
 		DB4B8AF818FA1DDB0063F3A3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB4B8ACF18FA1DDB0063F3A3 /* UIKit.framework */; };
 		DB4B8AF918FA1DDB0063F3A3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB4B8AD118FA1DDB0063F3A3 /* Foundation.framework */; };
 		DB4B8B0118FA1DDB0063F3A3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DB4B8AFF18FA1DDB0063F3A3 /* InfoPlist.strings */; };
@@ -77,8 +76,7 @@
 		DB4B8AEB18FA1DDB0063F3A3 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
 		DB4B8AED18FA1DDB0063F3A3 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		DB4B8AEE18FA1DDB0063F3A3 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		DB4B8AF518FA1DDB0063F3A3 /* SynterestTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SynterestTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		DB4B8AF618FA1DDB0063F3A3 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		DB4B8AF518FA1DDB0063F3A3 /* SynterestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SynterestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB4B8AFE18FA1DDB0063F3A3 /* SynterestTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SynterestTests-Info.plist"; sourceTree = "<group>"; };
 		DB4B8B0018FA1DDB0063F3A3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DB4B8B0218FA1DDB0063F3A3 /* SynterestTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SynterestTests.h; sourceTree = "<group>"; };
@@ -138,7 +136,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DB4B8AF718FA1DDB0063F3A3 /* SenTestingKit.framework in Frameworks */,
 				DB4B8AF818FA1DDB0063F3A3 /* UIKit.framework in Frameworks */,
 				DB4B8AF918FA1DDB0063F3A3 /* Foundation.framework in Frameworks */,
 				DB4B8B3D18FA29900063F3A3 /* FacebookSDK.framework in Frameworks */,
@@ -162,7 +159,7 @@
 			isa = PBXGroup;
 			children = (
 				DB4B8ACC18FA1DDB0063F3A3 /* Synterest.app */,
-				DB4B8AF518FA1DDB0063F3A3 /* SynterestTests.octest */,
+				DB4B8AF518FA1DDB0063F3A3 /* SynterestTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -179,7 +176,6 @@
 				DB4B8ACF18FA1DDB0063F3A3 /* UIKit.framework */,
 				DB4B8AD118FA1DDB0063F3A3 /* Foundation.framework */,
 				DB4B8AD318FA1DDB0063F3A3 /* CoreGraphics.framework */,
-				DB4B8AF618FA1DDB0063F3A3 /* SenTestingKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -312,8 +308,8 @@
 			);
 			name = SynterestTests;
 			productName = SynterestTests;
-			productReference = DB4B8AF518FA1DDB0063F3A3 /* SynterestTests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productReference = DB4B8AF518FA1DDB0063F3A3 /* SynterestTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -321,6 +317,7 @@
 		DB4B8AC418FA1DDB0063F3A3 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastTestingUpgradeCheck = 0510;
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = "Chris Jones";
 			};
@@ -566,13 +563,13 @@
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
 					"\"$(SRCROOT)\"",
+					"$(inherited)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Synterest/Synterest-Prefix.pch";
 				INFOPLIST_FILE = "SynterestTests/SynterestTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
 		};
@@ -584,13 +581,13 @@
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
 					"\"$(SRCROOT)\"",
+					"$(inherited)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Synterest/Synterest-Prefix.pch";
 				INFOPLIST_FILE = "SynterestTests/SynterestTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
 		};

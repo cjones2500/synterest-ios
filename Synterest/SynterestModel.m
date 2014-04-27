@@ -42,7 +42,7 @@
     
     unsigned int i = 0;
     //count the number of objects in the request
-    unsigned int cnt = [[dictionary objectForKey:@"data"] count];
+    unsigned long cnt = [[dictionary objectForKey:@"data"] count];
     
     //eid, name,location,description, venue, start_time, update_time, end_time, pic
     

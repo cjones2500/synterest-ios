@@ -226,7 +226,7 @@
         [_mapView removeAnnotation:annotation];
     }
     
-    NSLog(@"num of dataPoints %u",[responseData count]);
+    //NSLog(@"num of dataPoints %u",[responseData count]);
     
     for (NSMutableDictionary *singlePoint in responseData)
     {
