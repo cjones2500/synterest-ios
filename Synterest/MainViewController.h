@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
+#import "LoginViewController.h"
 
 @interface ViewController : UIViewController <MKMapViewDelegate>{
     BOOL _doneInitialZoom;

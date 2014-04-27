@@ -5,10 +5,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Login View Controller-->
         <scene sceneID="5">
             <objects>
-                <viewController id="2" customClass="ViewController" sceneMemberID="viewController">
+                <viewController id="2" customClass="LoginViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="eCm-Gf-kZw"/>
                         <viewControllerLayoutGuide type="bottom" id="BrH-Xn-mqa"/>
@@ -17,18 +17,48 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cdz-BG-t0h">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                            </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S4v-rq-edQ">
-                                <rect key="frame" x="245" y="20" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1ed-VB-dlL">
+                                <rect key="frame" x="137" y="269" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                                 <connections>
-                                    <action selector="buttonClickHandler:" destination="2" eventType="touchUpInside" id="T2j-mZ-EaW"/>
+                                    <action selector="startUpButtonAction:" destination="2" eventType="touchUpInside" id="7X1-fL-Agz"/>
+                                    <segue destination="o97-z1-owW" kind="modal" identifier="login_sucess" id="KUw-bv-lQz"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HoA-Lf-P4f">
-                                <rect key="frame" x="245" y="53" width="46" height="30"/>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="buttonLoginLogout" destination="S4v-rq-edQ" id="KUf-Rn-6OP"/>
+                        <outlet property="fqlButton" destination="HoA-Lf-P4f" id="Kbj-q2-zfG"/>
+                        <outlet property="mapView" destination="Cdz-BG-t0h" id="rZu-I4-Ql8"/>
+                        <outlet property="startUpButton" destination="1ed-VB-dlL" id="LV8-0v-7We"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="274" y="-153"/>
+        </scene>
+        <!--Main View Controller - MainViewController-->
+        <scene sceneID="Dwb-Z3-DyT">
+            <objects>
+                <viewController storyboardIdentifier="MainViewController" title="MainViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="o97-z1-owW" customClass="MainViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="rhK-1r-r2S"/>
+                        <viewControllerLayoutGuide type="bottom" id="a7N-ZU-O7i"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="DYb-Oz-pHn">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cdz-BG-t0h">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HoA-Lf-P4f">
+                                <rect key="frame" x="36" y="33" width="46" height="30"/>
                                 <state key="normal" title="Fql">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -36,29 +66,20 @@
                                     <action selector="fqlQueryAction:" destination="2" eventType="touchUpInside" id="Ypa-Tt-Klf"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S4v-rq-edQ">
+                                <rect key="frame" x="36" y="78" width="70" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="buttonClickHandler:" destination="2" eventType="touchUpInside" id="T2j-mZ-EaW"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="HoA-Lf-P4f" firstAttribute="trailing" secondItem="S4v-rq-edQ" secondAttribute="trailing" id="Bhh-Xq-F8q"/>
-                            <constraint firstItem="Cdz-BG-t0h" firstAttribute="top" secondItem="3" secondAttribute="top" id="PMp-S4-giD"/>
-                            <constraint firstItem="Cdz-BG-t0h" firstAttribute="leading" secondItem="3" secondAttribute="leading" id="TYj-A3-7EQ"/>
-                            <constraint firstItem="HoA-Lf-P4f" firstAttribute="top" secondItem="3" secondAttribute="top" constant="84" id="Zz9-Rq-MwS"/>
-                            <constraint firstItem="Cdz-BG-t0h" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" id="bji-H7-8Rv"/>
-                            <constraint firstItem="S4v-rq-edQ" firstAttribute="top" secondItem="3" secondAttribute="top" constant="20" symbolic="YES" id="gLZ-TI-Haf"/>
-                            <constraint firstItem="S4v-rq-edQ" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" id="h8I-Fw-G3l"/>
-                            <constraint firstItem="HoA-Lf-P4f" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" id="idQ-VF-e38"/>
-                            <constraint firstItem="Cdz-BG-t0h" firstAttribute="bottom" secondItem="3" secondAttribute="bottom" id="zfw-dg-ga2"/>
-                        </constraints>
                     </view>
-                    <connections>
-                        <outlet property="buttonLoginLogout" destination="S4v-rq-edQ" id="KUf-Rn-6OP"/>
-                        <outlet property="fqlButton" destination="HoA-Lf-P4f" id="Kbj-q2-zfG"/>
-                        <outlet property="mapView" destination="Cdz-BG-t0h" id="rZu-I4-Ql8"/>
-                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WHp-QZ-ND1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="322" y="-173"/>
+            <point key="canvasLocation" x="729" y="-153"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

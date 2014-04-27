@@ -9,7 +9,7 @@
 //appDelegate.session.accessTokenData.accessToken - this is the accessor for the accessToken 
 
 #import "AppDelegate.h"
-#import "ViewController.h"
+#import "MainViewController.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import <AddressBook/AddressBook.h>
 #import <MapKit/MapKit.h>

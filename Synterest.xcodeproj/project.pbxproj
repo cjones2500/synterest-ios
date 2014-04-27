@@ -20,7 +20,7 @@
 		DB4B8AE618FA1DDB0063F3A3 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DB4B8AE518FA1DDB0063F3A3 /* Default-568h@2x.png */; };
 		DB4B8AE918FA1DDB0063F3A3 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB4B8AE718FA1DDB0063F3A3 /* MainStoryboard_iPhone.storyboard */; };
 		DB4B8AEC18FA1DDB0063F3A3 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB4B8AEA18FA1DDB0063F3A3 /* MainStoryboard_iPad.storyboard */; };
-		DB4B8AEF18FA1DDB0063F3A3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB4B8AEE18FA1DDB0063F3A3 /* ViewController.m */; };
+		DB4B8AEF18FA1DDB0063F3A3 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB4B8AEE18FA1DDB0063F3A3 /* MainViewController.m */; };
 		DB4B8AF818FA1DDB0063F3A3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB4B8ACF18FA1DDB0063F3A3 /* UIKit.framework */; };
 		DB4B8AF918FA1DDB0063F3A3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB4B8AD118FA1DDB0063F3A3 /* Foundation.framework */; };
 		DB4B8B0118FA1DDB0063F3A3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DB4B8AFF18FA1DDB0063F3A3 /* InfoPlist.strings */; };
@@ -44,6 +44,7 @@
 		DB4B8B3D18FA29900063F3A3 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB4B8B3B18FA29900063F3A3 /* FacebookSDK.framework */; };
 		DB4B8B4318FA3C2C0063F3A3 /* SynterestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DB4B8B4218FA3C2C0063F3A3 /* SynterestModel.m */; };
 		DB9FDC9A190CC0B900881F86 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = DB9FDC99190CC0B900881F86 /* logo.png */; };
+		DBC0CD45190D7AC5002D3BF4 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBC0CD44190D7AC5002D3BF4 /* LoginViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,8 +76,8 @@
 		DB4B8AE518FA1DDB0063F3A3 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		DB4B8AE818FA1DDB0063F3A3 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		DB4B8AEB18FA1DDB0063F3A3 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
-		DB4B8AED18FA1DDB0063F3A3 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		DB4B8AEE18FA1DDB0063F3A3 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		DB4B8AED18FA1DDB0063F3A3 /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		DB4B8AEE18FA1DDB0063F3A3 /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		DB4B8AF518FA1DDB0063F3A3 /* SynterestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SynterestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB4B8AFE18FA1DDB0063F3A3 /* SynterestTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SynterestTests-Info.plist"; sourceTree = "<group>"; };
 		DB4B8B0018FA1DDB0063F3A3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -115,6 +116,8 @@
 		DB4B8B4118FA3C2B0063F3A3 /* SynterestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynterestModel.h; sourceTree = "<group>"; };
 		DB4B8B4218FA3C2C0063F3A3 /* SynterestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SynterestModel.m; sourceTree = "<group>"; };
 		DB9FDC99190CC0B900881F86 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
+		DBC0CD43190D7AC5002D3BF4 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		DBC0CD44190D7AC5002D3BF4 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -191,13 +194,15 @@
 				DB4B8ADF18FA1DDB0063F3A3 /* AppDelegate.m */,
 				DB4B8AE718FA1DDB0063F3A3 /* MainStoryboard_iPhone.storyboard */,
 				DB4B8AEA18FA1DDB0063F3A3 /* MainStoryboard_iPad.storyboard */,
-				DB4B8AED18FA1DDB0063F3A3 /* ViewController.h */,
-				DB4B8AEE18FA1DDB0063F3A3 /* ViewController.m */,
+				DB4B8AED18FA1DDB0063F3A3 /* MainViewController.h */,
+				DB4B8AEE18FA1DDB0063F3A3 /* MainViewController.m */,
 				DB4B8B4118FA3C2B0063F3A3 /* SynterestModel.h */,
 				DB4B8B4218FA3C2C0063F3A3 /* SynterestModel.m */,
 				DB2D4F4A18FB68C3004DE5BB /* MyLocation.h */,
 				DB2D4F4318FB5D0D004DE5BB /* MyLocation.m */,
 				DB2D4F4518FB66DA004DE5BB /* arrest.png */,
+				DBC0CD43190D7AC5002D3BF4 /* LoginViewController.h */,
+				DBC0CD44190D7AC5002D3BF4 /* LoginViewController.m */,
 				DB4B8AD618FA1DDB0063F3A3 /* Supporting Files */,
 			);
 			path = Synterest;
@@ -391,12 +396,13 @@
 			files = (
 				DB4B8ADC18FA1DDB0063F3A3 /* main.m in Sources */,
 				DB4B8AE018FA1DDB0063F3A3 /* AppDelegate.m in Sources */,
-				DB4B8AEF18FA1DDB0063F3A3 /* ViewController.m in Sources */,
+				DB4B8AEF18FA1DDB0063F3A3 /* MainViewController.m in Sources */,
 				DB4B8B2418FA22E90063F3A3 /* ASIAuthenticationDialog.m in Sources */,
 				DB4B8B2518FA22E90063F3A3 /* ASIDataCompressor.m in Sources */,
 				DB4B8B2618FA22E90063F3A3 /* ASIDataDecompressor.m in Sources */,
 				DB4B8B2718FA22E90063F3A3 /* ASIDownloadCache.m in Sources */,
 				DB4B8B2818FA22E90063F3A3 /* ASIFormDataRequest.m in Sources */,
+				DBC0CD45190D7AC5002D3BF4 /* LoginViewController.m in Sources */,
 				DB4B8B2918FA22E90063F3A3 /* ASIHTTPRequest.m in Sources */,
 				DB4B8B2A18FA22E90063F3A3 /* ASIInputStream.m in Sources */,
 				DB4B8B2B18FA22E90063F3A3 /* ASINetworkQueue.m in Sources */,
