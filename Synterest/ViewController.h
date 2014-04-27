@@ -18,8 +18,6 @@
 @property (weak, nonatomic) NSMutableArray *facebookData;
 
 - (void)viewWillAppear:(BOOL)animated;
-- (NSMutableArray*) parseFbFqlResult:(id)result;
 - (void)plotFacebookData:(NSMutableArray *)responseData;
-//- (IBAction)onFbLoginClick:(id)sender;
 
 @end

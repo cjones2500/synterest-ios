@@ -10,4 +10,8 @@
 
 @interface SynterestModel : NSObject
 
+-(void)saveLocalData:(NSMutableArray*)inputArray;
+-(NSMutableArray*)loadLocalData;
+-(NSMutableArray*) parseFbFqlResult:(id)result;
+
 @end

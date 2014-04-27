@@ -14,16 +14,19 @@
 #import <AddressBook/AddressBook.h>
 #import <MapKit/MapKit.h>
 #import "MyLocation.h"
+#import "SynterestModel.h"
 
 @interface ViewController ()
+
+
 
 @property (strong, nonatomic) IBOutlet UIButton *buttonLoginLogout;
 
 - (IBAction)buttonClickHandler:(id)sender;
 - (void)updateView;
-- (void) fqlRequest:(NSString*)fqlQuery;
 - (IBAction)fqlQueryAction:(id)sender;
 - (void)queryButtonAction;
+
 
 @end
 
@@ -34,6 +37,8 @@
 @implementation ViewController 
 
 @synthesize facebookData;
+
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -156,6 +161,8 @@
 
 - (void)queryButtonAction
 {
+    //Get the synterest Model
+    SynterestModel *aSynterestModel = [[SynterestModel alloc] init];
 
     //Standard Location query of facebook FQL
     NSString *query =@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('london') ORDER BY rand() LIMIT 10 ";
@@ -189,9 +196,14 @@
                                   // we pull the name property out, if there is one, and display it
                                   text = (NSString *)[dictionary objectForKey:@"data"];
                                   
-                                  facebookData = [self parseFbFqlResult:result];
+                                  facebookData = [aSynterestModel parseFbFqlResult:result];
                                   
-                                  [self plotFacebookData:facebookData];
+                                  //Save the facebook Data
+                                  [aSynterestModel saveLocalData:facebookData];
+                                  
+                                  //Load back the saved facebook Data
+                                  NSMutableArray* savedFacebookData =[aSynterestModel loadLocalData];
+                                  [self plotFacebookData:savedFacebookData];
                                   
                                   //NSLog(@"json dictionary %@",[[[dictionary objectForKey:@"data"] objectAtIndex:0] objectForKey:@"eid"]);
                                   
@@ -202,46 +214,9 @@
         NSLog(@"Session Not Open in FQL Query");
     }
     else{
-        //do nothing all is good 
+        //do nothing all is good
         //NSLog(@"Access token is here %@",appDelegate.session.accessTokenData);
     }
-    
-}
-
-- (NSMutableArray*) parseFbFqlResult:(id)result
-{
-    NSMutableArray* facebookResults = [[NSMutableArray alloc] init];
-    
-    // result is the json response from a successful request
-    NSDictionary *dictionary = (NSDictionary *)result;
-    
-    NSString *text;
-    // we pull the name property out, if there is one, and display it
-    text = (NSString *)[dictionary objectForKey:@"data"];
-    
-    //NSLog(@"json dictionary %@",[[[dictionary objectForKey:@"data"] objectAtIndex:0] objectForKey:@"eid"]);
-    
-    unsigned int i = 0;
-    //count the number of objects in the request 
-    unsigned int cnt = [[dictionary objectForKey:@"data"] count];
-    
-    //eid, name,location,description, venue, start_time, update_time, end_time, pic
-    
-    for(i =0;i<cnt;i++){
-    
-        NSMutableDictionary* singleResult = [[NSMutableDictionary alloc] init];
-        [singleResult setObject:[[[dictionary objectForKey:@"data"] objectAtIndex:i] objectForKey:@"eid"] forKey:@"eid"];
-        [singleResult setObject:[[[dictionary objectForKey:@"data"] objectAtIndex:i] objectForKey:@"name"] forKey:@"name"];
-        [singleResult setObject:[[[dictionary objectForKey:@"data"] objectAtIndex:i] objectForKey:@"description"] forKey:@"description"];
-        [singleResult setObject:[[[dictionary objectForKey:@"data"] objectAtIndex:i] objectForKey:@"start_time"] forKey:@"start_time"];
-        [singleResult setObject:[[[dictionary objectForKey:@"data"] objectAtIndex:i] objectForKey:@"end_time"] forKey:@"end_time"];
-        [singleResult setObject:[[[dictionary objectForKey:@"data"] objectAtIndex:i] objectForKey:@"pic"] forKey:@"pic"];
-        [singleResult setObject:[[[dictionary objectForKey:@"data"] objectAtIndex:i] objectForKey:@"venue"] forKey:@"venue"];
-        //NSLog(@" venue data %@\n",[singleResult objectForKey:@"venue"]);
-        [facebookResults addObject:singleResult];
-    }
-    
-    return facebookResults;
     
 }
 
@@ -277,28 +252,6 @@
     }
     
 }
-
-
-
-//this is the old function that doesn't work properly
-- (void) fqlRequest:(NSString*)fqlQuery
-{    
-    NSString *query = [NSString stringWithString:fqlQuery];  //begins from SELECT........
-    NSMutableDictionary * params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                    query, @"q",
-                                    nil];
-    FBRequest *request = [FBRequest requestWithGraphPath:@"/fql" parameters:params HTTPMethod:@"GET"];
-    
-    [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-        //do your stuff
-        NSLog(@"connection %@\n",connection);
-        NSLog(@"error %@\n",error);
-        NSLog(@"results %@\n",result);
-        
-    }];
-
-}
-
 
 - (void)viewDidUnload
 {
