@@ -33,7 +33,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "DB4B8AF418FA1DDB0063F3A3"
-               BuildableName = "SynterestTests.octest"
+               BuildableName = "SynterestTests.xctest"
                BlueprintName = "SynterestTests"
                ReferencedContainer = "container:Synterest.xcodeproj">
             </BuildableReference>

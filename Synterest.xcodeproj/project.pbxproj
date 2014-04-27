@@ -43,6 +43,7 @@
 		DB4B8B3C18FA29900063F3A3 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB4B8B3B18FA29900063F3A3 /* FacebookSDK.framework */; };
 		DB4B8B3D18FA29900063F3A3 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB4B8B3B18FA29900063F3A3 /* FacebookSDK.framework */; };
 		DB4B8B4318FA3C2C0063F3A3 /* SynterestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DB4B8B4218FA3C2C0063F3A3 /* SynterestModel.m */; };
+		DB9FDC9A190CC0B900881F86 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = DB9FDC99190CC0B900881F86 /* logo.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -113,6 +114,7 @@
 		DB4B8B3B18FA29900063F3A3 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		DB4B8B4118FA3C2B0063F3A3 /* SynterestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynterestModel.h; sourceTree = "<group>"; };
 		DB4B8B4218FA3C2C0063F3A3 /* SynterestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SynterestModel.m; sourceTree = "<group>"; };
+		DB9FDC99190CC0B900881F86 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -204,6 +206,7 @@
 		DB4B8AD618FA1DDB0063F3A3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				DB9FDC99190CC0B900881F86 /* logo.png */,
 				DB4B8AD718FA1DDB0063F3A3 /* Synterest-Info.plist */,
 				DB4B8AD818FA1DDB0063F3A3 /* InfoPlist.strings */,
 				DB4B8ADB18FA1DDB0063F3A3 /* main.m */,
@@ -348,6 +351,7 @@
 				DB4B8AE218FA1DDB0063F3A3 /* Default.png in Resources */,
 				DB4B8AE418FA1DDB0063F3A3 /* Default@2x.png in Resources */,
 				DB4B8AE618FA1DDB0063F3A3 /* Default-568h@2x.png in Resources */,
+				DB9FDC9A190CC0B900881F86 /* logo.png in Resources */,
 				DB4B8AE918FA1DDB0063F3A3 /* MainStoryboard_iPhone.storyboard in Resources */,
 				DB4B8AEC18FA1DDB0063F3A3 /* MainStoryboard_iPad.storyboard in Resources */,
 				DB2D4F4618FB66DA004DE5BB /* arrest.png in Resources */,
