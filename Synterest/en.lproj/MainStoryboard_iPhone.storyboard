@@ -17,13 +17,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f4l-vh-nH8">
-                                <rect key="frame" x="125" y="189" width="70" height="30"/>
-                                <state key="normal" title="Button 2"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f4l-vh-nH8">
+                                <rect key="frame" x="64" y="391" width="193" height="30"/>
+                                <state key="normal" title="Button"/>
                                 <connections>
                                     <action selector="buttonClickHandler:" destination="2" eventType="touchUpInside" id="0ws-qF-xjP"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="3X7-z9-ULq">
+                                <rect key="frame" x="35" y="44" width="250" height="192"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Synchronize your Interests" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pMs-BS-TYO">
+                                <rect key="frame" x="57" y="296" width="206" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -63,12 +74,24 @@
                                     <action selector="fqlQueryAction:" destination="WHp-QZ-ND1" eventType="touchUpInside" id="fak-rM-TbI"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BeM-5C-dyv">
+                                <rect key="frame" x="226" y="33" width="60" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Log Out">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="quitButtonAction:" destination="o97-z1-owW" eventType="touchUpInside" id="o71-C8-PUW"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
                         <outlet property="fqlButton" destination="HoA-Lf-P4f" id="Huz-o0-CpU"/>
                         <outlet property="mapView" destination="Cdz-BG-t0h" id="GBP-Tx-ned"/>
+                        <outlet property="quitButton" destination="BeM-5C-dyv" id="QIo-NR-4A1"/>
+                        <segue destination="2" kind="modal" identifier="logout_sucess" id="YuM-0e-9ne"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WHp-QZ-ND1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -76,6 +99,9 @@
             <point key="canvasLocation" x="729" y="-153"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="logo.png" width="301" height="224"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

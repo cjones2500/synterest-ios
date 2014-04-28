@@ -117,7 +117,7 @@
         
         // valid account UI is shown whenever the session is open
         [self.buttonLoginLogout setTitle:@"Log out" forState:UIControlStateNormal];
-        //[self performSegueWithIdentifier:@"login_sucess" sender:self];
+        [self performSegueWithIdentifier:@"login_sucess" sender:self];
         
     } else {
         // login-needed account UI is shown whenever the session is closed

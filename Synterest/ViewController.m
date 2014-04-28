@@ -21,12 +21,13 @@
 
 
 @property (strong, nonatomic) IBOutlet UIButton *buttonLoginLogout;
+@property (weak, nonatomic) IBOutlet UIButton *quitButton;
 
 - (IBAction)buttonClickHandler:(id)sender;
 - (void)updateView;
 - (IBAction)fqlQueryAction:(id)sender;
 - (void)queryButtonAction;
-
+- (IBAction)quitButtonAction:(id)sender;
 
 @end
 
@@ -155,6 +156,22 @@
 - (IBAction)fqlQueryAction:(id)sender
 {
     [self queryButtonAction];
+}
+
+- (IBAction)quitButtonAction:(id)sender
+{
+    AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+    if (appDelegate.session.isOpen) {
+        // if a user logs out explicitly, we delete any cached token information, and next
+        // time they run the applicaiton they will be presented with log in UX again; most
+        // users will simply close the app or switch away, without logging out; this will
+        // cause the implicit cached-token login to occur on next launch of the application
+        [appDelegate.session closeAndClearTokenInformation];
+        [self performSegueWithIdentifier:@"logout_sucess" sender:self];
+    }
+    else{
+        NSLog(@"Error - Facebook Session is Closed but map is visible");
+    }
 }
 
 - (void)queryButtonAction
