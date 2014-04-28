@@ -158,6 +158,11 @@
     [self queryButtonAction];
 }
 
+- (IBAction)searchButtonAction:(id)sender
+{
+    [self performSegueWithIdentifier:@"search_screen_segue" sender:self];
+}
+
 - (IBAction)quitButtonAction:(id)sender
 {
     AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
@@ -167,6 +172,7 @@
         // users will simply close the app or switch away, without logging out; this will
         // cause the implicit cached-token login to occur on next launch of the application
         [appDelegate.session closeAndClearTokenInformation];
+        
         [self performSegueWithIdentifier:@"logout_sucess" sender:self];
     }
     else{
@@ -297,6 +303,7 @@
     
     // 3
     [_mapView setRegion:viewRegion animated:YES];
+   
 }
 
 @end

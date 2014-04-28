@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UIButton *fqlButton;
 @property (weak, nonatomic) NSMutableArray *facebookData;
+@property (weak, nonatomic) IBOutlet UIButton *searchButton;
 
 - (void)viewWillAppear:(BOOL)animated;
 - (void)plotFacebookData:(NSMutableArray *)responseData;
