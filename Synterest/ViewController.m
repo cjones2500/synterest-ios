@@ -9,7 +9,7 @@
 //appDelegate.session.accessTokenData.accessToken - this is the accessor for the accessToken 
 
 #import "AppDelegate.h"
-#import "MainViewController.h"
+#import "ViewController.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import <AddressBook/AddressBook.h>
 #import <MapKit/MapKit.h>
@@ -37,8 +37,6 @@
 @implementation ViewController 
 
 @synthesize facebookData;
-
-
 
 - (void)didReceiveMemoryWarning
 {

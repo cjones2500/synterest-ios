@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MainViewController.h"
+#import "ViewController.h"
 
 @interface LoginViewController : UIViewController
+//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender;
 
 @end

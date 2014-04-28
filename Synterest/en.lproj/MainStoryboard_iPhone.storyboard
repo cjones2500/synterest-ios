@@ -17,35 +17,31 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1ed-VB-dlL">
-                                <rect key="frame" x="137" y="269" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f4l-vh-nH8">
+                                <rect key="frame" x="125" y="189" width="70" height="30"/>
+                                <state key="normal" title="Button 2"/>
                                 <connections>
-                                    <action selector="startUpButtonAction:" destination="2" eventType="touchUpInside" id="7X1-fL-Agz"/>
-                                    <segue destination="o97-z1-owW" kind="modal" identifier="login_sucess" id="KUw-bv-lQz"/>
+                                    <action selector="buttonClickHandler:" destination="2" eventType="touchUpInside" id="0ws-qF-xjP"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <outlet property="buttonLoginLogout" destination="S4v-rq-edQ" id="KUf-Rn-6OP"/>
+                        <outlet property="buttonLoginLogout" destination="f4l-vh-nH8" id="zWf-hZ-WKS"/>
                         <outlet property="fqlButton" destination="HoA-Lf-P4f" id="Kbj-q2-zfG"/>
                         <outlet property="mapView" destination="Cdz-BG-t0h" id="rZu-I4-Ql8"/>
-                        <outlet property="startUpButton" destination="1ed-VB-dlL" id="LV8-0v-7We"/>
+                        <segue destination="o97-z1-owW" kind="modal" identifier="login_sucess" id="0wx-kF-YYX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="274" y="-153"/>
         </scene>
-        <!--Main View Controller - MainViewController-->
+        <!--View Controller - ViewController-->
         <scene sceneID="Dwb-Z3-DyT">
             <objects>
-                <viewController storyboardIdentifier="MainViewController" title="MainViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="o97-z1-owW" customClass="MainViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewController" title="ViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="o97-z1-owW" customClass="ViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="rhK-1r-r2S"/>
                         <viewControllerLayoutGuide type="bottom" id="a7N-ZU-O7i"/>
@@ -64,18 +60,16 @@
                                 </state>
                                 <connections>
                                     <action selector="fqlQueryAction:" destination="2" eventType="touchUpInside" id="Ypa-Tt-Klf"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S4v-rq-edQ">
-                                <rect key="frame" x="36" y="78" width="70" height="30"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="buttonClickHandler:" destination="2" eventType="touchUpInside" id="T2j-mZ-EaW"/>
+                                    <action selector="fqlQueryAction:" destination="WHp-QZ-ND1" eventType="touchUpInside" id="fak-rM-TbI"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="fqlButton" destination="HoA-Lf-P4f" id="Huz-o0-CpU"/>
+                        <outlet property="mapView" destination="Cdz-BG-t0h" id="GBP-Tx-ned"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WHp-QZ-ND1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
