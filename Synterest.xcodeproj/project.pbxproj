@@ -51,6 +51,7 @@
 		DBC0CD50190DEA63002D3BF4 /* about-25.png in Resources */ = {isa = PBXBuildFile; fileRef = DBC0CD4F190DEA63002D3BF4 /* about-25.png */; };
 		DBC0CD52190DEB29002D3BF4 /* search-25.png in Resources */ = {isa = PBXBuildFile; fileRef = DBC0CD51190DEB29002D3BF4 /* search-25.png */; };
 		DBC0CD55190DF14A002D3BF4 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBC0CD54190DF14A002D3BF4 /* SearchViewController.m */; };
+		DBF289CC190EECF50053C130 /* AnnotationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF289CB190EECF50053C130 /* AnnotationViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -131,6 +132,8 @@
 		DBC0CD51190DEB29002D3BF4 /* search-25.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "search-25.png"; sourceTree = "<group>"; };
 		DBC0CD53190DF14A002D3BF4 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		DBC0CD54190DF14A002D3BF4 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
+		DBF289CA190EECF50053C130 /* AnnotationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnnotationViewController.h; sourceTree = "<group>"; };
+		DBF289CB190EECF50053C130 /* AnnotationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnnotationViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -218,6 +221,8 @@
 				DBC0CD44190D7AC5002D3BF4 /* LoginViewController.m */,
 				DBC0CD53190DF14A002D3BF4 /* SearchViewController.h */,
 				DBC0CD54190DF14A002D3BF4 /* SearchViewController.m */,
+				DBF289CA190EECF50053C130 /* AnnotationViewController.h */,
+				DBF289CB190EECF50053C130 /* AnnotationViewController.m */,
 				DB4B8AD618FA1DDB0063F3A3 /* Supporting Files */,
 			);
 			path = Synterest;
@@ -428,6 +433,7 @@
 				DB4B8B2718FA22E90063F3A3 /* ASIDownloadCache.m in Sources */,
 				DB4B8B2818FA22E90063F3A3 /* ASIFormDataRequest.m in Sources */,
 				DBC0CD45190D7AC5002D3BF4 /* LoginViewController.m in Sources */,
+				DBF289CC190EECF50053C130 /* AnnotationViewController.m in Sources */,
 				DB4B8B2918FA22E90063F3A3 /* ASIHTTPRequest.m in Sources */,
 				DB4B8B2A18FA22E90063F3A3 /* ASIInputStream.m in Sources */,
 				DBC0CD48190D8E2A002D3BF4 /* ViewController.m in Sources */,

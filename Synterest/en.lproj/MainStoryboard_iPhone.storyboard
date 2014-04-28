@@ -108,11 +108,52 @@
                         <outlet property="quitButton" destination="BeM-5C-dyv" id="QIo-NR-4A1"/>
                         <outlet property="searchButton" destination="3DS-78-sUB" id="Pzr-0B-DtB"/>
                         <segue destination="2" kind="modal" identifier="logout_sucess" id="YuM-0e-9ne"/>
+                        <segue destination="FVO-wd-fiy" kind="modal" identifier="annotation_selected" id="bug-3A-Ail"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WHp-QZ-ND1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="729" y="-153"/>
+        </scene>
+        <!--Annotation View Controller-->
+        <scene sceneID="xLb-XQ-JOM">
+            <objects>
+                <viewController id="FVO-wd-fiy" customClass="AnnotationViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="z3f-Wi-kgk"/>
+                        <viewControllerLayoutGuide type="bottom" id="C4I-00-zqn"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="M6U-pL-fBo">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Annotation selected" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MpU-HB-nx5">
+                                <rect key="frame" x="81" y="273" width="159" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b00-9U-CKC">
+                                <rect key="frame" x="22" y="26" width="82" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Go Back">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="clickOnGoBackAction:" destination="FVO-wd-fiy" eventType="touchUpInside" id="Dio-pL-xq2"/>
+                                    <segue destination="o97-z1-owW" kind="modal" identifier="go_back_from_annotation" modalTransitionStyle="crossDissolve" id="Bg8-qd-1px"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="goBackFromAnnotationButton" destination="b00-9U-CKC" id="mOi-MO-EYf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6Gh-oX-asN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="728" y="564"/>
         </scene>
         <!--Search View Controller-->
         <scene sceneID="Yq1-6E-Q6g">
@@ -167,6 +208,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="fZb-Mm-o0W"/>
+        <segue reference="Bg8-qd-1px"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -45,6 +45,11 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
+//This overrides the current clicking function that occurs here
+- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
+{
+    [self performSegueWithIdentifier:@"annotation_selected" sender:self];
+}
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(MyLocation*)annotation {
     
