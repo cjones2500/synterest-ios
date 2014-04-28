@@ -107,14 +107,21 @@
 // main helper method to update the UI to reflect the current state of the session.
 - (void)updateView {
     // get the app delegate, so that we can reference the session property
-    AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+    /*AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
     if (appDelegate.session.isOpen) {
         // valid account UI is shown whenever the session is open
         [self.buttonLoginLogout setTitle:@"Log out" forState:UIControlStateNormal];
     } else {
         // login-needed account UI is shown whenever the session is closed
         [self.buttonLoginLogout setTitle:@"Log in" forState:UIControlStateNormal];
-    }
+    }*/
+    
+    //Get the synterest Model
+    SynterestModel *aSynterestModel = [[SynterestModel alloc] init];
+    //Place Data on the screen if any is stored in Memory
+    NSMutableArray* savedFacebookData =[aSynterestModel loadLocalData];
+    [self plotFacebookData:savedFacebookData];
+    
 }
 
 

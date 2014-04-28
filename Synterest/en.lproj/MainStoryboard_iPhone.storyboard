@@ -141,7 +141,7 @@
                                 </state>
                                 <connections>
                                     <action selector="goBacktoMap:" destination="1JQ-AT-j6V" eventType="touchUpInside" id="bLi-aM-MQ5"/>
-                                    <segue destination="o97-z1-owW" kind="modal" identifier="back_from_search" id="fZb-Mm-o0W"/>
+                                    <segue destination="o97-z1-owW" kind="modal" identifier="back_from_search" modalTransitionStyle="crossDissolve" id="fZb-Mm-o0W"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -167,6 +167,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="0wx-kF-YYX"/>
+        <segue reference="fZb-Mm-o0W"/>
     </inferredMetricsTieBreakers>
 </document>
