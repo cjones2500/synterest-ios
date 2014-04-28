@@ -35,10 +35,15 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="1BP-pm-wUm">
+                                <rect key="frame" x="254" y="396" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="activityOfLogin" destination="1BP-pm-wUm" id="alk-Vi-HWh"/>
                         <outlet property="buttonLoginLogout" destination="f4l-vh-nH8" id="zWf-hZ-WKS"/>
                         <outlet property="fqlButton" destination="HoA-Lf-P4f" id="Kbj-q2-zfG"/>
                         <outlet property="mapView" destination="Cdz-BG-t0h" id="rZu-I4-Ql8"/>
@@ -80,6 +85,9 @@
                                 <state key="normal" image="exit-25.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="quitButtonAction:" destination="o97-z1-owW" eventType="touchUpInside" id="SeR-xr-T2l"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3DS-78-sUB">
                                 <rect key="frame" x="264" y="32" width="36" height="25"/>
@@ -159,6 +167,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="fZb-Mm-o0W"/>
+        <segue reference="0wx-kF-YYX"/>
     </inferredMetricsTieBreakers>
 </document>

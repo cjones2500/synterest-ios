@@ -20,6 +20,8 @@
 
 @implementation LoginViewController
 
+@synthesize activityOfLogin;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -93,6 +95,8 @@
         [appDelegate.session closeAndClearTokenInformation];
         
     } else {
+        [activityOfLogin startAnimating];
+        [self.buttonLoginLogout setTitle:@"Logging in..." forState:UIControlStateNormal];
         if (appDelegate.session.state != FBSessionStateCreated) {
             // Create a new, logged out session.
             appDelegate.session = [[FBSession alloc] init];
@@ -102,6 +106,7 @@
                                                          FBSessionState status,
                                                          NSError *error) {
             // and here we make sure to update our UX according to the new session state
+            [activityOfLogin stopAnimating];
             [self updateView];
         }];
         
