@@ -11,6 +11,7 @@
 		DB2589F019109B85001EE5E2 /* calendar-50.png in Resources */ = {isa = PBXBuildFile; fileRef = DB2589EF19109B85001EE5E2 /* calendar-50.png */; };
 		DB2589F219109BD2001EE5E2 /* location-32.png in Resources */ = {isa = PBXBuildFile; fileRef = DB2589F119109BD2001EE5E2 /* location-32.png */; };
 		DB2589F419109BDC001EE5E2 /* location-50.png in Resources */ = {isa = PBXBuildFile; fileRef = DB2589F319109BDC001EE5E2 /* location-50.png */; };
+		DB2589F81910AB16001EE5E2 /* logo_mini.png in Resources */ = {isa = PBXBuildFile; fileRef = DB2589F71910AB16001EE5E2 /* logo_mini.png */; };
 		DB2D4F4418FB5D0D004DE5BB /* MyLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = DB2D4F4318FB5D0D004DE5BB /* MyLocation.m */; };
 		DB2D4F4618FB66DA004DE5BB /* arrest.png in Resources */ = {isa = PBXBuildFile; fileRef = DB2D4F4518FB66DA004DE5BB /* arrest.png */; };
 		DB4B8AD018FA1DDB0063F3A3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB4B8ACF18FA1DDB0063F3A3 /* UIKit.framework */; };
@@ -73,6 +74,7 @@
 		DB2589EF19109B85001EE5E2 /* calendar-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calendar-50.png"; sourceTree = "<group>"; };
 		DB2589F119109BD2001EE5E2 /* location-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "location-32.png"; sourceTree = "<group>"; };
 		DB2589F319109BDC001EE5E2 /* location-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "location-50.png"; sourceTree = "<group>"; };
+		DB2589F71910AB16001EE5E2 /* logo_mini.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_mini.png; sourceTree = "<group>"; };
 		DB2D4F4318FB5D0D004DE5BB /* MyLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyLocation.m; sourceTree = "<group>"; };
 		DB2D4F4518FB66DA004DE5BB /* arrest.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrest.png; sourceTree = "<group>"; };
 		DB2D4F4B18FB68C3004DE5BB /* en */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = en; path = en.lproj/MyLocation.h; sourceTree = "<group>"; };
@@ -239,6 +241,7 @@
 		DB4B8AD618FA1DDB0063F3A3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				DB2589F71910AB16001EE5E2 /* logo_mini.png */,
 				DB2589F319109BDC001EE5E2 /* location-50.png */,
 				DB2589F119109BD2001EE5E2 /* location-32.png */,
 				DB2589EF19109B85001EE5E2 /* calendar-50.png */,
@@ -392,6 +395,7 @@
 				DBC0CD4A190DE4FE002D3BF4 /* Images.xcassets in Resources */,
 				DB4B8ADA18FA1DDB0063F3A3 /* InfoPlist.strings in Resources */,
 				DBC0CD4C190DE9C6002D3BF4 /* exit-50.png in Resources */,
+				DB2589F81910AB16001EE5E2 /* logo_mini.png in Resources */,
 				DBC0CD52190DEB29002D3BF4 /* search-25.png in Resources */,
 				DB2589EE19109B7C001EE5E2 /* calendar-25.png in Resources */,
 				DB4B8AE218FA1DDB0063F3A3 /* Default.png in Resources */,

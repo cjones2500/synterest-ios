@@ -57,10 +57,12 @@ dataToLoadToAnnotationView;
 {
     if ([[segue identifier] isEqualToString:@"annotation_selected"]) {
         MyLocation* anAnnotation =[sender annotation];
+        //Pipe all the information for a given annotation across to the annotationViewController
         [[segue destinationViewController] setEventType:[anAnnotation eventType]];
         [[segue destinationViewController] setEventTitleText:[anAnnotation name]];
         [[segue destinationViewController] setEventFbPic:[anAnnotation facebookPic]];
         [[segue destinationViewController] setEventDescription:[anAnnotation fbDescription]];
+        [[segue destinationViewController] setEventAddress:[anAnnotation fbLocData]];
     }
 }
 
@@ -285,14 +287,16 @@ dataToLoadToAnnotationView;
             //NSLog(@"logging...");
             //NSLog(@" coordinates %f",coordinates.latitude);
             //InitWithName gives a description
-            //NSLog(@" pic value %@",[singlePoint objectForKey:@"pic"]);
+            //NSLog(@" pic value %@",[singlePoint objectForKey:@"venue"]);
+            NSString *fbAdress = [self buildAddressToShow:[singlePoint objectForKey:@"venue"]];
             
             MyLocation *annotation = [[MyLocation alloc] initWithName:[singlePoint objectForKey:@"name"]
                                                                address:nil
                                                             coordinate:coordinates
                                                            typeOfEvent:0
                                                        withFacebookPic:[singlePoint objectForKey:@"pic"]
-                                                       withDescription:[singlePoint objectForKey:@"description"]];
+                                                       withDescription:[singlePoint objectForKey:@"description"]
+                                                        withFbLocData:fbAdress];
             
             [_mapView addAnnotation:annotation];
         
@@ -305,6 +309,78 @@ dataToLoadToAnnotationView;
         }
         
     }
+    
+}
+
+- (NSString*)buildAddressToShow:(NSMutableDictionary*)venueInfo
+{
+    //NSLog(@" test: %@",[venueInfo objectForKey:@"name"]);
+    NSString *addressAsAString = [[NSString alloc] init];
+    NSString *nameString;
+    nameString = [venueInfo objectForKey:@"name"];
+    
+    //see if the name field is present, if so add this
+    if(nameString != nil){
+        addressAsAString = [addressAsAString stringByAppendingString:nameString];
+    }
+
+    //see if the street field if present
+    if([venueInfo objectForKey:@"street"] != nil){
+        if(addressAsAString != nil){
+            //add an end line if the string is empty
+            //addressAsAString = [addressAsAString stringByAppendingFormat:@",\n"];
+            //add the street information
+            addressAsAString = [addressAsAString stringByAppendingFormat:@"%@",[venueInfo objectForKey:@"street"]];
+        }
+        else{
+            //add the street information
+            addressAsAString = [addressAsAString stringByAppendingFormat:@"%@",[venueInfo objectForKey:@"street"]];
+        }
+    }
+    
+    //see if the city field if present
+    if([venueInfo objectForKey:@"city"] != nil){
+        if(addressAsAString != nil){
+            //add an end line if the string is empty
+            addressAsAString = [addressAsAString stringByAppendingFormat:@",\n"];
+            //add the city information
+            addressAsAString = [addressAsAString stringByAppendingFormat:@"%@",[venueInfo objectForKey:@"city"]];
+        }
+        else{
+            //add the city information
+            addressAsAString = [addressAsAString stringByAppendingFormat:@"%@",[venueInfo objectForKey:@"city"]];
+        }
+    }
+    
+    //see if the zip field if present
+    if([venueInfo objectForKey:@"zip"] != nil){
+        if(addressAsAString != nil){
+            //add an end line if the string is empty
+            addressAsAString = [addressAsAString stringByAppendingFormat:@",\n"];
+            //add the zip information
+            addressAsAString = [addressAsAString stringByAppendingFormat:@"%@",[venueInfo objectForKey:@"zip"]];
+        }
+        else{
+            //add the zip information
+            addressAsAString = [addressAsAString stringByAppendingFormat:@"%@",[venueInfo objectForKey:@"zip"]];
+        }
+    }
+    
+    //see if the country field if present
+    if([venueInfo objectForKey:@"country"] != nil){
+        if(addressAsAString != nil){
+            //add an end line if the string is empty
+            addressAsAString = [addressAsAString stringByAppendingFormat:@",\n"];
+            //add the country information
+            addressAsAString = [addressAsAString stringByAppendingFormat:@"%@",[venueInfo objectForKey:@"country"]];
+        }
+        else{
+            //add the country information
+            addressAsAString = [addressAsAString stringByAppendingFormat:@"%@",[venueInfo objectForKey:@"country"]];
+        }
+    }
+    
+    return addressAsAString;
     
 }
 

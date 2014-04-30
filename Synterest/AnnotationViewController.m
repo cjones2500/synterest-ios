@@ -18,10 +18,12 @@
 
 @synthesize eventTitleText,
 eventFbImageView,
+eventAdressTextView,
 eventTitleScrollView,
 eventDescriptionView,
 eventDescription,
 eventDescriptionTextView,
+eventAddress,
 eventFbPic,
 eventTitle,
 eventType;
@@ -48,12 +50,21 @@ eventType;
     //load the eventDescription information into the eventDescriptionTextView (UITextView)
     self.eventDescriptionTextView.text = eventDescription;
     
+    //load the eventAddress information into the eventAddressTextView (UITextView)
+    self.eventAdressTextView.text = eventAddress;
 }
 
 -(void)loadFacebookPicture
 {
-    //Add a subview Image of the facebook picture
-    UIImage *facebookImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:eventFbPic]]];
+    UIImage *facebookImage;
+    if(eventFbPic == nil){
+        //Add the synterest Image
+        facebookImage = [UIImage imageNamed:@"logo_mini"];
+    }
+    else{
+        //Add a subview Image of the facebook picture (from the URL)
+        facebookImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:eventFbPic]]];
+    }
     UIImageView *facebookImageSubView = [[UIImageView alloc] initWithImage:facebookImage];
     facebookImageSubView.layer.cornerRadius = facebookImage.size.width / 2;
     facebookImageSubView.layer.masksToBounds = YES;
