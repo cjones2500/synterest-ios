@@ -15,6 +15,7 @@
 #import <MapKit/MapKit.h>
 #import "MyLocation.h"
 #import "SynterestModel.h"
+#import "AnnotationViewController.h"
 
 @interface ViewController ()
 
@@ -37,7 +38,8 @@
 
 @implementation ViewController 
 
-@synthesize facebookData;
+@synthesize facebookData,
+dataToLoadToAnnotationView;
 
 - (void)didReceiveMemoryWarning
 {
@@ -48,7 +50,18 @@
 //This overrides the current clicking function that occurs here
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
 {
-    [self performSegueWithIdentifier:@"annotation_selected" sender:self];
+    [self performSegueWithIdentifier:@"annotation_selected" sender:view];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"annotation_selected"]) {
+        MyLocation* anAnnotation =[sender annotation];
+        [[segue destinationViewController] setEventType:[anAnnotation eventType]];
+        [[segue destinationViewController] setEventTitleText:[anAnnotation name]];
+        [[segue destinationViewController] setEventFbPic:[anAnnotation facebookPic]];
+        [[segue destinationViewController] setEventDescription:[anAnnotation fbDescription]];
+    }
 }
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(MyLocation*)annotation {
@@ -65,6 +78,7 @@
         
         annotationView.enabled = YES;
         annotationView.canShowCallout = YES;
+        //[dataToLoadToAnnotationView addObject:
         
         //here I can play around with different icons for different types of event
         if([[annotation eventType] intValue] == 0){
@@ -271,7 +285,15 @@
             //NSLog(@"logging...");
             //NSLog(@" coordinates %f",coordinates.latitude);
             //InitWithName gives a description
-            MyLocation *annotation = [[MyLocation alloc] initWithName:[singlePoint objectForKey:@"name"] address:nil coordinate:coordinates typeOfEvent:0];
+            //NSLog(@" pic value %@",[singlePoint objectForKey:@"pic"]);
+            
+            MyLocation *annotation = [[MyLocation alloc] initWithName:[singlePoint objectForKey:@"name"]
+                                                               address:nil
+                                                            coordinate:coordinates
+                                                           typeOfEvent:0
+                                                       withFacebookPic:[singlePoint objectForKey:@"pic"]
+                                                       withDescription:[singlePoint objectForKey:@"description"]];
+            
             [_mapView addAnnotation:annotation];
         
         }

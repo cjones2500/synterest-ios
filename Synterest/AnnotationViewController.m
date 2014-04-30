@@ -7,12 +7,24 @@
 //
 
 #import "AnnotationViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface AnnotationViewController ()
+@property (weak, nonatomic) IBOutlet UITextView *eventTitle;
 
 @end
 
 @implementation AnnotationViewController
+
+@synthesize eventTitleText,
+eventFbImageView,
+eventTitleScrollView,
+eventDescriptionView,
+eventDescription,
+eventDescriptionTextView,
+eventFbPic,
+eventTitle,
+eventType;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -26,7 +38,26 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    //load the eventTitle information into the UITextView
+    eventTitle.text = eventTitleText;
+    
+    //Load a separate thread that pulls the facebook picture
+    [NSThread detachNewThreadSelector:@selector(loadFacebookPicture) toTarget:self withObject:nil];
+    
+    //load the eventDescription information into the eventDescriptionTextView (UITextView)
+    self.eventDescriptionTextView.text = eventDescription;
+    
+}
+
+-(void)loadFacebookPicture
+{
+    //Add a subview Image of the facebook picture
+    UIImage *facebookImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:eventFbPic]]];
+    UIImageView *facebookImageSubView = [[UIImageView alloc] initWithImage:facebookImage];
+    facebookImageSubView.layer.cornerRadius = facebookImage.size.width / 2;
+    facebookImageSubView.layer.masksToBounds = YES;
+    [self.eventFbImageView addSubview:facebookImageSubView];
 }
 
 - (void)didReceiveMemoryWarning
