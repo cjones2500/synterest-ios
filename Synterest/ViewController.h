@@ -22,5 +22,7 @@
 
 - (void)viewWillAppear:(BOOL)animated;
 - (void)plotFacebookData:(NSMutableArray *)responseData;
+- (NSString*)getDateInfoFromFb:(NSString*)isoFacebookDateString;
+- (NSString*)buildAddressToShow:(NSMutableDictionary*)venueInfo;
 
 @end

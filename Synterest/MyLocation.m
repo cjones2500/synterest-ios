@@ -16,6 +16,7 @@
 @synthesize facebookPic = _facebookPic;
 @synthesize fbDescription = _fbDescription;
 @synthesize fbLocData = _fbLocData;
+@synthesize fbEventDate = _fbEventDate;
 
 - (id)initWithName:(NSString*)name
            address:(NSString*)address
@@ -24,6 +25,7 @@
    withFacebookPic:(NSString*)aFacebookPic
    withDescription:(NSString*)aDescription
      withFbLocData:(NSString*)someFbLocData
+   withFbEventDate:(NSString*)aFbEventDate
 {
     if ((self = [super init])) {
         _name = [name copy];
@@ -33,6 +35,7 @@
         _eventType = [NSNumber numberWithInt:anEventType];
         _fbDescription = [aDescription copy];
         _fbLocData = [someFbLocData copy];
+        _fbEventDate = [aFbEventDate copy];
     }
     return self;
 }

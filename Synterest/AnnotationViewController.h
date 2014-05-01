@@ -20,6 +20,7 @@
 @property (nonatomic, weak) NSString *eventFbPic;
 @property (nonatomic, weak) NSString *eventDescription;
 @property (nonatomic, weak) NSString *eventAddress;
+@property (nonatomic, weak) NSString *eventDate;
 @property (weak, nonatomic) IBOutlet UIButton *goBackFromAnnotationButton;
 
 @end

@@ -170,7 +170,7 @@
                                 </subviews>
                             </scrollView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="calendar-50.png" translatesAutoresizingMaskIntoConstraints="NO" id="OyO-cW-kPm">
-                                <rect key="frame" x="124" y="46" width="20" height="20"/>
+                                <rect key="frame" x="124" y="62" width="20" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="location-50.png" translatesAutoresizingMaskIntoConstraints="NO" id="2Mj-JS-WDH">
@@ -191,9 +191,16 @@
                                 </subviews>
                             </scrollView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Description:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W2H-Qm-jZe">
-                                <rect key="frame" x="16" y="238" width="99" height="21"/>
+                                <rect key="frame" x="15" y="238" width="99" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Event Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yj6-bW-hSs">
+                                <rect key="frame" x="152" y="63" width="110" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -204,6 +211,7 @@
                     <connections>
                         <outlet property="eventAddressScrollView" destination="9KF-SN-zwV" id="xby-JQ-LCm"/>
                         <outlet property="eventAdressTextView" destination="2iU-Bi-5QT" id="LYC-zB-2Tb"/>
+                        <outlet property="eventDateLabel" destination="yj6-bW-hSs" id="XSX-73-pxM"/>
                         <outlet property="eventDescriptionTextView" destination="Aur-Vt-aeD" id="xys-Dn-PC1"/>
                         <outlet property="eventDescriptionView" destination="KUG-3a-xt7" id="7tb-rI-dEt"/>
                         <outlet property="eventFbImageView" destination="tjG-bV-SEb" id="br7-Db-Gk2"/>

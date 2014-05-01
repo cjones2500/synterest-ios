@@ -11,12 +11,14 @@
 
 @interface AnnotationViewController ()
 @property (weak, nonatomic) IBOutlet UITextView *eventTitle;
+@property (weak, nonatomic) IBOutlet UILabel *eventDateLabel;
 
 @end
 
 @implementation AnnotationViewController
 
 @synthesize eventTitleText,
+eventDate,
 eventFbImageView,
 eventAdressTextView,
 eventTitleScrollView,
@@ -52,6 +54,9 @@ eventType;
     
     //load the eventAddress information into the eventAddressTextView (UITextView)
     self.eventAdressTextView.text = eventAddress;
+    
+    //load the eventDate information
+    self.eventDateLabel.text =eventDate;
 }
 
 -(void)loadFacebookPicture

@@ -63,6 +63,7 @@ dataToLoadToAnnotationView;
         [[segue destinationViewController] setEventFbPic:[anAnnotation facebookPic]];
         [[segue destinationViewController] setEventDescription:[anAnnotation fbDescription]];
         [[segue destinationViewController] setEventAddress:[anAnnotation fbLocData]];
+        [[segue destinationViewController] setEventDate:[anAnnotation fbEventDate]];
     }
 }
 
@@ -214,7 +215,7 @@ dataToLoadToAnnotationView;
     SynterestModel *aSynterestModel = [[SynterestModel alloc] init];
 
     //Standard Location query of facebook FQL
-    NSString *query =@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('london') ORDER BY rand() LIMIT 10 ";
+    NSString *query =@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('london') ORDER BY rand() LIMIT 100 ";
     
     AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
     
@@ -275,7 +276,7 @@ dataToLoadToAnnotationView;
         [_mapView removeAnnotation:annotation];
     }
     
-    //NSLog(@"num of dataPoints %u",[responseData count]);
+    NSLog(@"num of dataPoints %u",[responseData count]);
     
     for (NSMutableDictionary *singlePoint in responseData)
     {
@@ -288,6 +289,8 @@ dataToLoadToAnnotationView;
             //NSLog(@" coordinates %f",coordinates.latitude);
             //InitWithName gives a description
             //NSLog(@" pic value %@",[singlePoint objectForKey:@"venue"]);
+            
+            NSString *facebookDateString = [self getDateInfoFromFb:[singlePoint objectForKey:@"start_time"]];
             NSString *fbAdress = [self buildAddressToShow:[singlePoint objectForKey:@"venue"]];
             
             MyLocation *annotation = [[MyLocation alloc] initWithName:[singlePoint objectForKey:@"name"]
@@ -296,7 +299,8 @@ dataToLoadToAnnotationView;
                                                            typeOfEvent:0
                                                        withFacebookPic:[singlePoint objectForKey:@"pic"]
                                                        withDescription:[singlePoint objectForKey:@"description"]
-                                                        withFbLocData:fbAdress];
+                                                        withFbLocData:fbAdress
+                                                      withFbEventDate:facebookDateString];
             
             [_mapView addAnnotation:annotation];
         
@@ -310,6 +314,61 @@ dataToLoadToAnnotationView;
         
     }
     
+}
+
+
+//Convert the Facebook Date String into a human-readable format
+-(NSString*)getDateInfoFromFb:(NSString*)isoFacebookDateString
+{
+    NSString * stringToReturn = [[NSString alloc] init];
+
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZ"];
+    NSDate *dateFromString = [dateFormatter dateFromString:isoFacebookDateString];
+    NSCalendar *calendar = [[NSCalendar alloc]initWithCalendarIdentifier:NSGregorianCalendar];
+    NSCalendarUnit units = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit;
+    NSDateComponents *components = [calendar components:units fromDate:dateFromString];
+    
+    //Add the date (dd:mm:yyyy)
+    if([components day] < 10){
+      stringToReturn = [stringToReturn stringByAppendingString:[NSString stringWithFormat:@"0%d",[components day]]];
+    }
+    
+    else{
+        stringToReturn = [stringToReturn stringByAppendingString:[NSString stringWithFormat:@"%d",[components day]]];
+    }
+    
+    stringToReturn = [stringToReturn stringByAppendingString:@"/"];
+    
+    if([components month] < 10){
+        stringToReturn = [stringToReturn stringByAppendingString:[NSString stringWithFormat:@"0%d",[components month]]];
+    }
+    
+    else{
+        stringToReturn = [stringToReturn stringByAppendingString:[NSString stringWithFormat:@"%d",[components month]]];
+    }
+    stringToReturn = [stringToReturn stringByAppendingString:@"/"];
+    stringToReturn = [stringToReturn stringByAppendingString:[NSString stringWithFormat:@"%d",[components year]]];
+    
+    //Add the time in 24 hr (hour:minute)
+    stringToReturn = [stringToReturn stringByAppendingString:@" "];
+    if([components hour] < 10){
+        stringToReturn = [stringToReturn stringByAppendingString:[NSString stringWithFormat:@"0%d",[components hour]]];
+    }
+    
+    else{
+        stringToReturn = [stringToReturn stringByAppendingString:[NSString stringWithFormat:@"%d",[components hour]]];
+    }
+    stringToReturn = [stringToReturn stringByAppendingString:@":"];
+    if([components minute] < 10){
+        stringToReturn = [stringToReturn stringByAppendingString:[NSString stringWithFormat:@"0%d",[components minute]]];
+    }
+    
+    else{
+        stringToReturn = [stringToReturn stringByAppendingString:[NSString stringWithFormat:@"%d",[components minute]]];
+    }
+    
+    return stringToReturn;
 }
 
 - (NSString*)buildAddressToShow:(NSMutableDictionary*)venueInfo
