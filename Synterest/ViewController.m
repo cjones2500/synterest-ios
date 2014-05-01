@@ -142,7 +142,12 @@ dataToLoadToAnnotationView;
     SynterestModel *aSynterestModel = [[SynterestModel alloc] init];
     //Place Data on the screen if any is stored in Memory
     NSMutableArray* savedFacebookData =[aSynterestModel loadLocalData];
-    [self plotFacebookData:savedFacebookData];
+    //NSLog(@"savedFacebookData: %@",savedFacebookData);
+    //check to see if there is actually some facebook data
+    if(savedFacebookData != NULL){
+        //NSLog(@"loading data...");
+        [self plotFacebookData:savedFacebookData];
+    }
     
 }
 
@@ -215,7 +220,7 @@ dataToLoadToAnnotationView;
     SynterestModel *aSynterestModel = [[SynterestModel alloc] init];
 
     //Standard Location query of facebook FQL
-    NSString *query =@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('london') ORDER BY rand() LIMIT 100 ";
+    NSString *query =@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('london') ORDER BY rand() LIMIT 10 ";
     
     AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
     
@@ -246,15 +251,26 @@ dataToLoadToAnnotationView;
                                   // we pull the name property out, if there is one, and display it
                                   text = (NSString *)[dictionary objectForKey:@"data"];
                                   
+                                  //@try{
                                   facebookData = [aSynterestModel parseFbFqlResult:result];
+                                  //}
+                                  //NSLog(@"after parseFbFqlResult call");
+                                  //@catch (NSException *exception) {
+                                     // NSLog(@"Exception Post annotation:%@ ",exception);
+                                  //}
+                                  //@finally {
+                                      //continue
+                                  //}
                                   
                                   //Save the facebook Data
                                   [aSynterestModel saveLocalData:facebookData];
+                                  //NSLog(@"after saveLocalData call");
                                   
                                   //Load back the saved facebook Data
                                   NSMutableArray* savedFacebookData =[aSynterestModel loadLocalData];
+                                  //NSLog(@"after loadLocalData call");
                                   [self plotFacebookData:savedFacebookData];
-                                  
+                                  //NSLog(@"after plotFacebookData call");
                                   //NSLog(@"json dictionary %@",[[[dictionary objectForKey:@"data"] objectAtIndex:0] objectForKey:@"eid"]);
                                   
                               }
@@ -280,20 +296,41 @@ dataToLoadToAnnotationView;
     
     for (NSMutableDictionary *singlePoint in responseData)
     {
+
+        //NSLog(@"latitude : %@",[[singlePoint objectForKey:@"venue"] objectForKey:@"latitude"]);
+        //NSLog(@"descp. :%@",singlePoint);
+
         
+        //this is for events that have no start time
+        /*if([singlePoint objectForKey:@"start_time"] == NULL){
+            continue;
+        }*/
+        double latitude,longitude;
+        NSString *facebookDateString;
         @try{
-            CLLocationCoordinate2D coordinates;
-            coordinates.latitude = [[[singlePoint objectForKey:@"venue"] objectForKey:@"latitude"] doubleValue];
-            coordinates.longitude = [[[singlePoint objectForKey:@"venue"] objectForKey:@"longitude"] doubleValue];
-            //NSLog(@"logging...");
-            //NSLog(@" coordinates %f",coordinates.latitude);
-            //InitWithName gives a description
-            //NSLog(@" pic value %@",[singlePoint objectForKey:@"venue"]);
+            latitude = [[[singlePoint objectForKey:@"venue"] objectForKey:@"latitude"] doubleValue];
+            longitude = [[[singlePoint objectForKey:@"venue"] objectForKey:@"longitude"] doubleValue];
+            facebookDateString = [self getDateInfoFromFb:[singlePoint objectForKey:@"start_time"]];
+        }
+        @catch (NSException *exception) {
+            NSLog(@"Exception Coordinates:%@ ",exception);
+        }
+        @finally {
+            @try{
+                //NSLog(@"start_time : %@",[singlePoint objectForKey:@"start_time"]);
+                //NSLog(@"latitude : %@",[[singlePoint objectForKey:@"venue"] objectForKey:@"latitude"]);
+                CLLocationCoordinate2D coordinates;
+                coordinates.latitude = latitude;
+                coordinates.longitude = longitude;
+                //NSLog(@"logging...");
+                //NSLog(@" coordinates %f",coordinates.latitude);
+                //InitWithName gives a description
+                //NSLog(@" pic value %@",[singlePoint objectForKey:@"venue"]);
             
-            NSString *facebookDateString = [self getDateInfoFromFb:[singlePoint objectForKey:@"start_time"]];
-            NSString *fbAdress = [self buildAddressToShow:[singlePoint objectForKey:@"venue"]];
+                
+                NSString *fbAdress = [self buildAddressToShow:[singlePoint objectForKey:@"venue"]];
             
-            MyLocation *annotation = [[MyLocation alloc] initWithName:[singlePoint objectForKey:@"name"]
+                MyLocation *annotation = [[MyLocation alloc] initWithName:[singlePoint objectForKey:@"name"]
                                                                address:nil
                                                             coordinate:coordinates
                                                            typeOfEvent:0
@@ -302,16 +339,16 @@ dataToLoadToAnnotationView;
                                                         withFbLocData:fbAdress
                                                       withFbEventDate:facebookDateString];
             
-            [_mapView addAnnotation:annotation];
+                [_mapView addAnnotation:annotation];
         
-        }
-        @catch (NSException *exception) {
-            NSLog(@"Exception:%@",exception);
-        }
-        @finally {
-            continue;
-        }
-        
+            }
+            @catch (NSException *exception) {
+                NSLog(@"Exception Post annotation:%@ ",exception);
+            }
+            @finally {
+                //continue;
+            }
+        }//end of main outer try loop
     }
     
 }
@@ -320,7 +357,14 @@ dataToLoadToAnnotationView;
 //Convert the Facebook Date String into a human-readable format
 -(NSString*)getDateInfoFromFb:(NSString*)isoFacebookDateString
 {
+    //NSLog(@"date value:%@",isoFacebookDateString);
+    //NSLog(@"date value:%i",[isoFacebookDateString length]);
     NSString * stringToReturn = [[NSString alloc] init];
+    
+    //fix for facebook dates that are in non-ISO format and non-null
+    if([isoFacebookDateString length] == 10){
+        return isoFacebookDateString;
+    }
 
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZ"];
@@ -378,6 +422,7 @@ dataToLoadToAnnotationView;
     NSString *nameString;
     nameString = [venueInfo objectForKey:@"name"];
     
+    //@try{
     //see if the name field is present, if so add this
     if(nameString != nil){
         addressAsAString = [addressAsAString stringByAppendingString:nameString];
@@ -438,6 +483,13 @@ dataToLoadToAnnotationView;
             addressAsAString = [addressAsAString stringByAppendingFormat:@"%@",[venueInfo objectForKey:@"country"]];
         }
     }
+    //}//end of try statement
+    //@catch (NSException *exception) {
+    //    NSLog(@"Exception fbAddress annotation:%@ ",exception);
+    ///}
+    //@finally {
+    //    return nil;
+    //}
     
     return addressAsAString;
     
