@@ -16,22 +16,110 @@
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:inputArray];
     [userDefaults setObject:data forKey:@"facebookData"];
-    //[self assignEventType:nil];
+    
 }
 
-- (NSMutableArray*)assignEventType:(NSMutableArray*)inputArray
+- (int)assignEventType:(NSMutableDictionary*)inputArray
 {
-    NSString *car = @"Maserati GranCabrio";
-    NSRange searchResult = [car rangeOfString:@"Cabrio"];
-    if (searchResult.location == NSNotFound) {
-        NSLog(@"Search string was not found");
-    } else {
-        NSLog(@"'Cabrio' starts at index %i and is %i characters long",
-              searchResult.location,        // 13
-              searchResult.length);         // 6
+    //Add the Name and Description strings together
+    NSString *description = [inputArray objectForKey:@"description"];
+    NSString *name = [inputArray objectForKey:@"name"];
+    NSString *stringToSearch = [NSString stringWithFormat:@"%@%@'",description,name];
+    //NSLog(@"string to search %@",inputArray);
+    
+    
+    NSNumber *randomValue =[NSNumber numberWithInt:0];
+    NSNumber *musicValue = [NSNumber numberWithInt:0];
+    //int value = [musicValue intValue];
+    //musicValue = [NSNumber numberWithInt:value +1];
+    NSNumber *intellectualValue = [NSNumber numberWithInt:0];
+    NSNumber *partyValue = [NSNumber numberWithInt:0];
+    NSNumber *sportValue = [NSNumber numberWithInt:0];
+    NSNumber *culturalValue = [NSNumber numberWithInt:0];
+    NSNumber *foodValue = [NSNumber numberWithInt:0];
+    
+    
+    //A nil is given at the beginning for random events (not assigned a value)
+    NSMutableArray *eventValueArray = [NSMutableArray arrayWithObjects:randomValue,musicValue,intellectualValue,partyValue,sportValue,culturalValue,foodValue, nil];
+    
+    //Array of keywords for each catagory
+    NSMutableArray *randomKeywords = [NSMutableArray arrayWithObjects:@"synterest",nil];
+    NSMutableArray *musicKeywords = [NSMutableArray arrayWithObjects:@"gig",@"music",@"band",nil];
+    NSMutableArray *intellectualKeywords =[NSMutableArray arrayWithObjects:@"talk",@"seminar",@"convention",@"conference",nil];
+    NSMutableArray *partyKeywords = [NSMutableArray arrayWithObjects:@"party",@"festival",@"club",nil];
+    NSMutableArray *sportKeywords = [NSMutableArray arrayWithObjects:@"sport",@"football",@"tennis",nil];
+    NSMutableArray *culturalKeywords = [NSMutableArray arrayWithObjects:@"theatre",@"art",@"museum",nil];
+    NSMutableArray *foodKeywords = [NSMutableArray arrayWithObjects:@"food",@"drink",@"dinner",nil];
+    
+    
+    //Make an array for each of the different catagory
+    NSMutableDictionary *keyWordsByTopic = [[NSMutableDictionary alloc] init];
+    [keyWordsByTopic setObject:randomKeywords forKey:@"random"];
+    [keyWordsByTopic setObject:musicKeywords forKey:@"music"];
+    [keyWordsByTopic setObject:partyKeywords forKey:@"party"];
+    [keyWordsByTopic setObject:foodKeywords forKey:@"food"];
+    [keyWordsByTopic setObject:culturalKeywords forKey:@"culture"];
+    [keyWordsByTopic setObject:sportKeywords forKey:@"sport"];
+    [keyWordsByTopic setObject:intellectualKeywords forKey:@"intellectual"];
+ 
+    
+    //NSLog(@"logging here..");
+    //NSLog(@"currentArray %@",foodKeywords);
+    //Loop through all topics with associated keywords
+    for (id key in keyWordsByTopic){
+        //NSLog(@"currentArray %@",key);
+        id currentArray = [keyWordsByTopic objectForKey:key];
+        
+        //counter to keep track of the number
+        unsigned int counter = 0;
+        
+        for(NSString* keyWordString2 in currentArray){
+            //NSLog(@"keyword %@",keyWordString2);
+            //NSLog(@"stringTosearch %@",stringToSearch);
+            NSRange searchResult = [stringToSearch rangeOfString:keyWordString2 options:NSCaseInsensitiveSearch];
+            if (searchResult.location == NSNotFound) {
+                //NSLog(@"didn't work");
+                //do nothing as the result isn't found
+            }
+            else{
+                [eventValueArray replaceObjectAtIndex:counter withObject:[NSNumber numberWithInt:[[eventValueArray objectAtIndex:counter]intValue]+1]];
+            }
+            counter = counter +1;
+            
+        }
     }
     
-    return inputArray;
+    //NSLog(@"logging here..2");
+    unsigned int eventSizeLoopCounter = 0;
+    int indexOfLargestValue = 0;
+    
+    //find the largest value within the eventValueArray
+    for(NSNumber *iterationValue in eventValueArray){
+        int currentValue,currentLargestValue = 0;
+        //assign the value of the current item in the iteration
+        currentValue =[iterationValue intValue];
+        //check to see if this is the first member in the loop
+        if(eventSizeLoopCounter == 0){
+            currentLargestValue = [iterationValue intValue];
+        }
+        else{
+            if(currentValue > currentLargestValue){
+                //assign the information for the largest value in the eventArray
+                indexOfLargestValue = eventSizeLoopCounter;
+                currentLargestValue = [iterationValue intValue];
+            }
+        }
+        
+        //assign a value to an
+        
+        eventSizeLoopCounter = eventSizeLoopCounter + 1;
+    }
+    
+    
+    //outputString = [keyWordsByTopic
+    //NSLog(@"index %i",indexOfLargestValue);
+    //NSLog(@"eventValueArray : %@",eventValueArray);
+    return indexOfLargestValue;
     
 }
 
@@ -69,6 +157,7 @@
     
     //eid, name,location,description, venue, start_time, update_time, end_time, pic
     
+    
     for(i =0;i<cnt;i++){
         
         //skip if there is no start date 
@@ -93,9 +182,16 @@
         }*/
         
         //NSMutableDictionary* singleResult = [[NSMutableDictionary alloc] init];
-       
+        
+        //NSLog(@"event_type %i",[self assignEventType:[[dictionary objectForKey:@"data"] objectAtIndex:i]]);
+        int eventTypeIntValue = [self assignEventType:[[dictionary objectForKey:@"data"] objectAtIndex:i]];
+        NSNumber *eventType = [NSNumber numberWithInt:eventTypeIntValue];
         
         NSMutableDictionary* singleResult = [[NSMutableDictionary alloc] init];
+        
+        //NSLog(@"event_type %i",v);
+        
+        
         [singleResult setObject:[[[dictionary objectForKey:@"data"] objectAtIndex:i] objectForKey:@"eid"] forKey:@"eid"];
         [singleResult setObject:[[[dictionary objectForKey:@"data"] objectAtIndex:i] objectForKey:@"name"] forKey:@"name"];
         [singleResult setObject:[[[dictionary objectForKey:@"data"] objectAtIndex:i] objectForKey:@"description"] forKey:@"description"];
@@ -103,6 +199,7 @@
         [singleResult setObject:[[[dictionary objectForKey:@"data"] objectAtIndex:i] objectForKey:@"end_time"] forKey:@"end_time"];
         [singleResult setObject:[[[dictionary objectForKey:@"data"] objectAtIndex:i] objectForKey:@"pic"] forKey:@"pic"];
         [singleResult setObject:[[[dictionary objectForKey:@"data"] objectAtIndex:i] objectForKey:@"venue"] forKey:@"venue"];
+        [singleResult setObject:eventType forKey:@"event_type"];
         [facebookResults addObject:singleResult];
             
     }

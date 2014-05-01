@@ -13,6 +13,6 @@
 -(void)saveLocalData:(NSMutableArray*)inputArray;
 -(NSMutableArray*)loadLocalData;
 -(NSMutableArray*) parseFbFqlResult:(id)result;
--(NSMutableArray*)assignEventType:(NSMutableArray*)inputArray;
+-(int)assignEventType:(NSMutableDictionary*)inputArray;
 
 @end

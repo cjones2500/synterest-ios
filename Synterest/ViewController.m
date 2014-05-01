@@ -81,15 +81,35 @@ dataToLoadToAnnotationView;
         
         annotationView.enabled = YES;
         annotationView.canShowCallout = YES;
-        //[dataToLoadToAnnotationView addObject:
+        
         
         //here I can play around with different icons for different types of event
         if([[annotation eventType] intValue] == 0){
-            annotationView.image=[UIImage imageNamed:@"arrest.png"];//here we use a nice image instead of the default pins
+            //annotationView.pinColor = MKPinAnnotationColorGreen;
+            annotationView.image=[UIImage imageNamed:@"yellow.png"];
+            //annotationView.image=[UIImage imageNamed:@"arrest.png"];//here we use a nice image instead of the default pins
+        }
+        else if ([[annotation eventType] intValue] == 1){
+            //annotationView.pinColor = MKPinAnnotationColorRed;
+            annotationView.image=[UIImage imageNamed:@"green.png"];
+            //annotationView.image=[UIImage imageNamed:@"arrest.png"];
+        }
+        else if ([[annotation eventType] intValue] == 2){
+            annotationView.image=[UIImage imageNamed:@"white.png"];
+        }
+        else if ([[annotation eventType] intValue] == 3){
+            annotationView.image=[UIImage imageNamed:@"orange.png"];
+        }
+        else if ([[annotation eventType] intValue] == 4){
+            annotationView.image=[UIImage imageNamed:@"deeperBlue.png"];
+        }
+        else if ([[annotation eventType] intValue] == 5){
+            annotationView.image=[UIImage imageNamed:@"pink2.png"];
         }
         else{
             //use the default value
         }
+        
         return annotationView;
     }
     
@@ -220,7 +240,7 @@ dataToLoadToAnnotationView;
     SynterestModel *aSynterestModel = [[SynterestModel alloc] init];
 
     //Standard Location query of facebook FQL
-    NSString *query =@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('london') ORDER BY rand() LIMIT 10 ";
+    NSString *query =@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('london') ORDER BY rand() LIMIT 100";
     
     AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
     
@@ -305,12 +325,14 @@ dataToLoadToAnnotationView;
         /*if([singlePoint objectForKey:@"start_time"] == NULL){
             continue;
         }*/
+        int eventType;
         double latitude,longitude;
         NSString *facebookDateString;
         @try{
             latitude = [[[singlePoint objectForKey:@"venue"] objectForKey:@"latitude"] doubleValue];
             longitude = [[[singlePoint objectForKey:@"venue"] objectForKey:@"longitude"] doubleValue];
             facebookDateString = [self getDateInfoFromFb:[singlePoint objectForKey:@"start_time"]];
+            eventType = [[singlePoint objectForKey:@"event_type"] intValue];
         }
         @catch (NSException *exception) {
             NSLog(@"Exception Coordinates:%@ ",exception);
@@ -333,7 +355,7 @@ dataToLoadToAnnotationView;
                 MyLocation *annotation = [[MyLocation alloc] initWithName:[singlePoint objectForKey:@"name"]
                                                                address:nil
                                                             coordinate:coordinates
-                                                           typeOfEvent:0
+                                                           typeOfEvent:eventType
                                                        withFacebookPic:[singlePoint objectForKey:@"pic"]
                                                        withDescription:[singlePoint objectForKey:@"description"]
                                                         withFbLocData:fbAdress
@@ -446,7 +468,7 @@ dataToLoadToAnnotationView;
     if([venueInfo objectForKey:@"city"] != nil){
         if(addressAsAString != nil){
             //add an end line if the string is empty
-            addressAsAString = [addressAsAString stringByAppendingFormat:@",\n"];
+            addressAsAString = [addressAsAString stringByAppendingFormat:@"\n"];
             //add the city information
             addressAsAString = [addressAsAString stringByAppendingFormat:@"%@",[venueInfo objectForKey:@"city"]];
         }
@@ -460,7 +482,7 @@ dataToLoadToAnnotationView;
     if([venueInfo objectForKey:@"zip"] != nil){
         if(addressAsAString != nil){
             //add an end line if the string is empty
-            addressAsAString = [addressAsAString stringByAppendingFormat:@",\n"];
+            addressAsAString = [addressAsAString stringByAppendingFormat:@"\n"];
             //add the zip information
             addressAsAString = [addressAsAString stringByAppendingFormat:@"%@",[venueInfo objectForKey:@"zip"]];
         }
@@ -474,7 +496,7 @@ dataToLoadToAnnotationView;
     if([venueInfo objectForKey:@"country"] != nil){
         if(addressAsAString != nil){
             //add an end line if the string is empty
-            addressAsAString = [addressAsAString stringByAppendingFormat:@",\n"];
+            addressAsAString = [addressAsAString stringByAppendingFormat:@"\n"];
             //add the country information
             addressAsAString = [addressAsAString stringByAppendingFormat:@"%@",[venueInfo objectForKey:@"country"]];
         }
