@@ -82,28 +82,28 @@ dataToLoadToAnnotationView;
         annotationView.enabled = YES;
         annotationView.canShowCallout = YES;
         
-        
-        //here I can play around with different icons for different types of event
         if([[annotation eventType] intValue] == 0){
-            //annotationView.pinColor = MKPinAnnotationColorGreen;
+            //random event
             annotationView.image=[UIImage imageNamed:@"yellow.png"];
-            //annotationView.image=[UIImage imageNamed:@"arrest.png"];//here we use a nice image instead of the default pins
         }
         else if ([[annotation eventType] intValue] == 1){
-            //annotationView.pinColor = MKPinAnnotationColorRed;
+            //music event
             annotationView.image=[UIImage imageNamed:@"green.png"];
-            //annotationView.image=[UIImage imageNamed:@"arrest.png"];
         }
         else if ([[annotation eventType] intValue] == 2){
+            //party event
             annotationView.image=[UIImage imageNamed:@"white.png"];
         }
         else if ([[annotation eventType] intValue] == 3){
+            //food event
             annotationView.image=[UIImage imageNamed:@"orange.png"];
         }
         else if ([[annotation eventType] intValue] == 4){
+            //cultural event
             annotationView.image=[UIImage imageNamed:@"deeperBlue.png"];
         }
         else if ([[annotation eventType] intValue] == 5){
+            //intellectual event
             annotationView.image=[UIImage imageNamed:@"pink2.png"];
         }
         else{
