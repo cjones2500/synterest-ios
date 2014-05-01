@@ -25,7 +25,7 @@
     NSString *description = [inputArray objectForKey:@"description"];
     NSString *name = [inputArray objectForKey:@"name"];
     NSString *stringToSearch = [NSString stringWithFormat:@"%@%@'",description,name];
-    //NSLog(@"string to search %@",inputArray);
+    //NSLog(@"string to search %@",stringToSearch);
     
     
     NSNumber *randomValue =[NSNumber numberWithInt:0];
@@ -76,16 +76,33 @@
         for(NSString* keyWordString2 in currentArray){
             //NSLog(@"keyword %@",keyWordString2);
             //NSLog(@"stringTosearch %@",stringToSearch);
-            NSRange searchResult = [stringToSearch rangeOfString:keyWordString2 options:NSCaseInsensitiveSearch];
+            /*NSRange searchResult = [stringToSearch rangeOfString:keyWordString2 options:NSCaseInsensitiveSearch];
             if (searchResult.location == NSNotFound) {
                 //NSLog(@"didn't work");
                 //do nothing as the result isn't found
             }
             else{
+                NSLog(@" searchResult: %i",searchResult.length);
+                NSLog(@"%i - ",[[eventValueArray objectAtIndex:counter] intValue]);
                 [eventValueArray replaceObjectAtIndex:counter withObject:[NSNumber numberWithInt:[[eventValueArray objectAtIndex:counter]intValue]+1]];
+                NSLog(@"%i - ",[[eventValueArray objectAtIndex:counter] intValue]);
             }
-            counter = counter +1;
+            counter = counter +1;*/
             
+            NSUInteger count = 0, length = [stringToSearch length];
+            NSRange range = NSMakeRange(0, length);
+            while(range.location != NSNotFound)
+            {
+                range = [stringToSearch rangeOfString:keyWordString2 options:NSCaseInsensitiveSearch range:range];
+                if(range.location != NSNotFound)
+                {
+                    range = NSMakeRange(range.location + range.length, length - (range.location + range.length));
+                    count++; 
+                }
+            }
+            //NSLog(@"counter %i",count);
+            [eventValueArray replaceObjectAtIndex:counter withObject:[NSNumber numberWithInt:[[eventValueArray objectAtIndex:counter]intValue]+count]];
+            counter = counter +1;
         }
     }
     
@@ -118,7 +135,7 @@
     
     //outputString = [keyWordsByTopic
     //NSLog(@"index %i",indexOfLargestValue);
-    //NSLog(@"eventValueArray : %@",eventValueArray);
+    NSLog(@"eventValueArray : %@",eventValueArray);
     return indexOfLargestValue;
     
 }
@@ -191,6 +208,8 @@
         
         //NSLog(@"event_type %i",v);
         
+        //NSLog(@"NAME: %@",[[[dictionary objectForKey:@"data"] objectAtIndex:i] objectForKey:@"name"]);
+        //NSLog(@"DESCRIPTION: %@",[[[dictionary objectForKey:@"data"] objectAtIndex:i] objectForKey:@"description"]);
         
         [singleResult setObject:[[[dictionary objectForKey:@"data"] objectAtIndex:i] objectForKey:@"eid"] forKey:@"eid"];
         [singleResult setObject:[[[dictionary objectForKey:@"data"] objectAtIndex:i] objectForKey:@"name"] forKey:@"name"];
