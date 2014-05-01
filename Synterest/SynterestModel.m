@@ -28,7 +28,7 @@
     //NSLog(@"string to search %@",stringToSearch);
     
     
-    NSNumber *randomValue =[NSNumber numberWithInt:0];
+    //NSNumber *randomValue =[NSNumber numberWithInt:0];
     NSNumber *musicValue = [NSNumber numberWithInt:0];
     //int value = [musicValue intValue];
     //musicValue = [NSNumber numberWithInt:value +1];
@@ -40,10 +40,10 @@
     
     
     //A nil is given at the beginning for random events (not assigned a value)
-    NSMutableArray *eventValueArray = [NSMutableArray arrayWithObjects:randomValue,musicValue,intellectualValue,partyValue,sportValue,culturalValue,foodValue, nil];
+    NSMutableArray *eventValueArray = [NSMutableArray arrayWithObjects:musicValue,intellectualValue,partyValue,sportValue,culturalValue,foodValue, nil];
     
     //Array of keywords for each catagory
-    NSMutableArray *randomKeywords = [NSMutableArray arrayWithObjects:@"synterest",nil];
+    //NSMutableArray *randomKeywords = [NSMutableArray arrayWithObjects:@"synterest",nil];
     NSMutableArray *musicKeywords = [NSMutableArray arrayWithObjects:@"gig",@"music",@"band",nil];
     NSMutableArray *intellectualKeywords =[NSMutableArray arrayWithObjects:@"talk",@"seminar",@"convention",@"conference",nil];
     NSMutableArray *partyKeywords = [NSMutableArray arrayWithObjects:@"party",@"festival",@"club",nil];
@@ -54,7 +54,7 @@
     
     //Make an array for each of the different catagory
     NSMutableDictionary *keyWordsByTopic = [[NSMutableDictionary alloc] init];
-    [keyWordsByTopic setObject:randomKeywords forKey:@"random"];
+    //[keyWordsByTopic setObject:randomKeywords forKey:@"random"];
     [keyWordsByTopic setObject:musicKeywords forKey:@"music"];
     [keyWordsByTopic setObject:partyKeywords forKey:@"party"];
     [keyWordsByTopic setObject:foodKeywords forKey:@"food"];
@@ -66,13 +66,14 @@
     //NSLog(@"logging here..");
     //NSLog(@"currentArray %@",foodKeywords);
     //Loop through all topics with associated keywords
+    
+    //counter to keep track of the number
+    unsigned int counter = 0;
+    
     for (id key in keyWordsByTopic){
         //NSLog(@"currentArray %@",key);
         id currentArray = [keyWordsByTopic objectForKey:key];
-        
-        //counter to keep track of the number
-        unsigned int counter = 0;
-        
+    
         for(NSString* keyWordString2 in currentArray){
             //NSLog(@"keyword %@",keyWordString2);
             //NSLog(@"stringTosearch %@",stringToSearch);
@@ -102,9 +103,12 @@
             }
             //NSLog(@"counter %i",count);
             [eventValueArray replaceObjectAtIndex:counter withObject:[NSNumber numberWithInt:[[eventValueArray objectAtIndex:counter]intValue]+count]];
-            counter = counter +1;
         }
+        
+        counter = counter +1;
     }
+    
+    
     
     //NSLog(@"logging here..2");
     unsigned int eventSizeLoopCounter = 0;
@@ -112,6 +116,7 @@
     
     //find the largest value within the eventValueArray
     for(NSNumber *iterationValue in eventValueArray){
+        //NSLog(@" eventSizeLoopCounter: %i",eventSizeLoopCounter);
         int currentValue,currentLargestValue = 0;
         //assign the value of the current item in the iteration
         currentValue =[iterationValue intValue];
@@ -135,7 +140,7 @@
     
     //outputString = [keyWordsByTopic
     //NSLog(@"index %i",indexOfLargestValue);
-    NSLog(@"eventValueArray : %@",eventValueArray);
+    //NSLog(@"eventValueArray : %@",eventValueArray);
     return indexOfLargestValue;
     
 }

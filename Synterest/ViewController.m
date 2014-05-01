@@ -79,32 +79,39 @@ dataToLoadToAnnotationView;
             annotationView.annotation = annotation;
         }
         
+        /*culture
+        2014-05-01 18:53:19.794 Synterest[12059:60b] currentArray party
+        2014-05-01 18:53:19.794 Synterest[12059:60b] currentArray sport
+        2014-05-01 18:53:19.795 Synterest[12059:60b] currentArray music
+        2014-05-01 18:53:19.795 Synterest[12059:60b] currentArray intellectual
+        2014-05-01 18:53:19.795 Synterest[12059:60b] currentArray food*/
+        
         annotationView.enabled = YES;
         annotationView.canShowCallout = YES;
         
         if([[annotation eventType] intValue] == 0){
-            //random event
+            //culture event
             annotationView.image=[UIImage imageNamed:@"yellow.png"];
         }
         else if ([[annotation eventType] intValue] == 1){
-            //music event
+            //party event
             annotationView.image=[UIImage imageNamed:@"green.png"];
         }
         else if ([[annotation eventType] intValue] == 2){
-            //party event
-            annotationView.image=[UIImage imageNamed:@"white.png"];
-        }
-        else if ([[annotation eventType] intValue] == 3){
-            //food event
+            //sport event
             annotationView.image=[UIImage imageNamed:@"orange.png"];
         }
-        else if ([[annotation eventType] intValue] == 4){
-            //cultural event
-            annotationView.image=[UIImage imageNamed:@"deeperBlue.png"];
+        else if ([[annotation eventType] intValue] == 3){
+            //music event
+            annotationView.image=[UIImage imageNamed:@"white.png"];
         }
-        else if ([[annotation eventType] intValue] == 5){
+        else if ([[annotation eventType] intValue] == 4){
             //intellectual event
             annotationView.image=[UIImage imageNamed:@"pink2.png"];
+        }
+        else if ([[annotation eventType] intValue] == 5){
+            //food event
+            annotationView.image=[UIImage imageNamed:@"blue.png"];
         }
         else{
             //use the default value
@@ -240,7 +247,7 @@ dataToLoadToAnnotationView;
     SynterestModel *aSynterestModel = [[SynterestModel alloc] init];
 
     //Standard Location query of facebook FQL
-    NSString *query =@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('london') ORDER BY rand() LIMIT 100";
+    NSString *query =@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('london') ORDER BY rand() LIMIT 200";
     
     AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
     
