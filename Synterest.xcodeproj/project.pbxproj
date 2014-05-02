@@ -69,6 +69,7 @@
 		DBD27BF11913382F002F4556 /* define_location-75.png in Resources */ = {isa = PBXBuildFile; fileRef = DBD27BEF1913382F002F4556 /* define_location-75.png */; };
 		DBD27BF21913382F002F4556 /* define_location-50.png in Resources */ = {isa = PBXBuildFile; fileRef = DBD27BF01913382F002F4556 /* define_location-50.png */; };
 		DBD27BF7191344D2002F4556 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBD27BF6191344D2002F4556 /* CoreLocation.framework */; };
+		DBD27BF919134E02002F4556 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBD27BF819134E02002F4556 /* QuartzCore.framework */; };
 		DBF289CC190EECF50053C130 /* AnnotationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF289CB190EECF50053C130 /* AnnotationViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -168,6 +169,7 @@
 		DBD27BEF1913382F002F4556 /* define_location-75.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "define_location-75.png"; sourceTree = "<group>"; };
 		DBD27BF01913382F002F4556 /* define_location-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "define_location-50.png"; sourceTree = "<group>"; };
 		DBD27BF6191344D2002F4556 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		DBD27BF819134E02002F4556 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		DBF289CA190EECF50053C130 /* AnnotationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnnotationViewController.h; sourceTree = "<group>"; };
 		DBF289CB190EECF50053C130 /* AnnotationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnnotationViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -177,6 +179,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBD27BF919134E02002F4556 /* QuartzCore.framework in Frameworks */,
 				DBD27BF7191344D2002F4556 /* CoreLocation.framework in Frameworks */,
 				DB4B8B3A18FA23A50063F3A3 /* libz.dylib in Frameworks */,
 				DB4B8B3818FA23980063F3A3 /* MobileCoreServices.framework in Frameworks */,
@@ -225,6 +228,7 @@
 		DB4B8ACE18FA1DDB0063F3A3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DBD27BF819134E02002F4556 /* QuartzCore.framework */,
 				DBD27BF6191344D2002F4556 /* CoreLocation.framework */,
 				DB4B8B3B18FA29900063F3A3 /* FacebookSDK.framework */,
 				DB4B8B3918FA23A50063F3A3 /* libz.dylib */,

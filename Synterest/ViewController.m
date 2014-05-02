@@ -220,6 +220,20 @@ sideBarActivationState;
     _sideBarView.layer.borderColor = [UIColor blackColor].CGColor;
     _sideBarView.layer.borderWidth = 1.5f;
     
+    //appears to control the sharpness of the gradient in the sideBarView
+    NSNumber *stopOne = [NSNumber numberWithFloat:0.0];
+    NSNumber *stopTwo = [NSNumber numberWithFloat:5.0];
+    NSArray *locations = [NSArray arrayWithObjects:stopOne, stopTwo, nil];
+    
+    //add a gradient to the sideBarView
+    CAGradientLayer *gradient = [CAGradientLayer layer];
+    gradient.frame = _sideBarView.bounds;
+    gradient.colors = [NSArray arrayWithObjects:(id)[UIColor colorWithRed:(186/255.0) green:(255/255.0) blue:(141/255.0) alpha:1],(id)[[UIColor whiteColor] CGColor],nil];
+    gradient.locations = locations;
+    [_sideBarView.layer insertSublayer:gradient atIndex:0];
+    
+    
+    
     //start the sidebar in the deactivated state
     [self toggleSideBarView];
     
