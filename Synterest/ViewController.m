@@ -29,6 +29,7 @@
 - (IBAction)fqlQueryAction:(id)sender;
 - (void)queryButtonAction;
 - (IBAction)quitButtonAction:(id)sender;
+- (IBAction)goToLocationAction:(id)sender;
 
 @end
 
@@ -39,13 +40,61 @@
 @implementation ViewController 
 
 @synthesize facebookData,
-dataToLoadToAnnotationView;
+dataToLoadToAnnotationView,
+sideBarActivationState;
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Release any cached data, images, etc that aren't in use.
 }
+
+-(void)toggleSideBarView
+{
+    
+    CGRect sideBarFrame = self.sideBarView.frame;
+    double maxSideBarFrameWidth = 244.0;
+    
+    if(sideBarFrame.size.width == maxSideBarFrameWidth){
+        sideBarFrame.size.width = 20.0; //brings the bar back
+    }
+    else{
+        sideBarFrame.size.width = maxSideBarFrameWidth;
+    }
+    
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:0.5];
+    [UIView setAnimationDelay:0.0];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+    
+    self.sideBarView.frame = sideBarFrame;
+    
+    [UIView commitAnimations];
+    
+}
+
+- (IBAction)goToLocationAction:(id)sender
+{
+    //locationManager.delegate = self;
+    //locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    //[locationManager startUpdatingLocation];
+    //[_mapView removeAnnotations:_mapView.annotations];
+    //self.mapView.centerCoordinate = self.mapView.userLocation.location.coordinate;
+    //CLLocation *location = [locationManager location];
+    //CLLocationCoordinate2D coordinateVal = [location coordinate];
+    //CLLocationCoordinate2D newLocation = self.mapView.userLocation.location.coordinate;
+    //NSLog(@"center of Map %f",coordinateVal.latitude);
+    //NSLog(@"center of Map %f",coordinateVal.longitude);
+    
+    //[self updateView];
+}
+
+-(void)tapOnSearchDetected{
+    
+    [self toggleSideBarView];
+    //[self performSegueWithIdentifier:@"search_screen_segue" sender:self];
+}
+
 
 //This overrides the current clicking function that occurs here
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
@@ -78,14 +127,7 @@ dataToLoadToAnnotationView;
         } else {
             annotationView.annotation = annotation;
         }
-        
-        /*culture
-        2014-05-01 18:53:19.794 Synterest[12059:60b] currentArray party
-        2014-05-01 18:53:19.794 Synterest[12059:60b] currentArray sport
-        2014-05-01 18:53:19.795 Synterest[12059:60b] currentArray music
-        2014-05-01 18:53:19.795 Synterest[12059:60b] currentArray intellectual
-        2014-05-01 18:53:19.795 Synterest[12059:60b] currentArray food*/
-        
+
         annotationView.enabled = YES;
         annotationView.canShowCallout = YES;
         
@@ -126,10 +168,50 @@ dataToLoadToAnnotationView;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self updateView];
+    
+    //Start the location Manager
+    //locationManager = [[CLLocationManager alloc] init];
+    
+    //need to add the subviews first
+    [self.view addSubview:self.sideBarView];
+    [self.view addSubview:self.searchButtonSubView];
+    [self.view insertSubview:self.sideBarView atIndex:2];
+    [self.view insertSubview:self.searchButtonSubView atIndex:3];
+    //[self insertSubview:(UIView *)view atIndex:(NSInteger)index;
+    
+    //Format the search button subView
+    _searchButtonSubView.layer.masksToBounds = YES;
+    _searchButtonSubView.backgroundColor = [UIColor whiteColor];
+    _searchButtonSubView.layer.borderColor = [UIColor blackColor].CGColor;
+    _searchButtonSubView.layer.borderWidth = 1.5;
+    _searchButtonSubView.layer.cornerRadius = 19.0f;
+    //[self.eventFbImageView addSubview:facebookImageSubView];
+    
+    //Format the sideBarView
+    _sideBarView.layer.masksToBounds = YES;
+    _sideBarView.layer.cornerRadius = 19.0f;
+    //_sideBarView.backgroundColor = [UIColor whiteColor];
+    _sideBarView.layer.borderColor = [UIColor blackColor].CGColor;
+    _sideBarView.layer.borderWidth = 1.5f;
+    
+    //start the sidebar in the deactivated state
+    [self toggleSideBarView];
+    
+    //Set up behaviour if for the imageView
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapOnSearchDetected)];
+    singleTap.numberOfTapsRequired = 1;
+    _searchButtonSubView.userInteractionEnabled = YES;
+    [_searchButtonSubView addGestureRecognizer:singleTap];
+    
+    /*_searchButton.backgroundColor = [UIColor whiteColor];
+    _searchButton.layer.borderColor = [UIColor blackColor].CGColor;
+    _searchButton.layer.borderWidth = 0.5f;
+    _searchButton.layer.cornerRadius = 10.0f;*/
     
     //Magic line that makes the mapView call the annotation script
     _mapView.delegate=self;
+    
+    [self updateView];
     
     AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
     if (!appDelegate.session.isOpen) {

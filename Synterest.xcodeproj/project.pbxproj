@@ -64,6 +64,10 @@
 		DBD27BE61912F8F7002F4556 /* blue.png in Resources */ = {isa = PBXBuildFile; fileRef = DBD27BE51912F8F7002F4556 /* blue.png */; };
 		DBD27BE81912F8FC002F4556 /* pink2.png in Resources */ = {isa = PBXBuildFile; fileRef = DBD27BE71912F8FC002F4556 /* pink2.png */; };
 		DBD27BEA1912F902002F4556 /* yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = DBD27BE91912F902002F4556 /* yellow.png */; };
+		DBD27BEC191310CF002F4556 /* plus-75.png in Resources */ = {isa = PBXBuildFile; fileRef = DBD27BEB191310CF002F4556 /* plus-75.png */; };
+		DBD27BEE191310D5002F4556 /* plus-50.png in Resources */ = {isa = PBXBuildFile; fileRef = DBD27BED191310D5002F4556 /* plus-50.png */; };
+		DBD27BF11913382F002F4556 /* define_location-75.png in Resources */ = {isa = PBXBuildFile; fileRef = DBD27BEF1913382F002F4556 /* define_location-75.png */; };
+		DBD27BF21913382F002F4556 /* define_location-50.png in Resources */ = {isa = PBXBuildFile; fileRef = DBD27BF01913382F002F4556 /* define_location-50.png */; };
 		DBF289CC190EECF50053C130 /* AnnotationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF289CB190EECF50053C130 /* AnnotationViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -158,6 +162,10 @@
 		DBD27BE51912F8F7002F4556 /* blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blue.png; sourceTree = "<group>"; };
 		DBD27BE71912F8FC002F4556 /* pink2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pink2.png; sourceTree = "<group>"; };
 		DBD27BE91912F902002F4556 /* yellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yellow.png; sourceTree = "<group>"; };
+		DBD27BEB191310CF002F4556 /* plus-75.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plus-75.png"; sourceTree = "<group>"; };
+		DBD27BED191310D5002F4556 /* plus-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plus-50.png"; sourceTree = "<group>"; };
+		DBD27BEF1913382F002F4556 /* define_location-75.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "define_location-75.png"; sourceTree = "<group>"; };
+		DBD27BF01913382F002F4556 /* define_location-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "define_location-50.png"; sourceTree = "<group>"; };
 		DBF289CA190EECF50053C130 /* AnnotationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnnotationViewController.h; sourceTree = "<group>"; };
 		DBF289CB190EECF50053C130 /* AnnotationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnnotationViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -258,8 +266,12 @@
 			isa = PBXGroup;
 			children = (
 				DBD27BDB1912E4A6002F4556 /* pink.png */,
+				DBD27BEF1913382F002F4556 /* define_location-75.png */,
+				DBD27BF01913382F002F4556 /* define_location-50.png */,
 				DBD27BE11912F8E2002F4556 /* green.png */,
+				DBD27BEB191310CF002F4556 /* plus-75.png */,
 				DBD27BE31912F8E6002F4556 /* deeperBlue.png */,
+				DBD27BED191310D5002F4556 /* plus-50.png */,
 				DBD27BE51912F8F7002F4556 /* blue.png */,
 				DBD27BE91912F902002F4556 /* yellow.png */,
 				DBD27BDD1912E53F002F4556 /* white.png */,
@@ -422,11 +434,15 @@
 				DBD27BDC1912E4A6002F4556 /* pink.png in Resources */,
 				DB4B8ADA18FA1DDB0063F3A3 /* InfoPlist.strings in Resources */,
 				DBC0CD4C190DE9C6002D3BF4 /* exit-50.png in Resources */,
+				DBD27BF11913382F002F4556 /* define_location-75.png in Resources */,
+				DBD27BEC191310CF002F4556 /* plus-75.png in Resources */,
 				DB2589F81910AB16001EE5E2 /* logo_mini.png in Resources */,
 				DBD27BDE1912E53F002F4556 /* white.png in Resources */,
 				DBC0CD52190DEB29002D3BF4 /* search-25.png in Resources */,
 				DB2589EE19109B7C001EE5E2 /* calendar-25.png in Resources */,
+				DBD27BF21913382F002F4556 /* define_location-50.png in Resources */,
 				DB4B8AE218FA1DDB0063F3A3 /* Default.png in Resources */,
+				DBD27BEE191310D5002F4556 /* plus-50.png in Resources */,
 				DBD27BE61912F8F7002F4556 /* blue.png in Resources */,
 				DB4B8AE418FA1DDB0063F3A3 /* Default@2x.png in Resources */,
 				DB4B8AE618FA1DDB0063F3A3 /* Default-568h@2x.png in Resources */,

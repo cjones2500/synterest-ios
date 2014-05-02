@@ -10,8 +10,8 @@
             <objects>
                 <viewController id="2" customClass="LoginViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="9KI-Lm-0qA"/>
-                        <viewControllerLayoutGuide type="bottom" id="UKu-jz-79d"/>
+                        <viewControllerLayoutGuide type="top" id="Lx4-9j-3of"/>
+                        <viewControllerLayoutGuide type="bottom" id="Dhs-IU-Rjj"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="3">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -59,8 +59,8 @@
             <objects>
                 <viewController storyboardIdentifier="ViewController" title="ViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="o97-z1-owW" customClass="ViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="rqr-DQ-SfJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="ym7-EW-KpZ"/>
+                        <viewControllerLayoutGuide type="top" id="WhV-Lj-sTd"/>
+                        <viewControllerLayoutGuide type="bottom" id="vcF-mj-Oal"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="DYb-Oz-pHn">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -69,44 +69,65 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cdz-BG-t0h">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HoA-Lf-P4f">
-                                <rect key="frame" x="22" y="78" width="46" height="30"/>
-                                <state key="normal" title="Fql">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="fqlQueryAction:" destination="2" eventType="touchUpInside" id="Ypa-Tt-Klf"/>
-                                    <action selector="fqlQueryAction:" destination="WHp-QZ-ND1" eventType="touchUpInside" id="fak-rM-TbI"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BeM-5C-dyv">
-                                <rect key="frame" x="20" y="20" width="50" height="50"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="plus-50.png" translatesAutoresizingMaskIntoConstraints="NO" id="Rcr-C8-Zvr">
+                                <rect key="frame" x="29" y="32" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="exit-25.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="quitButtonAction:" destination="o97-z1-owW" eventType="touchUpInside" id="SeR-xr-T2l"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3DS-78-sUB">
-                                <rect key="frame" x="264" y="32" width="36" height="25"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="u14-0w-RJC">
+                                <rect key="frame" x="35" y="32" width="244" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title=" " image="search-25.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="1JQ-AT-j6V" kind="modal" identifier="search_screen_segue" id="n3Q-bJ-8GC"/>
-                                </connections>
-                            </button>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3DS-78-sUB">
+                                        <rect key="frame" x="95" y="5" width="28" height="29"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title=" " image="search-25.png"/>
+                                        <connections>
+                                            <segue destination="1JQ-AT-j6V" kind="modal" identifier="search_screen_segue" id="n3Q-bJ-8GC"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BeM-5C-dyv">
+                                        <rect key="frame" x="140" y="2" width="38" height="36"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="exit-25.png"/>
+                                        <connections>
+                                            <action selector="quitButtonAction:" destination="o97-z1-owW" eventType="touchUpInside" id="SeR-xr-T2l"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HoA-Lf-P4f">
+                                        <rect key="frame" x="186" y="4" width="46" height="30"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
+                                        <state key="normal" title="F">
+                                            <color key="titleColor" white="0.19695060480000001" alpha="1" colorSpace="deviceWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="fqlQueryAction:" destination="2" eventType="touchUpInside" id="Ypa-Tt-Klf"/>
+                                            <action selector="fqlQueryAction:" destination="WHp-QZ-ND1" eventType="touchUpInside" id="fak-rM-TbI"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6uB-Qc-VYO">
+                                        <rect key="frame" x="47" y="5" width="28" height="29"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="define_location-50.png">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="goToLocationAction:" destination="o97-z1-owW" eventType="touchUpInside" id="sJC-Ga-uqF"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.7294887043645425" green="1" blue="0.55376304701956514" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
                         <outlet property="fqlButton" destination="HoA-Lf-P4f" id="Huz-o0-CpU"/>
+                        <outlet property="locationButton" destination="6uB-Qc-VYO" id="NcM-b5-tSq"/>
                         <outlet property="mapView" destination="Cdz-BG-t0h" id="GBP-Tx-ned"/>
                         <outlet property="quitButton" destination="BeM-5C-dyv" id="QIo-NR-4A1"/>
                         <outlet property="searchButton" destination="3DS-78-sUB" id="Pzr-0B-DtB"/>
+                        <outlet property="searchButtonSubView" destination="Rcr-C8-Zvr" id="cP6-dE-br7"/>
+                        <outlet property="sideBarView" destination="u14-0w-RJC" id="m3u-Z1-QGI"/>
                         <segue destination="2" kind="modal" identifier="logout_sucess" id="YuM-0e-9ne"/>
                         <segue destination="FVO-wd-fiy" kind="modal" identifier="annotation_selected" id="wQA-o9-AcT"/>
                     </connections>
@@ -120,8 +141,8 @@
             <objects>
                 <viewController id="FVO-wd-fiy" customClass="AnnotationViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="n88-l5-tJh"/>
-                        <viewControllerLayoutGuide type="bottom" id="T1n-IQ-7mO"/>
+                        <viewControllerLayoutGuide type="top" id="gDS-6F-gXQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="vKR-64-iGM"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="M6U-pL-fBo">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -229,8 +250,8 @@
             <objects>
                 <viewController id="1JQ-AT-j6V" customClass="SearchViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="g5Q-LV-TcS"/>
-                        <viewControllerLayoutGuide type="bottom" id="CBT-0I-Ema"/>
+                        <viewControllerLayoutGuide type="top" id="pjp-HH-dQS"/>
+                        <viewControllerLayoutGuide type="bottom" id="DN5-Ug-DJU"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="c5E-8e-Vge">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -268,9 +289,11 @@
     </scenes>
     <resources>
         <image name="calendar-50.png" width="50" height="50"/>
+        <image name="define_location-50.png" width="50" height="50"/>
         <image name="exit-25.png" width="25" height="25"/>
         <image name="location-50.png" width="50" height="50"/>
         <image name="logo.png" width="301" height="224"/>
+        <image name="plus-50.png" width="50" height="50"/>
         <image name="search-25.png" width="25" height="25"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
