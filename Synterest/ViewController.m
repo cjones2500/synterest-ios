@@ -24,6 +24,7 @@
 
 @property (strong, nonatomic) IBOutlet UIButton *buttonLoginLogout;
 @property (weak, nonatomic) IBOutlet UIButton *quitButton;
+@property (strong, nonatomic) NSMutableDictionary *placeDictionary;
 
 - (IBAction)buttonClickHandler:(id)sender;
 - (void)updateView;
@@ -660,6 +661,27 @@ sideBarActivationState;
     
     // 3
     [_mapView setRegion:viewRegion animated:YES];
+    
+    //beginnings of a geocoder...
+    self.placeDictionary = [[NSMutableDictionary alloc] init];
+    [self.placeDictionary setValue:nil forKey:@"Street"];
+    [self.placeDictionary setValue:@"london"  forKey:@"City"];
+    [self.placeDictionary setValue:@"UK" forKey:@"State"];
+    [self.placeDictionary setValue:nil forKey:@"ZIP"];
+    
+    
+    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+    [geocoder geocodeAddressDictionary:self.placeDictionary completionHandler:^(NSArray *placemarks, NSError *error) {
+        if([placemarks count]) {
+            CLPlacemark *placemark = [placemarks objectAtIndex:0];
+            CLLocation *location = placemark.location;
+            CLLocationCoordinate2D coordinateReverse = location.coordinate;
+            NSLog(@"coordinate %f",coordinateReverse.latitude);
+            //[self.mapView setCenterCoordinate:coordinate animated:YES];
+        } else {
+            NSLog(@"error");
+        }
+    }];
     
 }
 
