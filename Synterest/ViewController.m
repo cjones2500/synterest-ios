@@ -16,6 +16,7 @@
 #import "MyLocation.h"
 #import "SynterestModel.h"
 #import "AnnotationViewController.h"
+#import <CoreLocation/CoreLocation.h>
 
 @interface ViewController ()
 
@@ -42,6 +43,7 @@
 @synthesize facebookData,
 dataToLoadToAnnotationView,
 sideBarActivationState;
+@synthesize locationManager = _locationManager;
 
 - (void)didReceiveMemoryWarning
 {
@@ -75,16 +77,20 @@ sideBarActivationState;
 
 - (IBAction)goToLocationAction:(id)sender
 {
-    //locationManager.delegate = self;
-    //locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    //[locationManager startUpdatingLocation];
-    //[_mapView removeAnnotations:_mapView.annotations];
-    //self.mapView.centerCoordinate = self.mapView.userLocation.location.coordinate;
-    //CLLocation *location = [locationManager location];
-    //CLLocationCoordinate2D coordinateVal = [location coordinate];
-    //CLLocationCoordinate2D newLocation = self.mapView.userLocation.location.coordinate;
-    //NSLog(@"center of Map %f",coordinateVal.latitude);
-    //NSLog(@"center of Map %f",coordinateVal.longitude);
+    CLLocationCoordinate2D newLocation = self.mapView.userLocation.location.coordinate;
+    NSLog(@"center of Map %f",newLocation.latitude);
+    NSLog(@"center of Map %f",newLocation.longitude);
+    
+    //TODO:Add the ability to prompt location services if not activated
+    
+    //Don't move unless there are real values
+    if( (newLocation.latitude == 0.0) || (newLocation.latitude == 0.0)){
+        NSLog(@"No Real Location Given or location not simulated");
+    }
+    else{
+        [_mapView removeAnnotations:_mapView.annotations];
+        self.mapView.centerCoordinate = self.mapView.userLocation.location.coordinate;
+    }
     
     //[self updateView];
 }
@@ -165,9 +171,28 @@ sideBarActivationState;
     return nil;
 }
 
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation  {
+    
+    CLLocationCoordinate2D loc = [newLocation coordinate];
+    [self.mapView setCenterCoordinate:loc];
+    
+}
+
+/*- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
+{
+    NSLog(@"coordinates = %f,%f", mapView.userLocation.coordinate.latitude,
+          mapView.userLocation.coordinate.longitude);
+}*/
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.locationManager = [[CLLocationManager alloc] init] ;
+    self.locationManager.delegate = self;
+    [self.locationManager startUpdatingLocation];
+    
+    self.mapView.showsUserLocation=YES;
     
     //Start the location Manager
     //locationManager = [[CLLocationManager alloc] init];
@@ -635,7 +660,7 @@ sideBarActivationState;
     
     // 3
     [_mapView setRegion:viewRegion animated:YES];
-   
+    
 }
 
 @end

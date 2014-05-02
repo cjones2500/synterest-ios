@@ -12,8 +12,7 @@
 #import <CoreLocation/CoreLocation.h>
 
 
-@interface ViewController : UIViewController <MKMapViewDelegate>{
-    //CLLocationManager *locationManager;
+@interface ViewController : UIViewController <CLLocationManagerDelegate,MKMapViewDelegate>{
     BOOL _doneInitialZoom;
 }
 //@property (weak, nonatomic) IBOutlet MKMapView *_mapView;//This was auto-added by Xcode :]
@@ -26,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *searchButtonSubView;
 @property (weak, nonatomic) IBOutlet UIView *sideBarView;
 @property (weak, nonatomic) IBOutlet UIButton *locationButton;
+@property (nonatomic, retain) CLLocationManager *locationManager;
 
 - (void)viewWillAppear:(BOOL)animated;
 - (void)plotFacebookData:(NSMutableArray *)responseData;
