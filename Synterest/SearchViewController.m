@@ -7,8 +7,11 @@
 //
 
 #import "SearchViewController.h"
+#import <CoreLocation/CoreLocation.h>
 
 @interface SearchViewController ()
+@property (strong, nonatomic) NSMutableDictionary *placeDictionary;
+-(void)geocodeLocationValue;
 
 @end
 
@@ -26,7 +29,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self geocodeLocationValue];
     // Do any additional setup after loading the view.
+    
+    //self.location = [[CLLocation alloc] init] ;
+    //self.location.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning
@@ -35,9 +43,66 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(IBAction)reverseGeocode:(id)sender
+{
+    [self reverseGeocodeLocation];
+}
+
 -(IBAction)goBacktoMap:(id)sender
 {
+    //[self geocodeLocationValue];
     [self performSegueWithIdentifier:@"back_from_search" sender:self];
+}
+
+-(void)geocodeLocationValue
+{
+    
+    
+    //beginnings of a geocoder...
+    self.placeDictionary = [[NSMutableDictionary alloc] init];
+    [self.placeDictionary setValue:nil forKey:@"Street"];
+    [self.placeDictionary setValue:@"london"  forKey:@"City"];
+    [self.placeDictionary setValue:@"UK" forKey:@"State"];
+    [self.placeDictionary setValue:nil forKey:@"ZIP"];
+    
+    
+    //CLLocationCoordinate2D coordinatesOfPosition;
+    
+    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+    [geocoder geocodeAddressDictionary:self.placeDictionary completionHandler:^(NSArray *placemarks, NSError *error) {
+        if([placemarks count]) {
+            CLPlacemark *placemark = [placemarks objectAtIndex:0];
+            CLLocation *location = placemark.location;
+            CLLocationCoordinate2D coordinateReverse = location.coordinate;
+            self.locationValue = placemark.location;
+            NSLog(@"coordinate %f",coordinateReverse.latitude);
+            //[self.mapView setCenterCoordinate:coordinate animated:YES];
+        } else {
+            NSLog(@"error");
+        }
+        
+    }];
+    
+    
+
+    
+}
+
+-(void)reverseGeocodeLocation
+{
+    CLGeocoder *geocoder2 = [[CLGeocoder alloc] init];
+    //CLLocationCoordinate2D coordinateReverse;
+    //coordinateReverse.latitude = self.locationValue.coordinate.latitude;
+    //coordinateReverse.longitude = self.locationValue.coordinate.longitude;
+    [geocoder2 reverseGeocodeLocation:self.locationValue completionHandler:^(NSArray *placemarks, NSError *error){
+        CLPlacemark *placemark = placemarks[0];
+        NSLog(@"Found %@", placemark);
+    }];
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    
 }
 /*
 #pragma mark - Navigation

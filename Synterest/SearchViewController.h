@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 
-@interface SearchViewController : UIViewController
+@interface SearchViewController : UIViewController<CLLocationManagerDelegate>{
+}
 @property (weak, nonatomic) IBOutlet UIButton *goBackButton;
+@property (nonatomic, retain) CLLocation *locationValue;
 
 @end

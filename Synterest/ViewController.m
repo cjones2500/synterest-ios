@@ -690,7 +690,7 @@ sideBarActivationState;
             CLPlacemark *placemark = [placemarks objectAtIndex:0];
             CLLocation *location = placemark.location;
             CLLocationCoordinate2D coordinateReverse = location.coordinate;
-            NSLog(@"coordinate %f",coordinateReverse.latitude);
+            NSLog(@"ViewController:coordinate %f",coordinateReverse.latitude);
             //[self.mapView setCenterCoordinate:coordinate animated:YES];
         } else {
             NSLog(@"error");
