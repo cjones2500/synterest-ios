@@ -57,9 +57,19 @@ sideBarActivationState;
     }
     else{
         //unpack the zoomLocation variable
-        CLPlacemark * recievedPlacemark = [_zoomLocation objectAtIndex:0];
-        locationToZoom.latitude = recievedPlacemark.location.coordinate.latitude;
-        locationToZoom.longitude = recievedPlacemark.location.coordinate.longitude;
+        @try{
+            CLPlacemark * recievedPlacemark = [_zoomLocation objectAtIndex:0];
+            locationToZoom.latitude = recievedPlacemark.location.coordinate.latitude;
+            locationToZoom.longitude = recievedPlacemark.location.coordinate.longitude;
+        }
+        @catch(NSException *error){
+            NSLog(@"Error: %@",error);
+        }
+        @finally{
+            NSLog(@"Unreadable location. Moving to London");
+            locationToZoom.latitude = 51.50722;
+            locationToZoom.longitude = -0.12750;
+        }
     }
     
     //call the normal method of loadView (before override)
