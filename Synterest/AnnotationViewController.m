@@ -97,7 +97,7 @@ eventType;
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([[segue identifier] isEqualToString:@"go_back_from_annotation"]) {
-        NSLog(@"in here with current map coords %@",currentMapCenterCoords);
+        //NSLog(@"in here with current map coords %@",currentMapCenterCoords);
        [[segue destinationViewController] setZoomLocation:currentMapCenterCoords];
     }
 }

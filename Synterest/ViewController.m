@@ -17,6 +17,7 @@
 #import "SynterestModel.h"
 #import "AnnotationViewController.h"
 #import <CoreLocation/CoreLocation.h>
+#import "SearchViewController.h"
 
 @interface ViewController ()
 
@@ -43,10 +44,15 @@
 @implementation ViewController 
 
 @synthesize facebookData,
+currentCity,
 dataToLoadToAnnotationView,
+loadFacebookDataFlag,
+firstViewFlag,
+loadingDataWheel,
 sideBarActivationState;
 @synthesize locationManager = _locationManager;
 @synthesize zoomLocation = _zoomLocation;
+
 
 
 //called at the beginning of loading a view
@@ -60,15 +66,14 @@ sideBarActivationState;
         //unpack the zoomLocation variable
         @try{
             CLPlacemark * recievedPlacemark = [_zoomLocation objectAtIndex:0];
-            NSLog(@"placemark %f",recievedPlacemark.location.coordinate.latitude);
             locationToZoom.latitude = recievedPlacemark.location.coordinate.latitude;
             locationToZoom.longitude = recievedPlacemark.location.coordinate.longitude;
         }
         @catch(NSException *error){
             NSLog(@"Error: %@",error);
             NSLog(@"Unreadable location. Moving to London");
-            locationToZoom.latitude = 51.50722;
-            locationToZoom.longitude = -0.12750;
+            //locationToZoom.latitude = 51.50722;
+            //locationToZoom.longitude = -0.12750;
         }
     }
     
@@ -81,6 +86,50 @@ sideBarActivationState;
     [super didReceiveMemoryWarning];
     // Release any cached data, images, etc that aren't in use.
 }
+
+//fires when the mapview center is changed (includes zooming in and out)
+- (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated{
+    
+    //need to fix this such that there is no random increasing of this value
+    //[self reverseGeocodeLocation];
+    
+    
+    
+    
+    //[self reverseGeocodeLocation];
+    //check to see how many icons are in the view
+    //increase this to a certain value when the uses changes where they are
+    
+    //this is implemented to stop the search function firing when the user zooms in but only when they move
+    /*NSLog(@"mapview changed");
+    double longitudeLimit = 0.02;
+    double latitudeLimit = 0.02;
+    //CLPlacemark * centerPlacemark = [_zoomLocation objectAtIndex:0];
+    double currentCenterLongitude = self.mapView.centerCoordinate.longitude;
+    double currentCenterLatitude = self.mapView.centerCoordinate.latitude;
+    NSLog(@" currentLatitude %f",currentCenterLatitude);
+    NSLog(@" currentPlacemarkLatitude %f",locationToZoom.latitude);
+    if( (currentCenterLongitude > locationToZoom.longitude + longitudeLimit) ||(currentCenterLongitude < locationToZoom.longitude - longitudeLimit)){
+        NSLog(@"in here");
+        //[self plotFacebookData:nil];
+        //[self queryButtonAction];
+        [NSThread detachNewThreadSelector:@selector(queryButtonAction) toTarget:self withObject:nil];
+    }
+    else if((currentCenterLatitude > locationToZoom.latitude + latitudeLimit) ||(currentCenterLatitude < locationToZoom.latitude - latitudeLimit)){
+        //[self plotFacebookData:nil];
+        //[self queryButtonAction];
+        [NSThread detachNewThreadSelector:@selector(queryButtonAction) toTarget:self withObject:nil];
+    }
+    else{
+        //do nothing
+    }*/
+}
+
+//- (void)mapView:(MKMapView *)aMapView didAddAnnotationViews:(NSArray *)views{
+//    NSLog(@"getting called here");
+//    [self queryButtonAction];
+//}
+
 
 -(void)toggleSideBarView
 {
@@ -156,7 +205,10 @@ sideBarActivationState;
         [arrayToSend setObject:newPlacemark atIndexedSubscript:0];
         NSLog(@" sent array %@",arrayToSend);
         [[segue destinationViewController] setCurrentMapCenterCoords:arrayToSend];
-        
+    }
+    if ([[segue identifier] isEqualToString:@"search_screen_segue"]) {
+        [[segue destinationViewController] setCurrentSearchViewInformation:_zoomLocation];
+    
     }
 }
 
@@ -209,18 +261,23 @@ sideBarActivationState;
     return nil;
 }
 
-- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation  {
+/*- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation  {
     
     CLLocationCoordinate2D loc = [newLocation coordinate];
-    [self.mapView setCenterCoordinate:loc];
+    //if this is initial view then do this
+    if([firstViewFlag boolValue] == YES){
+        NSLog(@"First View");
+        [self.mapView setCenterCoordinate:loc];
+    }
     
-}
-
-/*- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
-{
-    NSLog(@"coordinates = %f,%f", mapView.userLocation.coordinate.latitude,
-          mapView.userLocation.coordinate.longitude);
 }*/
+
+//changes when the user location is updated or changed
+-(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
+{
+    [self.mapView setCenterCoordinate: userLocation.location.coordinate animated: NO];
+    [self reverseGeocodeLocation];
+}
 
 - (void)viewDidLoad
 {
@@ -228,9 +285,14 @@ sideBarActivationState;
     
     self.locationManager = [[CLLocationManager alloc] init] ;
     self.locationManager.delegate = self;
-    [self.locationManager startUpdatingLocation];
+    //[self.locationManager startUpdatingLocation];
     
     self.mapView.showsUserLocation=YES;
+    /*CLLocationCoordinate2D loc = [self.locationManager.location coordinate];
+    if([firstViewFlag boolValue] == YES){
+        NSLog(@"First View");
+        [self.mapView setCenterCoordinate:loc];
+    }*/
     
     //Start the location Manager
     //locationManager = [[CLLocationManager alloc] init];
@@ -288,8 +350,9 @@ sideBarActivationState;
     //Magic line that makes the mapView call the annotation script
     _mapView.delegate=self;
     
-    [self updateView];
+    self.loadingDataWheel.color = [UIColor blackColor];
     
+    [self updateView];
     AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
     if (!appDelegate.session.isOpen) {
         // create a fresh session object
@@ -375,6 +438,8 @@ sideBarActivationState;
 
 - (IBAction)fqlQueryAction:(id)sender
 {
+    //[NSThread detachNewThreadSelector:@selector(queryButtonAction) toTarget:self withObject:nil];
+    
     [self queryButtonAction];
 }
 
@@ -402,14 +467,24 @@ sideBarActivationState;
 
 - (void)queryButtonAction
 {
+    [loadingDataWheel startAnimating];
     //Get the synterest Model
     SynterestModel *aSynterestModel = [[SynterestModel alloc] init];
 
+    NSString *query;// = [[NSString alloc] init];
     //Standard Location query of facebook FQL
-    NSString *query =@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('london') ORDER BY rand() LIMIT 200";
+    @try{
+       query = [NSString stringWithFormat:@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('%@') ORDER BY rand() LIMIT 10",self.currentCity];
+        NSLog(@" string in question %@",self.currentCity);
+    }
+    @catch(NSException *e){
+        NSLog(@"Error appending string: %@",e);
+        NSLog(@" string in question %@",self.currentCity);
+        //default the automatic search to London if there is uncertainty
+        //query =@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('London') ORDER BY rand() LIMIT 3";
+    }
     
     AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
-    
     [FBSession setActiveSession:appDelegate.session];
     
     // Set up the query parameter
@@ -534,6 +609,7 @@ sideBarActivationState;
                 NSLog(@"Exception Post annotation:%@ ",exception);
             }
             @finally {
+                [loadingDataWheel stopAnimating];
                 //continue;
             }
         }//end of main outer try loop
@@ -700,6 +776,35 @@ sideBarActivationState;
     }
 }
 
+-(void)reverseGeocodeLocation
+{
+    @try{
+        double latitudeValue = self.mapView.centerCoordinate.latitude;
+        double longitudeValue = self.mapView.centerCoordinate.longitude;
+        CLLocation *testLocation = [[CLLocation alloc] initWithLatitude:latitudeValue longitude:longitudeValue];
+        self.reverseGeocodeLocationValue = testLocation;
+        CLGeocoder *reverseGeocoder = [[CLGeocoder alloc] init];
+        [reverseGeocoder reverseGeocodeLocation:self.reverseGeocodeLocationValue completionHandler:^(NSArray *placemarks, NSError *error){
+            CLPlacemark *placemark = placemarks[0];
+            NSLog(@"Found here %@", placemark.locality);
+            [self setCurrentCity:placemark.locality];
+            
+            
+            //only call the queryFunction if the data has changed
+            if([loadFacebookDataFlag boolValue] == YES){
+                NSLog(@"calling query action from changed location");
+                [self queryButtonAction];
+            }
+            //NSLog(@"current city inside block: %@",self.currentCity);
+        }];
+        //NSLog(@"current city outside block: %@",self.currentCity);
+    }
+    @catch(NSException *e){
+        NSLog(@"Error in reverse Geocoder: %@",e);
+    }
+    
+}
+
 - (void)setMapCenterWithCoords:(CLLocationCoordinate2D)coords{
     //MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 0.5*METERS_PER_MILE, 0.5*METERS_PER_MILE);
     //[_mapView setRegion:viewRegion animated:YES];
@@ -715,12 +820,14 @@ sideBarActivationState;
     //setZoomLocation.latitude = 51.50722;
     //setZoomLocation.longitude= -0.12750;
     //NSLog(@"location to zoom %f",locationToZoom.latitude);
-    
+    //self.mapView. = locationToZoom;
     // 2
     MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(locationToZoom, 0.5*METERS_PER_MILE, 0.5*METERS_PER_MILE);
     
     // 3
     [_mapView setRegion:viewRegion animated:YES];
+    
+    [self reverseGeocodeLocation];
     
 }
 

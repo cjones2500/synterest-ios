@@ -12,11 +12,12 @@
 @interface SearchViewController : UIViewController<CLLocationManagerDelegate,UISearchBarDelegate,UITableViewDelegate, UITableViewDataSource>{
     IBOutlet UISearchBar *_searchBar;
     NSArray *searchValues;
-    NSMutableArray *currentSearchViewInformation;
+    //NSMutableArray *currentSearchViewInformation;
     NSArray *inforamtionToSendBacktoMainView;
 }
 @property (weak, nonatomic) IBOutlet UITableView *synterestTableView;
 @property (weak, nonatomic) IBOutlet UIButton *goBackButton;
+@property (strong, nonatomic) NSMutableArray *currentSearchViewInformation;
 @property (nonatomic, retain) CLLocation *locationValue;
 @property (nonatomic, retain) NSArray *locationValueArray;
 @end

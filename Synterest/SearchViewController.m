@@ -19,7 +19,10 @@
 
 @end
 
+
 @implementation SearchViewController
+
+@synthesize currentSearchViewInformation;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -106,7 +109,7 @@
             searchValues = [NSArray arrayWithArray:nil];
             NSLog(@"error: %@",error);
             //_searchBar.text = nil;
-            currentSearchViewInformation = [NSMutableArray arrayWithArray:nil];
+            //currentSearchViewInformation = [NSMutableArray arrayWithArray:nil];
             //placemarks = [NSArray arrayWithObject:nil];
             //[self.synterestTableView reloadData];
             //[self viewDidLoad];
@@ -135,7 +138,7 @@
     currentSearchViewInformation = [NSMutableArray arrayWithObjects:nil];
     
     @try{
-        currentSearchViewInformation = [[NSMutableArray alloc] initWithCapacity:100];
+        //currentSearchViewInformation = [[NSMutableArray alloc] initWithCapacity:100];
         NSMutableArray *mutablePlacemarkArrayToFill = [[NSMutableArray alloc] initWithCapacity:100];
         int numberOfMembers = [self.locationValueArray count];
         NSLog(@" no of members %i",numberOfMembers);
@@ -194,9 +197,6 @@
 -(void)reverseGeocodeLocation
 {
     CLGeocoder *geocoder2 = [[CLGeocoder alloc] init];
-    //CLLocationCoordinate2D coordinateReverse;
-    //coordinateReverse.latitude = self.locationValue.coordinate.latitude;
-    //coordinateReverse.longitude = self.locationValue.coordinate.longitude;
     [geocoder2 reverseGeocodeLocation:self.locationValue completionHandler:^(NSArray *placemarks, NSError *error){
         //CLPlacemark *placemark = placemarks[0];
         NSLog(@"Found %@", placemarks);
@@ -276,18 +276,20 @@ searchString {
     if ([[segue identifier] isEqualToString:@"back_from_search"]) {
         if(inforamtionToSendBacktoMainView != nil){
             CLPlacemark *placemarkToSend = [inforamtionToSendBacktoMainView objectAtIndex:0];
-            //NSLog(@"item selected: %f",placemarkToSend.location.coordinate.latitude);
-            //CLLocationCoordinate2D zoomLocation;
-            //zoomLocation.latitude = placemarkToSend.location.coordinate.latitude;
-            //zoomLocation.longitude= placemarkToSend.location.coordinate.longitude;
             NSMutableArray *arrayToSend = [[NSMutableArray alloc] initWithCapacity:100];
             [arrayToSend addObject:placemarkToSend];
             [[segue destinationViewController] setZoomLocation:arrayToSend];
-            //[[segue destinationViewController]
+            NSNumber *numberToSend = [NSNumber numberWithBool:YES];
+            [[segue destinationViewController] setLoadFacebookDataFlag:numberToSend];
         }
         else{
             NSLog(@"normal go back");
-            //don't do any stuff
+            CLPlacemark *placemarkToSend = [currentSearchViewInformation objectAtIndex:0];
+            NSMutableArray *arrayToSend = [[NSMutableArray alloc] initWithCapacity:100];
+            [arrayToSend addObject:placemarkToSend];
+            [[segue destinationViewController] setZoomLocation:arrayToSend];
+            NSNumber *numberToSend = [NSNumber numberWithBool:NO];
+            [[segue destinationViewController] setLoadFacebookDataFlag:numberToSend];
         }
     }
 }

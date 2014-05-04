@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UIButton *fqlButton;
 @property (weak, nonatomic) NSMutableArray *facebookData;
+@property (weak, nonatomic) NSString *currentCity;
 @property (weak, nonatomic) NSString *sideBarActivationState;
 @property (weak, nonatomic) NSMutableArray *dataToLoadToAnnotationView;
 @property (weak, nonatomic) IBOutlet UIButton *searchButton;
@@ -30,6 +31,12 @@
 @property (weak, nonatomic) IBOutlet UIButton *locationButton;
 @property (nonatomic, retain) CLLocationManager *locationManager;
 @property (copy) NSMutableArray *zoomLocation;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loadingDataWheel;
+@property (nonatomic, retain) CLLocation *reverseGeocodeLocationValue;
+@property (weak,nonatomic) NSNumber *loadFacebookDataFlag;
+@property (weak,nonatomic) NSNumber *firstViewFlag;
+
+
 
 //- (id) initWithCoords:(NSMutableArray*)zoomLocation;
 - (void)viewWillAppear:(BOOL)animated;

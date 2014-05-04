@@ -139,6 +139,16 @@
     }
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"login_sucess"]) {
+        NSNumber *numberToSend = [NSNumber numberWithBool:YES];
+        [[segue destinationViewController] setLoadFacebookDataFlag:numberToSend];
+        NSNumber *firstViewFlag = [NSNumber numberWithBool:YES];
+        [[segue destinationViewController] setFirstViewFlag:firstViewFlag];
+    }
+}
+
 //#pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
