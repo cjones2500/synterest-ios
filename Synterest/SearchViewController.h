@@ -9,9 +9,13 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 
-@interface SearchViewController : UIViewController<CLLocationManagerDelegate>{
+@interface SearchViewController : UIViewController<CLLocationManagerDelegate,UISearchBarDelegate,UITableViewDelegate, UITableViewDataSource>{
+    IBOutlet UISearchBar *_searchBar;
+    NSArray *searchValues;
+    NSMutableArray *currentSearchViewInformation;
 }
+@property (weak, nonatomic) IBOutlet UITableView *synterestTableView;
 @property (weak, nonatomic) IBOutlet UIButton *goBackButton;
 @property (nonatomic, retain) CLLocation *locationValue;
-
+@property (nonatomic, retain) NSArray *locationValueArray;
 @end
