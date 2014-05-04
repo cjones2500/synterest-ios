@@ -13,6 +13,7 @@
     IBOutlet UISearchBar *_searchBar;
     NSArray *searchValues;
     NSMutableArray *currentSearchViewInformation;
+    NSString * errorFlag;
 }
 @property (weak, nonatomic) IBOutlet UITableView *synterestTableView;
 @property (weak, nonatomic) IBOutlet UIButton *goBackButton;

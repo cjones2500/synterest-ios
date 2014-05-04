@@ -72,7 +72,7 @@
     //aCityToSearch = [aCityToSearch stringByAppendingString:@""];
     //beginnings of a geocoder...
     self.placeDictionary = [[NSMutableDictionary alloc] init];
-    [self.placeDictionary setValue:nil forKey:@"town"];
+
     [self.placeDictionary setValue:nil forKey:@"Street"];
     [self.placeDictionary setValue:aCityToSearch  forKey:@"City"];
     [self.placeDictionary setValue:nil forKey:@"State"];
@@ -91,7 +91,7 @@
             //NSLog(@"array %@",__arrayInBlock);
             //NSLog(@"array1 %@",placemarks);
             //NSLog(@"array2 %@",placemarkersFromSearch);
-            self.locationValueArray =placemarks;
+            self.locationValueArray = placemarks;
             CLPlacemark *placemark = [placemarks objectAtIndex:0];
             //CLLocation *location = placemark.location;
             //CLLocationCoordinate2D coordinateReverse = location.coordinate;
@@ -103,8 +103,12 @@
         } else {
             //occurs if there are no placemarks
             searchValues = [NSArray arrayWithArray:nil];
-            [self.synterestTableView reloadData];
-            NSLog(@"error");
+            NSLog(@"error: %@",error);
+            //_searchBar.text = nil;
+            currentSearchViewInformation = [NSMutableArray arrayWithArray:nil];
+            //placemarks = [NSArray arrayWithObject:nil];
+            //[self.synterestTableView reloadData];
+            //[self viewDidLoad];
         }
         //finished = YES;
         //return placemarks;
@@ -143,16 +147,16 @@
             //NSLog(@"stringToPrint %@",stringToPrint);
             if( (placemarkLocality == NULL) && (placemarkCountry == NULL)){
                 //NSLog(@"no locality or country");
-                stringToPrint = [NSString stringWithFormat:nil];
-                //continue;//both items are NULL, meaningless result
+                //stringToPrint = [NSString stringWithFormat:nil];
+                continue;//both items are NULL, meaningless result
             }
             else if( ([placemarkLocality length] == 0) && ([placemarkCountry length] == 0)){
                 //NSLog(@"no locality");
                 stringToPrint = [NSString stringWithFormat:@"%@",placemarkLocality];
             }
             else if( ([placemarkLocality length] == 0) && ([placemarkCountry length] != 0)){
-                stringToPrint = [NSString stringWithFormat:nil];
-                //continue; //meaningless if only the country is visible
+                //stringToPrint = [NSString stringWithFormat:nil];
+                continue; //meaningless if only the country is visible
             }
             else if( ([placemarkLocality length] != 0) && ([placemarkCountry length] != 0)){
                 //NSLog(@"placemark: %i %i",[placemarkCountry length],[placemarkLocality length]);
@@ -209,19 +213,22 @@ searchString {
     return NO;
 }*/
 
+//[self viewDidLoad];
+
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-	if ([searchText length] != 0) {
+    if ([searchText length] != 0) {
         [self geocodeLocationValue:[_searchBar text]];
-        //searchValues = [NSArray arrayWithObject:[self geocodeLocationValue:[_searchBar text]]];
-        //NSLog(@"search values: %@",searchValues);
-        //[self.synterestTableView reloadData];
-        //self.synterestTableView = [[NSArray alloc] initWithObjects:@"iPhone", @"iPod", @"MacBook", @"MacBook Pro", @"iMac"];
-        
-	}
-	else {
-        //do nothing if there is no text
-	}
-    
+    }
+    else{
+        //do nothing
+    }
+}
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
+{
+    if ([searchBar.text length] != 0) {
+        [self geocodeLocationValue:[_searchBar text]];
+    }
 }
 
 - (IBAction)onTestClick:(id)sender
@@ -255,14 +262,24 @@ searchString {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
     }
     cell.textLabel.text = [searchValues objectAtIndex:indexPath.row];
+    
+    //format the image with the cell
+    UIImage *logoImage = [UIImage imageNamed:@"logo_mini.png"];
+    cell.imageView.layer.cornerRadius = 30.0;
+    cell.imageView.layer.masksToBounds = YES;
+    cell.imageView.image = logoImage;
     return cell;
 }
 
-
-//- (IBAction)onSearchBarCLickAction:(id)sender
-//{
-  //  [self geocodeLocationValue:[self.searchBar text]];
-//}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UIAlertView *messageAlert = [[UIAlertView alloc]
+                                 initWithTitle:@"Row Selected" message:@"You've selected a row" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    
+    // Display Alert Message
+    [messageAlert show];
+    
+}
 
 -(void)viewWillAppear:(BOOL)animated
 {

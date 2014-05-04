@@ -11,9 +11,9 @@
 		DB2589F019109B85001EE5E2 /* calendar-50.png in Resources */ = {isa = PBXBuildFile; fileRef = DB2589EF19109B85001EE5E2 /* calendar-50.png */; };
 		DB2589F219109BD2001EE5E2 /* location-32.png in Resources */ = {isa = PBXBuildFile; fileRef = DB2589F119109BD2001EE5E2 /* location-32.png */; };
 		DB2589F419109BDC001EE5E2 /* location-50.png in Resources */ = {isa = PBXBuildFile; fileRef = DB2589F319109BDC001EE5E2 /* location-50.png */; };
-		DB2589F81910AB16001EE5E2 /* logo_mini.png in Resources */ = {isa = PBXBuildFile; fileRef = DB2589F71910AB16001EE5E2 /* logo_mini.png */; };
 		DB2D4F4418FB5D0D004DE5BB /* MyLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = DB2D4F4318FB5D0D004DE5BB /* MyLocation.m */; };
 		DB2D4F4618FB66DA004DE5BB /* arrest.png in Resources */ = {isa = PBXBuildFile; fileRef = DB2D4F4518FB66DA004DE5BB /* arrest.png */; };
+		DB40FA951915F1EA0020910B /* logo_mini.png in Resources */ = {isa = PBXBuildFile; fileRef = DB40FA941915F1EA0020910B /* logo_mini.png */; };
 		DB4B8AD018FA1DDB0063F3A3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB4B8ACF18FA1DDB0063F3A3 /* UIKit.framework */; };
 		DB4B8AD218FA1DDB0063F3A3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB4B8AD118FA1DDB0063F3A3 /* Foundation.framework */; };
 		DB4B8AD418FA1DDB0063F3A3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB4B8AD318FA1DDB0063F3A3 /* CoreGraphics.framework */; };
@@ -88,10 +88,10 @@
 		DB2589EF19109B85001EE5E2 /* calendar-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calendar-50.png"; sourceTree = "<group>"; };
 		DB2589F119109BD2001EE5E2 /* location-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "location-32.png"; sourceTree = "<group>"; };
 		DB2589F319109BDC001EE5E2 /* location-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "location-50.png"; sourceTree = "<group>"; };
-		DB2589F71910AB16001EE5E2 /* logo_mini.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_mini.png; sourceTree = "<group>"; };
 		DB2D4F4318FB5D0D004DE5BB /* MyLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyLocation.m; sourceTree = "<group>"; };
 		DB2D4F4518FB66DA004DE5BB /* arrest.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrest.png; sourceTree = "<group>"; };
 		DB2D4F4B18FB68C3004DE5BB /* en */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = en; path = en.lproj/MyLocation.h; sourceTree = "<group>"; };
+		DB40FA941915F1EA0020910B /* logo_mini.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo_mini.png; path = ../../../Downloads/logo_mini.png; sourceTree = "<group>"; };
 		DB4B8ACC18FA1DDB0063F3A3 /* Synterest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Synterest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB4B8ACF18FA1DDB0063F3A3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		DB4B8AD118FA1DDB0063F3A3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -273,6 +273,7 @@
 		DB4B8AD618FA1DDB0063F3A3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				DB40FA941915F1EA0020910B /* logo_mini.png */,
 				DBD27BDB1912E4A6002F4556 /* pink.png */,
 				DBD27BEF1913382F002F4556 /* define_location-75.png */,
 				DBD27BF01913382F002F4556 /* define_location-50.png */,
@@ -285,7 +286,6 @@
 				DBD27BDD1912E53F002F4556 /* white.png */,
 				DBD27BE71912F8FC002F4556 /* pink2.png */,
 				DBD27BDF1912F8D6002F4556 /* orange.png */,
-				DB2589F71910AB16001EE5E2 /* logo_mini.png */,
 				DB2589F319109BDC001EE5E2 /* location-50.png */,
 				DB2589F119109BD2001EE5E2 /* location-32.png */,
 				DB2589EF19109B85001EE5E2 /* calendar-50.png */,
@@ -444,7 +444,6 @@
 				DBC0CD4C190DE9C6002D3BF4 /* exit-50.png in Resources */,
 				DBD27BF11913382F002F4556 /* define_location-75.png in Resources */,
 				DBD27BEC191310CF002F4556 /* plus-75.png in Resources */,
-				DB2589F81910AB16001EE5E2 /* logo_mini.png in Resources */,
 				DBD27BDE1912E53F002F4556 /* white.png in Resources */,
 				DBC0CD52190DEB29002D3BF4 /* search-25.png in Resources */,
 				DB2589EE19109B7C001EE5E2 /* calendar-25.png in Resources */,
@@ -465,6 +464,7 @@
 				DB2589F219109BD2001EE5E2 /* location-32.png in Resources */,
 				DB4B8AEC18FA1DDB0063F3A3 /* MainStoryboard_iPad.storyboard in Resources */,
 				DBD27BE41912F8E6002F4556 /* deeperBlue.png in Resources */,
+				DB40FA951915F1EA0020910B /* logo_mini.png in Resources */,
 				DB2D4F4618FB66DA004DE5BB /* arrest.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
