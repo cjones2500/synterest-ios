@@ -7,6 +7,7 @@
 //
 
 #import "SearchViewController.h"
+#import "ViewController.h"
 #import <CoreLocation/CoreLocation.h>
 
 @interface SearchViewController ()
@@ -231,23 +232,6 @@ searchString {
     }
 }
 
-- (IBAction)onTestClick:(id)sender
-{
-    //NSLog(@" test:",[self.synterestTableView]);
-    //self.searchValues =
-    NSLog(@"test: %@",currentSearchViewInformation);
-}
-/*- (void) getDataOnNewThread
-{
-    // code here to populate your data source
-    // call refreshTableViewOnMainThread like below:
-    [self performSelectorOnMainThread:@selector(refreshTableView) withObject:nil waitUntilDone:NO];
-}
-
-- (void) refreshTableView
-{
-    [UITableView reloadData];
-}*/
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -271,29 +255,39 @@ searchString {
     return cell;
 }
 
+//called when a cell is selected
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UIAlertView *messageAlert = [[UIAlertView alloc]
+    NSLog(@"@indexPath: %i",indexPath.row);
+    inforamtionToSendBacktoMainView = [NSArray arrayWithObject:[currentSearchViewInformation objectAtIndexedSubscript:indexPath.row]];
+    [self performSegueWithIdentifier:@"back_from_search" sender:inforamtionToSendBacktoMainView];
+    
+    /*UIAlertView *messageAlert = [[UIAlertView alloc]
                                  initWithTitle:@"Row Selected" message:@"You've selected a row" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     
     // Display Alert Message
-    [messageAlert show];
+    [messageAlert show];*/
     
 }
 
--(void)viewWillAppear:(BOOL)animated
-{
-    
-}
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([[segue identifier] isEqualToString:@"back_from_search"]) {
+        if(inforamtionToSendBacktoMainView != nil){
+            CLPlacemark *placemarkToSend = [inforamtionToSendBacktoMainView objectAtIndex:0];
+            NSLog(@"item selected: %f",placemarkToSend.location.coordinate.latitude);
+            CLLocationCoordinate2D zoomLocation;
+            zoomLocation.latitude = placemarkToSend.location.coordinate.latitude;
+            zoomLocation.longitude= placemarkToSend.location.coordinate.longitude;
+            [[segue destinationViewController] setMapCenterWithCoords:zoomLocation];
+            //[[segue destinationViewController]
+        }
+        else{
+            NSLog(@"normal go back");
+            //don't do any stuff
+        }
+    }
 }
-*/
 
 @end

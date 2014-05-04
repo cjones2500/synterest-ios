@@ -10,10 +10,12 @@
 #import <MapKit/MapKit.h>
 #import "LoginViewController.h"
 #import <CoreLocation/CoreLocation.h>
+#import "SearchViewController.h"
 
 
 @interface ViewController : UIViewController <CLLocationManagerDelegate,MKMapViewDelegate>{
     BOOL _doneInitialZoom;
+    CLLocationCoordinate2D zoomLocation;
 }
 //@property (weak, nonatomic) IBOutlet MKMapView *_mapView;//This was auto-added by Xcode :]
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
@@ -31,6 +33,7 @@
 - (void)plotFacebookData:(NSMutableArray *)responseData;
 - (NSString*)getDateInfoFromFb:(NSString*)isoFacebookDateString;
 - (NSString*)buildAddressToShow:(NSMutableDictionary*)venueInfo;
--(void)toggleSideBarView;
+- (void)toggleSideBarView;
+- (void)setMapCenterWithCoords:(CLLocationCoordinate2D)coords;
 
 @end

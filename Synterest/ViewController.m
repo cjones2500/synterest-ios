@@ -33,6 +33,7 @@
 - (IBAction)quitButtonAction:(id)sender;
 - (IBAction)goToLocationAction:(id)sender;
 
+
 @end
 
 //#define METERS_PER_MILE 1609.344
@@ -663,10 +664,17 @@ sideBarActivationState;
     }
 }
 
+- (void)setMapCenterWithCoords:(CLLocationCoordinate2D)coords{
+    //MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 0.5*METERS_PER_MILE, 0.5*METERS_PER_MILE);
+    //[_mapView setRegion:viewRegion animated:YES];
+    
+    self.mapView.centerCoordinate = coords;
+    
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     // 1
-    CLLocationCoordinate2D zoomLocation;
     zoomLocation.latitude = 51.50722;
     zoomLocation.longitude= -0.12750;
     
@@ -675,27 +683,6 @@ sideBarActivationState;
     
     // 3
     [_mapView setRegion:viewRegion animated:YES];
-    
-    //beginnings of a geocoder...
-    self.placeDictionary = [[NSMutableDictionary alloc] init];
-    [self.placeDictionary setValue:nil forKey:@"Street"];
-    [self.placeDictionary setValue:@"london"  forKey:@"City"];
-    [self.placeDictionary setValue:@"UK" forKey:@"State"];
-    [self.placeDictionary setValue:nil forKey:@"ZIP"];
-    
-    
-    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-    [geocoder geocodeAddressDictionary:self.placeDictionary completionHandler:^(NSArray *placemarks, NSError *error) {
-        if([placemarks count]) {
-            CLPlacemark *placemark = [placemarks objectAtIndex:0];
-            CLLocation *location = placemark.location;
-            CLLocationCoordinate2D coordinateReverse = location.coordinate;
-            NSLog(@"ViewController:coordinate %f",coordinateReverse.latitude);
-            //[self.mapView setCenterCoordinate:coordinate animated:YES];
-        } else {
-            NSLog(@"error");
-        }
-    }];
     
 }
 
