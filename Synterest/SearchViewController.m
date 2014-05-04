@@ -276,11 +276,13 @@ searchString {
     if ([[segue identifier] isEqualToString:@"back_from_search"]) {
         if(inforamtionToSendBacktoMainView != nil){
             CLPlacemark *placemarkToSend = [inforamtionToSendBacktoMainView objectAtIndex:0];
-            NSLog(@"item selected: %f",placemarkToSend.location.coordinate.latitude);
-            CLLocationCoordinate2D zoomLocation;
-            zoomLocation.latitude = placemarkToSend.location.coordinate.latitude;
-            zoomLocation.longitude= placemarkToSend.location.coordinate.longitude;
-            [[segue destinationViewController] setMapCenterWithCoords:zoomLocation];
+            //NSLog(@"item selected: %f",placemarkToSend.location.coordinate.latitude);
+            //CLLocationCoordinate2D zoomLocation;
+            //zoomLocation.latitude = placemarkToSend.location.coordinate.latitude;
+            //zoomLocation.longitude= placemarkToSend.location.coordinate.longitude;
+            NSMutableArray *arrayToSend = [[NSMutableArray alloc] initWithCapacity:100];
+            [arrayToSend addObject:placemarkToSend];
+            [[segue destinationViewController] setZoomLocation:arrayToSend];
             //[[segue destinationViewController]
         }
         else{

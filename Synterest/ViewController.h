@@ -15,7 +15,8 @@
 
 @interface ViewController : UIViewController <CLLocationManagerDelegate,MKMapViewDelegate>{
     BOOL _doneInitialZoom;
-    CLLocationCoordinate2D zoomLocation;
+    NSMutableArray *_zoomLocation;
+    CLLocationCoordinate2D locationToZoom;
 }
 //@property (weak, nonatomic) IBOutlet MKMapView *_mapView;//This was auto-added by Xcode :]
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
@@ -28,7 +29,9 @@
 @property (weak, nonatomic) IBOutlet UIView *sideBarView;
 @property (weak, nonatomic) IBOutlet UIButton *locationButton;
 @property (nonatomic, retain) CLLocationManager *locationManager;
+@property (copy) NSMutableArray *zoomLocation;
 
+//- (id) initWithCoords:(NSMutableArray*)zoomLocation;
 - (void)viewWillAppear:(BOOL)animated;
 - (void)plotFacebookData:(NSMutableArray *)responseData;
 - (NSString*)getDateInfoFromFb:(NSString*)isoFacebookDateString;

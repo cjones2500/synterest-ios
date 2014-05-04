@@ -46,6 +46,25 @@
 dataToLoadToAnnotationView,
 sideBarActivationState;
 @synthesize locationManager = _locationManager;
+@synthesize zoomLocation = _zoomLocation;
+
+
+//called at the beginning of loading a view
+- (void)loadView{
+    if(_zoomLocation == nil){
+        locationToZoom.latitude = 51.50722;
+        locationToZoom.longitude = -0.12750;
+    }
+    else{
+        //unpack the zoomLocation variable
+        CLPlacemark * recievedPlacemark = [_zoomLocation objectAtIndex:0];
+        locationToZoom.latitude = recievedPlacemark.location.coordinate.latitude;
+        locationToZoom.longitude = recievedPlacemark.location.coordinate.longitude;
+    }
+    
+    //call the normal method of loadView (before override)
+    [super loadView];
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -674,12 +693,14 @@ sideBarActivationState;
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    //CLLocationCoordinate2D setZoomLocation;
     // 1
-    zoomLocation.latitude = 51.50722;
-    zoomLocation.longitude= -0.12750;
+    //setZoomLocation.latitude = 51.50722;
+    //setZoomLocation.longitude= -0.12750;
+    NSLog(@"location to zoom %f",locationToZoom.latitude);
     
     // 2
-    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 0.5*METERS_PER_MILE, 0.5*METERS_PER_MILE);
+    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(locationToZoom, 0.5*METERS_PER_MILE, 0.5*METERS_PER_MILE);
     
     // 3
     [_mapView setRegion:viewRegion animated:YES];
