@@ -7,6 +7,7 @@
 //
 
 #import "AnnotationViewController.h"
+#import "ViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface AnnotationViewController ()
@@ -28,6 +29,7 @@ eventDescriptionTextView,
 eventAddress,
 eventFbPic,
 eventTitle,
+currentMapCenterCoords,
 eventType;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -57,6 +59,9 @@ eventType;
     
     //load the eventDate information
     self.eventDateLabel.text =eventDate;
+    
+    //load the centerMap data
+    //self.currentMapCenterCoords = currentMapCenterCoords;
 }
 
 -(void)loadFacebookPicture
@@ -84,18 +89,17 @@ eventType;
 
 -(IBAction)clickOnGoBackAction:(id)sender
 {
+    //NSLog(@"in here with current map coords22 %@",eventAddress);
+    //do same as with the search view controller
     [self performSegueWithIdentifier:@"go_back_from_annotation" sender:self];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([[segue identifier] isEqualToString:@"go_back_from_annotation"]) {
+        NSLog(@"in here with current map coords %@",currentMapCenterCoords);
+       [[segue destinationViewController] setZoomLocation:currentMapCenterCoords];
+    }
 }
-*/
 
 @end

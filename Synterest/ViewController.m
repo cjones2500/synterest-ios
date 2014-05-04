@@ -52,6 +52,7 @@ sideBarActivationState;
 //called at the beginning of loading a view
 - (void)loadView{
     if(_zoomLocation == nil){
+        NSLog(@"zoomLocation is nil");
         locationToZoom.latitude = 51.50722;
         locationToZoom.longitude = -0.12750;
     }
@@ -59,13 +60,12 @@ sideBarActivationState;
         //unpack the zoomLocation variable
         @try{
             CLPlacemark * recievedPlacemark = [_zoomLocation objectAtIndex:0];
+            NSLog(@"placemark %f",recievedPlacemark.location.coordinate.latitude);
             locationToZoom.latitude = recievedPlacemark.location.coordinate.latitude;
             locationToZoom.longitude = recievedPlacemark.location.coordinate.longitude;
         }
         @catch(NSException *error){
             NSLog(@"Error: %@",error);
-        }
-        @finally{
             NSLog(@"Unreadable location. Moving to London");
             locationToZoom.latitude = 51.50722;
             locationToZoom.longitude = -0.12750;
@@ -150,6 +150,13 @@ sideBarActivationState;
         [[segue destinationViewController] setEventDescription:[anAnnotation fbDescription]];
         [[segue destinationViewController] setEventAddress:[anAnnotation fbLocData]];
         [[segue destinationViewController] setEventDate:[anAnnotation fbEventDate]];
+        CLLocationCoordinate2D centre = [_mapView centerCoordinate];
+        CLPlacemark *newPlacemark = [[MKPlacemark alloc] initWithCoordinate:centre addressDictionary:nil];
+        NSMutableArray * arrayToSend = [[NSMutableArray alloc] initWithCapacity:100];
+        [arrayToSend setObject:newPlacemark atIndexedSubscript:0];
+        NSLog(@" sent array %@",arrayToSend);
+        [[segue destinationViewController] setCurrentMapCenterCoords:arrayToSend];
+        
     }
 }
 
@@ -707,7 +714,7 @@ sideBarActivationState;
     // 1
     //setZoomLocation.latitude = 51.50722;
     //setZoomLocation.longitude= -0.12750;
-    NSLog(@"location to zoom %f",locationToZoom.latitude);
+    //NSLog(@"location to zoom %f",locationToZoom.latitude);
     
     // 2
     MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(locationToZoom, 0.5*METERS_PER_MILE, 0.5*METERS_PER_MILE);

@@ -21,6 +21,7 @@
 @property (nonatomic, weak) NSString *eventDescription;
 @property (nonatomic, weak) NSString *eventAddress;
 @property (nonatomic, weak) NSString *eventDate;
+@property (nonatomic, strong) NSMutableArray *currentMapCenterCoords;
 @property (weak, nonatomic) IBOutlet UIButton *goBackFromAnnotationButton;
 
 @end
