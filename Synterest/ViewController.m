@@ -273,11 +273,11 @@ sideBarActivationState;
 }*/
 
 //changes when the user location is updated or changed
--(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
+/*-(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
 {
     [self.mapView setCenterCoordinate: userLocation.location.coordinate animated: NO];
     [self reverseGeocodeLocation];
-}
+}*/
 
 - (void)viewDidLoad
 {
@@ -474,14 +474,21 @@ sideBarActivationState;
     NSString *query;// = [[NSString alloc] init];
     //Standard Location query of facebook FQL
     @try{
-       query = [NSString stringWithFormat:@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('%@') ORDER BY rand() LIMIT 10",self.currentCity];
-        NSLog(@" string in question %@",self.currentCity);
+        //avoid using null values of currentCity
+        if(self.currentCity != nil){
+            query = [NSString stringWithFormat:@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('%@') ORDER BY rand() LIMIT 100",self.currentCity];
+            NSLog(@" string in question %@",self.currentCity);
+        }
+        else{
+            query =@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('London') ORDER BY rand() LIMIT 3";
+            NSLog(@"self.currentCity = null string");
+        }
     }
     @catch(NSException *e){
         NSLog(@"Error appending string: %@",e);
-        NSLog(@" string in question %@",self.currentCity);
+        //NSLog(@" string in question %@",self.currentCity);
         //default the automatic search to London if there is uncertainty
-        //query =@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('London') ORDER BY rand() LIMIT 3";
+        query =@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('London') ORDER BY rand() LIMIT 3";
     }
     
     AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
@@ -506,14 +513,24 @@ sideBarActivationState;
                                   //NSLog(@"Result: %@",[connection description]);
                                   
                                   // result is the json response from a successful request
-                                  NSDictionary *dictionary = (NSDictionary *)result;
+                                  //NSDictionary *dictionary = (NSDictionary *)result;
                                   
-                                  NSString *text;
+                                  //NSString *text;
                                   // we pull the name property out, if there is one, and display it
-                                  text = (NSString *)[dictionary objectForKey:@"data"];
+                                  //text = (NSString *)[dictionary objectForKey:@"data"];
                                   
                                   //@try{
-                                  facebookData = [aSynterestModel parseFbFqlResult:result];
+                                  NSLog(@"in here before facebookData assigned");
+                                  NSLog(@"connection %@",connection);
+                                  NSLog(@"result %@",result);
+                                  
+                                  //this required the selection to wait
+                                  self.facebookData =[aSynterestModel performSelector:@selector(parseFbFqlResult:) withObject:result];
+                                  
+                                  //self.facebookData = [aSynterestModel parseFbFqlResult:result];
+                                  //NSLog(@"facebookData : %@",[aSynterestModel parseFbFqlResult:result]);
+                                  //NSLog(@"facebookData : %@",self.facebookData);
+                                  //self.facebookData = [aSynterestModel parseFbFqlResult:result];
                                   //}
                                   //NSLog(@"after parseFbFqlResult call");
                                   //@catch (NSException *exception) {
@@ -522,6 +539,8 @@ sideBarActivationState;
                                   //@finally {
                                       //continue
                                   //}
+                                  
+                                  //place a thread in here
                                   
                                   //Save the facebook Data
                                   [aSynterestModel saveLocalData:facebookData];
@@ -609,12 +628,12 @@ sideBarActivationState;
                 NSLog(@"Exception Post annotation:%@ ",exception);
             }
             @finally {
-                [loadingDataWheel stopAnimating];
-                //continue;
+                //[loadingDataWheel stopAnimating];
+                continue;
             }
         }//end of main outer try loop
     }
-    
+    [loadingDataWheel stopAnimating];
 }
 
 
@@ -793,7 +812,7 @@ sideBarActivationState;
             //only call the queryFunction if the data has changed
             if([loadFacebookDataFlag boolValue] == YES){
                 NSLog(@"calling query action from changed location");
-                [self queryButtonAction];
+                //[self queryButtonAction];
             }
             //NSLog(@"current city inside block: %@",self.currentCity);
         }];

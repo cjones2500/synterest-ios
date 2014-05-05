@@ -167,9 +167,9 @@
     // result is the json response from a successful request
     NSDictionary *dictionary = (NSDictionary *)result;
     
-    NSString *text;
+    //NSString *text;
     // we pull the name property out, if there is one, and display it
-    text = (NSString *)[dictionary objectForKey:@"data"];
+    //text = (NSString *)[dictionary objectForKey:@"data"];
     
     //NSLog(@"json dictionary %@",[[[dictionary objectForKey:@"data"] objectAtIndex:0] objectForKey:@"eid"]);
     
