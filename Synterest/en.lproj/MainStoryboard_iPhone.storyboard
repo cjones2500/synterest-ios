@@ -82,6 +82,7 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title=" " image="define_location-50.png"/>
                                         <connections>
+                                            <action selector="searchButtonAction:" destination="o97-z1-owW" eventType="touchUpInside" id="JSe-Mm-wqt"/>
                                             <segue destination="1JQ-AT-j6V" kind="modal" identifier="search_screen_segue" id="n3Q-bJ-8GC"/>
                                         </connections>
                                     </button>

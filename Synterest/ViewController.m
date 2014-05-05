@@ -170,6 +170,7 @@ sideBarActivationState;
     else{
         [_mapView removeAnnotations:_mapView.annotations];
         self.mapView.centerCoordinate = self.mapView.userLocation.location.coordinate;
+        [self reverseGeocodeLocation];
     }
     
     //[self updateView];
@@ -811,8 +812,10 @@ sideBarActivationState;
             
             //only call the queryFunction if the data has changed
             if([loadFacebookDataFlag boolValue] == YES){
-                NSLog(@"calling query action from changed location");
-                //[self queryButtonAction];
+                if(self.currentCity != nil){
+                    NSLog(@"calling query action from changed location");
+                    [self queryButtonAction];
+                }
             }
             //NSLog(@"current city inside block: %@",self.currentCity);
         }];
