@@ -12,9 +12,9 @@
 
 
 @interface LoginViewController ()
-@property (weak, nonatomic) IBOutlet UIButton *startUpButton;
+//@property (weak, nonatomic) IBOutlet UIButton *startUpButton;
 @property (strong, nonatomic) IBOutlet UIButton *buttonLoginLogout;
-- (IBAction)startUpButtonAction:(id)sender;
+//- (IBAction)startUpButtonAction:(id)sender;
 - (IBAction)buttonClickHandler:(id)sender;
 @end
 
@@ -65,18 +65,18 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)startUpButtonAction:(id)sender
+/*- (IBAction)startUpButtonAction:(id)sender
 {
-    ViewController *mainMapView = [[UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil]
+    //ViewController *mainMapView = [[UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil]
                                     instantiateViewControllerWithIdentifier:@"ViewController"];
-    [self.navigationController pushViewController:mainMapView animated:YES];
+    //[self.navigationController pushViewController:mainMapView animated:YES];
     
     
     //[self performSegueWithIdentifier:@"showWebServiceViewController" sender:nil];
     
     //This works quite well
     //[self performSegueWithIdentifier:@"login_sucess" sender:self];
-}
+}*/
 
 // FBSample logic
 // handler for button click, logs sessions in or out

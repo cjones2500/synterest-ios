@@ -54,7 +54,6 @@ sideBarActivationState;
 @synthesize zoomLocation = _zoomLocation;
 
 
-
 //called at the beginning of loading a view
 - (void)loadView{
     if(_zoomLocation == nil){
@@ -92,9 +91,6 @@ sideBarActivationState;
     
     //need to fix this such that there is no random increasing of this value
     //[self reverseGeocodeLocation];
-    
-    
-    
     
     //[self reverseGeocodeLocation];
     //check to see how many icons are in the view
