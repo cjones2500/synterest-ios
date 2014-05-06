@@ -51,6 +51,9 @@
 @property (weak,nonatomic) NSNumber *loadFacebookDataFlag;
 @property (weak,nonatomic) NSNumber *firstViewFlag;
 
+//List view of events 
+@property (weak, nonatomic) IBOutlet UIImageView *listImageView;
+
 
 
 //- (id) initWithCoords:(NSMutableArray*)zoomLocation;

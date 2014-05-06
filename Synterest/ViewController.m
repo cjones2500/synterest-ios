@@ -372,7 +372,13 @@ sideBarActivationState;
     _searchButtonSubView.layer.borderColor = [UIColor blackColor].CGColor;
     _searchButtonSubView.layer.borderWidth = 1.5;
     _searchButtonSubView.layer.cornerRadius = 19.0f;
-    //[self.eventFbImageView addSubview:facebookImageSubView];
+    
+    //Format the list icon button
+    _listImageView.layer.masksToBounds = YES;
+    _listImageView.backgroundColor = [UIColor whiteColor];
+    _listImageView.layer.borderColor = [UIColor blackColor].CGColor;
+    _listImageView.layer.borderWidth = 1.5;
+    _listImageView.layer.cornerRadius = 19.0f;
     
     //Format the sideBarView
     _sideBarView.layer.masksToBounds = YES;
