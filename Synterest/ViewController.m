@@ -53,9 +53,21 @@ sideBarActivationState;
 @synthesize locationManager = _locationManager;
 @synthesize zoomLocation = _zoomLocation;
 
+-(id)init
+{
+    self = [super init];
+    return self;
+}
+
+-(IBAction)goBackFromAnnotationViewAction:(id)sender
+{
+    [self hideAnnotationView];
+}
+
 
 //called at the beginning of loading a view
 - (void)loadView{
+    
     if(_zoomLocation == nil){
         NSLog(@"zoomLocation is nil");
         locationToZoom.latitude = 51.50722;
@@ -132,23 +144,66 @@ sideBarActivationState;
     
     CGRect sideBarFrame = self.sideBarView.frame;
     double maxSideBarFrameWidth = 244.0;
-    
     if(sideBarFrame.size.width == maxSideBarFrameWidth){
         sideBarFrame.size.width = 20.0; //brings the bar back
     }
     else{
         sideBarFrame.size.width = maxSideBarFrameWidth;
     }
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:0.5];
+    [UIView setAnimationDelay:0.0];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+    self.sideBarView.frame = sideBarFrame;
+    [UIView commitAnimations];
+    
+}
+
+-(void)unHideAnnotationView
+{
+    //remove the data from any exsisting subview
+    self.fbEventTitle.text = nil;
+    self.fbEventDate.text = nil;
+    self.fbEventDescription.text = nil;
+    self.fbEventAddress.text = nil;
+    //Remove all the subviews
+    for(UIView *subview in self.facebookImageSubView.subviews)
+    {
+        [subview removeFromSuperview];
+    }
+    
+    //initial responder
+    if(self.annotationBarView.frame.size.width > 0){
+        CGRect annotationBarViewFrameFix = self.annotationBarView.frame;
+        annotationBarViewFrameFix.size.width = 0.0;
+        self.annotationBarView.frame = annotationBarViewFrameFix;
+    }
+    
+    //unhide the sideBar
+    self.annotationBarView.hidden = NO;
+    CGRect annotationBarViewFrame = self.annotationBarView.frame;
+    annotationBarViewFrame.size.width = self.view.frame.size.width;
     
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:0.5];
     [UIView setAnimationDelay:0.0];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
-    
-    self.sideBarView.frame = sideBarFrame;
-    
+    self.annotationBarView.frame = annotationBarViewFrame;
     [UIView commitAnimations];
-    
+}
+
+-(void)hideAnnotationView
+{
+    //when the first hide annotation view is called. It will go to being 0.0 in width but not hidden.
+    //this was implemented in this way so I could see what was going on when I moved between annotations in storyboard
+    CGRect annotationBarViewFrame = self.annotationBarView.frame;
+    annotationBarViewFrame.size.width = 0.0;
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:0.5];
+    [UIView setAnimationDelay:0.0];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
+    self.annotationBarView.frame = annotationBarViewFrame;
+    [UIView commitAnimations];
 }
 
 - (IBAction)goToLocationAction:(id)sender
@@ -182,7 +237,30 @@ sideBarActivationState;
 //This overrides the current clicking function that occurs here
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
 {
-    [self performSegueWithIdentifier:@"annotation_selected" sender:view];
+    [self unHideAnnotationView];
+    MyLocation* anAnnotation =[view annotation];
+    [NSThread detachNewThreadSelector:@selector(loadFacebookPicture:) toTarget:self withObject:[anAnnotation facebookPic]];
+    self.fbEventAddress.text = [anAnnotation fbLocData];
+    self.fbEventDate.text = [anAnnotation fbEventDate];
+    self.fbEventDescription.text = [anAnnotation fbDescription];
+    self.fbEventTitle.text = [anAnnotation name];
+}
+
+-(void)loadFacebookPicture:(NSString*)eventFbPic
+{
+    UIImage *facebookImage;
+    if(eventFbPic == nil){
+        //Add the synterest Image
+        facebookImage = [UIImage imageNamed:@"logo_mini"];
+    }
+    else{
+        //Add a subview Image of the facebook picture (from the URL)
+        facebookImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:eventFbPic]]];
+    }
+    UIImageView *facebookImageSubViewer = [[UIImageView alloc] initWithImage:facebookImage];
+    facebookImageSubViewer.layer.cornerRadius = facebookImage.size.width / 2;
+    facebookImageSubViewer.layer.masksToBounds = YES;
+    [self.facebookImageSubView addSubview:facebookImageSubViewer];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -222,7 +300,7 @@ sideBarActivationState;
         }
 
         annotationView.enabled = YES;
-        annotationView.canShowCallout = YES;
+        annotationView.canShowCallout = NO;
         
         if([[annotation eventType] intValue] == 0){
             //culture event
@@ -297,9 +375,13 @@ sideBarActivationState;
     //need to add the subviews first
     [self.view addSubview:self.sideBarView];
     [self.view addSubview:self.searchButtonSubView];
+    [self.view addSubview:self.annotationBarView];
     [self.view insertSubview:self.sideBarView atIndex:2];
     [self.view insertSubview:self.searchButtonSubView atIndex:3];
-    //[self insertSubview:(UIView *)view atIndex:(NSInteger)index;
+    [self.view insertSubview:self.annotationBarView atIndex:4];
+    
+    //keeps items within the view
+    self.annotationBarView.layer.masksToBounds = YES;
     
     //Format the search button subView
     _searchButtonSubView.layer.masksToBounds = YES;

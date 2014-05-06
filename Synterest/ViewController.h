@@ -18,6 +18,20 @@
     NSMutableArray *_zoomLocation;
     CLLocationCoordinate2D locationToZoom;
 }
+
+//AnnotationView information
+@property (weak, nonatomic) IBOutlet UIButton *goBackToMapFromAnnotation;
+@property (weak, nonatomic) IBOutlet UIImageView *facebookImageSubView;
+@property (weak, nonatomic) IBOutlet UIScrollView *fbEventDescriptionScroll;
+@property (weak, nonatomic) IBOutlet UILabel *fbEventDate;
+@property (weak, nonatomic) IBOutlet UIScrollView *fbEventTitleScroll;
+@property (weak, nonatomic) IBOutlet UITextView *fbEventAddress;
+@property (weak, nonatomic) IBOutlet UITextView *fbEventDescription;
+@property (weak, nonatomic) IBOutlet UITextView *fbEventTitle;
+
+
+
+
 //@property (weak, nonatomic) IBOutlet MKMapView *_mapView;//This was auto-added by Xcode :]
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UIButton *fqlButton;
@@ -27,6 +41,7 @@
 @property (weak, nonatomic) NSMutableArray *dataToLoadToAnnotationView;
 @property (weak, nonatomic) IBOutlet UIButton *searchButton;
 @property (weak, nonatomic) IBOutlet UIImageView *searchButtonSubView;
+@property (weak, nonatomic) IBOutlet UIView *annotationBarView;
 @property (weak, nonatomic) IBOutlet UIView *sideBarView;
 @property (weak, nonatomic) IBOutlet UIButton *locationButton;
 @property (nonatomic, retain) CLLocationManager *locationManager;
