@@ -15,7 +15,6 @@
 #import <MapKit/MapKit.h>
 #import "MyLocation.h"
 #import "SynterestModel.h"
-#import "AnnotationViewController.h"
 #import <CoreLocation/CoreLocation.h>
 #import "SearchViewController.h"
 
@@ -265,22 +264,6 @@ sideBarActivationState;
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([[segue identifier] isEqualToString:@"annotation_selected"]) {
-        MyLocation* anAnnotation =[sender annotation];
-        //Pipe all the information for a given annotation across to the annotationViewController
-        [[segue destinationViewController] setEventType:[anAnnotation eventType]];
-        [[segue destinationViewController] setEventTitleText:[anAnnotation name]];
-        [[segue destinationViewController] setEventFbPic:[anAnnotation facebookPic]];
-        [[segue destinationViewController] setEventDescription:[anAnnotation fbDescription]];
-        [[segue destinationViewController] setEventAddress:[anAnnotation fbLocData]];
-        [[segue destinationViewController] setEventDate:[anAnnotation fbEventDate]];
-        CLLocationCoordinate2D centre = [_mapView centerCoordinate];
-        CLPlacemark *newPlacemark = [[MKPlacemark alloc] initWithCoordinate:centre addressDictionary:nil];
-        NSMutableArray * arrayToSend = [[NSMutableArray alloc] initWithCapacity:100];
-        [arrayToSend setObject:newPlacemark atIndexedSubscript:0];
-        NSLog(@" sent array %@",arrayToSend);
-        [[segue destinationViewController] setCurrentMapCenterCoords:arrayToSend];
-    }
     if ([[segue identifier] isEqualToString:@"search_screen_segue"]) {
         [[segue destinationViewController] setCurrentSearchViewInformation:_zoomLocation];
     

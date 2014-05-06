@@ -204,110 +204,11 @@
                         <outlet property="searchButtonSubView" destination="Rcr-C8-Zvr" id="cP6-dE-br7"/>
                         <outlet property="sideBarView" destination="u14-0w-RJC" id="m3u-Z1-QGI"/>
                         <segue destination="2" kind="modal" identifier="logout_sucess" id="YuM-0e-9ne"/>
-                        <segue destination="FVO-wd-fiy" kind="modal" identifier="annotation_selected" id="wQA-o9-AcT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WHp-QZ-ND1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="729" y="-153"/>
-        </scene>
-        <!--Annotation View Controller-->
-        <scene sceneID="xLb-XQ-JOM">
-            <objects>
-                <viewController id="FVO-wd-fiy" customClass="AnnotationViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="M6U-pL-fBo">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="b00-9U-CKC">
-                                <rect key="frame" x="7" y="27" width="61" height="17"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Go Back">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="clickOnGoBackAction:" destination="FVO-wd-fiy" eventType="touchUpInside" id="Dio-pL-xq2"/>
-                                    <segue destination="o97-z1-owW" kind="modal" identifier="go_back_from_annotation" modalTransitionStyle="crossDissolve" id="Bg8-qd-1px"/>
-                                </connections>
-                            </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="tjG-bV-SEb">
-                                <rect key="frame" x="29" y="119" width="130" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" indicatorStyle="black" id="KUG-3a-xt7">
-                                <rect key="frame" x="6" y="248" width="302" height="285"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Event Description" id="Aur-Vt-aeD">
-                                        <rect key="frame" x="6" y="-5" width="288" height="284"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                        <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES"/>
-                                    </textView>
-                                </subviews>
-                            </scrollView>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="qLh-4X-HfF">
-                                <rect key="frame" x="6" y="55" width="302" height="46"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Event Title" id="neS-ai-B8e">
-                                        <rect key="frame" x="5" y="-1" width="290" height="46"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                    </textView>
-                                </subviews>
-                            </scrollView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="calendar-50.png" id="OyO-cW-kPm">
-                                <rect key="frame" x="147" y="119" width="20" height="20"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="location-50.png" id="2Mj-JS-WDH">
-                                <rect key="frame" x="146" y="149" width="20" height="20"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="9KF-SN-zwV">
-                                <rect key="frame" x="166" y="147" width="142" height="103"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Address" id="2iU-Bi-5QT">
-                                        <rect key="frame" x="-2" y="-6" width="144" height="109"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                    </textView>
-                                </subviews>
-                            </scrollView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="yj6-bW-hSs">
-                                <rect key="frame" x="170" y="120" width="110" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="E1Y-h2-vgy"/>
-                    <connections>
-                        <outlet property="eventAddressScrollView" destination="9KF-SN-zwV" id="xby-JQ-LCm"/>
-                        <outlet property="eventAdressTextView" destination="2iU-Bi-5QT" id="LYC-zB-2Tb"/>
-                        <outlet property="eventDateLabel" destination="yj6-bW-hSs" id="XSX-73-pxM"/>
-                        <outlet property="eventDescriptionTextView" destination="Aur-Vt-aeD" id="xys-Dn-PC1"/>
-                        <outlet property="eventDescriptionView" destination="KUG-3a-xt7" id="7tb-rI-dEt"/>
-                        <outlet property="eventFbImageView" destination="tjG-bV-SEb" id="br7-Db-Gk2"/>
-                        <outlet property="eventTitle" destination="neS-ai-B8e" id="6QJ-ky-yC1"/>
-                        <outlet property="eventTitleScrollView" destination="qLh-4X-HfF" id="2Bg-XP-xHt"/>
-                        <outlet property="goBackFromAnnotationButton" destination="b00-9U-CKC" id="mOi-MO-EYf"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="6Gh-oX-asN" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="728" y="564"/>
         </scene>
         <!--Search View Controller-->
         <scene sceneID="Yq1-6E-Q6g">
@@ -412,6 +313,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Bg8-qd-1px"/>
+        <segue reference="fZb-Mm-o0W"/>
     </inferredMetricsTieBreakers>
 </document>
