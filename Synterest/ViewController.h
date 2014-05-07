@@ -51,8 +51,11 @@
 @property (weak,nonatomic) NSNumber *loadFacebookDataFlag;
 @property (weak,nonatomic) NSNumber *firstViewFlag;
 
-//List view of events 
+//List view of events
 @property (weak, nonatomic) IBOutlet UIImageView *listImageView;
+@property (weak, nonatomic) IBOutlet UIView *listView;
+@property (weak, nonatomic) IBOutlet UIButton *goBackFromListView;
+@property (weak, nonatomic) IBOutlet UITableView *listTableView;
 
 
 

@@ -58,6 +58,33 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <view hidden="YES" contentMode="scaleToFill" id="y1e-0v-4Xl" userLabel="listView">
+                                <rect key="frame" x="0.0" y="-1" width="320" height="571"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="XJB-hN-Vdy">
+                                        <rect key="frame" x="0.0" y="85" width="320" height="484"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </tableView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="mtK-pd-qXi">
+                                        <rect key="frame" x="20" y="20" width="65" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Go Back">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="goBackFromListView:" destination="o97-z1-owW" eventType="touchUpInside" id="fd7-nr-GxE"/>
+                                        </connections>
+                                    </button>
+                                    <searchBar contentMode="redraw" id="ukd-Eb-ZKe">
+                                        <rect key="frame" x="0.0" y="41" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </searchBar>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" id="Cdz-BG-t0h">
                                 <rect key="frame" x="-3" y="-3" width="329" height="577"/>
                             </mapView>
@@ -104,7 +131,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="6uB-Qc-VYO">
                                         <rect key="frame" x="47" y="5" width="28" height="29"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" image="search-25.png">
+                                        <state key="normal" image="search-75.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -199,8 +226,11 @@
                         <outlet property="fbEventDescription" destination="crv-az-Z55" id="W9U-fn-AYs"/>
                         <outlet property="fbEventTitle" destination="nuM-xj-dMl" id="lmo-E5-7Xt"/>
                         <outlet property="fqlButton" destination="HoA-Lf-P4f" id="Huz-o0-CpU"/>
+                        <outlet property="goBackFromListView" destination="mtK-pd-qXi" id="3sq-F1-cYa"/>
                         <outlet property="goBackToMapFromAnnotation" destination="3Wp-f6-ZV9" id="2eM-6n-MbJ"/>
                         <outlet property="listImageView" destination="cdj-ku-Vj2" id="wmm-u4-CKO"/>
+                        <outlet property="listTableView" destination="XJB-hN-Vdy" id="mcX-sV-x5i"/>
+                        <outlet property="listView" destination="y1e-0v-4Xl" id="0Pj-cc-yCz"/>
                         <outlet property="loadingDataWheel" destination="PTM-Ap-Kwl" id="B43-9e-Nsa"/>
                         <outlet property="locationButton" destination="6uB-Qc-VYO" id="NcM-b5-tSq"/>
                         <outlet property="mapView" destination="Cdz-BG-t0h" id="GBP-Tx-ned"/>
@@ -311,7 +341,7 @@
         <image name="location-50.png" width="50" height="50"/>
         <image name="logo.png" width="301" height="224"/>
         <image name="plus-50.png" width="50" height="50"/>
-        <image name="search-25.png" width="25" height="25"/>
+        <image name="search-75.png" width="75" height="75"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

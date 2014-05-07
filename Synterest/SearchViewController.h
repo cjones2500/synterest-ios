@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *synterestTableView;
 @property (weak, nonatomic) IBOutlet UIButton *goBackButton;
 @property (strong, nonatomic) NSMutableArray *currentSearchViewInformation;
+@property (strong, nonatomic) NSMutableArray *freshSearchViewInformation;
 @property (nonatomic, retain) CLLocation *locationValue;
 @property (nonatomic, retain) NSArray *locationValueArray;
 @end

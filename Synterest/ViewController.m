@@ -191,6 +191,42 @@ sideBarActivationState;
     [UIView commitAnimations];
 }
 
+-(void)unhideListView
+{
+    //initial responder
+    if(self.listView.frame.size.height > 0){
+        CGRect listViewFrameFix = self.annotationBarView.frame;
+        listViewFrameFix.size.height = 0.0;
+        self.listView.frame = listViewFrameFix;
+    }
+    
+    //unhide the sideBar
+    self.listView.hidden = NO;
+    CGRect listViewFrame = self.listView.frame;
+    listViewFrame.size.height = self.view.frame.size.height;
+    
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:0.5];
+    [UIView setAnimationDelay:0.0];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+    self.listView.frame = listViewFrame;
+    [UIView commitAnimations];
+}
+
+-(void)hideListView
+{
+    //when the first hide annotation view is called. It will go to being 0.0 in width but not hidden.
+    //this was implemented in this way so I could see what was going on when I moved between annotations in storyboard
+    CGRect listViewFrame = self.listView.frame;
+    listViewFrame.size.height = 0.0;
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:0.5];
+    [UIView setAnimationDelay:0.0];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
+    self.listView.frame = listViewFrame;
+    [UIView commitAnimations];
+}
+
 -(void)hideAnnotationView
 {
     //when the first hide annotation view is called. It will go to being 0.0 in width but not hidden.
@@ -359,9 +395,12 @@ sideBarActivationState;
     [self.view addSubview:self.sideBarView];
     [self.view addSubview:self.searchButtonSubView];
     [self.view addSubview:self.annotationBarView];
+    [self.view addSubview:self.listView];
     [self.view insertSubview:self.sideBarView atIndex:2];
     [self.view insertSubview:self.searchButtonSubView atIndex:3];
     [self.view insertSubview:self.annotationBarView atIndex:4];
+    [self.view insertSubview:self.listView atIndex:5];
+    //[self.listView insertSubview:self. aboveSubview:<#(UIView *)#>]
     
     //keeps items within the view
     self.annotationBarView.layer.masksToBounds = YES;
@@ -379,6 +418,16 @@ sideBarActivationState;
     _listImageView.layer.borderColor = [UIColor blackColor].CGColor;
     _listImageView.layer.borderWidth = 1.5;
     _listImageView.layer.cornerRadius = 19.0f;
+    //Set up behaviour if for the listImageView
+    UITapGestureRecognizer *singleTapOnListImageView = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(setUpListView)];
+    singleTapOnListImageView.numberOfTapsRequired = 1;
+    _listImageView.userInteractionEnabled = YES;
+    [_listImageView addGestureRecognizer:singleTapOnListImageView];
+    
+    
+    //Format the ListView
+    _listView.layer.masksToBounds = YES;
+    
     
     //Format the sideBarView
     _sideBarView.layer.masksToBounds = YES;
@@ -468,6 +517,15 @@ sideBarActivationState;
     
 }
 
+-(void)setUpListView
+{
+    [self unhideListView];
+}
+
+-(IBAction)goBackFromListView:(id)sender
+{
+    [self hideListView];
+}
 
 // FBSample logic
 // handler for button click, logs sessions in or out

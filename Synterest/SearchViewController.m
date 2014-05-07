@@ -14,6 +14,7 @@
 @property (strong, nonatomic) NSMutableDictionary *placeDictionary;
 @property (strong, nonatomic) CLGeocoder *geocoder22;
 @property (strong, nonatomic) CLPlacemark *placemark22;
+
 -(void)geocodeLocationValue:(NSString*)aCityToSearch;
 -(void)callbackFromSearchBar;
 
@@ -43,6 +44,10 @@
     //initialise the array of searchValue
     searchValues = [NSArray arrayWithObjects:nil];
     //[self geocodeLocationValue];
+    
+    NSLog(@"in here");
+    //copy down the old search inforamtion 
+    //self.oldSearchViewInformation = [NSMutableArray arrayWithObject:currentSearchViewInformation];
     
     //[[UISearchDisplayController alloc] initWithSearchBar:self.placeSearchBar contentsController:self];
     //[self setSearchDisplayController:self];
@@ -135,9 +140,10 @@
     //NSLog(@"locationValue %@",self.locationValueArray);
     searchValues = [NSArray arrayWithObjects:nil];
     //reinitialise the current information
-    currentSearchViewInformation = [NSMutableArray arrayWithObjects:nil];
+    //currentSearchViewInformation = [NSMutableArray arrayWithObjects:nil];
     
     @try{
+        self.freshSearchViewInformation = [[NSMutableArray alloc] initWithCapacity:100];
         //currentSearchViewInformation = [[NSMutableArray alloc] initWithCapacity:100];
         NSMutableArray *mutablePlacemarkArrayToFill = [[NSMutableArray alloc] initWithCapacity:100];
         int numberOfMembers = [self.locationValueArray count];
@@ -174,7 +180,7 @@
             }
             
             [mutablePlacemarkArrayToFill setObject:stringToPrint atIndexedSubscript:i];
-            [currentSearchViewInformation setObject:placemark atIndexedSubscript:i];
+            [_freshSearchViewInformation setObject:placemark atIndexedSubscript:i];
         }
         
         NSArray *placemarkArrayToFill = [NSArray arrayWithArray:mutablePlacemarkArrayToFill];
@@ -259,7 +265,7 @@ searchString {
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"@indexPath: %i",indexPath.row);
-    inforamtionToSendBacktoMainView = [NSArray arrayWithObject:[currentSearchViewInformation objectAtIndexedSubscript:indexPath.row]];
+    inforamtionToSendBacktoMainView = [NSArray arrayWithObject:[_freshSearchViewInformation objectAtIndexedSubscript:indexPath.row]];
     [self performSegueWithIdentifier:@"back_from_search" sender:inforamtionToSendBacktoMainView];
     
     /*UIAlertView *messageAlert = [[UIAlertView alloc]
@@ -273,10 +279,11 @@ searchString {
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    NSMutableArray *arrayToSend = [[NSMutableArray alloc] initWithCapacity:100];
     if ([[segue identifier] isEqualToString:@"back_from_search"]) {
         if(inforamtionToSendBacktoMainView != nil){
             CLPlacemark *placemarkToSend = [inforamtionToSendBacktoMainView objectAtIndex:0];
-            NSMutableArray *arrayToSend = [[NSMutableArray alloc] initWithCapacity:100];
+            
             [arrayToSend addObject:placemarkToSend];
             [[segue destinationViewController] setZoomLocation:arrayToSend];
             NSNumber *numberToSend = [NSNumber numberWithBool:YES];
@@ -284,9 +291,11 @@ searchString {
         }
         else{
             NSLog(@"normal go back");
+            //need to get the coordiates of the current location sent to the SearchViewController
+            
             CLPlacemark *placemarkToSend = [currentSearchViewInformation objectAtIndex:0];
-            NSMutableArray *arrayToSend = [[NSMutableArray alloc] initWithCapacity:100];
             [arrayToSend addObject:placemarkToSend];
+            
             [[segue destinationViewController] setZoomLocation:arrayToSend];
             NSNumber *numberToSend = [NSNumber numberWithBool:NO];
             [[segue destinationViewController] setLoadFacebookDataFlag:numberToSend];

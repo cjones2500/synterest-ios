@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DB16E9FE1919BC8C00CC9390 /* search-75.png in Resources */ = {isa = PBXBuildFile; fileRef = DB16E9FD1919BC8C00CC9390 /* search-75.png */; };
 		DB2589EE19109B7C001EE5E2 /* calendar-25.png in Resources */ = {isa = PBXBuildFile; fileRef = DB2589ED19109B7C001EE5E2 /* calendar-25.png */; };
 		DB2589F019109B85001EE5E2 /* calendar-50.png in Resources */ = {isa = PBXBuildFile; fileRef = DB2589EF19109B85001EE5E2 /* calendar-50.png */; };
 		DB2589F219109BD2001EE5E2 /* location-32.png in Resources */ = {isa = PBXBuildFile; fileRef = DB2589F119109BD2001EE5E2 /* location-32.png */; };
@@ -87,6 +88,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DB16E9FD1919BC8C00CC9390 /* search-75.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "search-75.png"; path = "../../../Downloads/iOS7_icons/PNG/Very_Basic/search/search-75.png"; sourceTree = "<group>"; };
 		DB2589ED19109B7C001EE5E2 /* calendar-25.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calendar-25.png"; sourceTree = "<group>"; };
 		DB2589EF19109B85001EE5E2 /* calendar-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calendar-50.png"; sourceTree = "<group>"; };
 		DB2589F119109BD2001EE5E2 /* location-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "location-32.png"; sourceTree = "<group>"; };
@@ -276,6 +278,7 @@
 		DB4B8AD618FA1DDB0063F3A3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				DB16E9FD1919BC8C00CC9390 /* search-75.png */,
 				DB9006D1191948800063F8CC /* align_center-50.png */,
 				DB9006CF1919486E0063F8CC /* align_center-32.png */,
 				DB9006CD191948090063F8CC /* list-75.png */,
@@ -455,6 +458,7 @@
 				DBD27BDE1912E53F002F4556 /* white.png in Resources */,
 				DBC0CD52190DEB29002D3BF4 /* search-25.png in Resources */,
 				DB2589EE19109B7C001EE5E2 /* calendar-25.png in Resources */,
+				DB16E9FE1919BC8C00CC9390 /* search-75.png in Resources */,
 				DBD27BF21913382F002F4556 /* define_location-50.png in Resources */,
 				DB4B8AE218FA1DDB0063F3A3 /* Default.png in Resources */,
 				DB9006D01919486E0063F8CC /* align_center-32.png in Resources */,
