@@ -16,6 +16,7 @@
 @interface ViewController : UIViewController <CLLocationManagerDelegate,MKMapViewDelegate>{
     BOOL _doneInitialZoom;
     NSMutableArray *_zoomLocation;
+    NSMutableArray *_locationToSend;
     CLLocationCoordinate2D locationToZoom;
 }
 
@@ -46,6 +47,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *locationButton;
 @property (nonatomic, retain) CLLocationManager *locationManager;
 @property (copy) NSMutableArray *zoomLocation;
+@property (copy) NSMutableArray *locationToSend;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loadingDataWheel;
 @property (nonatomic, retain) CLLocation *reverseGeocodeLocationValue;
 @property (weak,nonatomic) NSNumber *loadFacebookDataFlag;
@@ -56,6 +58,7 @@
 @property (weak, nonatomic) IBOutlet UIView *listView;
 @property (weak, nonatomic) IBOutlet UIButton *goBackFromListView;
 @property (weak, nonatomic) IBOutlet UITableView *listTableView;
+@property (weak, nonatomic) IBOutlet UISearchBar *listViewSearchBar;
 
 
 
@@ -66,5 +69,6 @@
 - (NSString*)buildAddressToShow:(NSMutableDictionary*)venueInfo;
 - (void)toggleSideBarView;
 - (void)setMapCenterWithCoords:(CLLocationCoordinate2D)coords;
+- (void)unHideFirstTime;
 
 @end

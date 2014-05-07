@@ -51,6 +51,7 @@ loadingDataWheel,
 sideBarActivationState;
 @synthesize locationManager = _locationManager;
 @synthesize zoomLocation = _zoomLocation;
+@synthesize locationToSend = _locationToSend;
 
 -(id)init
 {
@@ -191,16 +192,24 @@ sideBarActivationState;
     [UIView commitAnimations];
 }
 
--(void)unhideListView
+-(void)unHideFirstTime
 {
-    //initial responder
     if(self.listView.frame.size.height > 0){
         CGRect listViewFrameFix = self.annotationBarView.frame;
         listViewFrameFix.size.height = 0.0;
         self.listView.frame = listViewFrameFix;
     }
+}
+
+-(void)unhideListView
+{
+    NSLog(@"listView frame height : %f",self.listView.frame.size.height);
     
-    //unhide the sideBar
+    //add a delay to make sure this happens
+    //[self unHideFirstTime];
+    //[self performSelector:@selector(unHideFirstTime) withObject:nil afterDelay:.1];
+    
+    
     self.listView.hidden = NO;
     CGRect listViewFrame = self.listView.frame;
     listViewFrame.size.height = self.view.frame.size.height;
@@ -213,8 +222,12 @@ sideBarActivationState;
     [UIView commitAnimations];
 }
 
+
+
 -(void)hideListView
 {
+    [self.listViewSearchBar resignFirstResponder];
+    
     //when the first hide annotation view is called. It will go to being 0.0 in width but not hidden.
     //this was implemented in this way so I could see what was going on when I moved between annotations in storyboard
     CGRect listViewFrame = self.listView.frame;
@@ -239,6 +252,8 @@ sideBarActivationState;
     [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
     self.annotationBarView.frame = annotationBarViewFrame;
     [UIView commitAnimations];
+    
+    [self.annotationBarView resignFirstResponder];
 }
 
 - (IBAction)goToLocationAction:(id)sender
@@ -250,16 +265,16 @@ sideBarActivationState;
     //TODO:Add the ability to prompt location services if not activated
     
     //Don't move unless there are real values
-    if( (newLocation.latitude == 0.0) || (newLocation.latitude == 0.0)){
+    if( (self.mapView.userLocation.location.coordinate.latitude == 0.0) || (self.mapView.userLocation.location.coordinate.latitude == 0.0)){
         NSLog(@"No Real Location Given or location not simulated");
     }
     else{
         [_mapView removeAnnotations:_mapView.annotations];
         self.mapView.centerCoordinate = self.mapView.userLocation.location.coordinate;
+        locationToZoom = self.mapView.userLocation.location.coordinate;
         [self reverseGeocodeLocation];
     }
     
-    //[self updateView];
 }
 
 -(void)tapOnSearchDetected{
@@ -272,6 +287,7 @@ sideBarActivationState;
 //This overrides the current clicking function that occurs here
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
 {
+    NSLog(@"clicked on an annotation");
     [self unHideAnnotationView];
     MyLocation* anAnnotation =[view annotation];
     [NSThread detachNewThreadSelector:@selector(loadFacebookPicture:) toTarget:self withObject:[anAnnotation facebookPic]];
@@ -301,7 +317,7 @@ sideBarActivationState;
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([[segue identifier] isEqualToString:@"search_screen_segue"]) {
-        [[segue destinationViewController] setCurrentSearchViewInformation:_zoomLocation];
+        [[segue destinationViewController] setCurrentSearchViewInformation:self.locationToSend];
     
     }
 }
@@ -399,8 +415,8 @@ sideBarActivationState;
     [self.view insertSubview:self.sideBarView atIndex:2];
     [self.view insertSubview:self.searchButtonSubView atIndex:3];
     [self.view insertSubview:self.annotationBarView atIndex:4];
-    [self.view insertSubview:self.listView atIndex:5];
-    //[self.listView insertSubview:self. aboveSubview:<#(UIView *)#>]
+    [self.view insertSubview:self.listView atIndex:4];
+    //be very careful with the indexes as they might prevent gesture functions from working
     
     //keeps items within the view
     self.annotationBarView.layer.masksToBounds = YES;
@@ -423,6 +439,7 @@ sideBarActivationState;
     singleTapOnListImageView.numberOfTapsRequired = 1;
     _listImageView.userInteractionEnabled = YES;
     [_listImageView addGestureRecognizer:singleTapOnListImageView];
+    
     
     
     //Format the ListView
@@ -519,12 +536,14 @@ sideBarActivationState;
 
 -(void)setUpListView
 {
+    NSLog(@"unhide listView");
     [self unhideListView];
 }
 
 -(IBAction)goBackFromListView:(id)sender
 {
     [self hideListView];
+    
 }
 
 // FBSample logic
@@ -571,6 +590,7 @@ sideBarActivationState;
 
 - (IBAction)searchButtonAction:(id)sender
 {
+    
     [self performSegueWithIdentifier:@"search_screen_segue" sender:self];
 }
 
@@ -933,6 +953,7 @@ sideBarActivationState;
             CLPlacemark *placemark = placemarks[0];
             NSLog(@"Found here %@", placemark.locality);
             [self setCurrentCity:placemark.locality];
+            self.locationToSend = [NSMutableArray arrayWithObject:placemark];
             
             
             //only call the queryFunction if the data has changed

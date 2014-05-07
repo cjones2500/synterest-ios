@@ -293,10 +293,11 @@ searchString {
             NSLog(@"normal go back");
             //need to get the coordiates of the current location sent to the SearchViewController
             
-            CLPlacemark *placemarkToSend = [currentSearchViewInformation objectAtIndex:0];
-            [arrayToSend addObject:placemarkToSend];
-            
-            [[segue destinationViewController] setZoomLocation:arrayToSend];
+            if(currentSearchViewInformation != nil){
+                CLPlacemark *placemarkToSend = [currentSearchViewInformation objectAtIndex:0];
+                [arrayToSend addObject:placemarkToSend];
+                [[segue destinationViewController] setZoomLocation:arrayToSend];
+            }
             NSNumber *numberToSend = [NSNumber numberWithBool:NO];
             [[segue destinationViewController] setLoadFacebookDataFlag:numberToSend];
         }

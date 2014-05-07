@@ -159,7 +159,7 @@
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                                <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES"/>
+                                                <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES" calendarEvent="YES"/>
                                             </textView>
                                         </subviews>
                                     </scrollView>
@@ -231,6 +231,7 @@
                         <outlet property="listImageView" destination="cdj-ku-Vj2" id="wmm-u4-CKO"/>
                         <outlet property="listTableView" destination="XJB-hN-Vdy" id="mcX-sV-x5i"/>
                         <outlet property="listView" destination="y1e-0v-4Xl" id="0Pj-cc-yCz"/>
+                        <outlet property="listViewSearchBar" destination="ukd-Eb-ZKe" id="HS2-pk-bKi"/>
                         <outlet property="loadingDataWheel" destination="PTM-Ap-Kwl" id="B43-9e-Nsa"/>
                         <outlet property="locationButton" destination="6uB-Qc-VYO" id="NcM-b5-tSq"/>
                         <outlet property="mapView" destination="Cdz-BG-t0h" id="GBP-Tx-ned"/>
