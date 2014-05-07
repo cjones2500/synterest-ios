@@ -13,7 +13,7 @@
 #import "SearchViewController.h"
 
 
-@interface ViewController : UIViewController <CLLocationManagerDelegate,MKMapViewDelegate>{
+@interface ViewController : UIViewController <CLLocationManagerDelegate,MKMapViewDelegate,UITableViewDelegate,UITableViewDataSource>{
     BOOL _doneInitialZoom;
     NSMutableArray *_zoomLocation;
     NSMutableArray *_locationToSend;
@@ -37,6 +37,7 @@
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UIButton *fqlButton;
 @property (weak, nonatomic) NSMutableArray *facebookData;
+@property (weak, nonatomic) NSMutableArray *listViewAnnotations;
 @property (weak, nonatomic) NSString *currentCity;
 @property (weak, nonatomic) NSString *sideBarActivationState;
 @property (weak, nonatomic) NSMutableArray *dataToLoadToAnnotationView;

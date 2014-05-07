@@ -159,6 +159,36 @@ sideBarActivationState;
     
 }
 
+-(void) updateTableView
+{
+    for (id<MKAnnotation> annotation in self.mapView.annotations){
+        MKAnnotationView* aView = [self.mapView viewForAnnotation: annotation];
+        if (aView){
+            MyLocation* anAnnotation =[aView annotation];
+            [self.listViewAnnotations addObject:[anAnnotation name]];
+        }
+    }
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *simpleTableIdentifier = @"SimpleTableCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
+    }
+    
+    cell.textLabel.text = [self.listViewAnnotations objectAtIndex:indexPath.row];
+    NSLog(@"self.listViewAnnotations: %@",self.listViewAnnotations);
+
+    return cell;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [self.listViewAnnotations count];
+}
+
 -(void)unHideAnnotationView
 {
     //remove the data from any exsisting subview
@@ -393,6 +423,7 @@ sideBarActivationState;
 {
     [super viewDidLoad];
     
+    
     self.locationManager = [[CLLocationManager alloc] init] ;
     self.locationManager.delegate = self;
     //[self.locationManager startUpdatingLocation];
@@ -407,11 +438,14 @@ sideBarActivationState;
     //Start the location Manager
     //locationManager = [[CLLocationManager alloc] init];
     
+    self.listTableView.delegate = self;
+    
     //need to add the subviews first
     [self.view addSubview:self.sideBarView];
     [self.view addSubview:self.searchButtonSubView];
     [self.view addSubview:self.annotationBarView];
     [self.view addSubview:self.listView];
+    
     [self.view insertSubview:self.sideBarView atIndex:2];
     [self.view insertSubview:self.searchButtonSubView atIndex:3];
     [self.view insertSubview:self.annotationBarView atIndex:4];
@@ -487,6 +521,7 @@ sideBarActivationState;
     self.loadingDataWheel.color = [UIColor blackColor];
     
     [self updateView];
+    
     AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
     if (!appDelegate.session.isOpen) {
         // create a fresh session object
@@ -532,6 +567,7 @@ sideBarActivationState;
         [self plotFacebookData:savedFacebookData];
     }
     
+    [self updateTableView];
 }
 
 -(void)setUpListView

@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Synterest/ViewController.m"
-            timestampString = "421123655.044722"
+            timestampString = "421197735.93784"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "593"
-            endingLineNumber = "593"
+            startingLineNumber = "628"
+            endingLineNumber = "628"
             landmarkName = "-searchButtonAction:"
             landmarkType = "5">
          </BreakpointContent>
@@ -106,11 +106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Synterest/ViewController.m"
-            timestampString = "421123655.044722"
+            timestampString = "421197735.93784"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "594"
-            endingLineNumber = "594"
+            startingLineNumber = "629"
+            endingLineNumber = "629"
             landmarkName = "-searchButtonAction:"
             landmarkType = "5">
          </BreakpointContent>
@@ -122,27 +122,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Synterest/ViewController.m"
-            timestampString = "421123603.665053"
+            timestampString = "421197735.93784"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "320"
-            endingLineNumber = "320"
-            landmarkName = "-prepareForSegue:sender:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Synterest/ViewController.m"
-            timestampString = "421123899.833802"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "956"
-            endingLineNumber = "956"
+            startingLineNumber = "991"
+            endingLineNumber = "991"
             landmarkName = "-reverseGeocodeLocation"
             landmarkType = "5">
          </BreakpointContent>
@@ -154,11 +138,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Synterest/ViewController.m"
-            timestampString = "421123899.833802"
+            timestampString = "421197735.93784"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "958"
-            endingLineNumber = "958"
+            startingLineNumber = "993"
+            endingLineNumber = "993"
             landmarkName = "-reverseGeocodeLocation"
             landmarkType = "5">
          </BreakpointContent>
