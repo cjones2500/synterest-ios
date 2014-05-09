@@ -37,7 +37,7 @@
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UIButton *fqlButton;
 @property (weak, nonatomic) NSMutableArray *facebookData;
-@property (weak, nonatomic) NSMutableArray *listViewAnnotations;
+@property (strong, nonatomic) NSMutableArray *listViewAnnotations;
 @property (weak, nonatomic) NSString *currentCity;
 @property (weak, nonatomic) NSString *sideBarActivationState;
 @property (weak, nonatomic) NSMutableArray *dataToLoadToAnnotationView;

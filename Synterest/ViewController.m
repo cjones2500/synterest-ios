@@ -159,14 +159,12 @@ sideBarActivationState;
     
 }
 
--(void) updateTableView
-{
-    for (id<MKAnnotation> annotation in self.mapView.annotations){
-        MKAnnotationView* aView = [self.mapView viewForAnnotation: annotation];
-        if (aView){
-            MyLocation* anAnnotation =[aView annotation];
-            [self.listViewAnnotations addObject:[anAnnotation name]];
-        }
+-(void) updateTableView{
+    self.listViewAnnotations = [NSMutableArray arrayWithCapacity:1];
+    for (id value in self.mapView.annotations){
+        MyLocation *annotation = value;
+        [self.listViewAnnotations addObject:annotation];
+        [self.listTableView reloadData];
     }
 }
 
@@ -178,9 +176,8 @@ sideBarActivationState;
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
     }
     
-    cell.textLabel.text = [self.listViewAnnotations objectAtIndex:indexPath.row];
-    NSLog(@"self.listViewAnnotations: %@",self.listViewAnnotations);
-
+    cell.textLabel.text = [[self.listViewAnnotations objectAtIndex:indexPath.row] name];
+    
     return cell;
 }
 
@@ -189,13 +186,30 @@ sideBarActivationState;
     return [self.listViewAnnotations count];
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    MyLocation* anAnnotation =[self.listViewAnnotations objectAtIndex:indexPath.row];
+    NSLog(@"annotation: %@",anAnnotation.fbDescription);
+    [self loadAnnotationView:anAnnotation];
+    [self unHideAnnotationView];
+    [self hideListView];
+}
+
+-(void)loadAnnotationView:(MyLocation*)anAnnotation{
+    self.fbEventAddress.text = [anAnnotation fbLocData];
+    self.fbEventDate.text = [anAnnotation fbEventDate];
+    self.fbEventDescription.text = [anAnnotation fbDescription];
+    self.fbEventTitle.text = [anAnnotation name];
+    [NSThread detachNewThreadSelector:@selector(loadFacebookPicture:) toTarget:self withObject:[anAnnotation facebookPic]];
+}
+
 -(void)unHideAnnotationView
 {
     //remove the data from any exsisting subview
-    self.fbEventTitle.text = nil;
+    /*self.fbEventTitle.text = nil;
     self.fbEventDate.text = nil;
     self.fbEventDescription.text = nil;
-    self.fbEventAddress.text = nil;
+    self.fbEventAddress.text = nil;*/
     //Remove all the subviews
     for(UIView *subview in self.facebookImageSubView.subviews)
     {
@@ -233,6 +247,10 @@ sideBarActivationState;
 
 -(void)unhideListView
 {
+    [self updateTableView];
+    //NSLog(@"self.listViewAnnotations: %@",self.listViewAnnotations);
+    //[self updateTableView];
+    [self.listTableView reloadData];
     NSLog(@"listView frame height : %f",self.listView.frame.size.height);
     
     //add a delay to make sure this happens
@@ -438,7 +456,7 @@ sideBarActivationState;
     //Start the location Manager
     //locationManager = [[CLLocationManager alloc] init];
     
-    self.listTableView.delegate = self;
+    //self.listTableView.delegate = self;
     
     //need to add the subviews first
     [self.view addSubview:self.sideBarView];
@@ -474,11 +492,8 @@ sideBarActivationState;
     _listImageView.userInteractionEnabled = YES;
     [_listImageView addGestureRecognizer:singleTapOnListImageView];
     
-    
-    
     //Format the ListView
     _listView.layer.masksToBounds = YES;
-    
     
     //Format the sideBarView
     _sideBarView.layer.masksToBounds = YES;
@@ -702,9 +717,9 @@ sideBarActivationState;
                                   //text = (NSString *)[dictionary objectForKey:@"data"];
                                   
                                   //@try{
-                                  NSLog(@"in here before facebookData assigned");
-                                  NSLog(@"connection %@",connection);
-                                  NSLog(@"result %@",result);
+                                  //NSLog(@"in here before facebookData assigned");
+                                  //NSLog(@"connection %@",connection);
+                                  //NSLog(@"result %@",result);
                                   
                                   //this required the selection to wait
                                   self.facebookData =[aSynterestModel performSelector:@selector(parseFbFqlResult:) withObject:result];
@@ -1032,6 +1047,7 @@ sideBarActivationState;
     [_mapView setRegion:viewRegion animated:YES];
     
     [self reverseGeocodeLocation];
+    [self updateTableView];
     
 }
 
