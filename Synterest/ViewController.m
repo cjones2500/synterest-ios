@@ -175,8 +175,12 @@ sideBarActivationState;
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
     }
-    
-    cell.textLabel.text = [[self.listViewAnnotations objectAtIndex:indexPath.row] name];
+    @try{
+        cell.textLabel.text = [[self.listViewAnnotations objectAtIndex:indexPath.row] name];
+    }
+    @catch(NSException *e){
+        NSLog(@"Cell assignment error %@",e);
+    }
     
     return cell;
 }
@@ -188,19 +192,29 @@ sideBarActivationState;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MyLocation* anAnnotation =[self.listViewAnnotations objectAtIndex:indexPath.row];
-    NSLog(@"annotation: %@",anAnnotation.fbDescription);
-    [self loadAnnotationView:anAnnotation];
-    [self unHideAnnotationView];
-    [self hideListView];
+    @try{
+        MyLocation* anAnnotation =[self.listViewAnnotations objectAtIndex:indexPath.row];
+        NSLog(@"annotation: %@",anAnnotation.fbDescription);
+        [self loadAnnotationView:anAnnotation];
+        [self unHideAnnotationView];
+        //[self hideListView];
+    }
+    @catch(NSException *e){
+        NSLog(@"MyLocation assignment error %@",e);
+    }
 }
 
 -(void)loadAnnotationView:(MyLocation*)anAnnotation{
-    self.fbEventAddress.text = [anAnnotation fbLocData];
-    self.fbEventDate.text = [anAnnotation fbEventDate];
-    self.fbEventDescription.text = [anAnnotation fbDescription];
-    self.fbEventTitle.text = [anAnnotation name];
-    [NSThread detachNewThreadSelector:@selector(loadFacebookPicture:) toTarget:self withObject:[anAnnotation facebookPic]];
+    @try{
+        self.fbEventAddress.text = [anAnnotation fbLocData];
+        self.fbEventDate.text = [anAnnotation fbEventDate];
+        self.fbEventDescription.text = [anAnnotation fbDescription];
+        self.fbEventTitle.text = [anAnnotation name];
+        [NSThread detachNewThreadSelector:@selector(loadFacebookPicture:) toTarget:self withObject:[anAnnotation facebookPic]];
+    }
+    @catch(NSException *e){
+        NSLog(@"Parsing Error %@",e);
+    }
 }
 
 -(void)unHideAnnotationView
@@ -440,7 +454,6 @@ sideBarActivationState;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     
     self.locationManager = [[CLLocationManager alloc] init] ;
     self.locationManager.delegate = self;
@@ -982,14 +995,19 @@ sideBarActivationState;
     [super viewDidUnload];
 }
 
+- (NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskPortrait;
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+    /*if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
     } else {
         return YES;
-    }
+    }*/
+    return NO;
 }
 
 -(void)reverseGeocodeLocation
