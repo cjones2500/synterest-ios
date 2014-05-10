@@ -33,14 +33,15 @@
 - (IBAction)quitButtonAction:(id)sender;
 - (IBAction)goToLocationAction:(id)sender;
 
-
 @end
 
 //#define METERS_PER_MILE 1609.344
 #define METERS_PER_MILE 10000.0
 
 
-@implementation ViewController 
+@implementation ViewController{
+    BOOL finishedLoadingExtraData;
+}
 
 @synthesize facebookData,
 currentCity,
@@ -444,6 +445,18 @@ sideBarActivationState;
     
 }*/
 
+-(IBAction)clickOnFacebook:(id)sender{
+    [self extendAnnotationsOnMap:^(BOOL finished) {
+        if(finished){
+            NSLog(@"success");
+            NSLog(@"completion value");
+            //do somestuff
+            [self addNewDataToMap:self.extraFacebookData];
+        }
+    }];
+    //[NSThread detachNewThreadSelector:@selector(extendAnnotationsOnMap) toTarget:self withObject:nil];
+}
+
 //changes when the user location is updated or changed
 /*-(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
 {
@@ -674,6 +687,79 @@ sideBarActivationState;
         NSLog(@"Error - Facebook Session is Closed but map is visible");
     }
 }
+
+- (void)extendAnnotationsOnMap:(myCompletion) compblock{
+    //finishedLoadingExtraData = NO;
+    self.extraFacebookData = [[NSMutableArray alloc] initWithCapacity:100];
+    //Add extra annotations to the map after all processes are finished
+    //Run this as a thread in the background and only change if the location changes
+    //NSArray *arrayOfKeywords = [NSArray arrayWithObjects:@"music",@"gig",@"food",@"drink",@"band", nil];
+    NSArray *arrayOfKeywords = [NSArray arrayWithObjects:@"music", nil];
+    for (id keyword in arrayOfKeywords){
+        NSLog(@"keyword %@",keyword);
+        //[self performSelector:@selector(queryFacebookDb:) withObject:keyword];
+        [self performSelectorOnMainThread:@selector(queryFacebookDb:) withObject:keyword waitUntilDone:YES];
+        //[self queryFacebookDb:keyword];
+    }
+    compblock(YES);
+}
+
+
+-(void)queryFacebookDb:(NSString*)queryString
+{
+    NSString *query;
+    @try{
+        if(self.currentCity != nil){
+            query = [NSString stringWithFormat:@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('%@ %@') ORDER BY rand() LIMIT 100",self.currentCity,queryString];
+        }
+        else{
+            query =@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('London') ORDER BY rand() LIMIT 3";
+            NSLog(@"self.currentCity = null string");
+        }
+    }
+    @catch(NSException *e){
+        NSLog(@"Error appending string: %@",e);
+        query =@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('London') ORDER BY rand() LIMIT 3";
+    }
+    //AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+    //[FBSession setActiveSession:appDelegate.session];
+    //SynterestModel *aSynterestModel = [[SynterestModel alloc] init];
+    NSDictionary *queryParam = @{ @"q": query };
+    
+    
+    //NSLog(@"in here with query string %@",query);
+    // Make the API request that uses FQL
+    [FBRequestConnection startWithGraphPath:@"/fql"
+                                 parameters:queryParam
+                                 HTTPMethod:@"GET"
+                          completionHandler:^(FBRequestConnection *connection,
+                                              id result,
+                                              NSError *error) {
+                              if (error) {
+                                  NSLog(@"Error: %@", [error localizedDescription]);
+                              } else {
+                                  NSLog(@"in here extending the view");
+                                  [self.extraFacebookData addObject:result];
+                                  /*self.facebookData =[aSynterestModel performSelector:@selector(parseFbFqlResult:) withObject:result];
+                                   
+                                  [aSynterestModel performSelector:@selector(saveAdditionalLocalData:) withObject:facebookData];
+                                  NSMutableArray* savedFacebookData =[aSynterestModel loadLocalData];
+                                  [self plotFacebookData:savedFacebookData];*/
+                              }
+                          }];
+}
+
+-(void)addNewDataToMap:(NSMutableArray*)newFacebookData
+{
+    NSLog(@"add data to map");
+    SynterestModel *aSynterestModel = [[SynterestModel alloc] init];
+    self.facebookData =[aSynterestModel performSelector:@selector(parseFbFqlResult:) withObject:self.extraFacebookData];
+     
+     [aSynterestModel performSelector:@selector(saveAdditionalLocalData:) withObject:facebookData];
+     NSMutableArray* savedFacebookData =[aSynterestModel loadLocalData];
+     [self plotFacebookData:savedFacebookData];
+}
+
 
 - (void)queryButtonAction
 {

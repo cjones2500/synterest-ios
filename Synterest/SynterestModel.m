@@ -19,6 +19,15 @@
     
 }
 
+-(void)saveAdditionalLocalData:(NSMutableArray*)inputArray
+{
+    NSMutableArray* newSavedFacebookData =[self loadLocalData];
+    [newSavedFacebookData addObject:inputArray];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:newSavedFacebookData];
+    [userDefaults setObject:data forKey:@"facebookData"];
+}
+
 - (int)assignEventType:(NSMutableDictionary*)inputArray
 {
     //Add the Name and Description strings together
@@ -133,7 +142,6 @@
         }
         
         //assign a value to an
-        
         eventSizeLoopCounter = eventSizeLoopCounter + 1;
     }
     
@@ -162,7 +170,15 @@
 
 - (NSMutableArray*) parseFbFqlResult:(id)result
 {
-    NSMutableArray* facebookResults = [[NSMutableArray alloc] init];
+    NSMutableArray* facebookResults;
+    //only allocate if there is nothing there
+    if(facebookResults == nil){
+        facebookResults = [[NSMutableArray alloc] init];
+    }
+    else{
+        NSLog(@"extra data being loaded");
+        
+    }
     
     // result is the json response from a successful request
     NSDictionary *dictionary = (NSDictionary *)result;

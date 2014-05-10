@@ -37,6 +37,7 @@
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UIButton *fqlButton;
 @property (weak, nonatomic) NSMutableArray *facebookData;
+@property (strong, nonatomic) NSMutableArray *extraFacebookData;
 @property (strong, nonatomic) NSMutableArray *listViewAnnotations;
 @property (weak, nonatomic) NSString *currentCity;
 @property (weak, nonatomic) NSString *sideBarActivationState;
@@ -71,5 +72,6 @@
 - (void)toggleSideBarView;
 - (void)setMapCenterWithCoords:(CLLocationCoordinate2D)coords;
 - (void)unHideFirstTime;
+typedef void(^myCompletion)(BOOL);
 
 @end
