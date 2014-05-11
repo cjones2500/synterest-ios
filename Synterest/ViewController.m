@@ -37,6 +37,7 @@
 
 //#define METERS_PER_MILE 1609.344
 #define METERS_PER_MILE 10000.0
+#define MAXIMUM_NUMBER_ANNOTATIONS 10000
 
 
 @implementation ViewController{
@@ -447,7 +448,8 @@ sideBarActivationState;
 }*/
 
 -(IBAction)clickOnFacebook:(id)sender{
-    NSArray *arrayOfKeywords = [NSArray arrayWithObjects:@"music",@"food",@"night",@"culture",@"social",@"meeting", nil];
+    //NSArray *arrayOfKeywords = [NSArray arrayWithObjects:@"music",@"food",@"night",@"culture",@"social",@"meeting", nil];
+    NSArray *arrayOfKeywords = [NSArray arrayWithObjects:@"music",@"night",@"band",@"food",@"people",@"social",@"meeting",@"drink",@"gig",@"talk",@"party",@"club",@"sport",@"event",@"society",@"group",@"art",@"business",@"new",@"old",@"live",@"book",@"fair",@"big",@"little",@"project",@"happy",nil];
     //NSArray *arrayOfKeywords = [NSArray arrayWithObjects:@"music",@"society",@"night",@"band",@"experience",@"food",@"people",@"social",@"meeting",@"drink",@"gig",@"talk",@"party",@"club",@"sport",@"event",@"society",@"group",@"art",@"business",@"food",@"dinner",@"culture",@"festival",@"dance",@"cafe",@"jazz",@"tour",@"exhibition",@"show",@"bar",@"class",@"theatre",@"football",@"hockey",@"tournament",@"match",@"college",@"time",@"well",@"student",@"new",@"old",@"live",@"book",@"fair",@"big",@"little",@"project",@"happy",nil];
     for(id keyword in arrayOfKeywords){
         
@@ -478,7 +480,7 @@ sideBarActivationState;
         // Run the loop
         while(waitingForBlock) {
             [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode
-                                     beforeDate:[NSDate dateWithTimeIntervalSinceNow:10.0]];
+                                     beforeDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
         }
 }
 
@@ -630,7 +632,7 @@ sideBarActivationState;
     //check to see if there is actually some facebook data
     if(savedFacebookData != NULL){
         //NSLog(@"loading data...");
-        [self plotFacebookData:savedFacebookData];
+        [self plotFacebookData:savedFacebookData withReset:YES];
     }
     
     [self updateTableView];
@@ -806,7 +808,7 @@ sideBarActivationState;
     NSMutableArray* savedFacebookData =[aSynterestModel loadLocalData];
     //[self performSelector:@selector(plotFacebookData:) onThread:[NSThread currentThread] withObject:savedFacebookData waitUntilDone:YES];
     
-    [self plotFacebookData:savedFacebookData];
+    [self plotFacebookData:savedFacebookData withReset:NO];
     self.extraFacebookData = nil;
 }
 
@@ -822,7 +824,7 @@ sideBarActivationState;
     @try{
         //avoid using null values of currentCity
         if(self.currentCity != nil){
-            query = [NSString stringWithFormat:@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('%@') ORDER BY rand() LIMIT 3",self.currentCity];
+            query = [NSString stringWithFormat:@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('%@') ORDER BY rand() LIMIT 100",self.currentCity];
             NSLog(@" string in question %@",self.currentCity);
         }
         else{
@@ -895,7 +897,7 @@ sideBarActivationState;
                                   //Load back the saved facebook Data
                                   NSMutableArray* savedFacebookData =[aSynterestModel loadLocalData];
                                   //NSLog(@"after loadLocalData call");
-                                  [self plotFacebookData:savedFacebookData];
+                                  [self plotFacebookData:savedFacebookData withReset:YES];
                                   //NSLog(@"after plotFacebookData call");
                                   //NSLog(@"json dictionary %@",[[[dictionary objectForKey:@"data"] objectAtIndex:0] objectForKey:@"eid"]);
                                   
@@ -912,10 +914,15 @@ sideBarActivationState;
     
 }
 
-- (void)plotFacebookData:(NSMutableArray *)responseData
+- (void)plotFacebookData:(NSMutableArray *)responseData withReset:(BOOL)resetValue
 {
-    for (id<MKAnnotation> annotation in _mapView.annotations) {
-        [_mapView removeAnnotation:annotation];
+    if(resetValue == YES){
+        for (id<MKAnnotation> annotation in _mapView.annotations) {
+            [_mapView removeAnnotation:annotation];
+        }
+    }
+    else{
+        //ignore this and don't reset the current map
     }
     
     NSLog(@"num of dataPoints %u",[responseData count]);
@@ -954,6 +961,7 @@ sideBarActivationState;
                 //NSLog(@" coordinates %f",coordinates.latitude);
                 //InitWithName gives a description
                 //NSLog(@" pic value %@",[singlePoint objectForKey:@"venue"]);
+                //NSDate *dateFromString = [dateFormatter dateFromString:isoFacebookDateString];
             
                 
                 NSString *fbAdress = [self buildAddressToShow:[singlePoint objectForKey:@"venue"]];

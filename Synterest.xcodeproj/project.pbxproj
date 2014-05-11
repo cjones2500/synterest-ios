@@ -665,6 +665,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Synterest/Synterest-Prefix.pch";
+				GCC_WARN_UNUSED_VARIABLE = NO;
 				INFOPLIST_FILE = "Synterest/Synterest-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -682,6 +683,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Synterest/Synterest-Prefix.pch";
+				GCC_WARN_UNUSED_VARIABLE = NO;
 				INFOPLIST_FILE = "Synterest/Synterest-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;

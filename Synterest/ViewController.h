@@ -67,7 +67,7 @@
 
 //- (id) initWithCoords:(NSMutableArray*)zoomLocation;
 - (void)viewWillAppear:(BOOL)animated;
-- (void)plotFacebookData:(NSMutableArray *)responseData;
+- (void)plotFacebookData:(NSMutableArray *)responseData withReset:(BOOL)resetValue;
 - (NSString*)getDateInfoFromFb:(NSString*)isoFacebookDateString;
 - (NSString*)buildAddressToShow:(NSMutableDictionary*)venueInfo;
 - (void)toggleSideBarView;

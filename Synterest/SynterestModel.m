@@ -10,6 +10,8 @@
 
 @implementation SynterestModel
 
+#define MAXIMUM_NUMBER_ANNOTATIONS 500
+
 //Save facebook data for synterest to the local phone cache
 - (void)saveLocalData:(NSMutableArray*)inputArray
 {
@@ -23,7 +25,13 @@
 {
     NSMutableArray* newSavedFacebookData =[self loadLocalData];
     for (id item in inputArray){
-        [newSavedFacebookData addObject:item];
+        if([newSavedFacebookData count] < MAXIMUM_NUMBER_ANNOTATIONS){
+            [newSavedFacebookData addObject:item];
+        }
+        else{
+            //break out of the for loop as the maximum number of annotations has been reached
+            break;
+        }
     }
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:newSavedFacebookData];
@@ -244,8 +252,39 @@
         [singleResult setObject:[[[dictionary objectForKey:@"data"] objectAtIndex:i] objectForKey:@"pic"] forKey:@"pic"];
         [singleResult setObject:[[[dictionary objectForKey:@"data"] objectAtIndex:i] objectForKey:@"venue"] forKey:@"venue"];
         [singleResult setObject:eventType forKey:@"event_type"];
-        [facebookResults addObject:singleResult];
-            
+        
+        //organise the dates
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZ"];
+        NSDate *dateFromString = [dateFormatter dateFromString:[singleResult objectForKey:@"start_time"]];
+        NSDate *currentTime = [NSDate date];
+        NSDate *dateInOneWeek =  [currentTime dateByAddingTimeInterval:60*60*24*7];
+        //NSTimeInterval *oneweek =
+        //NSdate *currentTimePlusWeek = [date ]
+        
+        //NSLog(@"string date: %@",dateFromString);
+        //NSLog(@"current date: %@",currentTime);
+        
+        //filter the results of events
+        if(dateFromString == nil){
+            NSLog(@"null date");
+        }
+        else if(currentTime < dateFromString){
+            NSLog(@"event has already passed");
+        }
+        else if(dateInOneWeek > dateFromString){
+            NSLog(@"event is too far in the future");
+        }
+        else if ([singleResult objectForKey:@"description"] == nil){
+            NSLog(@"event description is empty");
+        }
+        else if ([singleResult objectForKey:@"name"] == nil){
+            NSLog(@"event name is empty");
+        }
+        else{
+            //if then add to the mutable array
+            [facebookResults addObject:singleResult];
+        }
     }
     
     return facebookResults;
