@@ -447,8 +447,8 @@ sideBarActivationState;
 }*/
 
 -(IBAction)clickOnFacebook:(id)sender{
-    //NSArray *arrayOfKeywords = [NSArray arrayWithObjects:@"music", nil];
-    NSArray *arrayOfKeywords = [NSArray arrayWithObjects:@"music",@"gig",@"food",@"drink",@"band", nil];
+    NSArray *arrayOfKeywords = [NSArray arrayWithObjects:@"music",@"food",@"night",@"culture",@"social",@"meeting", nil];
+    //NSArray *arrayOfKeywords = [NSArray arrayWithObjects:@"music",@"society",@"night",@"band",@"experience",@"food",@"people",@"social",@"meeting",@"drink",@"gig",@"talk",@"party",@"club",@"sport",@"event",@"society",@"group",@"art",@"business",@"food",@"dinner",@"culture",@"festival",@"dance",@"cafe",@"jazz",@"tour",@"exhibition",@"show",@"bar",@"class",@"theatre",@"football",@"hockey",@"tournament",@"match",@"college",@"time",@"well",@"student",@"new",@"old",@"live",@"book",@"fair",@"big",@"little",@"project",@"happy",nil];
     for(id keyword in arrayOfKeywords){
         
         //[self performSelector:@selector(performFacebookSearch:) onThread:[NSThread currentThread] withObject:keyword waitUntilDone:YES];
