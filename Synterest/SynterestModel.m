@@ -22,10 +22,27 @@
 -(void)saveAdditionalLocalData:(NSMutableArray*)inputArray
 {
     NSMutableArray* newSavedFacebookData =[self loadLocalData];
-    [newSavedFacebookData addObject:inputArray];
+    for (id item in inputArray){
+        [newSavedFacebookData addObject:item];
+    }
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:newSavedFacebookData];
     [userDefaults setObject:data forKey:@"facebookData"];
+}
+
+//Load facebook data for synterest to the local phone cache
+-(NSMutableArray*)loadLocalData
+{
+    NSMutableArray *facebookData;
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSData *data = [userDefaults objectForKey:@"facebookData"];
+    if(data != NULL){
+        facebookData = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    }
+    else{
+        facebookData = nil;
+    }
+    return facebookData;
 }
 
 - (int)assignEventType:(NSMutableDictionary*)inputArray
@@ -153,32 +170,19 @@
     
 }
 
-//Load facebook data for synterest to the local phone cache
--(NSMutableArray*)loadLocalData
-{
-    NSMutableArray *facebookData;
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSData *data = [userDefaults objectForKey:@"facebookData"];
-    if(data != NULL){
-        facebookData = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-    }
-    else{
-        facebookData = nil;
-    }
-    return facebookData;
-}
+
 
 - (NSMutableArray*) parseFbFqlResult:(id)result
 {
     NSMutableArray* facebookResults;
     //only allocate if there is nothing there
-    if(facebookResults == nil){
+    //if(facebookResults == nil){
         facebookResults = [[NSMutableArray alloc] init];
-    }
-    else{
-        NSLog(@"extra data being loaded");
+    //}
+    //else{
+    //    NSLog(@"extra data being loaded");
         
-    }
+    //}
     
     // result is the json response from a successful request
     NSDictionary *dictionary = (NSDictionary *)result;

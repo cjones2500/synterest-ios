@@ -47,6 +47,7 @@
 currentCity,
 dataToLoadToAnnotationView,
 loadFacebookDataFlag,
+additionalFacebookData,
 firstViewFlag,
 loadingDataWheel,
 sideBarActivationState;
@@ -446,14 +447,30 @@ sideBarActivationState;
 }*/
 
 -(IBAction)clickOnFacebook:(id)sender{
+    
+    // Set the flag to YES
+    __block BOOL waitingForBlock = YES;
+    
     [self extendAnnotationsOnMap:^(BOOL finished) {
         if(finished){
             NSLog(@"success");
             NSLog(@"completion value");
+            waitingForBlock = NO;
             //do somestuff
-            [self addNewDataToMap:self.extraFacebookData];
+            //[self addNewDataToMap:self.extraFacebookData];
+            // Assert the truth
+            //finished = YES;
+            
+            //STAssertTrue(finished, @"Should have been success!");
         }
     }];
+    
+    // Run the loop
+    while(waitingForBlock) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode
+                                 beforeDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
+    }
+    
     //[NSThread detachNewThreadSelector:@selector(extendAnnotationsOnMap) toTarget:self withObject:nil];
 }
 
@@ -699,11 +716,12 @@ sideBarActivationState;
         NSLog(@"keyword %@",keyword);
         //[self performSelector:@selector(queryFacebookDb:) withObject:keyword];
         [self performSelectorOnMainThread:@selector(queryFacebookDb:) withObject:keyword waitUntilDone:YES];
+        //compblock(YES);
         //[self queryFacebookDb:keyword];
     }
     compblock(YES);
+    
 }
-
 
 -(void)queryFacebookDb:(NSString*)queryString
 {
@@ -740,11 +758,12 @@ sideBarActivationState;
                               } else {
                                   NSLog(@"in here extending the view");
                                   [self.extraFacebookData addObject:result];
-                                  /*self.facebookData =[aSynterestModel performSelector:@selector(parseFbFqlResult:) withObject:result];
-                                   
-                                  [aSynterestModel performSelector:@selector(saveAdditionalLocalData:) withObject:facebookData];
+                                  //self.extraFacebookData =[aSynterestModel performSelector:@selector(parseFbFqlResult:) withObject:result];
+                                  [self addNewDataToMap:self.extraFacebookData];
+                                  /*[aSynterestModel performSelector:@selector(saveAdditionalLocalData:) withObject:facebookData];
                                   NSMutableArray* savedFacebookData =[aSynterestModel loadLocalData];
                                   [self plotFacebookData:savedFacebookData];*/
+                                  //[self addNewDataToMap:self.extraFacebookData];
                               }
                           }];
 }
@@ -752,10 +771,11 @@ sideBarActivationState;
 -(void)addNewDataToMap:(NSMutableArray*)newFacebookData
 {
     NSLog(@"add data to map");
+    NSLog(@"new facebook data: %@",newFacebookData);
     SynterestModel *aSynterestModel = [[SynterestModel alloc] init];
-    self.facebookData =[aSynterestModel performSelector:@selector(parseFbFqlResult:) withObject:self.extraFacebookData];
+    self.additionalFacebookData =[aSynterestModel performSelector:@selector(parseFbFqlResult:) withObject:self.extraFacebookData[0]];
      
-     [aSynterestModel performSelector:@selector(saveAdditionalLocalData:) withObject:facebookData];
+     [aSynterestModel performSelector:@selector(saveAdditionalLocalData:) withObject:self.additionalFacebookData];
      NSMutableArray* savedFacebookData =[aSynterestModel loadLocalData];
      [self plotFacebookData:savedFacebookData];
 }
@@ -772,7 +792,7 @@ sideBarActivationState;
     @try{
         //avoid using null values of currentCity
         if(self.currentCity != nil){
-            query = [NSString stringWithFormat:@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('%@') ORDER BY rand() LIMIT 100",self.currentCity];
+            query = [NSString stringWithFormat:@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('%@') ORDER BY rand() LIMIT 3",self.currentCity];
             NSLog(@" string in question %@",self.currentCity);
         }
         else{
