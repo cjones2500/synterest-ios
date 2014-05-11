@@ -448,27 +448,29 @@ sideBarActivationState;
 
 -(IBAction)clickOnFacebook:(id)sender{
     
-    // Set the flag to YES
-    __block BOOL waitingForBlock = YES;
+    //NSArray *arrayOfKeywords = [NSArray arrayWithObjects:@"music",@"gig",@"food",@"drink",@"band", nil];
+    NSArray *arrayOfKeywords = [NSArray arrayWithObjects:@"music", nil];
+    for (id keyword in arrayOfKeywords){
+        // Set the flag to YES
+        __block BOOL waitingForBlock = YES;
+        NSLog(@"keyword: %@",keyword);
+        [self extendAnnotationsOnMap:keyword withCompletion:^(BOOL finished) {
+            if(finished){
+                NSLog(@"success");
+                NSLog(@"completion value");
+                waitingForBlock = NO;
+                //do somestuff
+                //[self addNewDataToMap:self.extraFacebookData];
+                // Assert the truth
+                //finished = YES;
+            }
+        }];
     
-    [self extendAnnotationsOnMap:^(BOOL finished) {
-        if(finished){
-            NSLog(@"success");
-            NSLog(@"completion value");
-            waitingForBlock = NO;
-            //do somestuff
-            //[self addNewDataToMap:self.extraFacebookData];
-            // Assert the truth
-            //finished = YES;
-            
-            //STAssertTrue(finished, @"Should have been success!");
+        // Run the loop
+        while(waitingForBlock) {
+            [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode
+                                     beforeDate:[NSDate dateWithTimeIntervalSinceNow:10.0]];
         }
-    }];
-    
-    // Run the loop
-    while(waitingForBlock) {
-        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode
-                                 beforeDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
     }
     
     //[NSThread detachNewThreadSelector:@selector(extendAnnotationsOnMap) toTarget:self withObject:nil];
@@ -705,20 +707,12 @@ sideBarActivationState;
     }
 }
 
-- (void)extendAnnotationsOnMap:(myCompletion) compblock{
+- (void)extendAnnotationsOnMap:(NSString*)keywordString withCompletion:(myCompletion) compblock{
     //finishedLoadingExtraData = NO;
     self.extraFacebookData = [[NSMutableArray alloc] initWithCapacity:100];
-    //Add extra annotations to the map after all processes are finished
-    //Run this as a thread in the background and only change if the location changes
-    //NSArray *arrayOfKeywords = [NSArray arrayWithObjects:@"music",@"gig",@"food",@"drink",@"band", nil];
-    NSArray *arrayOfKeywords = [NSArray arrayWithObjects:@"music", nil];
-    for (id keyword in arrayOfKeywords){
-        NSLog(@"keyword %@",keyword);
-        //[self performSelector:@selector(queryFacebookDb:) withObject:keyword];
-        [self performSelectorOnMainThread:@selector(queryFacebookDb:) withObject:keyword waitUntilDone:YES];
-        //compblock(YES);
-        //[self queryFacebookDb:keyword];
-    }
+    NSLog(@"keyword %@",keywordString);
+    //[self performSelector:@selector(queryFacebookDb:) withObject:keyword];
+    [self performSelectorOnMainThread:@selector(queryFacebookDb:) withObject:keywordString waitUntilDone:YES];
     compblock(YES);
     
 }
