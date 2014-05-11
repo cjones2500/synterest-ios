@@ -447,17 +447,26 @@ sideBarActivationState;
 }*/
 
 -(IBAction)clickOnFacebook:(id)sender{
-    
-    //NSArray *arrayOfKeywords = [NSArray arrayWithObjects:@"music",@"gig",@"food",@"drink",@"band", nil];
-    NSArray *arrayOfKeywords = [NSArray arrayWithObjects:@"music", nil];
-    for (id keyword in arrayOfKeywords){
+    //NSArray *arrayOfKeywords = [NSArray arrayWithObjects:@"music", nil];
+    NSArray *arrayOfKeywords = [NSArray arrayWithObjects:@"music",@"gig",@"food",@"drink",@"band", nil];
+    for(id keyword in arrayOfKeywords){
+        
+        //[self performSelector:@selector(performFacebookSearch:) onThread:[NSThread currentThread] withObject:keyword waitUntilDone:YES];
+        NSLog(@"keyword outer: %@",keyword);
+        [self performFacebookSearch:keyword];
+    }
+    //[NSThread detachNewThreadSelector:@selector(extendAnnotationsOnMap) toTarget:self withObject:nil];
+}
+
+- (void) performFacebookSearch:(NSString*)keyword
+{
+    __block BOOL waitingForBlock = YES;
         // Set the flag to YES
-        __block BOOL waitingForBlock = YES;
-        NSLog(@"keyword: %@",keyword);
+        //NSLog(@"keyword: %@",keyword);
         [self extendAnnotationsOnMap:keyword withCompletion:^(BOOL finished) {
             if(finished){
-                NSLog(@"success");
-                NSLog(@"completion value");
+                //NSLog(@"success");
+                //NSLog(@"completion value outer block");
                 waitingForBlock = NO;
                 //do somestuff
                 //[self addNewDataToMap:self.extraFacebookData];
@@ -465,15 +474,12 @@ sideBarActivationState;
                 //finished = YES;
             }
         }];
-    
+        
         // Run the loop
         while(waitingForBlock) {
             [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode
                                      beforeDate:[NSDate dateWithTimeIntervalSinceNow:10.0]];
         }
-    }
-    
-    //[NSThread detachNewThreadSelector:@selector(extendAnnotationsOnMap) toTarget:self withObject:nil];
 }
 
 //changes when the user location is updated or changed
@@ -712,13 +718,33 @@ sideBarActivationState;
     self.extraFacebookData = [[NSMutableArray alloc] initWithCapacity:100];
     NSLog(@"keyword %@",keywordString);
     //[self performSelector:@selector(queryFacebookDb:) withObject:keyword];
-    [self performSelectorOnMainThread:@selector(queryFacebookDb:) withObject:keywordString waitUntilDone:YES];
+    //old way
+    //[self performSelectorOnMainThread:@selector(queryFacebookDb:) withObject:keywordString waitUntilDone:YES];
+    //new way
+    __block BOOL waitingForInnerBlock = YES;
+    [self queryFacebookDb:keywordString withCompletion:^(BOOL finished) {
+        if(finished == YES){
+            NSLog(@"success inner");
+            NSLog(@"completion value inner");
+            waitingForInnerBlock = NO;
+            //do somestuff
+            //[self addNewDataToMap:self.extraFacebookData];
+            // Assert the truth
+            //finished = YES;
+        }
+    }];
+    
+    // Run the loop
+    while(waitingForInnerBlock) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode
+                                 beforeDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
+    }
+
     compblock(YES);
     
 }
 
--(void)queryFacebookDb:(NSString*)queryString
-{
+-(void)queryFacebookDb:(NSString*)queryString withCompletion:(myCompletion2) compblock2{
     NSString *query;
     @try{
         if(self.currentCity != nil){
@@ -753,25 +779,35 @@ sideBarActivationState;
                                   NSLog(@"in here extending the view");
                                   [self.extraFacebookData addObject:result];
                                   //self.extraFacebookData =[aSynterestModel performSelector:@selector(parseFbFqlResult:) withObject:result];
+                                  
+                                  //[self performSelector:@selector(addNewDataToMap:) onThread:[NSThread currentThread] withObject:self.extraFacebookData waitUntilDone:YES];
                                   [self addNewDataToMap:self.extraFacebookData];
                                   /*[aSynterestModel performSelector:@selector(saveAdditionalLocalData:) withObject:facebookData];
                                   NSMutableArray* savedFacebookData =[aSynterestModel loadLocalData];
                                   [self plotFacebookData:savedFacebookData];*/
                                   //[self addNewDataToMap:self.extraFacebookData];
+                                  compblock2(YES);
                               }
                           }];
+    
+    
 }
 
 -(void)addNewDataToMap:(NSMutableArray*)newFacebookData
 {
     NSLog(@"add data to map");
-    NSLog(@"new facebook data: %@",newFacebookData);
+    //NSLog(@"new facebook data: %@",newFacebookData);
     SynterestModel *aSynterestModel = [[SynterestModel alloc] init];
+    //self.additionalFacebookData = [aSynterestModel performSelector:@selector(parseFbFqlResult:) onThread:[NSThread currentThread] withObject:self.extraFacebookData[0] waitUntilDone:YES];
+    
     self.additionalFacebookData =[aSynterestModel performSelector:@selector(parseFbFqlResult:) withObject:self.extraFacebookData[0]];
-     
-     [aSynterestModel performSelector:@selector(saveAdditionalLocalData:) withObject:self.additionalFacebookData];
-     NSMutableArray* savedFacebookData =[aSynterestModel loadLocalData];
-     [self plotFacebookData:savedFacebookData];
+    //[aSynterestModel performSelector:@selector(saveAdditionalLocalData:) onThread:[NSThread currentThread] withObject:self.additionalFacebookData waitUntilDone:YES];
+    [aSynterestModel performSelector:@selector(saveAdditionalLocalData:) withObject:self.additionalFacebookData];
+    NSMutableArray* savedFacebookData =[aSynterestModel loadLocalData];
+    //[self performSelector:@selector(plotFacebookData:) onThread:[NSThread currentThread] withObject:savedFacebookData waitUntilDone:YES];
+    
+    [self plotFacebookData:savedFacebookData];
+    self.extraFacebookData = nil;
 }
 
 

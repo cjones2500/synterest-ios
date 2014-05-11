@@ -74,5 +74,6 @@
 - (void)setMapCenterWithCoords:(CLLocationCoordinate2D)coords;
 - (void)unHideFirstTime;
 typedef void(^myCompletion)(BOOL);
+typedef void(^myCompletion2)(BOOL);
 
 @end
