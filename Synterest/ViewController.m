@@ -37,7 +37,7 @@
 
 //#define METERS_PER_MILE 1609.344
 #define METERS_PER_MILE 10000.0
-#define MAXIMUM_NUMBER_ANNOTATIONS 10000
+#define MAXIMUM_NUMBER_ANNOTATIONS 1000
 
 
 @implementation ViewController{
@@ -448,8 +448,9 @@ sideBarActivationState;
 }*/
 
 -(IBAction)clickOnFacebook:(id)sender{
+    //List of keywords to search within facebook
     //NSArray *arrayOfKeywords = [NSArray arrayWithObjects:@"music",@"food",@"night",@"culture",@"social",@"meeting", nil];
-    NSArray *arrayOfKeywords = [NSArray arrayWithObjects:@"music",@"night",@"band",@"food",@"people",@"social",@"meeting",@"drink",@"gig",@"talk",@"party",@"club",@"sport",@"event",@"society",@"group",@"art",@"business",@"new",@"old",@"live",@"book",@"fair",@"big",@"little",@"project",@"happy",nil];
+    NSArray *arrayOfKeywords = [NSArray arrayWithObjects:@"new",@"old",@"live",@"book",@"fair",@"big",@"little",@"project",@"happy"@"music",@"night",@"band",@"food",@"people",@"social",@"meeting",@"drink",@"gig",@"talk",@"party",@"club",@"sport",@"event",@"society",@"group",@"art",@"business",nil];
     //NSArray *arrayOfKeywords = [NSArray arrayWithObjects:@"music",@"society",@"night",@"band",@"experience",@"food",@"people",@"social",@"meeting",@"drink",@"gig",@"talk",@"party",@"club",@"sport",@"event",@"society",@"group",@"art",@"business",@"food",@"dinner",@"culture",@"festival",@"dance",@"cafe",@"jazz",@"tour",@"exhibition",@"show",@"bar",@"class",@"theatre",@"football",@"hockey",@"tournament",@"match",@"college",@"time",@"well",@"student",@"new",@"old",@"live",@"book",@"fair",@"big",@"little",@"project",@"happy",nil];
     for(id keyword in arrayOfKeywords){
         
@@ -923,6 +924,16 @@ sideBarActivationState;
     }
     else{
         //ignore this and don't reset the current map
+    }
+    
+    int annotationCount = 0;
+    for (id<MKAnnotation> annotation in _mapView.annotations) {
+        annotationCount = annotationCount + 1;
+    }
+    
+    if(annotationCount > MAXIMUM_NUMBER_ANNOTATIONS){
+        NSLog(@"exceeded maximum annotations in view");
+        return;
     }
     
     NSLog(@"num of dataPoints %u",[responseData count]);

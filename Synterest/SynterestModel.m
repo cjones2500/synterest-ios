@@ -10,7 +10,7 @@
 
 @implementation SynterestModel
 
-#define MAXIMUM_NUMBER_ANNOTATIONS 500
+#define MAXIMUM_NUMBER_ANNOTATIONS 10000  //maximum number of annotations stored in memory
 
 //Save facebook data for synterest to the local phone cache
 - (void)saveLocalData:(NSMutableArray*)inputArray
@@ -258,7 +258,7 @@
         [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZ"];
         NSDate *dateFromString = [dateFormatter dateFromString:[singleResult objectForKey:@"start_time"]];
         NSDate *currentTime = [NSDate date];
-        NSDate *dateInOneWeek =  [currentTime dateByAddingTimeInterval:60*60*24*7];
+        NSDate *dateInOneWeek =  [currentTime dateByAddingTimeInterval:60*60*24*14];
         //NSTimeInterval *oneweek =
         //NSdate *currentTimePlusWeek = [date ]
         
@@ -272,9 +272,10 @@
         else if(currentTime < dateFromString){
             NSLog(@"event has already passed");
         }
-        else if(dateInOneWeek > dateFromString){
+        //TODO: add the ability to add events within a certain time period
+        /*else if(dateInOneWeek > dateFromString){
             NSLog(@"event is too far in the future");
-        }
+        }*/
         else if ([singleResult objectForKey:@"description"] == nil){
             NSLog(@"event description is empty");
         }
