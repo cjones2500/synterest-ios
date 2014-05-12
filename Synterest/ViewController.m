@@ -42,6 +42,7 @@
 
 @implementation ViewController{
     BOOL finishedLoadingExtraData;
+    BOOL stopExtraFacebookDataFlag;
 }
 
 @synthesize facebookData,
@@ -60,6 +61,10 @@ sideBarActivationState;
 {
     self = [super init];
     return self;
+}
+
+- (void) stopExtraFacebookData{
+    stopExtraFacebookDataFlag = YES;
 }
 
 -(IBAction)goBackFromAnnotationViewAction:(id)sender
@@ -333,6 +338,7 @@ sideBarActivationState;
 
 - (IBAction)goToLocationAction:(id)sender
 {
+    [self stopExtraFacebookData];
     CLLocationCoordinate2D newLocation = self.mapView.userLocation.location.coordinate;
     NSLog(@"center of Map %f",newLocation.latitude);
     NSLog(@"center of Map %f",newLocation.longitude);
@@ -466,6 +472,11 @@ sideBarActivationState;
         
         //[self performSelector:@selector(performFacebookSearch:) onThread:[NSThread currentThread] withObject:keyword waitUntilDone:YES];
         NSLog(@"keyword outer: %@",keyword);
+        if(stopExtraFacebookDataFlag == YES){
+            stopExtraFacebookDataFlag = NO;
+            break;
+        }
+        
         [self performFacebookSearch:keyword];
     }
     //[NSThread detachNewThreadSelector:@selector(extendAnnotationsOnMap) toTarget:self withObject:nil];
