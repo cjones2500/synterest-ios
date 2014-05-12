@@ -96,7 +96,11 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="align_center-50.png" id="cdj-ku-Vj2">
-                                <rect key="frame" x="29" y="99" width="40" height="40"/>
+                                <rect key="frame" x="29" y="149" width="40" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="calendar-50.png" id="57E-3X-mmI">
+                                <rect key="frame" x="29" y="88" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <view contentMode="scaleToFill" id="u14-0w-RJC">
@@ -133,7 +137,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="6uB-Qc-VYO">
                                         <rect key="frame" x="47" y="5" width="28" height="29"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" image="search-75.png">
+                                        <state key="normal" image="location-services.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -204,7 +208,7 @@
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Y6m-ht-IU4">
-                                        <rect key="frame" x="15" y="99" width="130" height="128"/>
+                                        <rect key="frame" x="14" y="100" width="130" height="128"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Address" id="G3O-Zi-I9a">
@@ -222,6 +226,7 @@
                     </view>
                     <connections>
                         <outlet property="annotationBarView" destination="RVV-uL-ihl" id="Iii-29-mCW"/>
+                        <outlet property="calenderImageView" destination="57E-3X-mmI" id="fGk-IA-MzR"/>
                         <outlet property="facebookImageSubView" destination="Y6m-ht-IU4" id="SKB-WV-yUV"/>
                         <outlet property="fbEventAddress" destination="G3O-Zi-I9a" id="MZs-x4-dFx"/>
                         <outlet property="fbEventDate" destination="qvY-Jw-ykO" id="NNk-iA-Xqk"/>
@@ -230,7 +235,7 @@
                         <outlet property="fqlButton" destination="HoA-Lf-P4f" id="Huz-o0-CpU"/>
                         <outlet property="goBackFromListView" destination="mtK-pd-qXi" id="3sq-F1-cYa"/>
                         <outlet property="goBackToMapFromAnnotation" destination="3Wp-f6-ZV9" id="2eM-6n-MbJ"/>
-                        <outlet property="listImageView" destination="cdj-ku-Vj2" id="wmm-u4-CKO"/>
+                        <outlet property="listImageView" destination="cdj-ku-Vj2" id="pfc-md-tIY"/>
                         <outlet property="listTableView" destination="XJB-hN-Vdy" id="mcX-sV-x5i"/>
                         <outlet property="listView" destination="y1e-0v-4Xl" id="0Pj-cc-yCz"/>
                         <outlet property="listViewSearchBar" destination="ukd-Eb-ZKe" id="HS2-pk-bKi"/>
@@ -342,9 +347,9 @@
         <image name="define_location-50.png" width="50" height="50"/>
         <image name="exit-25.png" width="25" height="25"/>
         <image name="location-50.png" width="50" height="50"/>
+        <image name="location-services.png" width="128" height="128"/>
         <image name="logo.png" width="301" height="224"/>
         <image name="plus-50.png" width="50" height="50"/>
-        <image name="search-75.png" width="75" height="75"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

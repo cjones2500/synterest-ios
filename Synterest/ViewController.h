@@ -13,7 +13,7 @@
 #import "SearchViewController.h"
 
 
-@interface ViewController : UIViewController <CLLocationManagerDelegate,MKMapViewDelegate,UITableViewDelegate,UITableViewDataSource>{
+@interface ViewController : UIViewController <CLLocationManagerDelegate,MKMapViewDelegate,UITableViewDelegate,UITableViewDataSource,UIPickerViewDataSource,UIPickerViewDelegate>{
     BOOL _doneInitialZoom;
     NSMutableArray *_zoomLocation;
     NSMutableArray *_locationToSend;
@@ -63,6 +63,10 @@
 @property (weak, nonatomic) IBOutlet UITableView *listTableView;
 @property (weak, nonatomic) IBOutlet UISearchBar *listViewSearchBar;
 
+//Calender view icon
+@property (weak, nonatomic) IBOutlet UIImageView *calenderImageView;
+@property (weak, nonatomic) IBOutlet UIPickerView *calenderPickerView;
+@property (weak, nonatomic) NSArray *dateOptionsArray;
 
 
 //- (id) initWithCoords:(NSMutableArray*)zoomLocation;

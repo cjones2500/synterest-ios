@@ -61,6 +61,7 @@
 		DBC0CD50190DEA63002D3BF4 /* about-25.png in Resources */ = {isa = PBXBuildFile; fileRef = DBC0CD4F190DEA63002D3BF4 /* about-25.png */; };
 		DBC0CD52190DEB29002D3BF4 /* search-25.png in Resources */ = {isa = PBXBuildFile; fileRef = DBC0CD51190DEB29002D3BF4 /* search-25.png */; };
 		DBC0CD55190DF14A002D3BF4 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBC0CD54190DF14A002D3BF4 /* SearchViewController.m */; };
+		DBCADE22192126C3006162B5 /* location-services.png in Resources */ = {isa = PBXBuildFile; fileRef = DBCADE21192126C3006162B5 /* location-services.png */; };
 		DBD27BDC1912E4A6002F4556 /* pink.png in Resources */ = {isa = PBXBuildFile; fileRef = DBD27BDB1912E4A6002F4556 /* pink.png */; };
 		DBD27BDE1912E53F002F4556 /* white.png in Resources */ = {isa = PBXBuildFile; fileRef = DBD27BDD1912E53F002F4556 /* white.png */; };
 		DBD27BE01912F8D6002F4556 /* orange.png in Resources */ = {isa = PBXBuildFile; fileRef = DBD27BDF1912F8D6002F4556 /* orange.png */; };
@@ -165,6 +166,7 @@
 		DBC0CD51190DEB29002D3BF4 /* search-25.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "search-25.png"; sourceTree = "<group>"; };
 		DBC0CD53190DF14A002D3BF4 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		DBC0CD54190DF14A002D3BF4 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
+		DBCADE21192126C3006162B5 /* location-services.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "location-services.png"; path = "../../../Downloads/location-services.png"; sourceTree = "<group>"; };
 		DBD27BDB1912E4A6002F4556 /* pink.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pink.png; sourceTree = "<group>"; };
 		DBD27BDD1912E53F002F4556 /* white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = white.png; path = ../white.png; sourceTree = "<group>"; };
 		DBD27BDF1912F8D6002F4556 /* orange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = orange.png; sourceTree = "<group>"; };
@@ -278,6 +280,7 @@
 		DB4B8AD618FA1DDB0063F3A3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				DBCADE21192126C3006162B5 /* location-services.png */,
 				DB16E9FD1919BC8C00CC9390 /* search-75.png */,
 				DB9006D1191948800063F8CC /* align_center-50.png */,
 				DB9006CF1919486E0063F8CC /* align_center-32.png */,
@@ -476,6 +479,7 @@
 				DBD27BEA1912F902002F4556 /* yellow.png in Resources */,
 				DB2589F419109BDC001EE5E2 /* location-50.png in Resources */,
 				DB4B8AE918FA1DDB0063F3A3 /* MainStoryboard_iPhone.storyboard in Resources */,
+				DBCADE22192126C3006162B5 /* location-services.png in Resources */,
 				DB2589F219109BD2001EE5E2 /* location-32.png in Resources */,
 				DB4B8AEC18FA1DDB0063F3A3 /* MainStoryboard_iPad.storyboard in Resources */,
 				DBD27BE41912F8E6002F4556 /* deeperBlue.png in Resources */,

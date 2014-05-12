@@ -74,6 +74,11 @@ sideBarActivationState;
     [self hideAnnotationView];
 }
 
+-(void)moveToCalender
+{
+    [self performSegueWithIdentifier:@"move_to_calender" sender:self];
+}
+
 -(void) setInitialLocationIfNull
 {
     //if((self.mapView.userLocation.coordinate.latitude))
@@ -555,9 +560,14 @@ sideBarActivationState;
     
     [super viewDidLoad];
     
+    self.dateOptionsArray = [NSArray arrayWithObjects:@"today",@"tomorrow",@"this week",nil];
+    
     self.locationManager = [[CLLocationManager alloc] init] ;
     self.locationManager.delegate = self;
     //[self.locationManager startUpdatingLocation];
+    
+    //self.calenderPickerView.delegate = self;
+    //self.calenderPickerView.dataSource = self;
     
     self.mapView.showsUserLocation=YES;
     /*CLLocationCoordinate2D loc = [self.locationManager.location coordinate];
@@ -576,11 +586,13 @@ sideBarActivationState;
     [self.view addSubview:self.searchButtonSubView];
     [self.view addSubview:self.annotationBarView];
     [self.view addSubview:self.listView];
+    //[self.view addSubview:self.calenderPickerView];
     
     [self.view insertSubview:self.sideBarView atIndex:2];
     [self.view insertSubview:self.searchButtonSubView atIndex:3];
     [self.view insertSubview:self.annotationBarView atIndex:4];
     [self.view insertSubview:self.listView atIndex:4];
+    //[self.view insertSubview:self.calenderPickerView atIndex:5];
     //be very careful with the indexes as they might prevent gesture functions from working
     
     //keeps items within the view
@@ -628,6 +640,14 @@ sideBarActivationState;
     [_sideBarView.layer insertSublayer:gradient atIndex:0];
     
     
+    //Set up behaviour if for the calenderImageView
+    /*UITapGestureRecognizer *singleTapOnCalenderImageView = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(moveToCalender)];
+    singleTapOnCalenderImageView.numberOfTapsRequired = 1;
+    _calenderImageView.userInteractionEnabled = YES;
+    [_calenderImageView addGestureRecognizer:singleTapOnCalenderImageView];*/
+    
+    //self.calenderPickerView.hidden = NO;
+    
     
     //start the sidebar in the deactivated state
     [self toggleSideBarView];
@@ -668,6 +688,26 @@ sideBarActivationState;
             }];
         }
     }
+    
+}
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+    
+}
+
+// returns the # of rows in each component..
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent: (NSInteger)component
+{
+    return [self.dateOptionsArray count];
+    
+}
+
+-(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row   forComponent:(NSInteger)component
+{
+    
+    return [self.dateOptionsArray objectAtIndex:row];
     
 }
 
@@ -756,6 +796,7 @@ sideBarActivationState;
 {
     
     [self performSegueWithIdentifier:@"search_screen_segue" sender:self];
+    [self stopExtraFacebookData];
 }
 
 - (IBAction)quitButtonAction:(id)sender
