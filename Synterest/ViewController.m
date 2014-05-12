@@ -774,16 +774,16 @@ sideBarActivationState;
     NSString *query;
     @try{
         if(self.currentCity != nil){
-            query = [NSString stringWithFormat:@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('%@ %@') ORDER BY rand() LIMIT 100",self.currentCity,queryString];
+            query = [NSString stringWithFormat:@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('%@ %@') AND start_time >= now() ORDER BY rand() LIMIT 100",self.currentCity,queryString];
         }
         else{
-            query =@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('London') ORDER BY rand() LIMIT 3";
+            query =@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('London') AND start_time >= now() ORDER BY rand() LIMIT 3";
             NSLog(@"self.currentCity = null string");
         }
     }
     @catch(NSException *e){
         NSLog(@"Error appending string: %@",e);
-        query =@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('London') ORDER BY rand() LIMIT 3";
+        query =@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('London') AND start_time >= now() ORDER BY rand() LIMIT 3";
     }
     //AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
     //[FBSession setActiveSession:appDelegate.session];
@@ -848,11 +848,11 @@ sideBarActivationState;
     @try{
         //avoid using null values of currentCity
         if(self.currentCity != nil){
-            query = [NSString stringWithFormat:@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('%@') ORDER BY rand() LIMIT 100",self.currentCity];
+            query = [NSString stringWithFormat:@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('%@') AND start_time >= now() ORDER BY rand() LIMIT 500",self.currentCity];
             NSLog(@" string in question %@",self.currentCity);
         }
         else{
-            query =@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('London') ORDER BY rand() LIMIT 3";
+            query =@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('London') AND start_time >= now() ORDER BY rand() LIMIT 3";
             NSLog(@"self.currentCity = null string");
         }
     }
@@ -860,7 +860,7 @@ sideBarActivationState;
         NSLog(@"Error appending string: %@",e);
         //NSLog(@" string in question %@",self.currentCity);
         //default the automatic search to London if there is uncertainty
-        query =@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('London') ORDER BY rand() LIMIT 3";
+        query =@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('London') AND start_time >= now() ORDER BY rand() LIMIT 3";
     }
     
     AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];

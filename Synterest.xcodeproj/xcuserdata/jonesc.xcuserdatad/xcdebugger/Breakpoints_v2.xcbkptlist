@@ -95,7 +95,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "73"
             endingLineNumber = "73"
-            landmarkName = "-setInitialLocationIfNull"
+            landmarkName = "-goBackFromAnnotationViewAction:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
