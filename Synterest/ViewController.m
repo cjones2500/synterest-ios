@@ -67,14 +67,22 @@ sideBarActivationState;
     [self hideAnnotationView];
 }
 
+-(void) setInitialLocationIfNull
+{
+    //if((self.mapView.userLocation.coordinate.latitude))
+    locationToZoom.latitude = 51.50722;
+    locationToZoom.longitude = -0.12750;
+    //self.mapView.userLocation.coordinate.longitude = locationToZoom.longitude;
+    //self.mapView.userLocation.coordinate.longitude = locationToZoom.longitude;
+    //locationToZoom = self.mapView.centerCoordinate;
+}
 
 //called at the beginning of loading a view
 - (void)loadView{
     
     if(_zoomLocation == nil){
         NSLog(@"zoomLocation is nil");
-        locationToZoom.latitude = 51.50722;
-        locationToZoom.longitude = -0.12750;
+        [self performSelectorOnMainThread:@selector(setInitialLocationIfNull) withObject:nil waitUntilDone:YES];
     }
     else{
         //unpack the zoomLocation variable
@@ -90,6 +98,8 @@ sideBarActivationState;
             //locationToZoom.longitude = -0.12750;
         }
     }
+    
+    //[self performSelectorOnMainThread:@selector(initLocationFind) withObject:nil waitUntilDone:YES];
     
     //call the normal method of loadView (before override)
     [super loadView];
@@ -494,6 +504,8 @@ sideBarActivationState;
 
 - (void)viewDidLoad
 {
+    //[self performSelectorOnMainThread:@selector(initReverseGeocodeLocation) withObject:nil waitUntilDone:YES];
+    
     [super viewDidLoad];
     
     self.locationManager = [[CLLocationManager alloc] init] ;
@@ -1174,12 +1186,13 @@ sideBarActivationState;
         self.reverseGeocodeLocationValue = testLocation;
         CLGeocoder *reverseGeocoder = [[CLGeocoder alloc] init];
         [reverseGeocoder reverseGeocodeLocation:self.reverseGeocodeLocationValue completionHandler:^(NSArray *placemarks, NSError *error){
+            if(error){
+                NSLog(@"Geocode error: %@",error);
+            }
             CLPlacemark *placemark = placemarks[0];
             NSLog(@"Found here %@", placemark.locality);
             [self setCurrentCity:placemark.locality];
             self.locationToSend = [NSMutableArray arrayWithObject:placemark];
-            
-            
             //only call the queryFunction if the data has changed
             if([loadFacebookDataFlag boolValue] == YES){
                 if(self.currentCity != nil){
@@ -1193,6 +1206,60 @@ sideBarActivationState;
     }
     @catch(NSException *e){
         NSLog(@"Error in reverse Geocoder: %@",e);
+    }
+    
+}
+
+-(void)initReverseGeocodeLocation
+{
+    @try{
+        double latitudeValue = self.mapView.centerCoordinate.latitude;
+        double longitudeValue = self.mapView.centerCoordinate.longitude;
+        CLLocation *testLocation = [[CLLocation alloc] initWithLatitude:latitudeValue longitude:longitudeValue];
+        self.reverseGeocodeLocationValue = testLocation;
+        CLGeocoder *reverseGeocoder = [[CLGeocoder alloc] init];
+        //[NSThread sleepForTimeInterval:4.0];
+        NSLog(@"reverse Geolocator %@",self.reverseGeocodeLocationValue);
+        [reverseGeocoder reverseGeocodeLocation:self.reverseGeocodeLocationValue completionHandler:^(NSArray *placemarks, NSError *error){
+            if(error){
+                NSLog(@"Geocode error: %@",error);
+            }
+            CLPlacemark *placemark = placemarks[0];
+            NSLog(@"placemarks %@",placemarks);
+            if(placemark.locality !=nil){
+                NSLog(@"Found here %@", placemark.locality);
+                [self setCurrentCity:placemark.locality];
+                self.locationToSend = [NSMutableArray arrayWithObject:placemark];
+            
+            
+                //only call the queryFunction if the data has changed
+                if([loadFacebookDataFlag boolValue] == YES){
+                    if(self.currentCity != nil){
+                        NSLog(@"calling query action from changed location");
+                        [self queryButtonAction];
+                    }
+                }
+            }
+            else{
+                NSLog(@"Placemark is nil");
+            }
+            //NSLog(@"current city inside block: %@",self.currentCity);
+        }];
+        //NSLog(@"current city outside block: %@",self.currentCity);
+    }
+    @catch(NSException *e){
+        NSLog(@"Error in reverse Geocoder: %@",e);
+    }
+    
+}
+
+- (void)initLocationFind{
+    @try{
+        self.mapView.centerCoordinate = self.mapView.userLocation.location.coordinate;
+        locationToZoom = self.mapView.userLocation.location.coordinate;
+    }
+    @catch(NSException *e){
+        NSLog(@"Error in initialising %@",e);
     }
     
 }
@@ -1213,13 +1280,20 @@ sideBarActivationState;
     //setZoomLocation.longitude= -0.12750;
     //NSLog(@"location to zoom %f",locationToZoom.latitude);
     //self.mapView. = locationToZoom;
+    
+    //[self performSelectorOnMainThread:@selector(checkLocationPosition) withObject:nil waitUntilDone:YES];
+    
     // 2
+    NSLog(@"location to Zoom: %f",locationToZoom.latitude);
     MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(locationToZoom, 0.5*METERS_PER_MILE, 0.5*METERS_PER_MILE);
     
     // 3
     [_mapView setRegion:viewRegion animated:YES];
     
-    [self reverseGeocodeLocation];
+    [self updateTableView];
+    
+    //[self reverseGeocodeLocation];
+    [self performSelectorOnMainThread:@selector(initReverseGeocodeLocation) withObject:nil waitUntilDone:YES];
     [self updateTableView];
     
 }
