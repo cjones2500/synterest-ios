@@ -43,6 +43,8 @@
 @implementation ViewController{
     BOOL finishedLoadingExtraData;
     BOOL stopExtraFacebookDataFlag;
+    BOOL firstLoad;
+    BOOL fbInitialQuery;
 }
 
 @synthesize facebookData,
@@ -84,6 +86,9 @@ sideBarActivationState;
 
 //called at the beginning of loading a view
 - (void)loadView{
+    
+    firstLoad = YES;
+    //fbInitialQuery = NO;
     
     if(_zoomLocation == nil){
         NSLog(@"zoomLocation is nil");
@@ -464,6 +469,21 @@ sideBarActivationState;
 }*/
 
 -(IBAction)clickOnFacebook:(id)sender{
+
+    [self performHugeFacebookSearch];
+    //[NSThread detachNewThreadSelector:@selector(extendAnnotationsOnMap) toTarget:self withObject:nil];
+}
+
+- (void)mapViewDidFinishRenderingMap:(MKMapView *)mapView fullyRendered:(BOOL)fullyRendered
+{
+    if(firstLoad == YES){
+        firstLoad = NO;
+        //[self performHugeFacebookSearch];
+    }
+}
+
+-(void) performHugeFacebookSearch
+{
     //List of keywords to search within facebook
     //NSArray *arrayOfKeywords = [NSArray arrayWithObjects:@"music",@"food",@"night",@"culture",@"social",@"meeting", nil];
     NSArray *arrayOfKeywords = [NSArray arrayWithObjects:@"new",@"old",@"live",@"book",@"fair",@"big",@"little",@"project",@"happy"@"music",@"night",@"band",@"food",@"people",@"social",@"meeting",@"drink",@"gig",@"talk",@"party",@"club",@"sport",@"event",@"society",@"group",@"art",@"business",nil];
@@ -479,7 +499,6 @@ sideBarActivationState;
         
         [self performFacebookSearch:keyword];
     }
-    //[NSThread detachNewThreadSelector:@selector(extendAnnotationsOnMap) toTarget:self withObject:nil];
 }
 
 - (void) performFacebookSearch:(NSString*)keyword

@@ -18,9 +18,51 @@
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:inputArray];
     [userDefaults setObject:data forKey:@"facebookData"];
-    
 }
 
+-(void)saveViewedEvents:(NSMutableArray*)inputArray
+{
+    NSMutableArray* newSavedEvents =[self loadNewSavedEvents];
+    NSDate *currentTime = [NSDate date];
+    for (id item in inputArray){
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZ"];
+        NSDate *dateFromString = [dateFormatter dateFromString:[item objectForKey:@"start_time"]];
+        if(currentTime < dateFromString){
+            [newSavedEvents addObject:item];
+        }
+    }
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:newSavedEvents];
+    [userDefaults setObject:data forKey:@"savedEvents"];
+}
+
+-(NSMutableArray*)loadNewSavedEvents
+{
+    NSMutableArray *facebookData;
+    NSMutableArray *returnArray = [[NSMutableArray alloc] initWithCapacity:100];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSData *data = [userDefaults objectForKey:@"savedEvents"];
+    if(data != NULL){
+        facebookData = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        NSDate *currentTime = [NSDate date];
+        for(id item in facebookData){
+            //if the event time is recent
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZ"];
+            NSDate *dateFromString = [dateFormatter dateFromString:[item objectForKey:@"start_time"]];
+            if(currentTime < dateFromString){
+                [returnArray addObject:item];
+            }
+        }
+    }
+    else{
+        facebookData = nil;
+    }
+    return facebookData;
+}
+  
+  
 -(void)saveAdditionalLocalData:(NSMutableArray*)inputArray
 {
     NSMutableArray* newSavedFacebookData =[self loadLocalData];
