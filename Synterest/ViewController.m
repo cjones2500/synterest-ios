@@ -37,14 +37,14 @@
 
 //#define METERS_PER_MILE 1609.344
 #define METERS_PER_MILE 10000.0
-#define MAXIMUM_NUMBER_ANNOTATIONS 1000
+#define MAXIMUM_NUMBER_ANNOTATIONS 3000
 
 
 @implementation ViewController{
     BOOL finishedLoadingExtraData;
     BOOL stopExtraFacebookDataFlag;
     BOOL firstLoad;
-    BOOL fbInitialQuery;
+    BOOL hasInitialFacebookDataBeenSource;
 }
 
 @synthesize facebookData,
@@ -88,7 +88,7 @@ sideBarActivationState;
 - (void)loadView{
     
     firstLoad = YES;
-    //fbInitialQuery = NO;
+    hasInitialFacebookDataBeenSource = NO;
     
     if(_zoomLocation == nil){
         NSLog(@"zoomLocation is nil");
@@ -474,19 +474,36 @@ sideBarActivationState;
     //[NSThread detachNewThreadSelector:@selector(extendAnnotationsOnMap) toTarget:self withObject:nil];
 }
 
-- (void)mapViewDidFinishRenderingMap:(MKMapView *)mapView fullyRendered:(BOOL)fullyRendered
+/*- (void)mapViewDidFinishRenderingMap:(MKMapView *)mapView fullyRendered:(BOOL)fullyRendered
 {
     if(firstLoad == YES){
-        firstLoad = NO;
-        //[self performHugeFacebookSearch];
+        if(hasInitialFacebookDataBeenSource == YES){
+            firstLoad = NO;
+            NSLog(@"loading here");
+            [self performHugeFacebookSearch];
+        }
     }
+}*/
+
+- (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views
+{
+    NSLog(@"did load annotations being fired!");
+    //if(firstLoad == YES){
+        if(hasInitialFacebookDataBeenSource == YES){
+            firstLoad = NO;
+            hasInitialFacebookDataBeenSource = NO;
+            stopExtraFacebookDataFlag = NO;
+            NSLog(@"loading here");
+            [self performHugeFacebookSearch];
+        }
+    //}
 }
 
 -(void) performHugeFacebookSearch
 {
     //List of keywords to search within facebook
     //NSArray *arrayOfKeywords = [NSArray arrayWithObjects:@"music",@"food",@"night",@"culture",@"social",@"meeting", nil];
-    NSArray *arrayOfKeywords = [NSArray arrayWithObjects:@"new",@"old",@"live",@"book",@"fair",@"big",@"little",@"project",@"happy"@"music",@"night",@"band",@"food",@"people",@"social",@"meeting",@"drink",@"gig",@"talk",@"party",@"club",@"sport",@"event",@"society",@"group",@"art",@"business",nil];
+    NSArray *arrayOfKeywords = [NSArray arrayWithObjects:@"music",@"food",@"gig",@"drink",@"art",@"culture",@"new",@"book",@"big",@"little",@"social",@"business",@"gig",@"talk",@"party",@"club",@"sport",@"event",@"society",@"group",nil];
     //NSArray *arrayOfKeywords = [NSArray arrayWithObjects:@"music",@"society",@"night",@"band",@"experience",@"food",@"people",@"social",@"meeting",@"drink",@"gig",@"talk",@"party",@"club",@"sport",@"event",@"society",@"group",@"art",@"business",@"food",@"dinner",@"culture",@"festival",@"dance",@"cafe",@"jazz",@"tour",@"exhibition",@"show",@"bar",@"class",@"theatre",@"football",@"hockey",@"tournament",@"match",@"college",@"time",@"well",@"student",@"new",@"old",@"live",@"book",@"fair",@"big",@"little",@"project",@"happy",nil];
     for(id keyword in arrayOfKeywords){
         
@@ -940,6 +957,7 @@ sideBarActivationState;
                                   //Load back the saved facebook Data
                                   NSMutableArray* savedFacebookData =[aSynterestModel loadLocalData];
                                   //NSLog(@"after loadLocalData call");
+                                  hasInitialFacebookDataBeenSource = YES;
                                   [self plotFacebookData:savedFacebookData withReset:YES];
                                   //NSLog(@"after plotFacebookData call");
                                   //NSLog(@"json dictionary %@",[[[dictionary objectForKey:@"data"] objectAtIndex:0] objectForKey:@"eid"]);
@@ -975,6 +993,7 @@ sideBarActivationState;
     
     if(annotationCount > MAXIMUM_NUMBER_ANNOTATIONS){
         NSLog(@"exceeded maximum annotations in view");
+        [self stopExtraFacebookData];
         return;
     }
     
