@@ -592,6 +592,7 @@ sideBarActivationState;
     [self.view insertSubview:self.searchButtonSubView atIndex:3];
     [self.view insertSubview:self.annotationBarView atIndex:4];
     [self.view insertSubview:self.listView atIndex:4];
+    [self.view insertSubview:self.calenderImageView atIndex:5];
     //[self.view insertSubview:self.calenderPickerView atIndex:5];
     //be very careful with the indexes as they might prevent gesture functions from working
     
