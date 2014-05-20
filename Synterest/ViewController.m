@@ -506,11 +506,26 @@ sideBarActivationState;
 
 -(void) performHugeFacebookSearch
 {
+    //have a counter that adds the facebook events at a certain point
+    int facebookEventLoadCounter = 0;
+    
     //List of keywords to search within facebook
     //NSArray *arrayOfKeywords = [NSArray arrayWithObjects:@"music",@"food",@"night",@"culture",@"social",@"meeting", nil];
     NSArray *arrayOfKeywords = [NSArray arrayWithObjects:@"music",@"food",@"gig",@"drink",@"art",@"culture",@"new",@"book",@"big",@"little",@"social",@"business",@"gig",@"talk",@"party",@"club",@"sport",@"event",@"society",@"group",nil];
     //NSArray *arrayOfKeywords = [NSArray arrayWithObjects:@"music",@"society",@"night",@"band",@"experience",@"food",@"people",@"social",@"meeting",@"drink",@"gig",@"talk",@"party",@"club",@"sport",@"event",@"society",@"group",@"art",@"business",@"food",@"dinner",@"culture",@"festival",@"dance",@"cafe",@"jazz",@"tour",@"exhibition",@"show",@"bar",@"class",@"theatre",@"football",@"hockey",@"tournament",@"match",@"college",@"time",@"well",@"student",@"new",@"old",@"live",@"book",@"fair",@"big",@"little",@"project",@"happy",nil];
     for(id keyword in arrayOfKeywords){
+        
+        if(facebookEventLoadCounter > 7){
+            //add events
+            SynterestModel *aSynterestModel = [[SynterestModel alloc] init];
+            NSMutableArray* savedFacebookData =[aSynterestModel loadLocalData];
+            [self plotFacebookData:savedFacebookData withReset:NO];
+            
+            //reset the facebookCounter
+            facebookEventLoadCounter = 0;
+        }
+        
+        facebookEventLoadCounter = facebookEventLoadCounter + 1;
         
         //[self performSelector:@selector(performFacebookSearch:) onThread:[NSThread currentThread] withObject:keyword waitUntilDone:YES];
         NSLog(@"keyword outer: %@",keyword);
@@ -521,6 +536,11 @@ sideBarActivationState;
         
         [self performFacebookSearch:keyword];
     }
+    
+    //add events at the end
+    SynterestModel *aSynterestModel = [[SynterestModel alloc] init];
+    NSMutableArray* savedFacebookData =[aSynterestModel loadLocalData];
+    [self plotFacebookData:savedFacebookData withReset:NO];
 }
 
 - (void) performFacebookSearch:(NSString*)keyword
@@ -592,7 +612,7 @@ sideBarActivationState;
     [self.view insertSubview:self.searchButtonSubView atIndex:3];
     [self.view insertSubview:self.annotationBarView atIndex:4];
     [self.view insertSubview:self.listView atIndex:4];
-    [self.view insertSubview:self.calenderImageView atIndex:5];
+    [self.view insertSubview:self.calenderImageView atIndex:2];
     //[self.view insertSubview:self.calenderPickerView atIndex:5];
     //be very careful with the indexes as they might prevent gesture functions from working
     
@@ -910,7 +930,7 @@ sideBarActivationState;
     NSMutableArray* savedFacebookData =[aSynterestModel loadLocalData];
     //[self performSelector:@selector(plotFacebookData:) onThread:[NSThread currentThread] withObject:savedFacebookData waitUntilDone:YES];
     
-    [self plotFacebookData:savedFacebookData withReset:NO];
+    //[self plotFacebookData:savedFacebookData withReset:NO];
     self.extraFacebookData = nil;
 }
 
