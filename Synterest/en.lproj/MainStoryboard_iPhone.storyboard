@@ -197,16 +197,6 @@
                                             </textView>
                                         </subviews>
                                     </scrollView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="3Wp-f6-ZV9">
-                                        <rect key="frame" x="19" y="14" width="56" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="GoBack">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="goBackFromAnnotationViewAction:" destination="o97-z1-owW" eventType="touchUpInside" id="Utu-U2-0Dz"/>
-                                        </connections>
-                                    </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Y6m-ht-IU4">
                                         <rect key="frame" x="14" y="100" width="130" height="128"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -234,7 +224,6 @@
                         <outlet property="fbEventTitle" destination="nuM-xj-dMl" id="lmo-E5-7Xt"/>
                         <outlet property="fqlButton" destination="HoA-Lf-P4f" id="Huz-o0-CpU"/>
                         <outlet property="goBackFromListView" destination="mtK-pd-qXi" id="3sq-F1-cYa"/>
-                        <outlet property="goBackToMapFromAnnotation" destination="3Wp-f6-ZV9" id="2eM-6n-MbJ"/>
                         <outlet property="listImageView" destination="cdj-ku-Vj2" id="pfc-md-tIY"/>
                         <outlet property="listTableView" destination="XJB-hN-Vdy" id="mcX-sV-x5i"/>
                         <outlet property="listView" destination="y1e-0v-4Xl" id="0Pj-cc-yCz"/>

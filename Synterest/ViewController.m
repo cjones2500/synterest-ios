@@ -632,6 +632,7 @@ sideBarActivationState;
     _listImageView.layer.borderColor = [UIColor blackColor].CGColor;
     _listImageView.layer.borderWidth = 1.5;
     _listImageView.layer.cornerRadius = 19.0f;
+    
     //Set up behaviour if for the listImageView
     UITapGestureRecognizer *singleTapOnListImageView = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(setUpListView)];
     singleTapOnListImageView.numberOfTapsRequired = 1;
@@ -678,6 +679,11 @@ sideBarActivationState;
     singleTap.numberOfTapsRequired = 1;
     _searchButtonSubView.userInteractionEnabled = YES;
     [_searchButtonSubView addGestureRecognizer:singleTap];
+    
+    //Set up behaviour of the annotationView
+    UISwipeGestureRecognizer *swipeBackAnnotation = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(hideAnnotationView)];
+    [swipeBackAnnotation setDirection:UISwipeGestureRecognizerDirectionLeft];
+    [self.annotationBarView addGestureRecognizer:swipeBackAnnotation];
     
     /*_searchButton.backgroundColor = [UIColor whiteColor];
     _searchButton.layer.borderColor = [UIColor blackColor].CGColor;
