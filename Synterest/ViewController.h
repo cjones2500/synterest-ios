@@ -65,7 +65,10 @@
 
 //Calender view icon
 @property (weak, nonatomic) IBOutlet UIImageView *calenderImageView;
-@property (weak, nonatomic) IBOutlet UIPickerView *calenderPickerView;
+@property (weak, nonatomic) IBOutlet UIView *calenderMainView;
+@property (weak, nonatomic) IBOutlet UIDatePicker *eventDatePicker;
+
+
 @property (weak, nonatomic) NSArray *dateOptionsArray;
 
 

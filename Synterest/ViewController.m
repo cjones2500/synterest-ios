@@ -574,6 +574,11 @@ sideBarActivationState;
     [self reverseGeocodeLocation];
 }*/
 
+-(void) prepareCalenderView
+{
+    
+}
+
 - (void)viewDidLoad
 {
     //[self performSelectorOnMainThread:@selector(initReverseGeocodeLocation) withObject:nil waitUntilDone:YES];
@@ -612,7 +617,10 @@ sideBarActivationState;
     [self.view insertSubview:self.searchButtonSubView atIndex:3];
     [self.view insertSubview:self.annotationBarView atIndex:4];
     [self.view insertSubview:self.listView atIndex:4];
-    [self.view insertSubview:self.calenderImageView atIndex:2];
+    //[self.view insertSubview:self.calenderImageView atIndex:2];
+    [self.view insertSubview:self.calenderMainView atIndex:2];
+    
+    [self.view insertSubview:self.eventDatePicker atIndex:5];
     //[self.view insertSubview:self.calenderPickerView atIndex:5];
     //be very careful with the indexes as they might prevent gesture functions from working
     
@@ -662,6 +670,18 @@ sideBarActivationState;
     [_sideBarView.layer insertSublayer:gradient atIndex:0];
     
     
+    //add a gradient to the calenderView
+    CAGradientLayer *gradientCalView = [CAGradientLayer layer];
+    gradientCalView.frame = self.calenderMainView.bounds;
+    gradientCalView.colors = [NSArray arrayWithObjects:(id)[UIColor colorWithRed:(186/255.0) green:(255/255.0) blue:(141/255.0) alpha:1],(id)[[UIColor whiteColor] CGColor],nil];
+    gradientCalView.locations = locations;
+    [self.calenderMainView.layer insertSublayer:gradientCalView atIndex:0];
+    
+    //add a gradient to the background to the date picker
+    //self.eventDatePicker.backgroundColor = [UIColor colorWithRed:(186/255.0) green:(255/255.0) blue:(141/255.0) alpha:1];
+    
+    self.eventDatePicker.backgroundColor = [UIColor whiteColor];
+    
     //Set up behaviour if for the calenderImageView
     /*UITapGestureRecognizer *singleTapOnCalenderImageView = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(moveToCalender)];
     singleTapOnCalenderImageView.numberOfTapsRequired = 1;
@@ -669,6 +689,8 @@ sideBarActivationState;
     [_calenderImageView addGestureRecognizer:singleTapOnCalenderImageView];*/
     
     //self.calenderPickerView.hidden = NO;
+    
+    
     
     
     //start the sidebar in the deactivated state
@@ -700,6 +722,8 @@ sideBarActivationState;
         [self updateView];
         //[self setLoadFacebookDataFlag:[NSNumber numberWithBool:NO]];
     }*/
+    
+    [self prepareCalenderView];
     
     [self updateView];
     
