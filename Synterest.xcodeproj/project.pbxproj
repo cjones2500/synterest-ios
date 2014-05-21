@@ -46,7 +46,6 @@
 		DB4B8B3C18FA29900063F3A3 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB4B8B3B18FA29900063F3A3 /* FacebookSDK.framework */; };
 		DB4B8B3D18FA29900063F3A3 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB4B8B3B18FA29900063F3A3 /* FacebookSDK.framework */; };
 		DB4B8B4318FA3C2C0063F3A3 /* SynterestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DB4B8B4218FA3C2C0063F3A3 /* SynterestModel.m */; };
-		DB9FDC9A190CC0B900881F86 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = DB9FDC99190CC0B900881F86 /* logo.png */; };
 		DBC0CD45190D7AC5002D3BF4 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBC0CD44190D7AC5002D3BF4 /* LoginViewController.m */; };
 		DBC0CD48190D8E2A002D3BF4 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB4B8AEE18FA1DDB0063F3A3 /* ViewController.m */; };
 		DBC0CD4A190DE4FE002D3BF4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBC0CD49190DE4FE002D3BF4 /* Images.xcassets */; };
@@ -71,8 +70,6 @@
 		DBD27BF919134E02002F4556 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBD27BF819134E02002F4556 /* QuartzCore.framework */; };
 		DBDDF4CA192BECAA00C458AC /* location-services.png in Resources */ = {isa = PBXBuildFile; fileRef = DBDDF4C9192BECAA00C458AC /* location-services.png */; };
 		DBDDF4CC192BECC800C458AC /* search-75.png in Resources */ = {isa = PBXBuildFile; fileRef = DBDDF4CB192BECC800C458AC /* search-75.png */; };
-		DBDDF4CF192BECF600C458AC /* align_center-32.png in Resources */ = {isa = PBXBuildFile; fileRef = DBDDF4CD192BECF600C458AC /* align_center-32.png */; };
-		DBDDF4D0192BECF600C458AC /* align_center-50.png in Resources */ = {isa = PBXBuildFile; fileRef = DBDDF4CE192BECF600C458AC /* align_center-50.png */; };
 		DBDDF4D5192BED0C00C458AC /* align_center-32.png in Resources */ = {isa = PBXBuildFile; fileRef = DBDDF4D1192BED0B00C458AC /* align_center-32.png */; };
 		DBDDF4D6192BED0C00C458AC /* align_center-50.png in Resources */ = {isa = PBXBuildFile; fileRef = DBDDF4D2192BED0B00C458AC /* align_center-50.png */; };
 		DBDDF4D7192BED0C00C458AC /* list-75.png in Resources */ = {isa = PBXBuildFile; fileRef = DBDDF4D3192BED0B00C458AC /* list-75.png */; };
@@ -429,7 +426,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastTestingUpgradeCheck = 0510;
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Chris Jones";
 			};
 			buildConfigurationList = DB4B8AC718FA1DDB0063F3A3 /* Build configuration list for PBXProject "Synterest" */;
@@ -463,7 +460,6 @@
 				DBC0CD4C190DE9C6002D3BF4 /* exit-50.png in Resources */,
 				DBD27BF11913382F002F4556 /* define_location-75.png in Resources */,
 				DBDDF4D5192BED0C00C458AC /* align_center-32.png in Resources */,
-				DBDDF4CF192BECF600C458AC /* align_center-32.png in Resources */,
 				DBD27BEC191310CF002F4556 /* plus-75.png in Resources */,
 				DBD27BDE1912E53F002F4556 /* white.png in Resources */,
 				DBC0CD52190DEB29002D3BF4 /* search-25.png in Resources */,
@@ -477,11 +473,9 @@
 				DB4B8AE418FA1DDB0063F3A3 /* Default@2x.png in Resources */,
 				DBDDF4D6192BED0C00C458AC /* align_center-50.png in Resources */,
 				DB4B8AE618FA1DDB0063F3A3 /* Default-568h@2x.png in Resources */,
-				DBDDF4D0192BECF600C458AC /* align_center-50.png in Resources */,
 				DBD27BE81912F8FC002F4556 /* pink2.png in Resources */,
 				DBC0CD50190DEA63002D3BF4 /* about-25.png in Resources */,
 				DBC0CD4E190DE9F1002D3BF4 /* exit-25.png in Resources */,
-				DB9FDC9A190CC0B900881F86 /* logo.png in Resources */,
 				DB2589F019109B85001EE5E2 /* calendar-50.png in Resources */,
 				DBDDF4D8192BED0C00C458AC /* list-128.png in Resources */,
 				DBDDF4D7192BED0C00C458AC /* list-75.png in Resources */,
