@@ -689,6 +689,12 @@ sideBarActivationState;
     
     self.loadingDataWheel.color = [UIColor blackColor];
     
+    /*if([self.loadFacebookDataFlag boolValue] == YES){
+        //perform actions if the facebook flag has been called
+        [self updateView];
+        //[self setLoadFacebookDataFlag:[NSNumber numberWithBool:NO]];
+    }*/
+    
     [self updateView];
     
     AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
@@ -1353,6 +1359,7 @@ sideBarActivationState;
             }
             else{
                 NSLog(@"Placemark is nil");
+                [self initReverseGeocodeLocation];
             }
             //NSLog(@"current city inside block: %@",self.currentCity);
         }];
