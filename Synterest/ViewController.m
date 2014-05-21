@@ -45,6 +45,7 @@
     BOOL stopExtraFacebookDataFlag;
     BOOL firstLoad;
     BOOL hasInitialFacebookDataBeenSource;
+    BOOL datePickerIsOpen;
 }
 
 @synthesize facebookData,
@@ -102,6 +103,7 @@ sideBarActivationState;
 //called at the beginning of loading a view
 - (void)loadView{
     
+    datePickerIsOpen = NO;
     firstLoad = YES;
     hasInitialFacebookDataBeenSource = NO;
     
@@ -586,7 +588,38 @@ sideBarActivationState;
 
 -(IBAction)onChooseADate:(id)sender
 {
-    self.eventDatePicker.hidden = NO;
+    if(datePickerIsOpen == NO){
+        self.eventDatePicker.hidden = NO;
+        datePickerIsOpen = YES;
+    }
+    else if (datePickerIsOpen == YES){
+        self.eventDatePicker.hidden = YES;
+        datePickerIsOpen = NO;
+    }
+    else{
+        NSLog(@"Date Picker error");
+    }
+}
+
+-(IBAction)onClickTodayAction:(id)sender
+{
+    [self stopExtraFacebookData];
+    
+    //search for extra data and start spinning wheel
+    for (id<MKAnnotation> annotation in _mapView.annotations) {
+        
+        @try{
+            MyLocation* anAnnotation = annotation;
+        
+            NSLog(@"event time: %@",[anAnnotation fbEventDate]);
+            //if it is not today then remove
+            //if([anAnnotation fbEventDate])
+            //[_mapView removeAnnotation:annotation];
+        }
+        @catch(NSException *e){
+            NSLog(@"Parse Error for Date Filter %@",e);
+        }
+    }
 }
 
 - (void)viewDidLoad
