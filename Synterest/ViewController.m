@@ -79,6 +79,16 @@ sideBarActivationState;
     [self performSegueWithIdentifier:@"move_to_calender" sender:self];
 }
 
+- (void)showEventPicker
+{
+    [self.view insertSubview:self.eventDatePicker atIndex:5];
+}
+
+-(void)hideEventPicker
+{
+    [self.view insertSubview:self.eventDatePicker atIndex:-1];
+}
+
 -(void) setInitialLocationIfNull
 {
     //if((self.mapView.userLocation.coordinate.latitude))
@@ -574,9 +584,9 @@ sideBarActivationState;
     [self reverseGeocodeLocation];
 }*/
 
--(void) prepareCalenderView
+-(IBAction)onChooseADate:(id)sender
 {
-    
+    self.eventDatePicker.hidden = NO;
 }
 
 - (void)viewDidLoad
@@ -621,6 +631,7 @@ sideBarActivationState;
     [self.view insertSubview:self.calenderMainView atIndex:2];
     
     [self.view insertSubview:self.eventDatePicker atIndex:5];
+    self.eventDatePicker.hidden = YES;
     //[self.view insertSubview:self.calenderPickerView atIndex:5];
     //be very careful with the indexes as they might prevent gesture functions from working
     
@@ -722,8 +733,6 @@ sideBarActivationState;
         [self updateView];
         //[self setLoadFacebookDataFlag:[NSNumber numberWithBool:NO]];
     }*/
-    
-    [self prepareCalenderView];
     
     [self updateView];
     
