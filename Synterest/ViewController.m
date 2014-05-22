@@ -1270,6 +1270,7 @@ sideBarActivationState;
                         NSComparisonResult result;
                         result = [testDate compare:tomorrowDate];
                         if(result==NSOrderedAscending){
+                            [_mapView addAnnotation:annotation];
                             NSLog(@"today is less");
                         }
                         else if(result==NSOrderedDescending){
