@@ -300,7 +300,7 @@
         [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZ"];
         NSDate *dateFromString = [dateFormatter dateFromString:[singleResult objectForKey:@"start_time"]];
         NSDate *currentTime = [NSDate date];
-        NSDate *dateInOneWeek =  [currentTime dateByAddingTimeInterval:60*60*24*14];
+        //NSDate *dateInOneWeek =  [currentTime dateByAddingTimeInterval:60*60*24*14];
         //NSTimeInterval *oneweek =
         //NSdate *currentTimePlusWeek = [date ]
         
