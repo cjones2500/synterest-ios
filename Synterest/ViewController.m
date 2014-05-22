@@ -46,6 +46,9 @@
     BOOL firstLoad;
     BOOL hasInitialFacebookDataBeenSource;
     BOOL datePickerIsOpen;
+    BOOL todayIsActive;
+    BOOL tomorrowIsActive;
+    BOOL customDateIsActive;
 }
 
 @synthesize facebookData,
@@ -505,7 +508,7 @@ sideBarActivationState;
 - (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views
 {
     NSLog(@"did load annotations being fired!");
-    //if(firstLoad == YES){
+    if(firstLoad == YES){
         if(hasInitialFacebookDataBeenSource == YES){
             firstLoad = NO;
             hasInitialFacebookDataBeenSource = NO;
@@ -513,7 +516,7 @@ sideBarActivationState;
             NSLog(@"loading here");
             [self performHugeFacebookSearch];
         }
-    //}
+    }
 }
 
 -(void) performHugeFacebookSearch
@@ -603,23 +606,87 @@ sideBarActivationState;
 
 -(IBAction)onClickTodayAction:(id)sender
 {
-    [self stopExtraFacebookData];
+    NSDateFormatter *formatFb = [[NSDateFormatter alloc] init];
+    [formatFb setDateFormat:@"dd/MM/yyyy HH:mm"];
     
-    //search for extra data and start spinning wheel
-    for (id<MKAnnotation> annotation in _mapView.annotations) {
+    // Get the current time zone of the location
+    NSDate *sourceDate = [NSDate dateWithTimeIntervalSinceNow:3600 * 24 * 60];
+    NSTimeZone* destinationTimeZone = [NSTimeZone systemTimeZone];
+    float timeZoneOffset = [destinationTimeZone secondsFromGMTForDate:sourceDate] / 3600.0;
+    
+    //adjust for the new timezone
+    [formatFb setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:timeZoneOffset]];
+    
+    //NSString *strConcat = @"26/05/2014 18:00";
+    //NSDate *date = [formatFb dateFromString:strConcat];
+    //NSLog(@"Date: %@", date);  // remember NSDate default to current timezone when logging to console
+    
+    //TODO: These dates don't properly take GMT shifts into account :(
+    
+    NSDate *todayDate = [NSDate date];
+    NSLog(@"Current Date: %@",todayDate);
+    
+    
+    if(todayIsActive == NO){
         
-        @try{
-            MyLocation* anAnnotation = annotation;
+        [self stopExtraFacebookData]; //this just sets a flag in the loop
+    
+        NSDate *tomorrowDate = [todayDate dateByAddingTimeInterval:60.0*60.0*24.0*1.0];
+    
+        //implement a mask for this
+        //search for extra data and start spinning wheel
+        for (id<MKAnnotation> annotation in _mapView.annotations) {
         
-            NSLog(@"event time: %@",[anAnnotation fbEventDate]);
-            //if it is not today then remove
-            //if([anAnnotation fbEventDate])
-            //[_mapView removeAnnotation:annotation];
+            @try{
+                MyLocation* anAnnotation = annotation;
+        
+                //NSLog(@"Facebook date:%@",[anAnnotation fbEventDate]);
+                NSDate *testDate = [formatFb dateFromString:[anAnnotation fbEventDate]];
+                //NSLog(@"TestDate: %@", testDate);
+                //NSLog(@"TomorrowDate: %@",tomorrowDate);
+            
+                NSComparisonResult result;
+                result = [testDate compare:tomorrowDate];
+                if(result==NSOrderedAscending){
+                    NSLog(@"today is less");
+                }
+                else if(result==NSOrderedDescending){
+                    NSLog(@"newDate is less");
+                    [_mapView removeAnnotation:annotation];
+                }
+                else{
+                    NSLog(@"Both dates are same");
+                }
+            }
+            @catch(NSException *e){
+                NSLog(@"Parse Error for Date Filter %@",e);
+            }
         }
-        @catch(NSException *e){
-            NSLog(@"Parse Error for Date Filter %@",e);
-        }
+        todayIsActive = YES;
+        tomorrowIsActive = NO;
+        customDateIsActive = NO;
     }
+    else if (todayIsActive == YES){
+        
+        //for (id<MKAnnotation> annotation in _mapView.annotations) {
+            
+            @try{
+                SynterestModel *aSynterestModel = [[SynterestModel alloc] init];
+                NSMutableArray* savedFacebookData =[aSynterestModel loadLocalData];
+                if(savedFacebookData != NULL){
+                    [self plotFacebookData:savedFacebookData withReset:YES];
+                }
+            }
+            @catch(NSException *e){
+                NSLog(@"Parse Error for Date Filter %@",e);
+            }
+        //}
+        todayIsActive = NO;
+    }
+    else{
+        NSLog(@"TodayIsActive Flag not set");
+    }
+    [self updateTableView];
 }
 
 - (void)viewDidLoad
@@ -660,6 +727,7 @@ sideBarActivationState;
     [self.view insertSubview:self.searchButtonSubView atIndex:3];
     [self.view insertSubview:self.annotationBarView atIndex:4];
     [self.view insertSubview:self.listView atIndex:4];
+    [self.view insertSubview:self.listImageView atIndex:2];
     //[self.view insertSubview:self.calenderImageView atIndex:2];
     [self.view insertSubview:self.calenderMainView atIndex:2];
     
