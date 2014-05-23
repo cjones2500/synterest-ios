@@ -605,6 +605,11 @@ sideBarActivationState;
     }
 }
 
+-(IBAction)onClickCustonDate:(id)sender
+{
+    
+}
+
 -(IBAction)onClickTomorrowAction:(id)sender
 {
     NSDateFormatter *formatFb = [[NSDateFormatter alloc] init];
@@ -620,6 +625,22 @@ sideBarActivationState;
     
     
     if(tomorrowIsActive == NO){
+        if(todayIsActive == YES){
+            //firing when switching between tomorrow to today
+            todayIsActive = NO;
+            tomorrowIsActive = NO;
+            customDateIsActive = NO;
+            @try{
+                SynterestModel *aSynterestModel = [[SynterestModel alloc] init];
+                NSMutableArray* savedFacebookData =[aSynterestModel loadLocalData];
+                if(savedFacebookData != NULL){
+                    [self plotFacebookData:savedFacebookData withReset:NO];
+                }
+            }
+            @catch(NSException *e){
+                NSLog(@"Parse Error for Date Filter %@",e);
+            }
+        }
         todayIsActive = NO;
         tomorrowIsActive = YES;
         customDateIsActive = NO;
@@ -657,9 +678,6 @@ sideBarActivationState;
         
     }
     else if (tomorrowIsActive == YES){
-        if(todayIsActive == YES){
-            //today filter is active from previous clip
-        }
         todayIsActive = NO;
         tomorrowIsActive = NO;
         customDateIsActive = NO;
