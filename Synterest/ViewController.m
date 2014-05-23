@@ -127,7 +127,7 @@ sideBarActivationState;
         @catch(NSException *e){
             NSLog(@"Parse Error for Date Filter %@",e);
         }*/
-        tomorrowIsActive = YES; //this causes the annotations to be added back 
+        tomorrowIsActive = YES; //this causes the annotations to be added back
         customDateIsActive = NO;
         [self firedCustomEventChoice];
     }
@@ -1537,7 +1537,7 @@ sideBarActivationState;
                     
                 } //end of tomorrow filter
                 else if(customDateIsActive == YES){
-                    
+                    [self firedCustomEventChoice];
                 }
                 else{
                     [_mapView addAnnotation:annotation];
