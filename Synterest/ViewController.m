@@ -687,7 +687,7 @@ sideBarActivationState;
         tomorrowIsActive = NO;
         customDateIsActive = YES;
         
-        NSDate *customDatePlusOneDay = [currentSelectedEventPickerDate dateByAddingTimeInterval:60.0*60.0*24.0*2.0];
+        NSDate *customDatePlusOneDay = [currentSelectedEventPickerDate dateByAddingTimeInterval:60.0*60.0*24.0*1.0];
         NSLog(@"customDateplusOneDay : %@",customDatePlusOneDay);
         
         //implement a mask for this
