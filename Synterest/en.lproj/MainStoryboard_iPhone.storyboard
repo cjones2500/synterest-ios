@@ -69,6 +69,7 @@
                                         </state>
                                         <connections>
                                             <action selector="onChooseADate:" destination="o97-z1-owW" eventType="touchUpInside" id="mSe-Q4-GlL"/>
+                                            <action selector="onClickCustomDate:" destination="o97-z1-owW" eventType="touchUpInside" id="FvP-gk-fCl"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="kQr-I4-XyS">
@@ -113,7 +114,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="mtK-pd-qXi">
                                         <rect key="frame" x="20" y="16" width="65" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Go Back">
+                                        <state key="normal" title="Map View">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -187,15 +188,15 @@
                                 <rect key="frame" x="142" y="221" width="37" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </activityIndicatorView>
-                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" id="V8b-p7-xp2">
-                                <rect key="frame" x="-3" y="352" width="323" height="162"/>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" id="V8b-p7-xp2">
+                                <rect key="frame" x="-1" y="352" width="323" height="162"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.72431505819999997" green="1" blue="0.61958159229999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <date key="date" timeIntervalSinceReferenceDate="422377442.976973">
                                     <!--2014-05-21 15:04:02 +0000-->
                                 </date>
-                                <date key="minimumDate" timeIntervalSinceReferenceDate="-975675600">
-                                    <!--1970-01-31 11:00:00 +0000-->
+                                <date key="minimumDate" timeIntervalSinceReferenceDate="390913200">
+                                    <!--2013-05-22 11:00:00 +0000-->
                                 </date>
                                 <date key="maximumDate" timeIntervalSinceReferenceDate="1167562800">
                                     <!--2037-12-31 11:00:00 +0000-->
@@ -221,6 +222,9 @@ AQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
 AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
 </data>
                                 </timeZone>
+                                <connections>
+                                    <action selector="displayDay:" destination="o97-z1-owW" eventType="valueChanged" id="6Iq-fR-mWH"/>
+                                </connections>
                             </datePicker>
                             <view hidden="YES" contentMode="scaleToFill" id="RVV-uL-ihl">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="571"/>

@@ -49,6 +49,8 @@
     BOOL todayIsActive;
     BOOL tomorrowIsActive;
     BOOL customDateIsActive;
+    BOOL firstDisplayOfEventPicker;
+    NSDate *currentSelectedEventPickerDate;
 }
 
 @synthesize facebookData,
@@ -62,6 +64,7 @@ sideBarActivationState;
 @synthesize locationManager = _locationManager;
 @synthesize zoomLocation = _zoomLocation;
 @synthesize locationToSend = _locationToSend;
+
 
 -(id)init
 {
@@ -103,8 +106,39 @@ sideBarActivationState;
     //locationToZoom = self.mapView.centerCoordinate;
 }
 
+//displays information about the date on the datepicker
+- (IBAction)displayDay:(id)sender {
+    
+    NSDate *chosen = [self.eventDatePicker date];
+    currentSelectedEventPickerDate = chosen;
+    
+    if(firstDisplayOfEventPicker == YES){
+        //don't call this value
+    }
+    else{
+        //deal with switching dates using the date bar
+        /*@try{
+            SynterestModel *aSynterestModel = [[SynterestModel alloc] init];
+            NSMutableArray* savedFacebookData =[aSynterestModel loadLocalData];
+            if(savedFacebookData != NULL){
+                [self plotFacebookData:savedFacebookData withReset:NO];
+            }
+        }
+        @catch(NSException *e){
+            NSLog(@"Parse Error for Date Filter %@",e);
+        }*/
+        tomorrowIsActive = YES; //this causes the annotations to be added back 
+        customDateIsActive = NO;
+        [self firedCustomEventChoice];
+    }
+}
+
 //called at the beginning of loading a view
 - (void)loadView{
+    
+    firstDisplayOfEventPicker = YES;
+    self.eventDatePicker.minimumDate = [NSDate date];
+    currentSelectedEventPickerDate = [NSDate date];
     
     datePickerIsOpen = NO;
     firstLoad = YES;
@@ -605,9 +639,108 @@ sideBarActivationState;
     }
 }
 
--(IBAction)onClickCustonDate:(id)sender
+-(IBAction)onClickCustomDate:(id)sender
 {
+    if(firstDisplayOfEventPicker == YES){
+        firstDisplayOfEventPicker = NO;
+    }
+    else if (firstDisplayOfEventPicker == NO){
+        firstDisplayOfEventPicker = YES;
+    }
+    else{
+        NSLog(@"FirstDisplayOfEventPicker Flag error");
+    }
+    [self firedCustomEventChoice];
+}
+
+-(void) firedCustomEventChoice
+{
+    NSDateFormatter *formatFb = [[NSDateFormatter alloc] init];
+    [formatFb setDateFormat:@"dd/MM/yyyy HH:mm"];
+    NSDate *sourceDate = [NSDate dateWithTimeIntervalSinceNow:3600 * 24 * 60];
+    NSTimeZone* destinationTimeZone = [NSTimeZone systemTimeZone];
+    float timeZoneOffset = [destinationTimeZone secondsFromGMTForDate:sourceDate] / 3600.0;
+    [formatFb setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:timeZoneOffset]];
+    //TODO: These dates don't properly take GMT shifts into account :(
     
+    NSDate *todayDate = [NSDate date];
+    
+    
+    if(customDateIsActive == NO){
+        if((todayIsActive == YES) || (tomorrowIsActive == YES)){
+            //firing when switching between tomorrow to today
+            todayIsActive = NO;
+            tomorrowIsActive = NO;
+            customDateIsActive = NO;
+            @try{
+                SynterestModel *aSynterestModel = [[SynterestModel alloc] init];
+                NSMutableArray* savedFacebookData =[aSynterestModel loadLocalData];
+                if(savedFacebookData != NULL){
+                    [self plotFacebookData:savedFacebookData withReset:NO];
+                }
+            }
+            @catch(NSException *e){
+                NSLog(@"Parse Error for Date Filter %@",e);
+            }
+        }
+        todayIsActive = NO;
+        tomorrowIsActive = NO;
+        customDateIsActive = YES;
+        
+        NSDate *customDatePlusOneDay = [currentSelectedEventPickerDate dateByAddingTimeInterval:60.0*60.0*24.0*2.0];
+        NSLog(@"customDateplusOneDay : %@",customDatePlusOneDay);
+        
+        //implement a mask for this
+        //search for extra data and start spinning wheel
+        for (id<MKAnnotation> annotation in _mapView.annotations) {
+            
+            @try{
+                MyLocation* anAnnotation = annotation;
+                NSDate *testDate = [formatFb dateFromString:[anAnnotation fbEventDate]];
+                NSComparisonResult result1;
+                result1 = [testDate compare:customDatePlusOneDay];
+                
+                NSComparisonResult result2;
+                result2 = [testDate compare:currentSelectedEventPickerDate];
+                
+                if(result1 != NSOrderedDescending){
+                    if(result2 != NSOrderedAscending){
+                        //do not removed
+                    }
+                    else{
+                        [_mapView removeAnnotation:annotation];
+                    }
+                }
+                else{
+                    [_mapView removeAnnotation:annotation];
+                }
+                
+            }
+            @catch(NSException *e){
+                NSLog(@"Parse Error for Date Filter %@",e);
+            }
+        }
+        
+    }
+    else if (customDateIsActive == YES){
+        todayIsActive = NO;
+        tomorrowIsActive = NO;
+        customDateIsActive = NO;
+        @try{
+            SynterestModel *aSynterestModel = [[SynterestModel alloc] init];
+            NSMutableArray* savedFacebookData =[aSynterestModel loadLocalData];
+            if(savedFacebookData != NULL){
+                [self plotFacebookData:savedFacebookData withReset:NO];
+            }
+        }
+        @catch(NSException *e){
+            NSLog(@"Parse Error for Date Filter %@",e);
+        }
+    }
+    else{
+        NSLog(@"TodayIsActive Flag not set");
+    }
+    [self updateTableView];
 }
 
 -(IBAction)onClickTomorrowAction:(id)sender
