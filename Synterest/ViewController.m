@@ -203,6 +203,7 @@ sideBarActivationState;
 }
 
 -(void) updateTableView{
+    self.listViewAnnotations = nil;
     self.listViewAnnotations = [NSMutableArray arrayWithCapacity:1];
     for (id value in self.mapView.annotations){
         MyLocation *annotation = value;
@@ -604,23 +605,89 @@ sideBarActivationState;
     }
 }
 
+-(IBAction)onClickTomorrowAction:(id)sender
+{
+    NSDateFormatter *formatFb = [[NSDateFormatter alloc] init];
+    [formatFb setDateFormat:@"dd/MM/yyyy HH:mm"];
+    NSDate *sourceDate = [NSDate dateWithTimeIntervalSinceNow:3600 * 24 * 60];
+    NSTimeZone* destinationTimeZone = [NSTimeZone systemTimeZone];
+    float timeZoneOffset = [destinationTimeZone secondsFromGMTForDate:sourceDate] / 3600.0;
+    [formatFb setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:timeZoneOffset]];
+    //TODO: These dates don't properly take GMT shifts into account :(
+    
+    NSDate *todayDate = [NSDate date];
+    NSLog(@"Current Date: %@",todayDate);
+    
+    
+    if(tomorrowIsActive == NO){
+        todayIsActive = NO;
+        tomorrowIsActive = YES;
+        customDateIsActive = NO;
+        NSDate *nextWeek = [todayDate dateByAddingTimeInterval:60.0*60.0*24.0*7.0];
+        
+        //implement a mask for this
+        //search for extra data and start spinning wheel
+        for (id<MKAnnotation> annotation in _mapView.annotations) {
+            
+            @try{
+                MyLocation* anAnnotation = annotation;
+                
+                //NSLog(@"Facebook date:%@",[anAnnotation fbEventDate]);
+                NSDate *testDate = [formatFb dateFromString:[anAnnotation fbEventDate]];
+                //NSLog(@"TestDate: %@", testDate);
+                //NSLog(@"TomorrowDate: %@",tomorrowDate);
+                
+                NSComparisonResult result;
+                result = [testDate compare:nextWeek];
+                if(result==NSOrderedAscending){
+                    //NSLog(@"today is less");
+                }
+                else if(result==NSOrderedDescending){
+                    //NSLog(@"newDate is less");
+                    [_mapView removeAnnotation:annotation];
+                }
+                else{
+                    //NSLog(@"Both dates are same");
+                }
+            }
+            @catch(NSException *e){
+                NSLog(@"Parse Error for Date Filter %@",e);
+            }
+        }
+        
+    }
+    else if (tomorrowIsActive == YES){
+        if(todayIsActive == YES){
+            //today filter is active from previous clip
+        }
+        todayIsActive = NO;
+        tomorrowIsActive = NO;
+        customDateIsActive = NO;
+        @try{
+            SynterestModel *aSynterestModel = [[SynterestModel alloc] init];
+            NSMutableArray* savedFacebookData =[aSynterestModel loadLocalData];
+            if(savedFacebookData != NULL){
+                [self plotFacebookData:savedFacebookData withReset:NO];
+            }
+        }
+        @catch(NSException *e){
+            NSLog(@"Parse Error for Date Filter %@",e);
+        }
+    }
+    else{
+        NSLog(@"TodayIsActive Flag not set");
+    }
+    [self updateTableView];
+}
+
 -(IBAction)onClickTodayAction:(id)sender
 {
     NSDateFormatter *formatFb = [[NSDateFormatter alloc] init];
     [formatFb setDateFormat:@"dd/MM/yyyy HH:mm"];
-    
-    // Get the current time zone of the location
     NSDate *sourceDate = [NSDate dateWithTimeIntervalSinceNow:3600 * 24 * 60];
     NSTimeZone* destinationTimeZone = [NSTimeZone systemTimeZone];
     float timeZoneOffset = [destinationTimeZone secondsFromGMTForDate:sourceDate] / 3600.0;
-    
-    //adjust for the new timezone
     [formatFb setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:timeZoneOffset]];
-    
-    //NSString *strConcat = @"26/05/2014 18:00";
-    //NSDate *date = [formatFb dateFromString:strConcat];
-    //NSLog(@"Date: %@", date);  // remember NSDate default to current timezone when logging to console
-    
     //TODO: These dates don't properly take GMT shifts into account :(
     
     NSDate *todayDate = [NSDate date];
@@ -634,7 +701,7 @@ sideBarActivationState;
         
         //[self stopExtraFacebookData]; //this just sets a flag in the loop
     
-        NSDate *tomorrowDate = [todayDate dateByAddingTimeInterval:60.0*60.0*24.0*1.0];
+        NSDate *tomorrowDate = [todayDate dateByAddingTimeInterval:60.0*60.0*24.0*2.0];
     
         //implement a mask for this
         //search for extra data and start spinning wheel
@@ -669,6 +736,8 @@ sideBarActivationState;
     }
     else if (todayIsActive == YES){
         todayIsActive = NO;
+        tomorrowIsActive = NO;
+        customDateIsActive = NO;
         @try{
             SynterestModel *aSynterestModel = [[SynterestModel alloc] init];
             NSMutableArray* savedFacebookData =[aSynterestModel loadLocalData];
@@ -1206,13 +1275,9 @@ sideBarActivationState;
     
     for (NSMutableDictionary *singlePoint in responseData)
     {
-        
-
-
         //NSLog(@"latitude : %@",[[singlePoint objectForKey:@"venue"] objectForKey:@"latitude"]);
         //NSLog(@"descp. :%@",singlePoint);
 
-        
         //this is for events that have no start time
         /*if([singlePoint objectForKey:@"start_time"] == NULL){
             continue;
@@ -1258,7 +1323,7 @@ sideBarActivationState;
                     //respect the today active filter
                     @try{
                         NSDate *todayDate = [NSDate date];
-                        NSDate *tomorrowDate = [todayDate dateByAddingTimeInterval:60.0*60.0*24.0*1.0];
+                        NSDate *tomorrowDate = [todayDate dateByAddingTimeInterval:60.0*60.0*24.0*2.0];
                         NSDateFormatter *formatFb = [[NSDateFormatter alloc] init];
                         [formatFb setDateFormat:@"dd/MM/yyyy HH:mm"];
                         NSDate *sourceDate = [NSDate dateWithTimeIntervalSinceNow:3600 * 24 * 60];
@@ -1271,14 +1336,15 @@ sideBarActivationState;
                         result = [testDate compare:tomorrowDate];
                         if(result==NSOrderedAscending){
                             [_mapView addAnnotation:annotation];
-                            NSLog(@"today is less");
+                            //NSLog(@"today is less");
                         }
                         else if(result==NSOrderedDescending){
-                            NSLog(@"newDate is less");
+                            //NSLog(@"newDate is less");
                             [_mapView removeAnnotation:annotation];
                         }
                         else{
-                            NSLog(@"Both dates are same");
+                            [_mapView addAnnotation:annotation];
+                            //NSLog(@"Both dates are same");
                         }
                     }
                     @catch(NSException *e){
@@ -1286,6 +1352,42 @@ sideBarActivationState;
                     }
                     
                 } //end of today filter
+                else if(tomorrowIsActive == YES){
+                    //respect the next week filter
+                    @try{
+                        NSDate *todayDate = [NSDate date];
+                        NSDate *tomorrowDate = [todayDate dateByAddingTimeInterval:60.0*60.0*24.0*7.0];
+                        NSDateFormatter *formatFb = [[NSDateFormatter alloc] init];
+                        [formatFb setDateFormat:@"dd/MM/yyyy HH:mm"];
+                        NSDate *sourceDate = [NSDate dateWithTimeIntervalSinceNow:3600 * 24 * 60];
+                        NSTimeZone* destinationTimeZone = [NSTimeZone systemTimeZone];
+                        float timeZoneOffset = [destinationTimeZone secondsFromGMTForDate:sourceDate] / 3600.0;
+                        [formatFb setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:timeZoneOffset]];
+                        NSDate *testDate = [formatFb dateFromString:[annotation fbEventDate]];
+                        
+                        NSComparisonResult result;
+                        result = [testDate compare:tomorrowDate];
+                        if(result==NSOrderedAscending){
+                            [_mapView addAnnotation:annotation];
+                            //NSLog(@"today is less");
+                        }
+                        else if(result==NSOrderedDescending){
+                            //NSLog(@"newDate is less");
+                            [_mapView removeAnnotation:annotation];
+                        }
+                        else{
+                            [_mapView addAnnotation:annotation];
+                            //NSLog(@"Both dates are same");
+                        }
+                    }
+                    @catch(NSException *e){
+                        NSLog(@"Parse Error for Date Filter %@",e);
+                    }
+                    
+                } //end of tomorrow filter
+                else if(customDateIsActive == YES){
+                    
+                }
                 else{
                     [_mapView addAnnotation:annotation];
                 }
