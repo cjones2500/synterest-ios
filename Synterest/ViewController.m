@@ -672,6 +672,9 @@ sideBarActivationState;
             todayIsActive = NO;
             tomorrowIsActive = NO;
             customDateIsActive = NO;
+            self.nextWeekButton.backgroundColor = [UIColor whiteColor];
+            self.nextDateButton.backgroundColor = [UIColor whiteColor];
+            self.nextTwoDaysButton.backgroundColor = [UIColor whiteColor];
             @try{
                 SynterestModel *aSynterestModel = [[SynterestModel alloc] init];
                 NSMutableArray* savedFacebookData =[aSynterestModel loadLocalData];
@@ -686,6 +689,9 @@ sideBarActivationState;
         todayIsActive = NO;
         tomorrowIsActive = NO;
         customDateIsActive = YES;
+        self.nextWeekButton.backgroundColor = [UIColor whiteColor];
+        self.nextDateButton.backgroundColor = [UIColor lightGrayColor];
+        self.nextTwoDaysButton.backgroundColor = [UIColor whiteColor];
         
         NSDate *customDatePlusOneDay = [currentSelectedEventPickerDate dateByAddingTimeInterval:60.0*60.0*24.0*1.0];
         NSLog(@"customDateplusOneDay : %@",customDatePlusOneDay);
@@ -726,6 +732,9 @@ sideBarActivationState;
         todayIsActive = NO;
         tomorrowIsActive = NO;
         customDateIsActive = NO;
+        self.nextWeekButton.backgroundColor = [UIColor whiteColor];
+        self.nextDateButton.backgroundColor = [UIColor whiteColor];
+        self.nextTwoDaysButton.backgroundColor = [UIColor whiteColor];
         @try{
             SynterestModel *aSynterestModel = [[SynterestModel alloc] init];
             NSMutableArray* savedFacebookData =[aSynterestModel loadLocalData];
@@ -756,13 +765,28 @@ sideBarActivationState;
     NSDate *todayDate = [NSDate date];
     NSLog(@"Current Date: %@",todayDate);
     
+    if(customDateIsActive == YES){
+        //toggle the date picker
+        self.eventDatePicker.hidden = YES;
+        firstDisplayOfEventPicker = NO;
+    }
     
     if(tomorrowIsActive == NO){
-        if(todayIsActive == YES){
+        
+        //change the profile of the button
+        //self.nextWeekButton.backgroundColor = [UIColor lightGrayColor];
+        self.nextWeekButton.backgroundColor = [UIColor lightGrayColor];
+        self.nextDateButton.backgroundColor = [UIColor whiteColor];
+        self.nextTwoDaysButton.backgroundColor = [UIColor whiteColor];
+        
+        
+        if( (todayIsActive == YES) || (customDateIsActive == YES)){
             //firing when switching between tomorrow to today
             todayIsActive = NO;
             tomorrowIsActive = NO;
             customDateIsActive = NO;
+            
+            
             @try{
                 SynterestModel *aSynterestModel = [[SynterestModel alloc] init];
                 NSMutableArray* savedFacebookData =[aSynterestModel loadLocalData];
@@ -811,6 +835,8 @@ sideBarActivationState;
         
     }
     else if (tomorrowIsActive == YES){
+        
+        self.nextWeekButton.backgroundColor = [UIColor whiteColor];
         todayIsActive = NO;
         tomorrowIsActive = NO;
         customDateIsActive = NO;
@@ -844,14 +870,45 @@ sideBarActivationState;
     NSDate *todayDate = [NSDate date];
     NSLog(@"Current Date: %@",todayDate);
     
+    if(customDateIsActive == YES){
+        //toggle the date picker
+        self.eventDatePicker.hidden = YES;
+        firstDisplayOfEventPicker = NO;
+    }
     
     if(todayIsActive == NO){
+
+        self.nextWeekButton.backgroundColor = [UIColor whiteColor];
+        self.nextDateButton.backgroundColor = [UIColor whiteColor];
+        self.nextTwoDaysButton.backgroundColor = [UIColor lightGrayColor];
+        
+        if( (tomorrowIsActive == YES) || (customDateIsActive == YES)){
+            //firing when switching between tomorrow to today
+            todayIsActive = NO;
+            tomorrowIsActive = NO;
+            customDateIsActive = NO;
+            
+            
+            @try{
+                SynterestModel *aSynterestModel = [[SynterestModel alloc] init];
+                NSMutableArray* savedFacebookData =[aSynterestModel loadLocalData];
+                if(savedFacebookData != NULL){
+                    [self plotFacebookData:savedFacebookData withReset:NO];
+                }
+            }
+            @catch(NSException *e){
+                NSLog(@"Parse Error for Date Filter %@",e);
+            }
+        }
+        
         todayIsActive = YES;
         tomorrowIsActive = NO;
         customDateIsActive = NO;
         
         //[self stopExtraFacebookData]; //this just sets a flag in the loop
     
+        //self.nextTwoDaysButton.backgroundColor = [UIColor lightGrayColor];
+        
         NSDate *tomorrowDate = [todayDate dateByAddingTimeInterval:60.0*60.0*24.0*2.0];
     
         //implement a mask for this
@@ -889,6 +946,10 @@ sideBarActivationState;
         todayIsActive = NO;
         tomorrowIsActive = NO;
         customDateIsActive = NO;
+        
+        //self.nextTwoDaysButton.backgroundColor = [UIColor whiteColor];
+        
+        
         @try{
             SynterestModel *aSynterestModel = [[SynterestModel alloc] init];
             NSMutableArray* savedFacebookData =[aSynterestModel loadLocalData];
@@ -1019,6 +1080,13 @@ sideBarActivationState;
     
     //self.calenderPickerView.hidden = NO;
     
+    //button views in Calender View Controls
+    self.nextWeekButton.layer.cornerRadius = 5;
+    self.nextTwoDaysButton.layer.cornerRadius = 5;
+    self.nextDateButton.layer.cornerRadius = 5;
+    self.nextWeekButton.backgroundColor = [UIColor whiteColor];
+    self.nextTwoDaysButton.backgroundColor = [UIColor whiteColor];
+    self.nextDateButton.backgroundColor = [UIColor whiteColor];
     
     
     
@@ -1471,6 +1539,7 @@ sideBarActivationState;
                                                       withFbEventDate:facebookDateString];
             
                 if(todayIsActive == YES){
+                    
                     //respect the today active filter
                     @try{
                         NSDate *todayDate = [NSDate date];
@@ -1504,6 +1573,7 @@ sideBarActivationState;
                     
                 } //end of today filter
                 else if(tomorrowIsActive == YES){
+                    
                     //respect the next week filter
                     @try{
                         NSDate *todayDate = [NSDate date];

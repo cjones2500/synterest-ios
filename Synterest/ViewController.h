@@ -70,6 +70,10 @@
 
 
 @property (weak, nonatomic) NSArray *dateOptionsArray;
+@property (weak, nonatomic) IBOutlet UIButton *nextTwoDaysButton;
+@property (weak, nonatomic) IBOutlet UIButton *nextWeekButton;
+@property (weak, nonatomic) IBOutlet UIButton *nextDateButton;
+
 
 
 //- (id) initWithCoords:(NSMutableArray*)zoomLocation;

@@ -62,7 +62,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="31j-Nc-3Ko">
-                                        <rect key="frame" x="228" y="10" width="79" height="48"/>
+                                        <rect key="frame" x="230" y="9" width="80" height="45"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="Date">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -73,7 +73,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="kQr-I4-XyS">
-                                        <rect key="frame" x="4" y="11" width="120" height="45"/>
+                                        <rect key="frame" x="4" y="9" width="120" height="45"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="Next Two days">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -83,7 +83,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="MiL-aW-S95">
-                                        <rect key="frame" x="127" y="12" width="93" height="45"/>
+                                        <rect key="frame" x="131" y="9" width="93" height="45"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="Next Week">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -306,6 +306,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <outlet property="loadingDataWheel" destination="PTM-Ap-Kwl" id="B43-9e-Nsa"/>
                         <outlet property="locationButton" destination="6uB-Qc-VYO" id="NcM-b5-tSq"/>
                         <outlet property="mapView" destination="Cdz-BG-t0h" id="GBP-Tx-ned"/>
+                        <outlet property="nextDateButton" destination="31j-Nc-3Ko" id="VJt-ku-YRU"/>
+                        <outlet property="nextTwoDaysButton" destination="kQr-I4-XyS" id="W5K-h9-Ase"/>
+                        <outlet property="nextWeekButton" destination="MiL-aW-S95" id="QtO-lR-q8M"/>
                         <outlet property="quitButton" destination="BeM-5C-dyv" id="QIo-NR-4A1"/>
                         <outlet property="searchButton" destination="3DS-78-sUB" id="Pzr-0B-DtB"/>
                         <outlet property="searchButtonSubView" destination="Rcr-C8-Zvr" id="cP6-dE-br7"/>
