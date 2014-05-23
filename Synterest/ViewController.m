@@ -768,7 +768,7 @@ sideBarActivationState;
     if(customDateIsActive == YES){
         //toggle the date picker
         self.eventDatePicker.hidden = YES;
-        firstDisplayOfEventPicker = NO;
+        //firstDisplayOfEventPicker = NO;
     }
     
     if(tomorrowIsActive == NO){
@@ -873,7 +873,7 @@ sideBarActivationState;
     if(customDateIsActive == YES){
         //toggle the date picker
         self.eventDatePicker.hidden = YES;
-        firstDisplayOfEventPicker = NO;
+        //firstDisplayOfEventPicker = NO;
     }
     
     if(todayIsActive == NO){
@@ -946,6 +946,10 @@ sideBarActivationState;
         todayIsActive = NO;
         tomorrowIsActive = NO;
         customDateIsActive = NO;
+        
+        self.nextWeekButton.backgroundColor = [UIColor whiteColor];
+        self.nextDateButton.backgroundColor = [UIColor whiteColor];
+        self.nextTwoDaysButton.backgroundColor = [UIColor whiteColor];
         
         //self.nextTwoDaysButton.backgroundColor = [UIColor whiteColor];
         
