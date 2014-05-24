@@ -667,6 +667,9 @@ sideBarActivationState;
     
     
     if(customDateIsActive == NO){
+        
+        self.eventDatePicker.hidden = NO;
+        
         if((todayIsActive == YES) || (tomorrowIsActive == YES)){
             //firing when switching between tomorrow to today
             todayIsActive = NO;
@@ -695,6 +698,8 @@ sideBarActivationState;
         
         NSDate *customDatePlusOneDay = [currentSelectedEventPickerDate dateByAddingTimeInterval:60.0*60.0*24.0*1.0];
         NSLog(@"customDateplusOneDay : %@",customDatePlusOneDay);
+        
+        
         
         //implement a mask for this
         //search for extra data and start spinning wheel
@@ -729,6 +734,9 @@ sideBarActivationState;
         
     }
     else if (customDateIsActive == YES){
+        
+        self.eventDatePicker.hidden = YES;
+        
         todayIsActive = NO;
         tomorrowIsActive = NO;
         customDateIsActive = NO;
@@ -926,14 +934,14 @@ sideBarActivationState;
                 NSComparisonResult result;
                 result = [testDate compare:tomorrowDate];
                 if(result==NSOrderedAscending){
-                    NSLog(@"today is less");
+                    //NSLog(@"today is less");
                 }
                 else if(result==NSOrderedDescending){
-                    NSLog(@"newDate is less");
+                    //NSLog(@"newDate is less");
                     [_mapView removeAnnotation:annotation];
                 }
                 else{
-                    NSLog(@"Both dates are same");
+                    //NSLog(@"Both dates are same");
                 }
             }
             @catch(NSException *e){
@@ -1117,6 +1125,9 @@ sideBarActivationState;
     _mapView.delegate=self;
     
     self.loadingDataWheel.color = [UIColor blackColor];
+    
+    
+    //remove the date picker on click on
     
     /*if([self.loadFacebookDataFlag boolValue] == YES){
         //perform actions if the facebook flag has been called
