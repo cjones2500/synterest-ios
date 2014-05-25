@@ -1100,7 +1100,8 @@ sideBarActivationState;
     self.nextTwoDaysButton.backgroundColor = [UIColor whiteColor];
     self.nextDateButton.backgroundColor = [UIColor whiteColor];
     
-    
+    //delegate listViewSearchBar to itself
+    self.listViewSearchBar.delegate = self;
     
     //start the sidebar in the deactivated state
     [self toggleSideBarView];
@@ -1482,6 +1483,29 @@ sideBarActivationState;
     }
     
 }
+
+//Control for the List View (Search by event)
+
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    //if ([searchText length] != 0) {
+        NSLog(@"in here55");//[self geocodeLocationValue:[_searchBar text]];
+    //}
+    //else{
+        //do nothing
+    //}
+}
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
+{
+    //if ([searchBar.text length] != 0) {
+         NSLog(@"in here377");
+    //}
+}
+
+
+
+
 
 - (void)plotFacebookData:(NSMutableArray *)responseData withReset:(BOOL)resetValue
 {
