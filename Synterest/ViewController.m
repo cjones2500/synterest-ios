@@ -381,6 +381,7 @@ sideBarActivationState;
     [UIView commitAnimations];
 }
 
+//this works to put events in the calender
 -(IBAction)testingEventStuff:(id)sender
 {
     EKEventStore *eventStore = [[EKEventStore alloc] init];
@@ -459,6 +460,37 @@ sideBarActivationState;
     self.fbEventDescription.text = [anAnnotation fbDescription];
     self.fbEventTitle.text = [anAnnotation name];
 }
+
+//click on the annotation event date
+-(void)onClickAnnotationEventDate
+{
+    EKEventStore *eventStore = [[EKEventStore alloc] init];
+    
+    [eventStore requestAccessToEntityType:EKEntityTypeEvent
+                               completion:^(BOOL granted, NSError *error) {
+                                   if (!granted)
+                                       NSLog(@"Access to store not granted");
+                               }];
+    
+    EKEvent *event  = [EKEvent eventWithEventStore:eventStore];
+    event.calendar  = [eventStore defaultCalendarForNewEvents];
+    event.title     = self.fbEventTitle.text;
+    event.location  = self.fbEventAddress.text;
+    event.notes     = self.fbEventDescription.text;
+    event.startDate = [NSDate dateWithTimeIntervalSinceNow:0];
+    event.endDate   = [NSDate dateWithTimeIntervalSinceNow:3600];
+    event.allDay    = YES;
+    [eventStore saveEvent:event span:EKSpanThisEvent error:nil];
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Event Added"
+                                                    message:[NSString stringWithFormat:@"%@ has been added to your Calender",self.fbEventTitle.text]
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
+    
+}
+
 
 -(void)loadFacebookPicture:(NSString*)eventFbPic
 {
@@ -1138,6 +1170,12 @@ sideBarActivationState;
     UISwipeGestureRecognizer *swipeBackAnnotation = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(hideAnnotationView)];
     [swipeBackAnnotation setDirection:UISwipeGestureRecognizerDirectionLeft];
     [self.annotationBarView addGestureRecognizer:swipeBackAnnotation];
+    
+    //Respond to tap click on the UILabel for calender
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onClickAnnotationEventDate)];
+    tapGestureRecognizer.numberOfTapsRequired = 1;
+    [self.fbEventDate addGestureRecognizer:tapGestureRecognizer];
+    self.fbEventDate .userInteractionEnabled = YES;
     
     /*_searchButton.backgroundColor = [UIColor whiteColor];
     _searchButton.layer.borderColor = [UIColor blackColor].CGColor;
