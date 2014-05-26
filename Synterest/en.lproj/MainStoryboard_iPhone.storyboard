@@ -248,7 +248,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                         <rect key="frame" x="133" y="129" width="20" height="20"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
-                                    <label opaque="NO" clipsSubviews="YES" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" highlighted="YES" adjustsFontSizeToFit="NO" id="qvY-Jw-ykO">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" highlighted="YES" adjustsFontSizeToFit="NO" id="qvY-Jw-ykO">
                                         <rect key="frame" x="156" y="100" width="110" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <attributedString key="attributedText">
@@ -267,7 +267,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <subviews>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Event Title" id="nuM-xj-dMl">
-                                                <rect key="frame" x="5" y="-1" width="290" height="46"/>
+                                                <rect key="frame" x="5" y="-3" width="290" height="46"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -297,6 +297,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <connections>
                         <outlet property="annotationBarView" destination="RVV-uL-ihl" id="Iii-29-mCW"/>
                         <outlet property="calenderMainView" destination="SLy-98-6yf" id="XFk-S4-hm2"/>
+                        <outlet property="calenderStaticImage" destination="Sn2-Fy-gYk" id="1EU-is-Kcd"/>
                         <outlet property="eventDatePicker" destination="V8b-p7-xp2" id="mgg-0Y-2Hf"/>
                         <outlet property="facebookImageSubView" destination="Y6m-ht-IU4" id="SKB-WV-yUV"/>
                         <outlet property="fbEventAddress" destination="G3O-Zi-I9a" id="MZs-x4-dFx"/>

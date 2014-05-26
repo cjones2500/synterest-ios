@@ -464,30 +464,40 @@ sideBarActivationState;
 //click on the annotation event date
 -(void)onClickAnnotationEventDate
 {
-    EKEventStore *eventStore = [[EKEventStore alloc] init];
+    @try{
+        EKEventStore *eventStore = [[EKEventStore alloc] init];
     
-    [eventStore requestAccessToEntityType:EKEntityTypeEvent
+        [eventStore requestAccessToEntityType:EKEntityTypeEvent
                                completion:^(BOOL granted, NSError *error) {
                                    if (!granted)
                                        NSLog(@"Access to store not granted");
                                }];
     
-    EKEvent *event  = [EKEvent eventWithEventStore:eventStore];
-    event.calendar  = [eventStore defaultCalendarForNewEvents];
-    event.title     = self.fbEventTitle.text;
-    event.location  = self.fbEventAddress.text;
-    event.notes     = self.fbEventDescription.text;
-    event.startDate = [NSDate dateWithTimeIntervalSinceNow:0];
-    event.endDate   = [NSDate dateWithTimeIntervalSinceNow:3600];
-    event.allDay    = YES;
-    [eventStore saveEvent:event span:EKSpanThisEvent error:nil];
+        EKEvent *event  = [EKEvent eventWithEventStore:eventStore];
+        event.calendar  = [eventStore defaultCalendarForNewEvents];
+        event.title     = self.fbEventTitle.text;
+        event.location  = self.fbEventAddress.text;
+        event.notes     = self.fbEventDescription.text;
     
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Event Added"
+        NSDateFormatter *formatFb = [[NSDateFormatter alloc] init];
+        [formatFb setDateFormat:@"dd/MM/yyyy HH:mm"];
+        NSLog(@"start date %@",self.fbEventDate.text);
+        NSDate *formattedFacebookEventDate = [formatFb dateFromString:self.fbEventDate.text];
+        NSLog(@" after format start date %@",formattedFacebookEventDate);
+        event.startDate = formattedFacebookEventDate;
+        event.allDay = YES;
+        [eventStore saveEvent:event span:EKSpanThisEvent error:nil];
+    
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Event Added"
                                                     message:[NSString stringWithFormat:@"%@ has been added to your Calender",self.fbEventTitle.text]
                                                    delegate:nil
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil];
-    [alert show];
+        [alert show];
+    }
+    @catch(NSException *e){
+        NSLog(@"iCal Error %@",e);
+    }
     
 }
 
@@ -1172,10 +1182,14 @@ sideBarActivationState;
     [self.annotationBarView addGestureRecognizer:swipeBackAnnotation];
     
     //Respond to tap click on the UILabel for calender
-    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onClickAnnotationEventDate)];
-    tapGestureRecognizer.numberOfTapsRequired = 1;
-    [self.fbEventDate addGestureRecognizer:tapGestureRecognizer];
+    UITapGestureRecognizer *tapGestureRecognizerCal = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onClickAnnotationEventDate)];
+    tapGestureRecognizerCal.numberOfTapsRequired = 1;
+    [self.fbEventDate addGestureRecognizer:tapGestureRecognizerCal];
     self.fbEventDate .userInteractionEnabled = YES;
+    
+    [self.calenderStaticImage addGestureRecognizer:tapGestureRecognizerCal];
+    
+    
     
     /*_searchButton.backgroundColor = [UIColor whiteColor];
     _searchButton.layer.borderColor = [UIColor blackColor].CGColor;

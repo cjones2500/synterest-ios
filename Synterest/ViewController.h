@@ -74,6 +74,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *nextWeekButton;
 @property (weak, nonatomic) IBOutlet UIButton *nextDateButton;
 
+@property (weak, nonatomic) IBOutlet UIImageView *calenderStaticImage;
 
 
 //- (id) initWithCoords:(NSMutableArray*)zoomLocation;
