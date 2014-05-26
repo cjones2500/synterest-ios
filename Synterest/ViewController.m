@@ -273,8 +273,11 @@ sideBarActivationState;
     @try{
         MyLocation* anAnnotation =[self.listViewAnnotations objectAtIndex:indexPath.row];
         //NSLog(@"annotation: %@",anAnnotation.fbDescription);
+        [self.view endEditing:YES];
         [self loadAnnotationView:anAnnotation];
         [self unHideAnnotationView];
+
+        
         //[self hideListView];
     }
     @catch(NSException *e){
