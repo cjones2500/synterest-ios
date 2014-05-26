@@ -1540,6 +1540,10 @@ sideBarActivationState;
     else{
         //do nothing
     }
+    
+    if([searchText length] ==0){
+        [self updateTableView];
+    }
 }
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
@@ -1547,6 +1551,13 @@ sideBarActivationState;
     if ([searchBar.text length] != 0) {
          //begin editing
     }
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
+{
+    NSLog(@"cancelled button called");
+    //this adds back any missing items from the
+    [self updateTableView];
 }
 
 
