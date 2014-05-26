@@ -272,7 +272,7 @@ sideBarActivationState;
 {
     @try{
         MyLocation* anAnnotation =[self.listViewAnnotations objectAtIndex:indexPath.row];
-        NSLog(@"annotation: %@",anAnnotation.fbDescription);
+        //NSLog(@"annotation: %@",anAnnotation.fbDescription);
         [self loadAnnotationView:anAnnotation];
         [self unHideAnnotationView];
         //[self hideListView];
@@ -1487,25 +1487,73 @@ sideBarActivationState;
 //Control for the List View (Search by event)
 
 
+- (void)searchAnnotationsForKeyword:(NSString*)keyword
+{
+    //reset the listViewAnnotations
+    //self.listViewAnnotations = nil;
+    
+    NSMutableArray *newListObjects = [[NSMutableArray alloc] initWithCapacity:100];
+    
+    //loop through all the annotations
+    for (id<MKAnnotation> annotation in _mapView.annotations) {
+        
+        @try{
+            MyLocation* anAnnotation = annotation;
+            //combine the different string sections of the annotation together
+            NSString *stringToSearch = [NSString stringWithFormat:@"%@ %@'",[anAnnotation fbDescription],[anAnnotation name]];
+            
+            //search through the combined string
+            NSUInteger count = 0, length = [stringToSearch length];
+            NSRange range = NSMakeRange(0, length);
+            while(range.location != NSNotFound){
+             range = [stringToSearch rangeOfString:keyword options:NSCaseInsensitiveSearch range:range];
+             if(range.location != NSNotFound){
+                 range = NSMakeRange(range.location + range.length, length - (range.location + range.length));
+                 count++;
+             }
+            }
+            
+            if(count > 1){
+                //if the event is detected then keep it on the list
+                [newListObjects addObject:anAnnotation];
+            }
+            else{
+                //if the event isn't detected then remove it from the list
+            }
+            
+        }
+        @catch(NSException *e){
+            NSLog(@"searchAnnotationsForKeyword Error: %@",e);
+        }
+    }
+    
+    self.listViewAnnotations = newListObjects;
+    [self.listTableView reloadData];
+    
+}
+
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    //if ([searchText length] != 0) {
-        NSLog(@"in here55");//[self geocodeLocationValue:[_searchBar text]];
-    //}
-    //else{
+    if ([searchText length] != 0) {
+        [self searchAnnotationsForKeyword:searchText];
+        //text changed
+    }
+    else{
         //do nothing
-    //}
+    }
 }
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
-    //if ([searchBar.text length] != 0) {
-         NSLog(@"in here377");
-    //}
+    if ([searchBar.text length] != 0) {
+         //begin editing
+    }
 }
 
 
-
-
+- (void)addUserTriggeredData
+{
+    //add points to the plot based on what users searched
+}
 
 - (void)plotFacebookData:(NSMutableArray *)responseData withReset:(BOOL)resetValue
 {

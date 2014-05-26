@@ -100,7 +100,7 @@
     //Add the Name and Description strings together
     NSString *description = [inputArray objectForKey:@"description"];
     NSString *name = [inputArray objectForKey:@"name"];
-    NSString *stringToSearch = [NSString stringWithFormat:@"%@%@'",description,name];
+    NSString *stringToSearch = [NSString stringWithFormat:@"%@ %@'",description,name];
     //NSLog(@"string to search %@",stringToSearch);
     
     
