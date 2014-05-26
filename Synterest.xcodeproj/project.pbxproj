@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8397BEA819338F3200305F5A /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8397BEA719338F3200305F5A /* EventKit.framework */; };
 		DB2589EE19109B7C001EE5E2 /* calendar-25.png in Resources */ = {isa = PBXBuildFile; fileRef = DB2589ED19109B7C001EE5E2 /* calendar-25.png */; };
 		DB2589F019109B85001EE5E2 /* calendar-50.png in Resources */ = {isa = PBXBuildFile; fileRef = DB2589EF19109B85001EE5E2 /* calendar-50.png */; };
 		DB2589F219109BD2001EE5E2 /* location-32.png in Resources */ = {isa = PBXBuildFile; fileRef = DB2589F119109BD2001EE5E2 /* location-32.png */; };
@@ -88,6 +89,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8397BEA719338F3200305F5A /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
 		DB2589ED19109B7C001EE5E2 /* calendar-25.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calendar-25.png"; sourceTree = "<group>"; };
 		DB2589EF19109B85001EE5E2 /* calendar-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calendar-50.png"; sourceTree = "<group>"; };
 		DB2589F119109BD2001EE5E2 /* location-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "location-32.png"; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8397BEA819338F3200305F5A /* EventKit.framework in Frameworks */,
 				DBD27BF919134E02002F4556 /* QuartzCore.framework in Frameworks */,
 				DBD27BF7191344D2002F4556 /* CoreLocation.framework in Frameworks */,
 				DB4B8B3A18FA23A50063F3A3 /* libz.dylib in Frameworks */,
@@ -238,6 +241,7 @@
 		DB4B8ACE18FA1DDB0063F3A3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8397BEA719338F3200305F5A /* EventKit.framework */,
 				DBD27BF819134E02002F4556 /* QuartzCore.framework */,
 				DBD27BF6191344D2002F4556 /* CoreLocation.framework */,
 				DB4B8B3B18FA29900063F3A3 /* FacebookSDK.framework */,

@@ -17,6 +17,7 @@
 #import "SynterestModel.h"
 #import <CoreLocation/CoreLocation.h>
 #import "SearchViewController.h"
+#import <EventKit/EventKit.h>
 
 @interface ViewController ()
 
@@ -378,6 +379,27 @@ sideBarActivationState;
     [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
     self.listView.frame = listViewFrame;
     [UIView commitAnimations];
+}
+
+-(IBAction)testingEventStuff:(id)sender
+{
+    EKEventStore *eventStore = [[EKEventStore alloc] init];
+    
+    [eventStore requestAccessToEntityType:EKEntityTypeEvent
+                                completion:^(BOOL granted, NSError *error) {
+                                    if (!granted)
+                                        NSLog(@"Access to store not granted");
+                                }];
+    
+    EKEvent *event  = [EKEvent eventWithEventStore:eventStore];
+    event.calendar  = [eventStore defaultCalendarForNewEvents];
+    event.title     = @"/dev/world/feffefefefe";
+    event.location  = @"Melbourne";
+    event.notes     = @"AUC Developer Conference";
+    event.startDate = [NSDate dateWithTimeIntervalSinceNow:0];
+    event.endDate   = [NSDate dateWithTimeIntervalSinceNow:3600];
+    event.allDay    = YES;
+    [eventStore saveEvent:event span:EKSpanThisEvent error:nil];
 }
 
 -(void)hideAnnotationView
