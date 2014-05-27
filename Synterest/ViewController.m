@@ -491,13 +491,26 @@ sideBarActivationState;
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
 {
     NSLog(@"clicked on an annotation");
-    [self unHideAnnotationView];
+    
+    
     MyLocation* anAnnotation =[view annotation];
     [NSThread detachNewThreadSelector:@selector(loadFacebookPicture:) toTarget:self withObject:[anAnnotation facebookPic]];
     self.fbEventAddress.text = [anAnnotation fbLocData];
     self.fbEventDate.text = [anAnnotation fbEventDate];
     self.fbEventDescription.text = [anAnnotation fbDescription];
     self.fbEventTitle.text = [anAnnotation name];
+    
+    //reduce the size of the text until it fits
+    /*if (self.fbEventAddress.contentSize.width> self.fbEventAddress.frame.size.width) {
+        int fontIncrement = 1;
+        while (self.fbEventAddress.contentSize.width > self.fbEventAddress.frame.size.width) {
+            NSLog(@"reducing text");
+            self.fbEventAddress.font = [UIFont systemFontOfSize:12.0-fontIncrement];
+            fontIncrement++;
+        }
+    }*/
+    
+    [self unHideAnnotationView];
 }
 
 //click on the annotation event date
@@ -1187,6 +1200,10 @@ sideBarActivationState;
     
     self.eventDatePicker.backgroundColor = [UIColor whiteColor];
     
+    //address view in annotation view
+    //self.fbEventAddress
+    //self.fbEventAddress.frame = CGRectMake(self.fbEventAddress.frame.origin.x, self.fbEventAddress.frame.origin.y, self.fbEventAddress.contentSize.width, self.fbEventAddress.contentSize.height);
+    
     //Set up behaviour if for the calenderImageView
     /*UITapGestureRecognizer *singleTapOnCalenderImageView = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(moveToCalender)];
     singleTapOnCalenderImageView.numberOfTapsRequired = 1;
@@ -1224,9 +1241,9 @@ sideBarActivationState;
     UITapGestureRecognizer *tapGestureRecognizerCal = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onClickAnnotationEventDate)];
     tapGestureRecognizerCal.numberOfTapsRequired = 1;
     [self.fbEventDate addGestureRecognizer:tapGestureRecognizerCal];
-    self.fbEventDate .userInteractionEnabled = YES;
+    self.fbEventDate.userInteractionEnabled = YES;
     
-    [self.calenderStaticImage addGestureRecognizer:tapGestureRecognizerCal];
+    //[self.calenderStaticImage addGestureRecognizer:tapGestureRecognizerCal];
     
     
     
@@ -1432,16 +1449,16 @@ sideBarActivationState;
     NSString *query;
     @try{
         if(self.currentCity != nil){
-            query = [NSString stringWithFormat:@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('%@ %@') AND start_time > now() ORDER BY rand() LIMIT 100",self.currentCity,queryString];
+            query = [NSString stringWithFormat:@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('%@ %@') AND (venue.city = '%@') AND start_time > now() ORDER BY rand() LIMIT 100",self.currentCity,queryString,self.currentCity];
         }
         else{
-            query =@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('London') AND start_time > now() ORDER BY rand() LIMIT 3";
+            query =@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('London') AND (venue.city = 'London') AND start_time > now() ORDER BY rand() LIMIT 3";
             NSLog(@"self.currentCity = null string");
         }
     }
     @catch(NSException *e){
         NSLog(@"Error appending string: %@",e);
-        query =@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('London') AND start_time > now() ORDER BY rand() LIMIT 3";
+        query =@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('London') AND (venue.city = 'London') AND start_time > now() ORDER BY rand() LIMIT 3";
     }
     //AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
     //[FBSession setActiveSession:appDelegate.session];
@@ -1506,11 +1523,11 @@ sideBarActivationState;
     @try{
         //avoid using null values of currentCity
         if(self.currentCity != nil){
-            query = [NSString stringWithFormat:@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('%@') AND start_time > now() ORDER BY rand() LIMIT 500",self.currentCity];
+            query = [NSString stringWithFormat:@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('%@') AND (venue.city = '%@') AND start_time > now() ORDER BY rand() LIMIT 500",self.currentCity,self.currentCity];
             NSLog(@" string in question %@",self.currentCity);
         }
         else{
-            query =@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('London') AND start_time > now() ORDER BY rand() LIMIT 3";
+            query =@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('London') AND (venue.city = 'London') AND start_time > now() ORDER BY rand() LIMIT 3";
             NSLog(@"self.currentCity = null string");
         }
     }
@@ -1518,7 +1535,7 @@ sideBarActivationState;
         NSLog(@"Error appending string: %@",e);
         //NSLog(@" string in question %@",self.currentCity);
         //default the automatic search to London if there is uncertainty
-        query =@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('London') AND start_time > now() ORDER BY rand() LIMIT 3";
+        query =@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('London') AND (venue.city = 'London') AND start_time > now() ORDER BY rand() LIMIT 3";
     }
     
     AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
@@ -1907,14 +1924,31 @@ sideBarActivationState;
     NSString *nameString;
     nameString = [venueInfo objectForKey:@"name"];
     
+    //NSLog(@"venueInfo before : %@",venueInfo);
+    
+    /*for (id item in venueInfo){
+        NSLog(@"value : %@",item);
+        NSString *newItem = [item stringByReplacingOccurrencesOfString:@"," withString:@",/n"];
+        NSLog(@"newItem : %@",newItem);
+        //[venueInfo setObject:newItem forKey:item];
+    }
+    NSLog(@"venueInfo : %@",venueInfo);*/
+    
+    //[venueInfo setObject:[ç forKey:@"name"];
+    //[venueInfo setObject:[[venueInfo objectForKey:@"street"] stringByReplacingOccurrencesOfString:@"," withString:@",/n"] forKey:@"street"];
+    //[venueInfo setObject:[[venueInfo objectForKey:@"city"] stringByReplacingOccurrencesOfString:@"," withString:@",/n"] forKey:@"city"];
+    //[venueInfo setObject:[[venueInfo objectForKey:@"zip"] stringByReplacingOccurrencesOfString:@"," withString:@",/n"] forKey:@"zip"];
+    //[venueInfo setObject:[[venueInfo objectForKey:@"country"] stringByReplacingOccurrencesOfString:@"," withString:@",/n"] forKey:@"country"];
+    
     //@try{
     //see if the name field is present, if so add this
-    if(nameString != nil){
+    if( (nameString != nil) || ([nameString isEqual:NULL])){
         addressAsAString = [addressAsAString stringByAppendingString:nameString];
     }
+    
 
     //see if the street field if present
-    if([venueInfo objectForKey:@"street"] != nil){
+    if( ([venueInfo objectForKey:@"street"] != nil) || ([[venueInfo objectForKey:@"street"] isEqual:NULL])){
         if(addressAsAString != nil){
             //add an end line if the string is empty
             //addressAsAString = [addressAsAString stringByAppendingFormat:@",\n"];
@@ -1928,7 +1962,7 @@ sideBarActivationState;
     }
     
     //see if the city field if present
-    if([venueInfo objectForKey:@"city"] != nil){
+    if( ([venueInfo objectForKey:@"city"] != nil) || (([[venueInfo objectForKey:@"city"] isEqual:NULL]))){
         if(addressAsAString != nil){
             //add an end line if the string is empty
             addressAsAString = [addressAsAString stringByAppendingFormat:@"\n"];
@@ -1942,7 +1976,7 @@ sideBarActivationState;
     }
     
     //see if the zip field if present
-    if([venueInfo objectForKey:@"zip"] != nil){
+    if(([venueInfo objectForKey:@"zip"] != nil) || ([[venueInfo objectForKey:@"zip"] isEqual:NULL])){
         if(addressAsAString != nil){
             //add an end line if the string is empty
             addressAsAString = [addressAsAString stringByAppendingFormat:@"\n"];
@@ -1956,7 +1990,7 @@ sideBarActivationState;
     }
     
     //see if the country field if present
-    if([venueInfo objectForKey:@"country"] != nil){
+    if(([venueInfo objectForKey:@"country"] != nil) || ([[venueInfo objectForKey:@"country"] isEqual:NULL])){
         if(addressAsAString != nil){
             //add an end line if the string is empty
             addressAsAString = [addressAsAString stringByAppendingFormat:@"\n"];
