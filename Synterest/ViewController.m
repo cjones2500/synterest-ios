@@ -384,7 +384,46 @@ sideBarActivationState;
 //this works to put events in the calender
 -(IBAction)testingEventStuff:(id)sender
 {
-    EKEventStore *eventStore = [[EKEventStore alloc] init];
+    /*NSString* fql1 = [NSString stringWithFormat:
+                      @"select uid2 from friend where uid1 == 10 order by rand() limit 10"];
+    NSString* fql2 = [NSString stringWithFormat:
+                      @"select uid, name from user where uid in (select uid2 from #queryID)"];
+    NSString* fql3 = [NSString stringWithFormat:
+                      @"select uid, status_id, message from status where uid in (select uid from #queryName) limit 1"];
+    NSString* fql = [NSString stringWithFormat:
+                     @"{\"queryID\":\"%@\",\"queryName\":\"%@\",\"queryStatus\":\"%@\"}",fql1,fql2,fql3];*/
+    
+    NSString *query =
+    @"{"
+    @"'friends':'SELECT eid, name FROM event WHERE contains('London') LIMIT 10',"
+    @"'friendinfo':'SELECT eid FROM event WHERE eid IN (SELECT eid FROM #friends)',"
+    @"}";
+    
+    /*@"{"
+    @"'query1':'SELECT eid2, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('London') AND start_time > now() ORDER BY rand() LIMIT 10',"
+    @"'friendinfo':'SELECT eid FROM event WHERE eid IN (SELECT eid2 FROM #query1)',"
+    @"}";*/
+    // Set up the query parameter
+    NSDictionary *queryParam = @{ @"q": query };
+    
+    //NSDictionary* params = [NSDictionary dictionaryWithObject:fql forKey:@"queries"];
+    
+    [FBRequestConnection startWithGraphPath:@"/fql"
+                                 parameters:queryParam
+                                 HTTPMethod:@"GET"
+                          completionHandler:^(FBRequestConnection *connection,
+                                              id result,
+                                              NSError *error) {
+                              if (error) {
+                                  NSLog(@"Error: %@", [error localizedDescription]);
+                              } else {
+                                  NSLog(@"in here extending the view");
+                                  NSLog(@"results: %@",result);
+        
+                              }
+                          }];
+    
+    /*EKEventStore *eventStore = [[EKEventStore alloc] init];
     
     [eventStore requestAccessToEntityType:EKEntityTypeEvent
                                 completion:^(BOOL granted, NSError *error) {
@@ -400,7 +439,7 @@ sideBarActivationState;
     event.startDate = [NSDate dateWithTimeIntervalSinceNow:0];
     event.endDate   = [NSDate dateWithTimeIntervalSinceNow:3600];
     event.allDay    = YES;
-    [eventStore saveEvent:event span:EKSpanThisEvent error:nil];
+    [eventStore saveEvent:event span:EKSpanThisEvent error:nil];*/
 }
 
 -(void)hideAnnotationView
