@@ -298,11 +298,7 @@ sideBarActivationState;
 
 -(void)unHideAnnotationView
 {
-    //remove the data from any exsisting subview
-    /*self.fbEventTitle.text = nil;
-    self.fbEventDate.text = nil;
-    self.fbEventDescription.text = nil;
-    self.fbEventAddress.text = nil;*/
+
     //Remove all the subviews
     for(UIView *subview in self.facebookImageSubView.subviews)
     {
@@ -492,6 +488,12 @@ sideBarActivationState;
 {
     NSLog(@"clicked on an annotation");
     
+    //remove the data from any exsisting subview
+    self.fbEventTitle.text = nil;
+    self.fbEventDate.text = nil;
+    self.fbEventDescription.text = nil;
+    self.fbEventAddress.text = nil;
+    
     
     MyLocation* anAnnotation =[view annotation];
     [NSThread detachNewThreadSelector:@selector(loadFacebookPicture:) toTarget:self withObject:[anAnnotation facebookPic]];
@@ -499,6 +501,8 @@ sideBarActivationState;
     self.fbEventDate.text = [anAnnotation fbEventDate];
     self.fbEventDescription.text = [anAnnotation fbDescription];
     self.fbEventTitle.text = [anAnnotation name];
+    
+    NSLog(@"address value: %@",self.fbEventAddress);
     
     //reduce the size of the text until it fits
     /*if (self.fbEventAddress.contentSize.width> self.fbEventAddress.frame.size.width) {
@@ -537,6 +541,7 @@ sideBarActivationState;
         NSDate *formattedFacebookEventDate = [formatFb dateFromString:self.fbEventDate.text];
         NSLog(@" after format start date %@",formattedFacebookEventDate);
         event.startDate = formattedFacebookEventDate;
+        event.endDate = formattedFacebookEventDate;
         event.allDay = YES;
         [eventStore saveEvent:event span:EKSpanThisEvent error:nil];
     
