@@ -136,7 +136,6 @@ sideBarActivationState;
 
 //called at the beginning of loading a view
 - (void)loadView{
-    
     firstDisplayOfEventPicker = YES;
     self.eventDatePicker.minimumDate = [NSDate date];
     currentSelectedEventPickerDate = [NSDate date];
@@ -238,13 +237,25 @@ sideBarActivationState;
 }
 
 -(void) updateTableView{
-    self.listViewAnnotations = nil;
-    self.listViewAnnotations = [NSMutableArray arrayWithCapacity:1];
-    for (id value in self.mapView.annotations){
-        MyLocation *annotation = value;
-        [self.listViewAnnotations addObject:annotation];
+    if(self.listViewAnnotations != nil){
+        [self.listViewAnnotations removeAllObjects];
         [self.listTableView reloadData];
     }
+    self.listViewAnnotations =[ NSMutableArray arrayWithCapacity:1];
+    //else{
+       //[self.listViewAnnotations removeAllObjects];
+        //[self.listTableView reloadData];
+        //self.listViewAnnotations = nil;
+    //}
+    
+    //NSLog(@"count number of annotations: %i",[self.mapView.annotations count]);
+    
+    for (id<MKAnnotation> annotation in _mapView.annotations)
+    {
+        MyLocation *anAnnotation = annotation;
+        [self.listViewAnnotations addObject:anAnnotation];
+    }
+    [self.listTableView reloadData];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -336,10 +347,10 @@ sideBarActivationState;
 
 -(void)unhideListView
 {
-    [self updateTableView];
+    //[self updateTableView];
     //NSLog(@"self.listViewAnnotations: %@",self.listViewAnnotations);
     //[self updateTableView];
-    [self.listTableView reloadData];
+    //[self.listTableView reloadData];
     NSLog(@"listView frame height : %f",self.listView.frame.size.height);
     
     //add a delay to make sure this happens
@@ -803,7 +814,7 @@ sideBarActivationState;
                 SynterestModel *aSynterestModel = [[SynterestModel alloc] init];
                 NSMutableArray* savedFacebookData =[aSynterestModel loadLocalData];
                 if(savedFacebookData != NULL){
-                    [self plotFacebookData:savedFacebookData withReset:NO];
+                    [self plotFacebookData:savedFacebookData withReset:YES];
                 }
             }
             @catch(NSException *e){
@@ -837,7 +848,7 @@ sideBarActivationState;
                 
                 if(result1 != NSOrderedDescending){
                     if(result2 != NSOrderedAscending){
-                        //do not removed
+                        //do not remove
                     }
                     else{
                         [_mapView removeAnnotation:annotation];
@@ -868,7 +879,7 @@ sideBarActivationState;
             SynterestModel *aSynterestModel = [[SynterestModel alloc] init];
             NSMutableArray* savedFacebookData =[aSynterestModel loadLocalData];
             if(savedFacebookData != NULL){
-                [self plotFacebookData:savedFacebookData withReset:NO];
+                [self plotFacebookData:savedFacebookData withReset:YES];
             }
         }
         @catch(NSException *e){
@@ -920,7 +931,7 @@ sideBarActivationState;
                 SynterestModel *aSynterestModel = [[SynterestModel alloc] init];
                 NSMutableArray* savedFacebookData =[aSynterestModel loadLocalData];
                 if(savedFacebookData != NULL){
-                    [self plotFacebookData:savedFacebookData withReset:NO];
+                    [self plotFacebookData:savedFacebookData withReset:YES];
                 }
             }
             @catch(NSException *e){
@@ -973,7 +984,7 @@ sideBarActivationState;
             SynterestModel *aSynterestModel = [[SynterestModel alloc] init];
             NSMutableArray* savedFacebookData =[aSynterestModel loadLocalData];
             if(savedFacebookData != NULL){
-                [self plotFacebookData:savedFacebookData withReset:NO];
+                [self plotFacebookData:savedFacebookData withReset:YES];
             }
         }
         @catch(NSException *e){
@@ -1022,7 +1033,7 @@ sideBarActivationState;
                 SynterestModel *aSynterestModel = [[SynterestModel alloc] init];
                 NSMutableArray* savedFacebookData =[aSynterestModel loadLocalData];
                 if(savedFacebookData != NULL){
-                    [self plotFacebookData:savedFacebookData withReset:NO];
+                    [self plotFacebookData:savedFacebookData withReset:YES];
                 }
             }
             @catch(NSException *e){
@@ -1087,7 +1098,7 @@ sideBarActivationState;
             SynterestModel *aSynterestModel = [[SynterestModel alloc] init];
             NSMutableArray* savedFacebookData =[aSynterestModel loadLocalData];
             if(savedFacebookData != NULL){
-                [self plotFacebookData:savedFacebookData withReset:NO];
+                [self plotFacebookData:savedFacebookData withReset:YES];
             }
         }
         @catch(NSException *e){
@@ -1097,6 +1108,7 @@ sideBarActivationState;
     else{
         NSLog(@"TodayIsActive Flag not set");
     }
+    
     [self updateTableView];
 }
 
@@ -2155,7 +2167,7 @@ sideBarActivationState;
     // 3
     [_mapView setRegion:viewRegion animated:YES];
     
-    [self updateTableView];
+    //[self updateTableView];
     
     //[self reverseGeocodeLocation];
     [self performSelectorOnMainThread:@selector(initReverseGeocodeLocation) withObject:nil waitUntilDone:YES];
