@@ -16,8 +16,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "DB4B8ACB18FA1DDB0063F3A3"
                BuildableName = "Synterest.app"
-               BlueprintName = "Synterest"
-               ReferencedContainer = "container:Synterest.xcodeproj">
+               BlueprintName = "wonmap"
+               ReferencedContainer = "container:wonmap.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -34,8 +34,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "DB4B8AF418FA1DDB0063F3A3"
                BuildableName = "SynterestTests.xctest"
-               BlueprintName = "SynterestTests"
-               ReferencedContainer = "container:Synterest.xcodeproj">
+               BlueprintName = "wonmapTests"
+               ReferencedContainer = "container:wonmap.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -44,8 +44,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "DB4B8ACB18FA1DDB0063F3A3"
             BuildableName = "Synterest.app"
-            BlueprintName = "Synterest"
-            ReferencedContainer = "container:Synterest.xcodeproj">
+            BlueprintName = "wonmap"
+            ReferencedContainer = "container:wonmap.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -63,8 +63,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "DB4B8ACB18FA1DDB0063F3A3"
             BuildableName = "Synterest.app"
-            BlueprintName = "Synterest"
-            ReferencedContainer = "container:Synterest.xcodeproj">
+            BlueprintName = "wonmap"
+            ReferencedContainer = "container:wonmap.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -81,8 +81,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "DB4B8ACB18FA1DDB0063F3A3"
             BuildableName = "Synterest.app"
-            BlueprintName = "Synterest"
-            ReferencedContainer = "container:Synterest.xcodeproj">
+            BlueprintName = "wonmap"
+            ReferencedContainer = "container:wonmap.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

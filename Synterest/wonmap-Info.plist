@@ -14,6 +14,11 @@
 		<dict>
 			<key>CFBundleIconFiles</key>
 			<array>
+				<string>whappener-58</string>
+				<string>whappener-29</string>
+				<string>whappener-144</string>
+				<string>whappener-114</string>
+				<string>whappener-57</string>
 				<string>logo_mini</string>
 			</array>
 		</dict>
