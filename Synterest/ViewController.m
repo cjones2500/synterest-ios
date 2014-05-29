@@ -1467,16 +1467,16 @@ sideBarActivationState;
     NSString *query;
     @try{
         if(self.currentCity != nil){
-            query = [NSString stringWithFormat:@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('%@ %@') AND (venue.city = '%@') AND start_time > now() ORDER BY rand() LIMIT 100",self.currentCity,queryString,self.currentCity];
+            query = [NSString stringWithFormat:@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('%@ %@') AND (venue.city = '%@') AND (venue.street != '') AND start_time > now() ORDER BY rand() LIMIT 100",self.currentCity,queryString,self.currentCity];
         }
         else{
-            query =@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('London') AND (venue.city = 'London') AND start_time > now() ORDER BY rand() LIMIT 3";
+            query =@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('London') AND (venue.city = 'London') AND (venue.street != '') AND start_time > now() ORDER BY rand() LIMIT 3";
             NSLog(@"self.currentCity = null string");
         }
     }
     @catch(NSException *e){
         NSLog(@"Error appending string: %@",e);
-        query =@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('London') AND (venue.city = 'London') AND start_time > now() ORDER BY rand() LIMIT 3";
+        query =@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('London') AND (venue.city = 'London') AND (venue.street != '') AND start_time > now() ORDER BY rand() LIMIT 3";
     }
     //AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
     //[FBSession setActiveSession:appDelegate.session];
@@ -1541,11 +1541,11 @@ sideBarActivationState;
     @try{
         //avoid using null values of currentCity
         if(self.currentCity != nil){
-            query = [NSString stringWithFormat:@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('%@') AND (venue.city = '%@') AND start_time > now() ORDER BY rand() LIMIT 500",self.currentCity,self.currentCity];
+            query = [NSString stringWithFormat:@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('%@') AND (venue.city = '%@') AND (venue.street != '') AND start_time > now() ORDER BY rand() LIMIT 500",self.currentCity,self.currentCity];
             NSLog(@" string in question %@",self.currentCity);
         }
         else{
-            query =@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('London') AND (venue.city = 'London') AND start_time > now() ORDER BY rand() LIMIT 3";
+            query =@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('London') AND (venue.city = 'London') AND (venue.street != '') AND start_time > now() ORDER BY rand() LIMIT 3";
             NSLog(@"self.currentCity = null string");
         }
     }
@@ -1553,7 +1553,7 @@ sideBarActivationState;
         NSLog(@"Error appending string: %@",e);
         //NSLog(@" string in question %@",self.currentCity);
         //default the automatic search to London if there is uncertainty
-        query =@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('London') AND (venue.city = 'London') AND start_time > now() ORDER BY rand() LIMIT 3";
+        query =@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('London') AND (venue.city = 'London') AND (venue.street != '') AND start_time > now() ORDER BY rand() LIMIT 3";
     }
     
     AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
@@ -1942,6 +1942,8 @@ sideBarActivationState;
     NSString *nameString;
     nameString = [venueInfo objectForKey:@"name"];
     
+    //NSLog(@"venue Info %@",venueInfo);
+    
     //NSLog(@"venueInfo before : %@",venueInfo);
     
     /*for (id item in venueInfo){
@@ -1960,28 +1962,36 @@ sideBarActivationState;
     
     //@try{
     //see if the name field is present, if so add this
-    if( (nameString != nil) || ([nameString isEqual:NULL])){
+    if( nameString != nil){
         addressAsAString = [addressAsAString stringByAppendingString:nameString];
     }
     
 
     //see if the street field if present
-    if( ([venueInfo objectForKey:@"street"] != nil) || ([[venueInfo objectForKey:@"street"] isEqual:NULL])){
-        if(addressAsAString != nil){
+    if(([venueInfo objectForKey:@"street"] != nil) || ((![[venueInfo objectForKey:@"street"] isEqual:@""]))){
+        
+        NSString *streetString = [venueInfo objectForKey:@"street"];
+        if ([streetString rangeOfString:@","].location == NSNotFound) {
+            //a comma is not present
+            addressAsAString = [addressAsAString stringByAppendingFormat:@"%@",[venueInfo objectForKey:@"street"]];
+        } else {
+            //a comma is present!!
+            NSString * newString = [[venueInfo objectForKey:@"street"] stringByReplacingOccurrencesOfString:@", " withString:@"\n"];
+            addressAsAString = [addressAsAString stringByAppendingFormat:@"%@",newString];
+        }
+        
+        //if(addressAsAString != nil){
             //add an end line if the string is empty
             //addressAsAString = [addressAsAString stringByAppendingFormat:@",\n"];
             //add the street information
-            addressAsAString = [addressAsAString stringByAppendingFormat:@"%@",[venueInfo objectForKey:@"street"]];
-        }
-        else{
-            //add the street information
-            addressAsAString = [addressAsAString stringByAppendingFormat:@"%@",[venueInfo objectForKey:@"street"]];
-        }
+        
+        //}
+
     }
     
     //see if the city field if present
-    if( ([venueInfo objectForKey:@"city"] != nil) || (([[venueInfo objectForKey:@"city"] isEqual:NULL]))){
-        if(addressAsAString != nil){
+    if( ([venueInfo objectForKey:@"city"] != nil) || ((![[venueInfo objectForKey:@"city"] isEqual:@""]))){
+        if([venueInfo objectForKey:@"street"] != nil){
             //add an end line if the string is empty
             addressAsAString = [addressAsAString stringByAppendingFormat:@"\n"];
             //add the city information
@@ -1994,8 +2004,8 @@ sideBarActivationState;
     }
     
     //see if the zip field if present
-    if(([venueInfo objectForKey:@"zip"] != nil) || ([[venueInfo objectForKey:@"zip"] isEqual:NULL])){
-        if(addressAsAString != nil){
+    if(([venueInfo objectForKey:@"zip"] != nil) || ([[venueInfo objectForKey:@"zip"] isEqual:@""])){
+        if([venueInfo objectForKey:@"city"] != nil){
             //add an end line if the string is empty
             addressAsAString = [addressAsAString stringByAppendingFormat:@"\n"];
             //add the zip information
@@ -2008,8 +2018,8 @@ sideBarActivationState;
     }
     
     //see if the country field if present
-    if(([venueInfo objectForKey:@"country"] != nil) || ([[venueInfo objectForKey:@"country"] isEqual:NULL])){
-        if(addressAsAString != nil){
+    if(([venueInfo objectForKey:@"country"] != nil) || ([[venueInfo objectForKey:@"country"] isEqual:@""])){
+        if([venueInfo objectForKey:@"zip"] != nil){
             //add an end line if the string is empty
             addressAsAString = [addressAsAString stringByAppendingFormat:@"\n"];
             //add the country information
