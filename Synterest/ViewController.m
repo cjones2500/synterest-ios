@@ -298,6 +298,7 @@ sideBarActivationState;
     @try{
         self.fbEventAddress.text = [anAnnotation fbLocData];
         self.fbEventDate.text = [anAnnotation fbEventDate];
+        self.fbEventDescription.textColor = [UIColor blackColor];
         self.fbEventDescription.text = [anAnnotation fbDescription];
         self.fbEventTitle.text = [anAnnotation name];
         [NSThread detachNewThreadSelector:@selector(loadFacebookPicture:) toTarget:self withObject:[anAnnotation facebookPic]];
@@ -693,8 +694,8 @@ sideBarActivationState;
     
     //List of keywords to search within facebook
     //NSArray *arrayOfKeywords = [NSArray arrayWithObjects:@"music",@"food",@"night",@"culture",@"social",@"meeting", nil];
-    NSArray *arrayOfKeywords = [NSArray arrayWithObjects:@"music",@"food",@"gig",@"drink",@"art",@"culture",@"new",@"book",@"big",@"little",@"social",@"business",@"gig",@"talk",@"party",@"club",@"sport",@"event",@"society",@"group",nil];
-    //NSArray *arrayOfKeywords = [NSArray arrayWithObjects:@"music",@"society",@"night",@"band",@"experience",@"food",@"people",@"social",@"meeting",@"drink",@"gig",@"talk",@"party",@"club",@"sport",@"event",@"society",@"group",@"art",@"business",@"food",@"dinner",@"culture",@"festival",@"dance",@"cafe",@"jazz",@"tour",@"exhibition",@"show",@"bar",@"class",@"theatre",@"football",@"hockey",@"tournament",@"match",@"college",@"time",@"well",@"student",@"new",@"old",@"live",@"book",@"fair",@"big",@"little",@"project",@"happy",nil];
+    //NSArray *arrayOfKeywords = [NSArray arrayWithObjects:@"music",@"food",@"gig",@"drink",@"art",@"culture",@"new",@"book",@"big",@"little",@"social",@"business",@"gig",@"talk",@"party",@"club",@"sport",@"event",@"society",@"group",nil];
+    NSArray *arrayOfKeywords = [NSArray arrayWithObjects:@"music",@"society",@"night",@"band",@"experience",@"food",@"people",@"social",@"meeting",@"drink",@"gig",@"talk",@"party",@"club",@"sport",@"event",@"society",@"group",@"art",@"business",@"food",@"dinner",@"culture",@"festival",@"dance",@"cafe",@"jazz",@"tour",@"exhibition",@"show",@"bar",@"class",@"theatre",@"football",@"hockey",@"tournament",@"match",@"college",@"time",@"well",@"student",@"new",@"old",@"live",@"book",@"fair",@"big",@"little",@"project",@"happy",nil];
     for(id keyword in arrayOfKeywords){
         
         if(facebookEventLoadCounter > 7){
@@ -889,7 +890,7 @@ sideBarActivationState;
     else{
         NSLog(@"TodayIsActive Flag not set");
     }
-    [self updateTableView];
+    //[self updateTableView];
 }
 
 -(IBAction)onClickTomorrowAction:(id)sender
@@ -994,7 +995,7 @@ sideBarActivationState;
     else{
         NSLog(@"TodayIsActive Flag not set");
     }
-    [self updateTableView];
+    //[self updateTableView];
 }
 
 -(IBAction)onClickTodayAction:(id)sender
@@ -1109,7 +1110,7 @@ sideBarActivationState;
         NSLog(@"TodayIsActive Flag not set");
     }
     
-    [self updateTableView];
+    //[self updateTableView];
 }
 
 - (void)viewDidLoad
