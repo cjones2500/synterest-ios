@@ -1242,7 +1242,7 @@ sideBarActivationState;
     self.listViewSearchBar.delegate = self;
     
     //start the sidebar in the deactivated state
-    [self toggleSideBarView];
+    //[self toggleSideBarView];
     
     //Set up behaviour if for the imageView
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapOnSearchDetected)];
