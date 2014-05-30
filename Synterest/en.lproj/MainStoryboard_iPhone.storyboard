@@ -166,6 +166,7 @@
                                             <color key="titleColor" white="0.19695060480000001" alpha="1" colorSpace="deviceWhite"/>
                                         </state>
                                         <connections>
+                                            <action selector="clickOnFacebook:" destination="o97-z1-owW" eventType="touchUpInside" id="nch-JK-BE0"/>
                                             <action selector="testingEventStuff:" destination="o97-z1-owW" eventType="touchUpInside" id="4mg-Ii-Jud"/>
                                         </connections>
                                     </button>
