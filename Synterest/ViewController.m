@@ -695,7 +695,7 @@ sideBarActivationState;
     //List of keywords to search within facebook
     //NSArray *arrayOfKeywords = [NSArray arrayWithObjects:@"music",@"food",@"night",@"culture",@"social",@"meeting", nil];
     //NSArray *arrayOfKeywords = [NSArray arrayWithObjects:@"music",@"food",@"gig",@"drink",@"art",@"culture",@"new",@"book",@"big",@"little",@"social",@"business",@"gig",@"talk",@"party",@"club",@"sport",@"event",@"society",@"group",nil];
-    NSArray *arrayOfKeywords = [NSArray arrayWithObjects:@"music",@"society",@"night",@"band",@"experience",@"food",@"people",@"social",@"meeting",@"drink",@"gig",@"talk",@"party",@"club",@"sport",@"event",@"society",@"group",@"art",@"business",@"food",@"dinner",@"culture",@"festival",@"dance",@"cafe",@"jazz",@"tour",@"exhibition",@"show",@"bar",@"class",@"theatre",@"football",@"hockey",@"tournament",@"match",@"college",@"time",@"well",@"student",@"new",@"old",@"live",@"book",@"fair",@"big",@"little",@"project",@"happy",nil];
+    NSArray *arrayOfKeywords = [NSArray arrayWithObjects:@"music",@"society",@"night",@"band",@"experience",@"tickets",@"food",@"people",@"social",@"meeting",@"drink",@"gig",@"talk",@"party",@"club",@"sport",@"event",@"society",@"group",@"art",@"business",@"food",@"dinner",@"culture",@"festival",@"dance",@"cafe",@"jazz",@"tour",@"exhibition",@"show",@"bar",@"class",@"theatre",@"football",@"hockey",@"tournament",@"match",@"college",@"time",@"well",@"student",@"new",@"old",@"live",@"book",@"fair",@"big",@"little",@"project",@"happy",nil];
     for(id keyword in arrayOfKeywords){
         
         if(facebookEventLoadCounter > 7){
@@ -1466,8 +1466,12 @@ sideBarActivationState;
 -(void)queryFacebookDb:(NSString*)queryString withCompletion:(myCompletion2) compblock2{
     NSString *query;
     @try{
+        //remove any accents from words
+        NSData *dataCurrent = [self.currentCity dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+        NSString *newStr = [[NSString alloc] initWithData:dataCurrent encoding:NSASCIIStringEncoding];
+        
         if(self.currentCity != nil){
-            query = [NSString stringWithFormat:@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('%@ %@') AND (venue.city = '%@') AND (venue.street != '') AND start_time > now() ORDER BY rand() LIMIT 100",self.currentCity,queryString,self.currentCity];
+            query = [NSString stringWithFormat:@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('%@ %@') AND (venue.city = '%@') AND (venue.street != '') AND start_time > now() ORDER BY rand() LIMIT 100",newStr,queryString,newStr];
         }
         else{
             query =@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('London') AND (venue.city = 'London') AND (venue.street != '') AND start_time > now() ORDER BY rand() LIMIT 3";
@@ -1539,10 +1543,14 @@ sideBarActivationState;
     NSString *query;// = [[NSString alloc] init];
     //Standard Location query of facebook FQL
     @try{
+        
+        NSData *dataCurrent = [self.currentCity dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+        NSString *newStr = [[NSString alloc] initWithData:dataCurrent encoding:NSASCIIStringEncoding];
+        
         //avoid using null values of currentCity
         if(self.currentCity != nil){
-            query = [NSString stringWithFormat:@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('%@') AND (venue.city = '%@') AND (venue.street != '') AND start_time > now() ORDER BY rand() LIMIT 500",self.currentCity,self.currentCity];
-            NSLog(@" string in question %@",self.currentCity);
+            query = [NSString stringWithFormat:@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('%@') AND (venue.city = '%@') AND (venue.street != '') AND start_time > now() ORDER BY rand() LIMIT 500",newStr,newStr];
+            //NSLog(@" string in question %@",self.currentCity);
         }
         else{
             query =@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('London') AND (venue.city = 'London') AND (venue.street != '') AND start_time > now() ORDER BY rand() LIMIT 3";
