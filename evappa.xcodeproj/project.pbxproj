@@ -88,6 +88,8 @@
 		DBA50E611937664F00041095 /* whappener-640.png in Resources */ = {isa = PBXBuildFile; fileRef = DBA50E3A1937664F00041095 /* whappener-640.png */; };
 		DBA50E621937664F00041095 /* whappener-72.png in Resources */ = {isa = PBXBuildFile; fileRef = DBA50E3B1937664F00041095 /* whappener-72.png */; };
 		DBA50E631937664F00041095 /* whappener-96.png in Resources */ = {isa = PBXBuildFile; fileRef = DBA50E3C1937664F00041095 /* whappener-96.png */; };
+		DBAC749619389ACA002C19AC /* refreshIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = DBAC749519389ACA002C19AC /* refreshIcon.png */; };
+		DBAC749819389B7C002C19AC /* refresher.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = DBAC749719389B7C002C19AC /* refresher.jpeg */; };
 		DBC0CD45190D7AC5002D3BF4 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBC0CD44190D7AC5002D3BF4 /* LoginViewController.m */; };
 		DBC0CD48190D8E2A002D3BF4 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB4B8AEE18FA1DDB0063F3A3 /* ViewController.m */; };
 		DBC0CD4A190DE4FE002D3BF4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBC0CD49190DE4FE002D3BF4 /* Images.xcassets */; };
@@ -138,14 +140,14 @@
 		DB2D4F4318FB5D0D004DE5BB /* MyLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyLocation.m; sourceTree = "<group>"; };
 		DB2D4F4518FB66DA004DE5BB /* arrest.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrest.png; sourceTree = "<group>"; };
 		DB2D4F4B18FB68C3004DE5BB /* en */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = en; path = en.lproj/MyLocation.h; sourceTree = "<group>"; };
-		DB4B8ACC18FA1DDB0063F3A3 /* wonmap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wonmap.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB4B8ACC18FA1DDB0063F3A3 /* evappa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = evappa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB4B8ACF18FA1DDB0063F3A3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		DB4B8AD118FA1DDB0063F3A3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		DB4B8AD318FA1DDB0063F3A3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		DB4B8AD718FA1DDB0063F3A3 /* wonmap-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "wonmap-Info.plist"; sourceTree = "<group>"; };
+		DB4B8AD718FA1DDB0063F3A3 /* evappa-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "evappa-Info.plist"; sourceTree = "<group>"; };
 		DB4B8AD918FA1DDB0063F3A3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DB4B8ADB18FA1DDB0063F3A3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		DB4B8ADD18FA1DDB0063F3A3 /* wonmap-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "wonmap-Prefix.pch"; sourceTree = "<group>"; };
+		DB4B8ADD18FA1DDB0063F3A3 /* evappa-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "evappa-Prefix.pch"; sourceTree = "<group>"; };
 		DB4B8ADE18FA1DDB0063F3A3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		DB4B8ADF18FA1DDB0063F3A3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		DB4B8AE118FA1DDB0063F3A3 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
@@ -155,8 +157,8 @@
 		DB4B8AEB18FA1DDB0063F3A3 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
 		DB4B8AED18FA1DDB0063F3A3 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		DB4B8AEE18FA1DDB0063F3A3 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		DB4B8AF518FA1DDB0063F3A3 /* wonmapTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = wonmapTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		DB4B8AFE18FA1DDB0063F3A3 /* wonmapTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "wonmapTests-Info.plist"; sourceTree = "<group>"; };
+		DB4B8AF518FA1DDB0063F3A3 /* evappaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = evappaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB4B8AFE18FA1DDB0063F3A3 /* evappaTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "evappaTests-Info.plist"; sourceTree = "<group>"; };
 		DB4B8B0018FA1DDB0063F3A3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DB4B8B0218FA1DDB0063F3A3 /* SynterestTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SynterestTests.h; sourceTree = "<group>"; };
 		DB4B8B0318FA1DDB0063F3A3 /* SynterestTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SynterestTests.m; sourceTree = "<group>"; };
@@ -234,6 +236,8 @@
 		DBA50E3A1937664F00041095 /* whappener-640.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "whappener-640.png"; sourceTree = "<group>"; };
 		DBA50E3B1937664F00041095 /* whappener-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "whappener-72.png"; sourceTree = "<group>"; };
 		DBA50E3C1937664F00041095 /* whappener-96.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "whappener-96.png"; sourceTree = "<group>"; };
+		DBAC749519389ACA002C19AC /* refreshIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refreshIcon.png; sourceTree = "<group>"; };
+		DBAC749719389B7C002C19AC /* refresher.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = refresher.jpeg; sourceTree = "<group>"; };
 		DBC0CD43190D7AC5002D3BF4 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		DBC0CD44190D7AC5002D3BF4 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		DBC0CD49190DE4FE002D3BF4 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -314,8 +318,8 @@
 		DB4B8ACD18FA1DDB0063F3A3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				DB4B8ACC18FA1DDB0063F3A3 /* wonmap.app */,
-				DB4B8AF518FA1DDB0063F3A3 /* wonmapTests.xctest */,
+				DB4B8ACC18FA1DDB0063F3A3 /* evappa.app */,
+				DB4B8AF518FA1DDB0063F3A3 /* evappaTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -367,6 +371,8 @@
 		DB4B8AD618FA1DDB0063F3A3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				DBAC749719389B7C002C19AC /* refresher.jpeg */,
+				DBAC749519389ACA002C19AC /* refreshIcon.png */,
 				DBA50E131937664F00041095 /* wonmap */,
 				DBA50E11193764A400041095 /* listViewIcon.png */,
 				DBA50E0F1937637500041095 /* locIcon.png */,
@@ -401,10 +407,10 @@
 				DBC0CD51190DEB29002D3BF4 /* search-25.png */,
 				DBC0CD49190DE4FE002D3BF4 /* Images.xcassets */,
 				DB9FDC99190CC0B900881F86 /* logo.png */,
-				DB4B8AD718FA1DDB0063F3A3 /* wonmap-Info.plist */,
+				DB4B8AD718FA1DDB0063F3A3 /* evappa-Info.plist */,
 				DB4B8AD818FA1DDB0063F3A3 /* InfoPlist.strings */,
 				DB4B8ADB18FA1DDB0063F3A3 /* main.m */,
-				DB4B8ADD18FA1DDB0063F3A3 /* wonmap-Prefix.pch */,
+				DB4B8ADD18FA1DDB0063F3A3 /* evappa-Prefix.pch */,
 				DB4B8AE118FA1DDB0063F3A3 /* Default.png */,
 				DB4B8AE318FA1DDB0063F3A3 /* Default@2x.png */,
 				DB4B8AE518FA1DDB0063F3A3 /* Default-568h@2x.png */,
@@ -425,7 +431,7 @@
 		DB4B8AFD18FA1DDB0063F3A3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				DB4B8AFE18FA1DDB0063F3A3 /* wonmapTests-Info.plist */,
+				DB4B8AFE18FA1DDB0063F3A3 /* evappaTests-Info.plist */,
 				DB4B8AFF18FA1DDB0063F3A3 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
@@ -534,9 +540,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		DB4B8ACB18FA1DDB0063F3A3 /* wonmap */ = {
+		DB4B8ACB18FA1DDB0063F3A3 /* evappa */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DB4B8B0718FA1DDB0063F3A3 /* Build configuration list for PBXNativeTarget "wonmap" */;
+			buildConfigurationList = DB4B8B0718FA1DDB0063F3A3 /* Build configuration list for PBXNativeTarget "evappa" */;
 			buildPhases = (
 				DB4B8AC818FA1DDB0063F3A3 /* Sources */,
 				DB4B8AC918FA1DDB0063F3A3 /* Frameworks */,
@@ -546,14 +552,14 @@
 			);
 			dependencies = (
 			);
-			name = wonmap;
+			name = evappa;
 			productName = Synterest;
-			productReference = DB4B8ACC18FA1DDB0063F3A3 /* wonmap.app */;
+			productReference = DB4B8ACC18FA1DDB0063F3A3 /* evappa.app */;
 			productType = "com.apple.product-type.application";
 		};
-		DB4B8AF418FA1DDB0063F3A3 /* wonmapTests */ = {
+		DB4B8AF418FA1DDB0063F3A3 /* evappaTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DB4B8B0A18FA1DDB0063F3A3 /* Build configuration list for PBXNativeTarget "wonmapTests" */;
+			buildConfigurationList = DB4B8B0A18FA1DDB0063F3A3 /* Build configuration list for PBXNativeTarget "evappaTests" */;
 			buildPhases = (
 				DB4B8AF018FA1DDB0063F3A3 /* Sources */,
 				DB4B8AF118FA1DDB0063F3A3 /* Frameworks */,
@@ -565,9 +571,9 @@
 			dependencies = (
 				DB4B8AFB18FA1DDB0063F3A3 /* PBXTargetDependency */,
 			);
-			name = wonmapTests;
+			name = evappaTests;
 			productName = SynterestTests;
-			productReference = DB4B8AF518FA1DDB0063F3A3 /* wonmapTests.xctest */;
+			productReference = DB4B8AF518FA1DDB0063F3A3 /* evappaTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -580,7 +586,7 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Chris Jones";
 			};
-			buildConfigurationList = DB4B8AC718FA1DDB0063F3A3 /* Build configuration list for PBXProject "wonmap" */;
+			buildConfigurationList = DB4B8AC718FA1DDB0063F3A3 /* Build configuration list for PBXProject "evappa" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -592,8 +598,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				DB4B8ACB18FA1DDB0063F3A3 /* wonmap */,
-				DB4B8AF418FA1DDB0063F3A3 /* wonmapTests */,
+				DB4B8ACB18FA1DDB0063F3A3 /* evappa */,
+				DB4B8AF418FA1DDB0063F3A3 /* evappaTests */,
 			);
 		};
 /* End PBXProject section */
@@ -621,6 +627,7 @@
 				DBA50E531937664F00041095 /* whappener-114.png in Resources */,
 				DBC0CD52190DEB29002D3BF4 /* search-25.png in Resources */,
 				DBA50E631937664F00041095 /* whappener-96.png in Resources */,
+				DBAC749619389ACA002C19AC /* refreshIcon.png in Resources */,
 				DBA50E441937664F00041095 /* Icon-Small-20.png in Resources */,
 				DBA50E3D1937664F00041095 /* artwork-source.png in Resources */,
 				DBA50E3E1937664F00041095 /* apple-touch-icon-114x114-precomposed.png in Resources */,
@@ -642,6 +649,7 @@
 				DB4B8AE418FA1DDB0063F3A3 /* Default@2x.png in Resources */,
 				DBA50E601937664F00041095 /* whappener-64.png in Resources */,
 				DBA50E401937664F00041095 /* apple-touch-icon-72x72-precomposed.png in Resources */,
+				DBAC749819389B7C002C19AC /* refresher.jpeg in Resources */,
 				DBDDF4D6192BED0C00C458AC /* align_center-50.png in Resources */,
 				DBA50E461937664F00041095 /* Icon-Small-30.png in Resources */,
 				DBA50E581937664F00041095 /* whappener-320.png in Resources */,
@@ -746,7 +754,7 @@
 /* Begin PBXTargetDependency section */
 		DB4B8AFB18FA1DDB0063F3A3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = DB4B8ACB18FA1DDB0063F3A3 /* wonmap */;
+			target = DB4B8ACB18FA1DDB0063F3A3 /* evappa */;
 			targetProxy = DB4B8AFA18FA1DDB0063F3A3 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -862,10 +870,10 @@
 					"\"$(SRCROOT)\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Synterest/wonmap-Prefix.pch";
+				GCC_PREFIX_HEADER = "Synterest/evappa-Prefix.pch";
 				GCC_WARN_UNUSED_VARIABLE = NO;
-				INFOPLIST_FILE = "Synterest/wonmap-Info.plist";
-				PRODUCT_NAME = wonmap;
+				INFOPLIST_FILE = "Synterest/evappa-Info.plist";
+				PRODUCT_NAME = evappa;
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -880,10 +888,10 @@
 					"\"$(SRCROOT)\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Synterest/wonmap-Prefix.pch";
+				GCC_PREFIX_HEADER = "Synterest/evappa-Prefix.pch";
 				GCC_WARN_UNUSED_VARIABLE = NO;
-				INFOPLIST_FILE = "Synterest/wonmap-Info.plist";
-				PRODUCT_NAME = wonmap;
+				INFOPLIST_FILE = "Synterest/evappa-Info.plist";
+				PRODUCT_NAME = evappa;
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -901,8 +909,8 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Synterest/Synterest-Prefix.pch";
-				INFOPLIST_FILE = "SynterestTests/wonmapTests-Info.plist";
-				PRODUCT_NAME = wonmapTests;
+				INFOPLIST_FILE = "SynterestTests/evappaTests-Info.plist";
+				PRODUCT_NAME = evappaTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
 			name = Debug;
@@ -919,8 +927,8 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Synterest/Synterest-Prefix.pch";
-				INFOPLIST_FILE = "SynterestTests/wonmapTests-Info.plist";
-				PRODUCT_NAME = wonmapTests;
+				INFOPLIST_FILE = "SynterestTests/evappaTests-Info.plist";
+				PRODUCT_NAME = evappaTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
 			name = Release;
@@ -928,7 +936,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		DB4B8AC718FA1DDB0063F3A3 /* Build configuration list for PBXProject "wonmap" */ = {
+		DB4B8AC718FA1DDB0063F3A3 /* Build configuration list for PBXProject "evappa" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DB4B8B0518FA1DDB0063F3A3 /* Debug */,
@@ -937,7 +945,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DB4B8B0718FA1DDB0063F3A3 /* Build configuration list for PBXNativeTarget "wonmap" */ = {
+		DB4B8B0718FA1DDB0063F3A3 /* Build configuration list for PBXNativeTarget "evappa" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DB4B8B0818FA1DDB0063F3A3 /* Debug */,
@@ -946,7 +954,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DB4B8B0A18FA1DDB0063F3A3 /* Build configuration list for PBXNativeTarget "wonmapTests" */ = {
+		DB4B8B0A18FA1DDB0063F3A3 /* Build configuration list for PBXNativeTarget "evappaTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DB4B8B0B18FA1DDB0063F3A3 /* Debug */,

@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:wonmap.xcodeproj">
+      location = "self:evappa.xcodeproj">
    </FileRef>
 </Workspace>
