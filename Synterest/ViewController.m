@@ -1366,6 +1366,9 @@ sideBarActivationState;
     
     [self.facebookImageSubView addGestureRecognizer:tapToFacebookEventLink];
     self.facebookImageSubView.userInteractionEnabled = YES;
+    
+    [self.fbEventTitle addGestureRecognizer:tapToFacebookEventLink];
+    self.fbEventTitle.userInteractionEnabled = YES;
     //[self.calenderStaticImage addGestureRecognizer:tapGestureRecognizerCal];
     
     
