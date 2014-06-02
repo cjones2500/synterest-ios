@@ -63,6 +63,7 @@ loadFacebookDataFlag,
 additionalFacebookData,
 firstViewFlag,
 loadingDataWheel,
+fbEidText,
 sideBarActivationState;
 @synthesize locationManager = _locationManager;
 @synthesize zoomLocation = _zoomLocation;
@@ -299,6 +300,7 @@ sideBarActivationState;
 
 -(void)loadAnnotationView:(MyLocation*)anAnnotation{
     @try{
+        self.fbEidText = [anAnnotation fbEid];
         self.fbEventAddress.text = [anAnnotation fbLocData];
         self.fbEventDate.text = [anAnnotation fbEventDate];
         self.fbEventDescription.textColor = [UIColor blackColor];
@@ -511,6 +513,7 @@ sideBarActivationState;
     
     
     MyLocation* anAnnotation =[view annotation];
+    self.fbEidText = [anAnnotation fbEid];
     [NSThread detachNewThreadSelector:@selector(loadFacebookPicture:) toTarget:self withObject:[anAnnotation facebookPic]];
     self.fbEventAddress.text = [anAnnotation fbLocData];
     self.fbEventDate.text = [anAnnotation fbEventDate];
@@ -663,6 +666,16 @@ sideBarActivationState;
 
     userTriggerRefresh = YES;
     stopExtraFacebookDataFlag = YES;
+    for (id<MKAnnotation> annotation in _mapView.annotations) {
+        
+        @try{
+            MyLocation* anAnnotation = annotation;
+            [_mapView removeAnnotation:annotation];
+        }
+        @catch(NSException *e){
+            NSLog(@"Parse Error for removing annotation: %@",e);
+        }
+    }
     [self refreshSearch];
     //[NSThread detachNewThreadSelector:@selector(extendAnnotationsOnMap) toTarget:self withObject:nil];
 }
@@ -697,8 +710,15 @@ sideBarActivationState;
 -(void)goToFacebookEventPage
 {
     //open up a browser with the facebook event page
-    //htt ps://www.facebook.com/event
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://www.facebook.com/events/"]];
+    @try{
+        NSLog(@"https://www.facebook.com/events/%@",self.fbEidText);
+        NSString * urlStringToFb = [NSString stringWithFormat:@"https://www.facebook.com/events/%@",self.fbEidText];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStringToFb]];
+    }
+    @catch(NSException *e)
+    {
+        NSLog(@"Error opening link : %@",e);
+    }
 
 }
 
@@ -1339,14 +1359,13 @@ sideBarActivationState;
     self.fbEventDate.userInteractionEnabled = YES;
     
     
+   
     //Respond to clicking on the photo or event title or facebook symbol
     UITapGestureRecognizer *tapToFacebookEventLink = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goToFacebookEventPage)];
     tapToFacebookEventLink.numberOfTapsRequired = 1;
     
     [self.facebookImageSubView addGestureRecognizer:tapToFacebookEventLink];
     self.facebookImageSubView.userInteractionEnabled = YES;
-    
-    
     //[self.calenderStaticImage addGestureRecognizer:tapGestureRecognizerCal];
     
     
@@ -1876,7 +1895,8 @@ sideBarActivationState;
                                                        withFacebookPic:[singlePoint objectForKey:@"pic"]
                                                        withDescription:[singlePoint objectForKey:@"description"]
                                                         withFbLocData:fbAdress
-                                                      withFbEventDate:facebookDateString];
+                                                      withFbEventDate:facebookDateString
+                                                            withFbEid:[singlePoint objectForKey:@"eid"]];
             
                 if(todayIsActive == YES){
                     

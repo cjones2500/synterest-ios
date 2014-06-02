@@ -17,6 +17,7 @@
     NSString *_fbDescription;
     NSString *_fbLocData;
     NSString *_fbEventDate;
+    NSString *_fbEid;
     CLLocationCoordinate2D _coordinate;
 }
 
@@ -27,6 +28,7 @@
 @property (copy) NSString *fbDescription;
 @property (copy) NSString *fbLocData;
 @property (copy) NSString *fbEventDate;
+@property (copy) NSString *fbEid;
 @property (nonatomic, readonly) CLLocationCoordinate2D coordinate;
 
 - (id)initWithName:(NSString*)name
@@ -36,7 +38,8 @@
    withFacebookPic:(NSString*)aFacebookPic
    withDescription:(NSString*)aDescription
      withFbLocData:(NSString*)someFbLocData
-   withFbEventDate:(NSString*)aFbEventDate;
+   withFbEventDate:(NSString*)aFbEventDate
+         withFbEid:(NSString*)aFbEid;
 @end
 
 

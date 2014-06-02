@@ -26,6 +26,7 @@
    withDescription:(NSString*)aDescription
      withFbLocData:(NSString*)someFbLocData
    withFbEventDate:(NSString*)aFbEventDate
+         withFbEid:(NSString*)aFbEid
 {
     if ((self = [super init])) {
         _name = [name copy];
@@ -36,6 +37,7 @@
         _fbDescription = [aDescription copy];
         _fbLocData = [someFbLocData copy];
         _fbEventDate = [aFbEventDate copy];
+        _fbEid = [aFbEid copy];
     }
     return self;
 }
