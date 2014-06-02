@@ -521,6 +521,10 @@ sideBarActivationState;
     self.fbEventAddress.text = nil;
     self.fbEidText = nil;
     
+    [self.fbEventDescriptionScroll setContentOffset:CGPointZero animated:YES];
+    [self.fbEventTitleScroll setContentOffset:CGPointZero animated:YES];
+    
+    
     
     MyLocation* anAnnotation =[view annotation];
     self.fbEidText = [anAnnotation fbEid];

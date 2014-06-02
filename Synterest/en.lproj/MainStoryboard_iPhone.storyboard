@@ -224,7 +224,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     <action selector="displayDay:" destination="o97-z1-owW" eventType="valueChanged" id="6Iq-fR-mWH"/>
                                 </connections>
                             </datePicker>
-                            <view contentMode="scaleToFill" id="AXD-8h-eUq" userLabel="fbPageView">
+                            <view hidden="YES" contentMode="scaleToFill" id="AXD-8h-eUq" userLabel="fbPageView">
                                 <rect key="frame" x="-1" y="-1" width="321" height="571"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
@@ -265,15 +265,15 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                         </subviews>
                                     </scrollView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="calendar-50.png" id="Sn2-Fy-gYk">
-                                        <rect key="frame" x="133" y="101" width="20" height="20"/>
+                                        <rect key="frame" x="124" y="101" width="20" height="20"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="location-50.png" id="7jd-ep-7oP">
-                                        <rect key="frame" x="133" y="129" width="20" height="20"/>
+                                        <rect key="frame" x="124" y="129" width="20" height="20"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" highlighted="YES" adjustsFontSizeToFit="NO" id="qvY-Jw-ykO">
-                                        <rect key="frame" x="156" y="100" width="110" height="21"/>
+                                        <rect key="frame" x="147" y="100" width="110" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <attributedString key="attributedText">
                                             <fragment content="Event Date">
@@ -305,7 +305,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Address" id="G3O-Zi-I9a">
-                                        <rect key="frame" x="152" y="121" width="144" height="109"/>
+                                        <rect key="frame" x="143" y="121" width="157" height="109"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
