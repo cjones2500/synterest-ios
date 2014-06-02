@@ -63,7 +63,6 @@ loadFacebookDataFlag,
 additionalFacebookData,
 firstViewFlag,
 loadingDataWheel,
-fbEidText,
 sideBarActivationState;
 @synthesize locationManager = _locationManager;
 @synthesize zoomLocation = _zoomLocation;
@@ -313,6 +312,16 @@ sideBarActivationState;
     }
 }
 
+-(void)hideFacebookView
+{
+    self.fbPageView.hidden = YES;
+}
+
+-(void)unhideFacebookView
+{
+    self.fbPageView.hidden = NO;
+}
+
 -(void)unHideAnnotationView
 {
 
@@ -510,6 +519,7 @@ sideBarActivationState;
     self.fbEventDate.text = nil;
     self.fbEventDescription.text = nil;
     self.fbEventAddress.text = nil;
+    self.fbEidText = nil;
     
     
     MyLocation* anAnnotation =[view annotation];
@@ -705,14 +715,37 @@ sideBarActivationState;
         }
     //}
 }
+- (IBAction)onClickEvappaAction:(id)sender
+{
+    [self hideFacebookView];
+    UIWebView *tempWebview = [[UIWebView alloc]initWithFrame:self.fbWebView.frame];
+    NSString * urlStringToFb = [NSString stringWithFormat:@"http:www.google.com"];
+    NSURL *url = [NSURL URLWithString:urlStringToFb];
+    NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
+    [self.fbWebView loadRequest:requestObj];
+    self.fbWebView = tempWebview;
+}
 
 
 -(void)goToFacebookEventPage
 {
+
+    //[self unhideFacebookView];
     //open up a browser with the facebook event page
     @try{
-        NSLog(@"https://www.facebook.com/events/%@",self.fbEidText);
+        /*UIImageView *facebookImageSubViewer = [[UIImageView alloc] initWithImage:facebookImage];
+        facebookImageSubViewer.layer.cornerRadius = facebookImage.size.width / 2;
+        facebookImageSubViewer.layer.masksToBounds = YES;
+        [self.facebookImageSubView addSubview:facebookImageSubViewer];*/
+        
+        //UIWebView *tempWebview = [[UIWebView alloc]initWithFrame:self.fbWebView.frame];
         NSString * urlStringToFb = [NSString stringWithFormat:@"https://www.facebook.com/events/%@",self.fbEidText];
+        //NSURL *url = [NSURL URLWithString:urlStringToFb];
+        //NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
+        //[self.fbWebView loadRequest:requestObj];
+        //self.fbWebView = tempWebview;
+        //self.fbWebView.delegate = self;
+        //self.fbEidText = nil;
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStringToFb]];
     }
     @catch(NSException *e)
@@ -721,6 +754,7 @@ sideBarActivationState;
     }
 
 }
+
 
 -(void)refreshSearch
 {
@@ -1242,6 +1276,7 @@ sideBarActivationState;
     [self.view addSubview:self.searchButtonSubView];
     [self.view addSubview:self.annotationBarView];
     [self.view addSubview:self.listView];
+    [self.view addSubview:self.fbPageView];
     //[self.view addSubview:self.calenderPickerView];
     
     [self.view insertSubview:self.sideBarView atIndex:2];
@@ -1253,7 +1288,12 @@ sideBarActivationState;
     [self.view insertSubview:self.calenderMainView atIndex:2];
     
     [self.view insertSubview:self.eventDatePicker atIndex:5];
+    [self.view insertSubview:self.fbPageView atIndex:10];
+    
+    //[self.view inser]
     self.eventDatePicker.hidden = YES;
+    self.fbPageView.hidden = YES;
+    self.fbPageView.layer.masksToBounds = YES;
     //[self.view insertSubview:self.calenderPickerView atIndex:5];
     //be very careful with the indexes as they might prevent gesture functions from working
     
@@ -1367,7 +1407,9 @@ sideBarActivationState;
     [self.facebookImageSubView addGestureRecognizer:tapToFacebookEventLink];
     self.facebookImageSubView.userInteractionEnabled = YES;
     
-    [self.fbEventTitle addGestureRecognizer:tapToFacebookEventLink];
+    UITapGestureRecognizer *tapToFacebookEventLink2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goToFacebookEventPage)];
+    tapToFacebookEventLink2.numberOfTapsRequired = 1;
+    [self.fbEventTitle addGestureRecognizer:tapToFacebookEventLink2];
     self.fbEventTitle.userInteractionEnabled = YES;
     //[self.calenderStaticImage addGestureRecognizer:tapGestureRecognizerCal];
     

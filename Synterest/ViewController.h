@@ -13,7 +13,7 @@
 #import "SearchViewController.h"
 
 
-@interface ViewController : UIViewController <CLLocationManagerDelegate,MKMapViewDelegate,UITableViewDelegate,UITableViewDataSource,UIPickerViewDataSource,UIPickerViewDelegate,UISearchBarDelegate>{
+@interface ViewController : UIViewController <CLLocationManagerDelegate,MKMapViewDelegate,UITableViewDelegate,UITableViewDataSource,UIPickerViewDataSource,UIPickerViewDelegate,UISearchBarDelegate,UIWebViewDelegate>{
     BOOL _doneInitialZoom;
     NSMutableArray *_zoomLocation;
     NSMutableArray *_locationToSend;
@@ -76,6 +76,11 @@
 @property (weak, nonatomic) IBOutlet UIButton *nextDateButton;
 
 @property (weak, nonatomic) IBOutlet UIImageView *calenderStaticImage;
+
+//facebook Page View
+@property (weak, nonatomic) IBOutlet UIView *fbPageView;
+@property (weak, nonatomic) IBOutlet UIWebView *fbWebView;
+@property (weak, nonatomic) IBOutlet UIButton *gotoEvappa;
 
 
 //- (id) initWithCoords:(NSMutableArray*)zoomLocation;

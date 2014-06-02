@@ -224,6 +224,28 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     <action selector="displayDay:" destination="o97-z1-owW" eventType="valueChanged" id="6Iq-fR-mWH"/>
                                 </connections>
                             </datePicker>
+                            <view contentMode="scaleToFill" id="AXD-8h-eUq" userLabel="fbPageView">
+                                <rect key="frame" x="-1" y="-1" width="321" height="571"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <webView contentMode="scaleToFill" id="0SP-ee-sJO" userLabel="fbWebView">
+                                        <rect key="frame" x="0.0" y="46" width="321" height="525"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </webView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="kbv-mZ-jpm">
+                                        <rect key="frame" x="13" y="14" width="134" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Return to Evappa">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="onClickEvappaAction:" destination="o97-z1-owW" eventType="touchUpInside" id="p9p-gn-XB3"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
                             <view hidden="YES" contentMode="scaleToFill" id="RVV-uL-ihl">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="571"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -307,8 +329,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <outlet property="fbEventDate" destination="qvY-Jw-ykO" id="NNk-iA-Xqk"/>
                         <outlet property="fbEventDescription" destination="crv-az-Z55" id="W9U-fn-AYs"/>
                         <outlet property="fbEventTitle" destination="nuM-xj-dMl" id="lmo-E5-7Xt"/>
+                        <outlet property="fbPageView" destination="AXD-8h-eUq" id="gci-az-umU"/>
+                        <outlet property="fbWebView" destination="0SP-ee-sJO" id="9PY-xc-gX4"/>
                         <outlet property="fqlButton" destination="HoA-Lf-P4f" id="Huz-o0-CpU"/>
                         <outlet property="goBackFromListView" destination="mtK-pd-qXi" id="3sq-F1-cYa"/>
+                        <outlet property="gotoEvappa" destination="kbv-mZ-jpm" id="GUi-4V-KZo"/>
                         <outlet property="listImageView" destination="cdj-ku-Vj2" id="pfc-md-tIY"/>
                         <outlet property="listTableView" destination="XJB-hN-Vdy" id="mcX-sV-x5i"/>
                         <outlet property="listView" destination="y1e-0v-4Xl" id="0Pj-cc-yCz"/>
