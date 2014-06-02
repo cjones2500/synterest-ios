@@ -142,7 +142,7 @@
 		DB2D4F4318FB5D0D004DE5BB /* MyLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyLocation.m; sourceTree = "<group>"; };
 		DB2D4F4518FB66DA004DE5BB /* arrest.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrest.png; sourceTree = "<group>"; };
 		DB2D4F4B18FB68C3004DE5BB /* en */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = en; path = en.lproj/MyLocation.h; sourceTree = "<group>"; };
-		DB4B8ACC18FA1DDB0063F3A3 /* evappa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = evappa.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB4B8ACC18FA1DDB0063F3A3 /* Evappa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Evappa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB4B8ACF18FA1DDB0063F3A3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		DB4B8AD118FA1DDB0063F3A3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		DB4B8AD318FA1DDB0063F3A3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -322,7 +322,7 @@
 		DB4B8ACD18FA1DDB0063F3A3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				DB4B8ACC18FA1DDB0063F3A3 /* evappa.app */,
+				DB4B8ACC18FA1DDB0063F3A3 /* Evappa.app */,
 				DB4B8AF518FA1DDB0063F3A3 /* evappaTests.xctest */,
 			);
 			name = Products;
@@ -560,7 +560,7 @@
 			);
 			name = evappa;
 			productName = Synterest;
-			productReference = DB4B8ACC18FA1DDB0063F3A3 /* evappa.app */;
+			productReference = DB4B8ACC18FA1DDB0063F3A3 /* Evappa.app */;
 			productType = "com.apple.product-type.application";
 		};
 		DB4B8AF418FA1DDB0063F3A3 /* evappaTests */ = {
@@ -592,7 +592,7 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Chris Jones";
 			};
-			buildConfigurationList = DB4B8AC718FA1DDB0063F3A3 /* Build configuration list for PBXProject "evappa" */;
+			buildConfigurationList = DB4B8AC718FA1DDB0063F3A3 /* Build configuration list for PBXProject "Evappa" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -881,7 +881,7 @@
 				GCC_PREFIX_HEADER = "Synterest/evappa-Prefix.pch";
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				INFOPLIST_FILE = "Synterest/evappa-Info.plist";
-				PRODUCT_NAME = evappa;
+				PRODUCT_NAME = Evappa;
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -899,7 +899,7 @@
 				GCC_PREFIX_HEADER = "Synterest/evappa-Prefix.pch";
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				INFOPLIST_FILE = "Synterest/evappa-Info.plist";
-				PRODUCT_NAME = evappa;
+				PRODUCT_NAME = Evappa;
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -944,7 +944,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		DB4B8AC718FA1DDB0063F3A3 /* Build configuration list for PBXProject "evappa" */ = {
+		DB4B8AC718FA1DDB0063F3A3 /* Build configuration list for PBXProject "Evappa" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DB4B8B0518FA1DDB0063F3A3 /* Debug */,
