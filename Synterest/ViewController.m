@@ -730,6 +730,7 @@ sideBarActivationState;
 -(void)goToFacebookEventPage
 {
 
+    [loadingDataWheel stopAnimating];
     //[self unhideFacebookView];
     //open up a browser with the facebook event page
     @try{
@@ -758,6 +759,7 @@ sideBarActivationState;
 
 -(void)refreshSearch
 {
+    [loadingDataWheel startAnimating];
     //have a counter that adds the facebook events at a certain point
     int facebookEventLoadCounter = 0;
     
@@ -830,6 +832,7 @@ sideBarActivationState;
     for(id keyword in arrayOfKeywords){
         
         if(facebookEventLoadCounter > 7){
+            [loadingDataWheel stopAnimating];
             //add events
             SynterestModel *aSynterestModel = [[SynterestModel alloc] init];
             NSMutableArray* savedFacebookData =[aSynterestModel loadLocalData];
@@ -1729,7 +1732,7 @@ sideBarActivationState;
                                               NSError *error) {
                               if (error) {
                                   
-                                  NSLog(@"Error: %@", [error localizedDescription]);
+                                  NSLog(@"Query Error: %@", [error localizedDescription]);
                                   
                               } else {
                                   //do things with the result here
