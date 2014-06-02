@@ -693,6 +693,15 @@ sideBarActivationState;
     //}
 }
 
+
+-(void)goToFacebookEventPage
+{
+    //open up a browser with the facebook event page
+    //htt ps://www.facebook.com/event
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://www.facebook.com/events/"]];
+
+}
+
 -(void)refreshSearch
 {
     //have a counter that adds the facebook events at a certain point
@@ -1328,6 +1337,15 @@ sideBarActivationState;
     tapGestureRecognizerCal.numberOfTapsRequired = 1;
     [self.fbEventDate addGestureRecognizer:tapGestureRecognizerCal];
     self.fbEventDate.userInteractionEnabled = YES;
+    
+    
+    //Respond to clicking on the photo or event title or facebook symbol
+    UITapGestureRecognizer *tapToFacebookEventLink = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goToFacebookEventPage)];
+    tapToFacebookEventLink.numberOfTapsRequired = 1;
+    
+    [self.facebookImageSubView addGestureRecognizer:tapToFacebookEventLink];
+    self.facebookImageSubView.userInteractionEnabled = YES;
+    
     
     //[self.calenderStaticImage addGestureRecognizer:tapGestureRecognizerCal];
     
