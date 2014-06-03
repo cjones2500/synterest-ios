@@ -137,11 +137,6 @@ sideBarActivationState;
     }
 }
 
--(void) checkAnnotationIsNew
-{
-    
-}
-
 //called at the beginning of loading a view
 - (void)loadView{
     firstDisplayOfEventPicker = YES;
@@ -1564,6 +1559,10 @@ sideBarActivationState;
     }
     
 }
+- (IBAction)onGoBackAction:(id)sender
+{
+    [self hideAnnotationView];
+}
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
@@ -1676,6 +1675,11 @@ sideBarActivationState;
 }
 
 - (IBAction)quitButtonAction:(id)sender
+{
+    [self quitApplication];
+}
+
+-(void)quitApplication
 {
     AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
     if (appDelegate.session.isOpen) {
@@ -1827,6 +1831,11 @@ sideBarActivationState;
     AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
     [FBSession setActiveSession:appDelegate.session];
     
+    
+    if (appDelegate.session.isOpen) {
+        NSLog(@"state: %@",[appDelegate.session description]);
+    }
+    
     // Set up the query parameter
     NSDictionary *queryParam = @{ @"q": query };
     
@@ -1841,7 +1850,20 @@ sideBarActivationState;
                                   
                                   NSLog(@"Query Error: %@", [error localizedDescription]);
                                   
+                                  @try{
+                                      UIAlertView *fbAlert = [[UIAlertView alloc] initWithTitle:@"Network/Facebook Error"
+                                                                                    message:[NSString stringWithFormat:@"%@",[error localizedDescription]]
+                                                                                   delegate:self
+                                                                          cancelButtonTitle:@"OK"
+                                                                          otherButtonTitles:nil];
+                                      [fbAlert show];
+                                  }
+                                  @catch(NSException *e){
+                                      NSLog(@"Error showing alert screen");
+                                  }
+                                  
                               } else {
+                                  
                                   //do things with the result here
                                   //NSLog(@"Result: %@",[connection description]);
                                   
@@ -1898,6 +1920,13 @@ sideBarActivationState;
         //NSLog(@"Access token is here %@",appDelegate.session.accessTokenData);
     }
     
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == 0){
+        //cancel clicked ...do your action
+        [self quitApplication];
+    }
 }
 
 //Control for the List View (Search by event)

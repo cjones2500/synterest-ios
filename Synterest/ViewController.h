@@ -13,7 +13,7 @@
 #import "SearchViewController.h"
 
 
-@interface ViewController : UIViewController <CLLocationManagerDelegate,MKMapViewDelegate,UITableViewDelegate,UITableViewDataSource,UIPickerViewDataSource,UIPickerViewDelegate,UISearchBarDelegate,UIWebViewDelegate>{
+@interface ViewController : UIViewController <CLLocationManagerDelegate,MKMapViewDelegate,UITableViewDelegate,UITableViewDataSource,UIPickerViewDataSource,UIPickerViewDelegate,UISearchBarDelegate,UIWebViewDelegate,UIAlertViewDelegate>{
     BOOL _doneInitialZoom;
     NSMutableArray *_zoomLocation;
     NSMutableArray *_locationToSend;

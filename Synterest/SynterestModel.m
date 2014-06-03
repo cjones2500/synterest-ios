@@ -120,10 +120,10 @@
     //Array of keywords for each catagory
     //NSMutableArray *randomKeywords = [NSMutableArray arrayWithObjects:@"synterest",nil];
     NSMutableArray *musicKeywords = [NSMutableArray arrayWithObjects:@"gig",@"music",@"band",nil];
-    NSMutableArray *intellectualKeywords =[NSMutableArray arrayWithObjects:@"talk",@"seminar",@"convention",@"conference",nil];
+    NSMutableArray *intellectualKeywords =[NSMutableArray arrayWithObjects:@"talk",@"seminar",@"convention",@"conference",@"intellect",@"clever",nil];
     NSMutableArray *partyKeywords = [NSMutableArray arrayWithObjects:@"party",@"festival",@"club",nil];
-    NSMutableArray *sportKeywords = [NSMutableArray arrayWithObjects:@"sport",@"football",@"tennis",nil];
-    NSMutableArray *culturalKeywords = [NSMutableArray arrayWithObjects:@"theatre",@"art",@"museum",nil];
+    NSMutableArray *sportKeywords = [NSMutableArray arrayWithObjects:@"sport",@"football",@"tennis",@"exercise",@"fitness",nil];
+    NSMutableArray *culturalKeywords = [NSMutableArray arrayWithObjects:@"theatre",@"art",@"museum",@"culture",@"play",@"exhibit",@"show",nil];
     NSMutableArray *foodKeywords = [NSMutableArray arrayWithObjects:@"food",@"drink",@"dinner",nil];
     
     
