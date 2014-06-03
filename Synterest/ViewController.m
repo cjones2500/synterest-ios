@@ -939,7 +939,6 @@ sideBarActivationState;
             SynterestModel *aSynterestModel = [[SynterestModel alloc] init];
             NSMutableArray* savedFacebookData =[aSynterestModel loadLocalData];
             [self plotFacebookData:savedFacebookData withReset:NO];
-            //[self updateTableView];
             
             //reset the facebookCounter
             facebookEventLoadCounter = 0;
