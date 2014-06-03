@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "DB4B8ACB18FA1DDB0063F3A3"
-               BuildableName = "evappa.app"
+               BuildableName = "Evappa.app"
                BlueprintName = "evappa"
                ReferencedContainer = "container:evappa.xcodeproj">
             </BuildableReference>
@@ -43,7 +43,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "DB4B8ACB18FA1DDB0063F3A3"
-            BuildableName = "evappa.app"
+            BuildableName = "Evappa.app"
             BlueprintName = "evappa"
             ReferencedContainer = "container:evappa.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "DB4B8ACB18FA1DDB0063F3A3"
-            BuildableName = "evappa.app"
+            BuildableName = "Evappa.app"
             BlueprintName = "evappa"
             ReferencedContainer = "container:evappa.xcodeproj">
          </BuildableReference>
@@ -80,7 +80,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "DB4B8ACB18FA1DDB0063F3A3"
-            BuildableName = "evappa.app"
+            BuildableName = "Evappa.app"
             BlueprintName = "evappa"
             ReferencedContainer = "container:evappa.xcodeproj">
          </BuildableReference>

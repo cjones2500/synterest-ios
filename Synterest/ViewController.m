@@ -521,8 +521,8 @@ sideBarActivationState;
     self.fbEventAddress.text = nil;
     self.fbEidText = nil;
     
-    [self.fbEventDescriptionScroll setContentOffset:CGPointZero animated:YES];
-    [self.fbEventTitleScroll setContentOffset:CGPointZero animated:YES];
+    [self.fbEventDescriptionScroll setContentOffset:CGPointMake(0,self.fbEventDescriptionScroll.frame.origin.y + 10.0)  animated:YES];
+    [self.fbEventTitleScroll setContentOffset:CGPointMake(0,self.fbEventTitleScroll.frame.origin.y + 10.0)  animated:YES];
     
     
     
