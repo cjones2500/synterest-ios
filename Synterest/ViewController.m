@@ -137,6 +137,11 @@ sideBarActivationState;
     }
 }
 
+-(void) checkAnnotationIsNew
+{
+    
+}
+
 //called at the beginning of loading a view
 - (void)loadView{
     firstDisplayOfEventPicker = YES;
@@ -244,20 +249,72 @@ sideBarActivationState;
         [self.listViewAnnotations removeAllObjects];
         [self.listTableView reloadData];
     }
-    self.listViewAnnotations =[ NSMutableArray arrayWithCapacity:1];
+    self.listViewAnnotations = [ NSMutableArray arrayWithCapacity:1];
     //else{
        //[self.listViewAnnotations removeAllObjects];
         //[self.listTableView reloadData];
         //self.listViewAnnotations = nil;
     //}
     
-    //NSLog(@"count number of annotations: %i",[self.mapView.annotations count]);
-    
     for (id<MKAnnotation> annotation in _mapView.annotations)
     {
         MyLocation *anAnnotation = annotation;
         [self.listViewAnnotations addObject:anAnnotation];
     }
+    
+    NSMutableArray *checkEidArray = [[NSMutableArray alloc] initWithCapacity:0];
+    
+    for (id<MKAnnotation> annotation in _mapView.annotations)
+    {
+        MyLocation *anAnnotation = annotation;
+        [checkEidArray addObject:[anAnnotation fbEid]];
+    }
+    
+    
+    for (id<MKAnnotation> annotation in _mapView.annotations)
+    {
+        MyLocation *anAnnotation = annotation;
+        int counter = 0;
+        //loop through the current eid array
+        for(id item in checkEidArray){
+            if([item isEqualToString:[anAnnotation fbEid]]){
+                counter = counter + 1;
+            }
+        }
+        if(counter > 1){
+            NSLog(@"event title : %@",[anAnnotation name]);
+            NSLog(@"counter : %i",counter);
+            //do not add this to the list
+        }
+        else{
+            //[self.mapView removeAnnotation:annotation];
+            [self.listViewAnnotations addObject:anAnnotation];
+            
+        }
+        
+    }
+    
+    /*for (id<MKAnnotation> annotation in _mapView.annotations)
+    {
+        MyLocation *anAnnotation = annotation;
+        int counter = 0;
+        
+        for(id item in checkEidArray){
+            
+            if([item isEqualToString:[anAnnotation fbEid]]){
+                //remove from annotation and break this loop
+                counter = counter +1;
+            }
+            if(counter > 1){
+                [self.mapView removeAnnotation:annotation];
+                //counter = 0;
+            }
+        }
+    }*/
+    
+    //NSLog(@"count number of annotations: %i",[self.mapView.annotations count]);
+    
+    
     [self.listTableView reloadData];
 }
 
@@ -882,6 +939,7 @@ sideBarActivationState;
             SynterestModel *aSynterestModel = [[SynterestModel alloc] init];
             NSMutableArray* savedFacebookData =[aSynterestModel loadLocalData];
             [self plotFacebookData:savedFacebookData withReset:NO];
+            //[self updateTableView];
             
             //reset the facebookCounter
             facebookEventLoadCounter = 0;
@@ -1485,7 +1543,7 @@ sideBarActivationState;
         //[self setLoadFacebookDataFlag:[NSNumber numberWithBool:NO]];
     }*/
     
-    [self updateView];
+    //[self updateView];
     
     AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
     if (!appDelegate.session.isOpen) {
@@ -1501,7 +1559,7 @@ sideBarActivationState;
                                                              FBSessionState status,
                                                              NSError *error) {
                 // we recurse here, in order to update buttons and labels
-                [self updateView];
+                //[self updateView];
             }];
         }
     }
@@ -1552,12 +1610,14 @@ sideBarActivationState;
         [self plotFacebookData:savedFacebookData withReset:YES];
     }
     
-    [self updateTableView];
+    //[self updateTableView];
 }
 
 -(void)setUpListView
 {
     NSLog(@"unhide listView");
+    [self performSelectorOnMainThread:@selector(updateTableView) withObject:self waitUntilDone:YES];
+    //[self updateTableView];
     [self unhideListView];
 }
 
@@ -1933,7 +1993,7 @@ sideBarActivationState;
     else{
         //ignore this and don't reset the current map
     }
-    
+
     int annotationCount = 0;
     for (id<MKAnnotation> annotation in _mapView.annotations) {
         annotationCount = annotationCount + 1;
@@ -2080,6 +2140,7 @@ sideBarActivationState;
         }//end of main outer try loop
     }
     [loadingDataWheel stopAnimating];
+    
     //self.loadingDataWheel.hidden = YES;
 }
 

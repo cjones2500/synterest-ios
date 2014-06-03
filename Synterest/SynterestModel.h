@@ -16,4 +16,6 @@
 -(int)assignEventType:(NSMutableDictionary*)inputArray;
 -(void)saveAdditionalLocalData:(NSMutableArray*)inputArray;
 
+@property (strong, nonatomic) NSMutableArray *checkEidList;
+
 @end

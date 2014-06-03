@@ -8,9 +8,7 @@
 
 #import "SynterestModel.h"
 
-@implementation SynterestModel{
-    NSMutableArray *checkEidList;
-}
+@implementation SynterestModel
 #define MAXIMUM_NUMBER_ANNOTATIONS 10000  //maximum number of annotations stored in memory
 
 //Save facebook data for synterest to the local phone cache
@@ -235,9 +233,9 @@
         
     //}
     
-    if(checkEidList ==nil){
-        checkEidList = [[NSMutableArray alloc] initWithCapacity:1];
-    }
+    /*if(self.checkEidList == nil){
+        self.checkEidList = [[NSMutableArray alloc] initWithCapacity:1];
+    }*/
     
     //Create the eid check list
     //NSMutableArray * checkEidList = [[NSMutableArray alloc] initWithCapacity:1];
@@ -315,11 +313,11 @@
         //NSLog(@"string date: %@",dateFromString);
         //NSLog(@"current date: %@",currentTime);
         
-        NSString *currentEid = [singleResult objectForKey:@"eid"];
+        /*NSString *currentEid = [singleResult objectForKey:@"eid"];
         BOOL itemPresent = NO;
         
         //Loop through current eid check list and see if this is present
-        for(NSString* item in checkEidList)
+        for(NSString* item in self.checkEidList)
         {
             if([currentEid isEqualToString:item]){
                 itemPresent = YES;
@@ -327,8 +325,8 @@
         }
         if(itemPresent == NO){
             //add item to the check eid List
-            [checkEidList addObject:currentEid];
-        }
+            [self.checkEidList addObject:currentEid];
+        }*/
         
 
         
@@ -340,10 +338,10 @@
         else if(currentTime < dateFromString){
             NSLog(@"event has already passed");
         }
-        else if(itemPresent == YES){
+        /*else if(itemPresent == YES){
             NSLog(@"This eid is already present");
             //skip this item in the loop
-        }
+        }*/
         //TODO: add the ability to add events within a certain time period
         /*else if(dateInOneWeek > dateFromString){
             NSLog(@"event is too far in the future");
