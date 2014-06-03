@@ -328,7 +328,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <outlet property="fbEventAddress" destination="G3O-Zi-I9a" id="MZs-x4-dFx"/>
                         <outlet property="fbEventDate" destination="qvY-Jw-ykO" id="NNk-iA-Xqk"/>
                         <outlet property="fbEventDescription" destination="crv-az-Z55" id="W9U-fn-AYs"/>
+                        <outlet property="fbEventDescriptionScroll" destination="VKn-rs-4Bu" id="ifj-CB-yAW"/>
                         <outlet property="fbEventTitle" destination="nuM-xj-dMl" id="lmo-E5-7Xt"/>
+                        <outlet property="fbEventTitleScroll" destination="NmN-0D-XVt" id="1jN-AP-byo"/>
                         <outlet property="fbPageView" destination="AXD-8h-eUq" id="gci-az-umU"/>
                         <outlet property="fbWebView" destination="0SP-ee-sJO" id="9PY-xc-gX4"/>
                         <outlet property="fqlButton" destination="HoA-Lf-P4f" id="Huz-o0-CpU"/>

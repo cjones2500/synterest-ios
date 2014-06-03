@@ -331,6 +331,14 @@ sideBarActivationState;
         [subview removeFromSuperview];
     }
     
+    /*for (UIView *subview in self.fbEventDescriptionScroll.subviews) {
+        [subview removeFromSuperview];
+    }
+    
+    for (UIView *subview in self.fbEventTitleScroll.subviews) {
+        [subview removeFromSuperview];
+    }*/
+    
     //initial responder
     if(self.annotationBarView.frame.size.width > 0){
         CGRect annotationBarViewFrameFix = self.annotationBarView.frame;
@@ -349,6 +357,23 @@ sideBarActivationState;
     [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
     self.annotationBarView.frame = annotationBarViewFrame;
     [UIView commitAnimations];
+    
+    //[self.fbEventDescriptionScroll scrollRectToVisible:CGRectMake(0, 0, 1, 1)
+    //animated:NO];
+    
+    /*UIScrollView* fbDesScroll = (UIScrollView*) self.view ;
+    CGRect rc = [self.fbEventDescription bounds];
+    rc = [self.fbEventDescription convertRect:rc toView:fbDesScroll];
+    rc.origin.x = 0.0 ;
+    rc.origin.y = 0.0 ;
+    [self.fbEventDescriptionScroll scrollRectToVisible:rc animated:YES];*/
+    
+    //self.fbEventDescriptionScroll.contentOffset = CGPointMake(0.0,self.fbEventDescription.frame.origin.y);
+    //[self.fbEventDescriptionScroll setContentOffset:CGPointMake(0.0,self.fbEventDescription.frame.origin.y)  animated:YES];
+    //[self.fbEventDescriptionScroll setContentOffset:CGPointMake(0.0,0.0)  animated:NO];
+    //[self.fbEventTitleScroll setContentOffset:CGPointMake(0.0,0.0)  animated:NO];
+    NSLog(@"Content offset: x:%f y:%f",self.fbEventDescriptionScroll.contentOffset.x,self.fbEventDescriptionScroll.contentOffset.y);
+
 }
 
 -(void)unHideFirstTime
@@ -468,6 +493,16 @@ sideBarActivationState;
 {
     //when the first hide annotation view is called. It will go to being 0.0 in width but not hidden.
     //this was implemented in this way so I could see what was going on when I moved between annotations in storyboard
+    NSLog(@"HIDE Content offset: x:%f y:%f",self.fbEventDescriptionScroll.contentOffset.x,self.fbEventDescriptionScroll.contentOffset.y);
+    
+    
+    self.fbEventDescriptionScroll.contentOffset = CGPointZero;
+    
+    [self.fbEventDescriptionScroll setContentOffset:CGPointMake(0.0,0.0)  animated:NO];
+    [self.fbEventDescription setContentOffset:CGPointMake(0.0,0.0)  animated:NO];
+    [self.fbEventTitleScroll setContentOffset:CGPointMake(0.0,0.0)  animated:NO];
+    [self.fbEventTitle setContentOffset:CGPointMake(0.0,0.0)  animated:NO];
+    
     CGRect annotationBarViewFrame = self.annotationBarView.frame;
     annotationBarViewFrame.size.width = 0.0;
     [UIView beginAnimations:nil context:nil];
@@ -476,6 +511,7 @@ sideBarActivationState;
     [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
     self.annotationBarView.frame = annotationBarViewFrame;
     [UIView commitAnimations];
+    
     
     [self.annotationBarView resignFirstResponder];
 }
@@ -521,8 +557,8 @@ sideBarActivationState;
     self.fbEventAddress.text = nil;
     self.fbEidText = nil;
     
-    [self.fbEventDescriptionScroll setContentOffset:CGPointMake(0,self.fbEventDescriptionScroll.frame.origin.y + 10.0)  animated:YES];
-    [self.fbEventTitleScroll setContentOffset:CGPointMake(0,self.fbEventTitleScroll.frame.origin.y + 10.0)  animated:YES];
+    //[self.fbEventDescriptionScroll setContentOffset:CGPointMake(0,self.fbEventDescription.frame.origin.y)  animated:YES];
+    //[self.fbEventTitleScroll setContentOffset:CGPointMake(0,self.fbEventTitle.frame.origin.y)  animated:YES];
     
     
     
@@ -545,6 +581,7 @@ sideBarActivationState;
             fontIncrement++;
         }
     }*/
+    
     
     [self unHideAnnotationView];
 }
@@ -1278,6 +1315,9 @@ sideBarActivationState;
     
     //self.listTableView.delegate = self;
     
+    //self.fbEventDescriptionScroll.delegate = self;
+    //self.fbEventTitleScroll.delegate = self;
+    
     //need to add the subviews first
     [self.view addSubview:self.sideBarView];
     [self.view addSubview:self.searchButtonSubView];
@@ -1371,6 +1411,9 @@ sideBarActivationState;
     singleTapOnCalenderImageView.numberOfTapsRequired = 1;
     _calenderImageView.userInteractionEnabled = YES;
     [_calenderImageView addGestureRecognizer:singleTapOnCalenderImageView];*/
+    
+    
+    //self.annotationBarView.autoresizesSubviews = YES;
     
     //self.calenderPickerView.hidden = NO;
     
@@ -2334,6 +2377,7 @@ sideBarActivationState;
     //setZoomLocation.longitude= -0.12750;
     //NSLog(@"location to zoom %f",locationToZoom.latitude);
     //self.mapView. = locationToZoom;
+
     
     //[self performSelectorOnMainThread:@selector(checkLocationPosition) withObject:nil waitUntilDone:YES];
     
