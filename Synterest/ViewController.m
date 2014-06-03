@@ -355,6 +355,7 @@ sideBarActivationState;
         self.fbEventAddress.text = [anAnnotation fbLocData];
         self.fbEventDate.text = [anAnnotation fbEventDate];
         self.fbEventDescription.textColor = [UIColor blackColor];
+        
         self.fbEventDescription.text = [anAnnotation fbDescription];
         self.fbEventTitle.text = [anAnnotation name];
         [NSThread detachNewThreadSelector:@selector(loadFacebookPicture:) toTarget:self withObject:[anAnnotation facebookPic]];
@@ -610,8 +611,8 @@ sideBarActivationState;
     //remove the data from any exsisting subview
     self.fbEventTitle.text = nil;
     self.fbEventDate.text = nil;
-    self.fbEventDescription.text = nil;
-    self.fbEventAddress.text = nil;
+    self.fbEventDescription.text = @"";
+    self.fbEventAddress.text = @"";
     self.fbEidText = nil;
     
     
@@ -1681,6 +1682,7 @@ sideBarActivationState;
 
 -(void)quitApplication
 {
+    
     AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
     if (appDelegate.session.isOpen) {
         // if a user logs out explicitly, we delete any cached token information, and next
