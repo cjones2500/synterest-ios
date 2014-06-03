@@ -2192,6 +2192,9 @@ sideBarActivationState;
                     NSLog(@"calling query action from changed location");
                     [self queryButtonAction];
                 }
+                else{
+                    [self queryButtonAction];
+                }
             }
             //NSLog(@"current city inside block: %@",self.currentCity);
         }];
