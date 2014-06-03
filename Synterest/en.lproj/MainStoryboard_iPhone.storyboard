@@ -111,7 +111,7 @@
                                         </connections>
                                     </tableView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="mtK-pd-qXi">
-                                        <rect key="frame" x="6" y="16" width="94" height="30"/>
+                                        <rect key="frame" x="-3" y="16" width="94" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="Map View">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -153,7 +153,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="BeM-5C-dyv">
-                                        <rect key="frame" x="140" y="2" width="38" height="36"/>
+                                        <rect key="frame" x="194" y="2" width="38" height="36"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" image="exit-25.png"/>
                                         <connections>
@@ -161,7 +161,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="HoA-Lf-P4f">
-                                        <rect key="frame" x="191" y="6" width="36" height="25"/>
+                                        <rect key="frame" x="145" y="5" width="29" height="29"/>
                                         <state key="normal" image="reloadIcon2.png">
                                             <color key="titleColor" white="0.19695060480000001" alpha="1" colorSpace="deviceWhite"/>
                                         </state>
@@ -462,6 +462,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="0wx-kF-YYX"/>
+        <segue reference="fZb-Mm-o0W"/>
     </inferredMetricsTieBreakers>
 </document>
