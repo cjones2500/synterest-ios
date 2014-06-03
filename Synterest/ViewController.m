@@ -331,6 +331,12 @@ sideBarActivationState;
         [subview removeFromSuperview];
     }
     
+    for(UIView *subview in self.fbEventDescriptionScroll.subviews)
+    {
+        [subview clearsContextBeforeDrawing];
+    }
+    
+    
     /*for (UIView *subview in self.fbEventDescriptionScroll.subviews) {
         [subview removeFromSuperview];
     }
@@ -493,8 +499,7 @@ sideBarActivationState;
 {
     //when the first hide annotation view is called. It will go to being 0.0 in width but not hidden.
     //this was implemented in this way so I could see what was going on when I moved between annotations in storyboard
-    NSLog(@"HIDE Content offset: x:%f y:%f",self.fbEventDescriptionScroll.contentOffset.x,self.fbEventDescriptionScroll.contentOffset.y);
-    
+    //NSLog(@"HIDE Content offset: x:%f y:%f",self.fbEventDescriptionScroll.contentOffset.x,self.fbEventDescriptionScroll.contentOffset.y);
     
     self.fbEventDescriptionScroll.contentOffset = CGPointZero;
     
@@ -557,10 +562,8 @@ sideBarActivationState;
     self.fbEventAddress.text = nil;
     self.fbEidText = nil;
     
-    //[self.fbEventDescriptionScroll setContentOffset:CGPointMake(0,self.fbEventDescription.frame.origin.y)  animated:YES];
-    //[self.fbEventTitleScroll setContentOffset:CGPointMake(0,self.fbEventTitle.frame.origin.y)  animated:YES];
     
-    
+
     
     MyLocation* anAnnotation =[view annotation];
     self.fbEidText = [anAnnotation fbEid];
@@ -1314,9 +1317,6 @@ sideBarActivationState;
     //locationManager = [[CLLocationManager alloc] init];
     
     //self.listTableView.delegate = self;
-    
-    //self.fbEventDescriptionScroll.delegate = self;
-    //self.fbEventTitleScroll.delegate = self;
     
     //need to add the subviews first
     [self.view addSubview:self.sideBarView];

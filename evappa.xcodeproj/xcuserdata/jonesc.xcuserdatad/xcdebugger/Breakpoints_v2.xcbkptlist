@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Synterest/ViewController.m"
-            timestampString = "423481574.279455"
+            timestampString = "423483587.437034"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "375"
-            endingLineNumber = "375"
+            startingLineNumber = "381"
+            endingLineNumber = "381"
             landmarkName = "-unHideAnnotationView"
             landmarkType = "5">
          </BreakpointContent>
