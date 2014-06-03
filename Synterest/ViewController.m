@@ -122,6 +122,21 @@ sideBarActivationState;
     }
 }
 
+-(void)getCurrentLocation
+{
+    @try{
+        CLLocationCoordinate2D newLocation = self.mapView.userLocation.location.coordinate;
+
+        CLPlacemark * recievedPlacemark = [_zoomLocation objectAtIndex:0];
+        locationToZoom.latitude = recievedPlacemark.location.coordinate.latitude;
+        locationToZoom.longitude = recievedPlacemark.location.coordinate.longitude;
+    }
+    @catch(NSException *error){
+        NSLog(@"Error: %@",error);
+        NSLog(@"Unreadable location. Moving to London");
+    }
+}
+
 //called at the beginning of loading a view
 - (void)loadView{
     firstDisplayOfEventPicker = YES;
@@ -132,21 +147,16 @@ sideBarActivationState;
     firstLoad = YES;
     hasInitialFacebookDataBeenSource = NO;
     
+    [self performSelectorOnMainThread:@selector(getCurrentLocation) withObject:nil waitUntilDone:YES];
+    
     if(_zoomLocation == nil){
         NSLog(@"zoomLocation is nil");
+        //[self loadView];
         [self performSelectorOnMainThread:@selector(setInitialLocationIfNull) withObject:nil waitUntilDone:YES];
     }
     else{
         //unpack the zoomLocation variable
-        @try{
-            CLPlacemark * recievedPlacemark = [_zoomLocation objectAtIndex:0];
-            locationToZoom.latitude = recievedPlacemark.location.coordinate.latitude;
-            locationToZoom.longitude = recievedPlacemark.location.coordinate.longitude;
-        }
-        @catch(NSException *error){
-            NSLog(@"Error: %@",error);
-            NSLog(@"Unreadable location. Moving to London");
-        }
+        [self getCurrentLocation];
     }
     [super loadView];
 }
@@ -190,35 +200,41 @@ sideBarActivationState;
         [self.listViewAnnotations addObject:anAnnotation];
     }
     
-    NSMutableArray *checkEidArray = [[NSMutableArray alloc] initWithCapacity:0];
     
-    for (id<MKAnnotation> annotation in _mapView.annotations)
-    {
-        MyLocation *anAnnotation = annotation;
-        [checkEidArray addObject:[anAnnotation fbEid]];
-    }
+    @try{
+        NSMutableArray *checkEidArray = [[NSMutableArray alloc] initWithCapacity:0];
+    
+        for (id<MKAnnotation> annotation in _mapView.annotations)
+        {
+            MyLocation *anAnnotation = annotation;
+            [checkEidArray addObject:[anAnnotation fbEid]];
+        }
     
     
-    for (id<MKAnnotation> annotation in _mapView.annotations)
-    {
-        MyLocation *anAnnotation = annotation;
-        int counter = 0;
-        //loop through the current eid array
-        for(id item in checkEidArray){
-            if([item isEqualToString:[anAnnotation fbEid]]){
-                counter = counter + 1;
+        for (id<MKAnnotation> annotation in _mapView.annotations)
+        {
+            MyLocation *anAnnotation = annotation;
+            int counter = 0;
+            //loop through the current eid array
+            for(id item in checkEidArray){
+                if([item isEqualToString:[anAnnotation fbEid]]){
+                    counter = counter + 1;
+                }
             }
-        }
-        if(counter > 1){
-            //do not add this to the list
-        }
-        else{
-            [self.listViewAnnotations addObject:anAnnotation];
+            if(counter > 1){
+                //do not add this to the list
+            }
+            else{
+                [self.listViewAnnotations addObject:anAnnotation];
             
-        }
+            }
         
+        }
+        [self.listTableView reloadData];
     }
-    [self.listTableView reloadData];
+    @catch(NSException *e){
+        NSLog(@"Error: %@",e);
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -2208,11 +2224,13 @@ sideBarActivationState;
                 [self setCurrentCity:placemark.locality];
                 self.locationToSend = [NSMutableArray arrayWithObject:placemark];
             
-            
                 //only call the queryFunction if the data has changed
                 if([loadFacebookDataFlag boolValue] == YES){
                     if(self.currentCity != nil){
                         NSLog(@"calling query action from changed location");
+                        [self queryButtonAction];
+                    }
+                    else{
                         [self queryButtonAction];
                     }
                 }
