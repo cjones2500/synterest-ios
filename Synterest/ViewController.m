@@ -102,12 +102,8 @@ sideBarActivationState;
 
 -(void) setInitialLocationIfNull
 {
-    //if((self.mapView.userLocation.coordinate.latitude))
     locationToZoom.latitude = 51.50722;
     locationToZoom.longitude = -0.12750;
-    //self.mapView.userLocation.coordinate.longitude = locationToZoom.longitude;
-    //self.mapView.userLocation.coordinate.longitude = locationToZoom.longitude;
-    //locationToZoom = self.mapView.centerCoordinate;
 }
 
 //displays information about the date on the datepicker
@@ -120,17 +116,6 @@ sideBarActivationState;
         //don't call this value
     }
     else{
-        //deal with switching dates using the date bar
-        /*@try{
-            SynterestModel *aSynterestModel = [[SynterestModel alloc] init];
-            NSMutableArray* savedFacebookData =[aSynterestModel loadLocalData];
-            if(savedFacebookData != NULL){
-                [self plotFacebookData:savedFacebookData withReset:NO];
-            }
-        }
-        @catch(NSException *e){
-            NSLog(@"Parse Error for Date Filter %@",e);
-        }*/
         tomorrowIsActive = YES; //this causes the annotations to be added back
         customDateIsActive = NO;
         [self firedCustomEventChoice];
@@ -161,14 +146,8 @@ sideBarActivationState;
         @catch(NSException *error){
             NSLog(@"Error: %@",error);
             NSLog(@"Unreadable location. Moving to London");
-            //locationToZoom.latitude = 51.50722;
-            //locationToZoom.longitude = -0.12750;
         }
     }
-    
-    //[self performSelectorOnMainThread:@selector(initLocationFind) withObject:nil waitUntilDone:YES];
-    
-    //call the normal method of loadView (before override)
     [super loadView];
 }
 
@@ -177,47 +156,6 @@ sideBarActivationState;
     [super didReceiveMemoryWarning];
     // Release any cached data, images, etc that aren't in use.
 }
-
-//fires when the mapview center is changed (includes zooming in and out)
-- (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated{
-    
-    //need to fix this such that there is no random increasing of this value
-    //[self reverseGeocodeLocation];
-    
-    //[self reverseGeocodeLocation];
-    //check to see how many icons are in the view
-    //increase this to a certain value when the uses changes where they are
-    
-    //this is implemented to stop the search function firing when the user zooms in but only when they move
-    /*NSLog(@"mapview changed");
-    double longitudeLimit = 0.02;
-    double latitudeLimit = 0.02;
-    //CLPlacemark * centerPlacemark = [_zoomLocation objectAtIndex:0];
-    double currentCenterLongitude = self.mapView.centerCoordinate.longitude;
-    double currentCenterLatitude = self.mapView.centerCoordinate.latitude;
-    NSLog(@" currentLatitude %f",currentCenterLatitude);
-    NSLog(@" currentPlacemarkLatitude %f",locationToZoom.latitude);
-    if( (currentCenterLongitude > locationToZoom.longitude + longitudeLimit) ||(currentCenterLongitude < locationToZoom.longitude - longitudeLimit)){
-        NSLog(@"in here");
-        //[self plotFacebookData:nil];
-        //[self queryButtonAction];
-        [NSThread detachNewThreadSelector:@selector(queryButtonAction) toTarget:self withObject:nil];
-    }
-    else if((currentCenterLatitude > locationToZoom.latitude + latitudeLimit) ||(currentCenterLatitude < locationToZoom.latitude - latitudeLimit)){
-        //[self plotFacebookData:nil];
-        //[self queryButtonAction];
-        [NSThread detachNewThreadSelector:@selector(queryButtonAction) toTarget:self withObject:nil];
-    }
-    else{
-        //do nothing
-    }*/
-}
-
-//- (void)mapView:(MKMapView *)aMapView didAddAnnotationViews:(NSArray *)views{
-//    NSLog(@"getting called here");
-//    [self queryButtonAction];
-//}
-
 
 -(void)toggleSideBarView
 {
@@ -245,11 +183,6 @@ sideBarActivationState;
         [self.listTableView reloadData];
     }
     self.listViewAnnotations = [ NSMutableArray arrayWithCapacity:1];
-    //else{
-       //[self.listViewAnnotations removeAllObjects];
-        //[self.listTableView reloadData];
-        //self.listViewAnnotations = nil;
-    //}
     
     for (id<MKAnnotation> annotation in _mapView.annotations)
     {
@@ -277,39 +210,14 @@ sideBarActivationState;
             }
         }
         if(counter > 1){
-            NSLog(@"event title : %@",[anAnnotation name]);
-            NSLog(@"counter : %i",counter);
             //do not add this to the list
         }
         else{
-            //[self.mapView removeAnnotation:annotation];
             [self.listViewAnnotations addObject:anAnnotation];
             
         }
         
     }
-    
-    /*for (id<MKAnnotation> annotation in _mapView.annotations)
-    {
-        MyLocation *anAnnotation = annotation;
-        int counter = 0;
-        
-        for(id item in checkEidArray){
-            
-            if([item isEqualToString:[anAnnotation fbEid]]){
-                //remove from annotation and break this loop
-                counter = counter +1;
-            }
-            if(counter > 1){
-                [self.mapView removeAnnotation:annotation];
-                //counter = 0;
-            }
-        }
-    }*/
-    
-    //NSLog(@"count number of annotations: %i",[self.mapView.annotations count]);
-    
-    
     [self.listTableView reloadData];
 }
 
@@ -339,7 +247,6 @@ sideBarActivationState;
 {
     @try{
         MyLocation* anAnnotation =[self.listViewAnnotations objectAtIndex:indexPath.row];
-        //NSLog(@"annotation: %@",anAnnotation.fbDescription);
         [self.view endEditing:YES];
         [self loadAnnotationView:anAnnotation];
         [self unHideAnnotationView];
@@ -389,15 +296,6 @@ sideBarActivationState;
         [subview clearsContextBeforeDrawing];
     }
     
-    
-    /*for (UIView *subview in self.fbEventDescriptionScroll.subviews) {
-        [subview removeFromSuperview];
-    }
-    
-    for (UIView *subview in self.fbEventTitleScroll.subviews) {
-        [subview removeFromSuperview];
-    }*/
-    
     //initial responder
     if(self.annotationBarView.frame.size.width > 0){
         CGRect annotationBarViewFrameFix = self.annotationBarView.frame;
@@ -416,22 +314,6 @@ sideBarActivationState;
     [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
     self.annotationBarView.frame = annotationBarViewFrame;
     [UIView commitAnimations];
-    
-    //[self.fbEventDescriptionScroll scrollRectToVisible:CGRectMake(0, 0, 1, 1)
-    //animated:NO];
-    
-    /*UIScrollView* fbDesScroll = (UIScrollView*) self.view ;
-    CGRect rc = [self.fbEventDescription bounds];
-    rc = [self.fbEventDescription convertRect:rc toView:fbDesScroll];
-    rc.origin.x = 0.0 ;
-    rc.origin.y = 0.0 ;
-    [self.fbEventDescriptionScroll scrollRectToVisible:rc animated:YES];*/
-    
-    //self.fbEventDescriptionScroll.contentOffset = CGPointMake(0.0,self.fbEventDescription.frame.origin.y);
-    //[self.fbEventDescriptionScroll setContentOffset:CGPointMake(0.0,self.fbEventDescription.frame.origin.y)  animated:YES];
-    //[self.fbEventDescriptionScroll setContentOffset:CGPointMake(0.0,0.0)  animated:NO];
-    //[self.fbEventTitleScroll setContentOffset:CGPointMake(0.0,0.0)  animated:NO];
-    NSLog(@"Content offset: x:%f y:%f",self.fbEventDescriptionScroll.contentOffset.x,self.fbEventDescriptionScroll.contentOffset.y);
 
 }
 
@@ -446,17 +328,6 @@ sideBarActivationState;
 
 -(void)unhideListView
 {
-    //[self updateTableView];
-    //NSLog(@"self.listViewAnnotations: %@",self.listViewAnnotations);
-    //[self updateTableView];
-    //[self.listTableView reloadData];
-    NSLog(@"listView frame height : %f",self.listView.frame.size.height);
-    
-    //add a delay to make sure this happens
-    //[self unHideFirstTime];
-    //[self performSelector:@selector(unHideFirstTime) withObject:nil afterDelay:.1];
-    
-    
     self.listView.hidden = NO;
     CGRect listViewFrame = self.listView.frame;
     listViewFrame.size.height = self.view.frame.size.height;
@@ -487,72 +358,10 @@ sideBarActivationState;
     [UIView commitAnimations];
 }
 
-//this works to put events in the calender
--(IBAction)testingEventStuff:(id)sender
-{
-    /*NSString* fql1 = [NSString stringWithFormat:
-                      @"select uid2 from friend where uid1 == 10 order by rand() limit 10"];
-    NSString* fql2 = [NSString stringWithFormat:
-                      @"select uid, name from user where uid in (select uid2 from #queryID)"];
-    NSString* fql3 = [NSString stringWithFormat:
-                      @"select uid, status_id, message from status where uid in (select uid from #queryName) limit 1"];
-    NSString* fql = [NSString stringWithFormat:
-                     @"{\"queryID\":\"%@\",\"queryName\":\"%@\",\"queryStatus\":\"%@\"}",fql1,fql2,fql3];*/
-    
-    NSString *query =
-    @"{"
-    @"'friends':'SELECT eid, name FROM event WHERE contains('London') LIMIT 10',"
-    @"'friendinfo':'SELECT eid FROM event WHERE eid IN (SELECT eid FROM #friends)',"
-    @"}";
-    
-    /*@"{"
-    @"'query1':'SELECT eid2, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('London') AND start_time > now() ORDER BY rand() LIMIT 10',"
-    @"'friendinfo':'SELECT eid FROM event WHERE eid IN (SELECT eid2 FROM #query1)',"
-    @"}";*/
-    // Set up the query parameter
-    NSDictionary *queryParam = @{ @"q": query };
-    
-    //NSDictionary* params = [NSDictionary dictionaryWithObject:fql forKey:@"queries"];
-    
-    [FBRequestConnection startWithGraphPath:@"/fql"
-                                 parameters:queryParam
-                                 HTTPMethod:@"GET"
-                          completionHandler:^(FBRequestConnection *connection,
-                                              id result,
-                                              NSError *error) {
-                              if (error) {
-                                  NSLog(@"Error: %@", [error localizedDescription]);
-                              } else {
-                                  NSLog(@"in here extending the view");
-                                  NSLog(@"results: %@",result);
-        
-                              }
-                          }];
-    
-    /*EKEventStore *eventStore = [[EKEventStore alloc] init];
-    
-    [eventStore requestAccessToEntityType:EKEntityTypeEvent
-                                completion:^(BOOL granted, NSError *error) {
-                                    if (!granted)
-                                        NSLog(@"Access to store not granted");
-                                }];
-    
-    EKEvent *event  = [EKEvent eventWithEventStore:eventStore];
-    event.calendar  = [eventStore defaultCalendarForNewEvents];
-    event.title     = @"/dev/world/feffefefefe";
-    event.location  = @"Melbourne";
-    event.notes     = @"AUC Developer Conference";
-    event.startDate = [NSDate dateWithTimeIntervalSinceNow:0];
-    event.endDate   = [NSDate dateWithTimeIntervalSinceNow:3600];
-    event.allDay    = YES;
-    [eventStore saveEvent:event span:EKSpanThisEvent error:nil];*/
-}
-
 -(void)hideAnnotationView
 {
     //when the first hide annotation view is called. It will go to being 0.0 in width but not hidden.
     //this was implemented in this way so I could see what was going on when I moved between annotations in storyboard
-    //NSLog(@"HIDE Content offset: x:%f y:%f",self.fbEventDescriptionScroll.contentOffset.x,self.fbEventDescriptionScroll.contentOffset.y);
     
     self.fbEventDescriptionScroll.contentOffset = CGPointZero;
     
@@ -599,24 +408,18 @@ sideBarActivationState;
 -(void)tapOnSearchDetected{
     
     [self toggleSideBarView];
-    //[self performSegueWithIdentifier:@"search_screen_segue" sender:self];
 }
 
 
 //This overrides the current clicking function that occurs here
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
 {
-    NSLog(@"clicked on an annotation");
-    
     //remove the data from any exsisting subview
     self.fbEventTitle.text = nil;
     self.fbEventDate.text = nil;
     self.fbEventDescription.text = @"";
     self.fbEventAddress.text = @"";
     self.fbEidText = nil;
-    
-    
-
     
     MyLocation* anAnnotation =[view annotation];
     self.fbEidText = [anAnnotation fbEid];
@@ -625,20 +428,6 @@ sideBarActivationState;
     self.fbEventDate.text = [anAnnotation fbEventDate];
     self.fbEventDescription.text = [anAnnotation fbDescription];
     self.fbEventTitle.text = [anAnnotation name];
-    
-    NSLog(@"address value: %@",self.fbEventAddress);
-    
-    //reduce the size of the text until it fits
-    /*if (self.fbEventAddress.contentSize.width> self.fbEventAddress.frame.size.width) {
-        int fontIncrement = 1;
-        while (self.fbEventAddress.contentSize.width > self.fbEventAddress.frame.size.width) {
-            NSLog(@"reducing text");
-            self.fbEventAddress.font = [UIFont systemFontOfSize:12.0-fontIncrement];
-            fontIncrement++;
-        }
-    }*/
-    
-    
     [self unHideAnnotationView];
 }
 
