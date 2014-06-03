@@ -611,10 +611,11 @@ sideBarActivationState;
         [formatFb setDateFormat:@"dd/MM/yyyy HH:mm"];
         NSLog(@"start date %@",self.fbEventDate.text);
         NSDate *formattedFacebookEventDate = [formatFb dateFromString:self.fbEventDate.text];
+        NSDate *endTimeOfEvent = [formattedFacebookEventDate dateByAddingTimeInterval:3600];
         NSLog(@" after format start date %@",formattedFacebookEventDate);
         event.startDate = formattedFacebookEventDate;
-        event.endDate = formattedFacebookEventDate;
-        event.allDay = YES;
+        event.endDate = endTimeOfEvent;
+        //event.allDay = YES;
         [eventStore saveEvent:event span:EKSpanThisEvent error:nil];
     
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Event Added"

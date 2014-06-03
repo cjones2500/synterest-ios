@@ -8,8 +8,9 @@
 
 #import "SynterestModel.h"
 
-@implementation SynterestModel
-
+@implementation SynterestModel{
+    NSMutableArray *checkEidList;
+}
 #define MAXIMUM_NUMBER_ANNOTATIONS 10000  //maximum number of annotations stored in memory
 
 //Save facebook data for synterest to the local phone cache
@@ -234,6 +235,13 @@
         
     //}
     
+    if(checkEidList ==nil){
+        checkEidList = [[NSMutableArray alloc] initWithCapacity:1];
+    }
+    
+    //Create the eid check list
+    //NSMutableArray * checkEidList = [[NSMutableArray alloc] initWithCapacity:1];
+    
     // result is the json response from a successful request
     NSDictionary *dictionary = (NSDictionary *)result;
     
@@ -307,12 +315,34 @@
         //NSLog(@"string date: %@",dateFromString);
         //NSLog(@"current date: %@",currentTime);
         
+        NSString *currentEid = [singleResult objectForKey:@"eid"];
+        BOOL itemPresent = NO;
+        
+        //Loop through current eid check list and see if this is present
+        for(NSString* item in checkEidList)
+        {
+            if([currentEid isEqualToString:item]){
+                itemPresent = YES;
+            }
+        }
+        if(itemPresent == NO){
+            //add item to the check eid List
+            [checkEidList addObject:currentEid];
+        }
+        
+
+        
+        
         //filter the results of events
         if(dateFromString == nil){
             NSLog(@"null date");
         }
         else if(currentTime < dateFromString){
             NSLog(@"event has already passed");
+        }
+        else if(itemPresent == YES){
+            NSLog(@"This eid is already present");
+            //skip this item in the loop
         }
         //TODO: add the ability to add events within a certain time period
         /*else if(dateInOneWeek > dateFromString){
