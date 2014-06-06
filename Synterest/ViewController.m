@@ -1555,7 +1555,9 @@ sideBarActivationState;
     self.additionalFacebookData =[aSynterestModel performSelector:@selector(parseFbFqlResult:) withObject:self.extraFacebookData[0]];
     //[aSynterestModel performSelector:@selector(saveAdditionalLocalData:) onThread:[NSThread currentThread] withObject:self.additionalFacebookData waitUntilDone:YES];
     [aSynterestModel performSelector:@selector(saveAdditionalLocalData:) withObject:self.additionalFacebookData];
-    NSMutableArray* savedFacebookData =[aSynterestModel loadLocalData];
+    
+    //NSMutableArray* savedFacebookData =[aSynterestModel loadLocalData];
+    [aSynterestModel loadLocalData];
     //[self performSelector:@selector(plotFacebookData:) onThread:[NSThread currentThread] withObject:savedFacebookData waitUntilDone:YES];
     
     //[self plotFacebookData:savedFacebookData withReset:NO];
