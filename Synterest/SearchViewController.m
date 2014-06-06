@@ -283,6 +283,10 @@ searchString {
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    
+    NSNumber *numberToSend = [NSNumber numberWithBool:YES];
+    [[segue destinationViewController] setBackFromSearch:numberToSend];
+    
     NSMutableArray *arrayToSend = [[NSMutableArray alloc] initWithCapacity:100];
     if ([[segue identifier] isEqualToString:@"back_from_search"]) {
         if(inforamtionToSendBacktoMainView != nil){

@@ -53,6 +53,7 @@
     BOOL firstDisplayOfEventPicker;
     BOOL userTriggerRefresh;
     BOOL anotherSearchInProgress;
+    BOOL userChosenLocation;
     NSDate *currentSelectedEventPickerDate;
 }
 
@@ -60,6 +61,7 @@
 currentCity,
 dataToLoadToAnnotationView,
 loadFacebookDataFlag,
+backFromSearch,
 additionalFacebookData,
 firstViewFlag,
 loadingDataWheel,
@@ -590,7 +592,6 @@ sideBarActivationState;
         }
     }
     [self refreshSearch];
-    //[NSThread detachNewThreadSelector:@selector(extendAnnotationsOnMap) toTarget:self withObject:nil];
 }
 
 /*- (void)mapViewDidFinishRenderingMap:(MKMapView *)mapView fullyRendered:(BOOL)fullyRendered
@@ -682,7 +683,7 @@ sideBarActivationState;
     
     for(id keyword in arrayOfKeywords){
         
-        if(facebookEventLoadCounter > 7){
+        if(facebookEventLoadCounter > 4){
             //add events
             SynterestModel *aSynterestModel = [[SynterestModel alloc] init];
             NSMutableArray* savedFacebookData =[aSynterestModel loadLocalData];
@@ -1150,32 +1151,41 @@ sideBarActivationState;
     //[self updateTableView];
 }
 
+//only updates location if the user has changed position by over 500m
+- (void)locationManager:(CLLocationManager *)manager
+     didUpdateLocations:(NSArray *)locations {
+    
+    // If it's a relatively recent event, turn off updates to save power.
+    CLLocation* updateLocation = [locations lastObject];
+    
+    
+    if([backFromSearch boolValue] == YES){
+        [self setBackFromSearch:[NSNumber numberWithBool:NO]];
+    }
+    else{
+        [self stopExtraFacebookData];
+        locationToZoom.latitude = updateLocation.coordinate.latitude;
+        locationToZoom.longitude = updateLocation.coordinate.longitude;
+        self.mapView.centerCoordinate = updateLocation.coordinate;
+        MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(locationToZoom, 0.5*METERS_PER_MILE, 0.5*METERS_PER_MILE);
+        [_mapView setRegion:viewRegion animated:YES];
+        [self performSelectorOnMainThread:@selector(initReverseGeocodeLocation) withObject:nil waitUntilDone:YES];
+        [self updateTableView];
+    }
+}
+
 - (void)viewDidLoad
 {
-    //[self performSelectorOnMainThread:@selector(initReverseGeocodeLocation) withObject:nil waitUntilDone:YES];
-    
-    [super viewDidLoad];
-    
     self.dateOptionsArray = [NSArray arrayWithObjects:@"today",@"tomorrow",@"this week",nil];
-    
     self.locationManager = [[CLLocationManager alloc] init] ;
     self.locationManager.delegate = self;
-    //[self.locationManager startUpdatingLocation];
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyKilometer;
     
-    //self.calenderPickerView.delegate = self;
-    //self.calenderPickerView.dataSource = self;
-    
+    // Set a movement threshold for new events.
+    self.locationManager.distanceFilter = 500;
+    [self.locationManager startUpdatingLocation];
+    [super viewDidLoad];
     self.mapView.showsUserLocation=YES;
-    /*CLLocationCoordinate2D loc = [self.locationManager.location coordinate];
-    if([firstViewFlag boolValue] == YES){
-        NSLog(@"First View");
-        [self.mapView setCenterCoordinate:loc];
-    }*/
-    
-    //Start the location Manager
-    //locationManager = [[CLLocationManager alloc] init];
-    
-    //self.listTableView.delegate = self;
     
     //need to add the subviews first
     [self.view addSubview:self.sideBarView];
@@ -1196,11 +1206,9 @@ sideBarActivationState;
     [self.view insertSubview:self.eventDatePicker atIndex:5];
     [self.view insertSubview:self.fbPageView atIndex:10];
     
-    //[self.view inser]
     self.eventDatePicker.hidden = YES;
     self.fbPageView.hidden = YES;
     self.fbPageView.layer.masksToBounds = YES;
-    //[self.view insertSubview:self.calenderPickerView atIndex:5];
     //be very careful with the indexes as they might prevent gesture functions from working
     
     //keeps items within the view
@@ -1260,22 +1268,7 @@ sideBarActivationState;
     //self.eventDatePicker.backgroundColor = [UIColor colorWithRed:(186/255.0) green:(255/255.0) blue:(141/255.0) alpha:1];
     
     self.eventDatePicker.backgroundColor = [UIColor whiteColor];
-    
-    //address view in annotation view
-    //self.fbEventAddress
-    //self.fbEventAddress.frame = CGRectMake(self.fbEventAddress.frame.origin.x, self.fbEventAddress.frame.origin.y, self.fbEventAddress.contentSize.width, self.fbEventAddress.contentSize.height);
-    
-    //Set up behaviour if for the calenderImageView
-    /*UITapGestureRecognizer *singleTapOnCalenderImageView = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(moveToCalender)];
-    singleTapOnCalenderImageView.numberOfTapsRequired = 1;
-    _calenderImageView.userInteractionEnabled = YES;
-    [_calenderImageView addGestureRecognizer:singleTapOnCalenderImageView];*/
-    
-    
-    //self.annotationBarView.autoresizesSubviews = YES;
-    
-    //self.calenderPickerView.hidden = NO;
-    
+
     //button views in Calender View Controls
     self.nextWeekButton.layer.cornerRadius = 5;
     self.nextTwoDaysButton.layer.cornerRadius = 5;
@@ -1320,30 +1313,11 @@ sideBarActivationState;
     tapToFacebookEventLink2.numberOfTapsRequired = 1;
     [self.fbEventTitle addGestureRecognizer:tapToFacebookEventLink2];
     self.fbEventTitle.userInteractionEnabled = YES;
-    //[self.calenderStaticImage addGestureRecognizer:tapGestureRecognizerCal];
-    
-    
-    
-    /*_searchButton.backgroundColor = [UIColor whiteColor];
-    _searchButton.layer.borderColor = [UIColor blackColor].CGColor;
-    _searchButton.layer.borderWidth = 0.5f;
-    _searchButton.layer.cornerRadius = 10.0f;*/
     
     //Magic line that makes the mapView call the annotation script
     _mapView.delegate=self;
     
     self.loadingDataWheel.color = [UIColor blackColor];
-    
-    
-    //remove the date picker on click on
-    
-    /*if([self.loadFacebookDataFlag boolValue] == YES){
-        //perform actions if the facebook flag has been called
-        [self updateView];
-        //[self setLoadFacebookDataFlag:[NSNumber numberWithBool:NO]];
-    }*/
-    
-    //[self updateView];
     
     AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
     if (!appDelegate.session.isOpen) {
@@ -1394,15 +1368,6 @@ sideBarActivationState;
 // main helper method to update the UI to reflect the current state of the session.
 - (void)updateView {
     // get the app delegate, so that we can reference the session property
-    /*AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
-    if (appDelegate.session.isOpen) {
-        // valid account UI is shown whenever the session is open
-        [self.buttonLoginLogout setTitle:@"Log out" forState:UIControlStateNormal];
-    } else {
-        // login-needed account UI is shown whenever the session is closed
-        [self.buttonLoginLogout setTitle:@"Log in" forState:UIControlStateNormal];
-    }*/
-    
     //Get the synterest Model
     SynterestModel *aSynterestModel = [[SynterestModel alloc] init];
     //Place Data on the screen if any is stored in Memory
@@ -1572,14 +1537,7 @@ sideBarActivationState;
                               } else {
                                   NSLog(@"in here extending the view");
                                   [self.extraFacebookData addObject:result];
-                                  //self.extraFacebookData =[aSynterestModel performSelector:@selector(parseFbFqlResult:) withObject:result];
-                                  
-                                  //[self performSelector:@selector(addNewDataToMap:) onThread:[NSThread currentThread] withObject:self.extraFacebookData waitUntilDone:YES];
                                   [self addNewDataToMap:self.extraFacebookData];
-                                  /*[aSynterestModel performSelector:@selector(saveAdditionalLocalData:) withObject:facebookData];
-                                  NSMutableArray* savedFacebookData =[aSynterestModel loadLocalData];
-                                  [self plotFacebookData:savedFacebookData];*/
-                                  //[self addNewDataToMap:self.extraFacebookData];
                                   compblock2(YES);
                               }
                           }];
@@ -2293,8 +2251,10 @@ sideBarActivationState;
     //[self updateTableView];
     
     //[self reverseGeocodeLocation];
-    [self performSelectorOnMainThread:@selector(initReverseGeocodeLocation) withObject:nil waitUntilDone:YES];
-    [self updateTableView];
+    //if(firstLoad == NO){
+        [self performSelectorOnMainThread:@selector(initReverseGeocodeLocation) withObject:nil waitUntilDone:YES];
+        [self updateTableView];
+    //}
     
 }
 

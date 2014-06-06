@@ -55,6 +55,7 @@
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loadingDataWheel;
 @property (nonatomic, retain) CLLocation *reverseGeocodeLocationValue;
 @property (weak,nonatomic) NSNumber *loadFacebookDataFlag;
+@property (weak,nonatomic) NSNumber *backFromSearch;
 @property (weak,nonatomic) NSNumber *firstViewFlag;
 
 //List view of events
