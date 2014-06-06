@@ -730,7 +730,7 @@ sideBarActivationState;
         userTriggerRefresh = NO;
     }
     else{
-        arrayOfKeywords= [NSArray arrayWithObjects:@"music",@"society",@"night",@"band",@"experience",@"tickets",@"food",@"people",@"social",@"meeting",@"drink",@"gig",@"talk",@"party",@"club",@"sport",@"event",@"society",@"group",@"art",@"business",@"food",@"dinner",@"culture",@"festival",@"dance",@"cafe",@"jazz",@"tour",@"exhibition",@"show",@"bar",@"class",@"theatre",@"football",@"hockey",@"tournament",@"match",@"college",@"time",@"well",@"student",@"new",@"old",@"live",@"book",@"fair",@"big",@"little",@"project",@"happy",nil];
+        arrayOfKeywords= [NSArray arrayWithObjects:@"",@"music",@"society",@"night",@"band",@"experience",@"tickets",@"food",@"people",@"social",@"meeting",@"drink",@"gig",@"talk",@"party",@"club",@"sport",@"event",@"society",@"group",@"art",@"business",@"food",@"dinner",@"culture",@"festival",@"dance",@"cafe",@"jazz",@"tour",@"exhibition",@"show",@"bar",@"class",@"theatre",@"football",@"hockey",@"tournament",@"match",@"college",@"time",@"well",@"student",@"new",@"old",@"live",@"book",@"fair",@"big",@"little",@"project",@"happy",nil];
     }
     
     for(id keyword in arrayOfKeywords){
@@ -1160,6 +1160,7 @@ sideBarActivationState;
     
     
     if([backFromSearch boolValue] == YES){
+        [self performSelectorOnMainThread:@selector(initReverseGeocodeLocation) withObject:nil waitUntilDone:YES];
         [self setBackFromSearch:[NSNumber numberWithBool:NO]];
     }
     else{
@@ -1556,8 +1557,8 @@ sideBarActivationState;
     //[aSynterestModel performSelector:@selector(saveAdditionalLocalData:) onThread:[NSThread currentThread] withObject:self.additionalFacebookData waitUntilDone:YES];
     [aSynterestModel performSelector:@selector(saveAdditionalLocalData:) withObject:self.additionalFacebookData];
     
-    //NSMutableArray* savedFacebookData =[aSynterestModel loadLocalData];
-    [aSynterestModel loadLocalData];
+    NSMutableArray* savedFacebookData =[aSynterestModel loadLocalData];
+    //[aSynterestModel loadLocalData];
     //[self performSelector:@selector(plotFacebookData:) onThread:[NSThread currentThread] withObject:savedFacebookData waitUntilDone:YES];
     
     //[self plotFacebookData:savedFacebookData withReset:NO];
@@ -2253,10 +2254,10 @@ sideBarActivationState;
     //[self updateTableView];
     
     //[self reverseGeocodeLocation];
-    //if(firstLoad == NO){
+    if((firstLoad != YES) || ([backFromSearch boolValue] == YES)){
         [self performSelectorOnMainThread:@selector(initReverseGeocodeLocation) withObject:nil waitUntilDone:YES];
         [self updateTableView];
-    //}
+    }
     
 }
 
