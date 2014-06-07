@@ -2253,6 +2253,8 @@ sideBarActivationState;
     
     //[self updateTableView];
     
+    //if((firstLoad != YES) && ([CLLocationManager])
+    
     //[self reverseGeocodeLocation];
     if((firstLoad != YES) || ([backFromSearch boolValue] == YES)){
         [self performSelectorOnMainThread:@selector(initReverseGeocodeLocation) withObject:nil waitUntilDone:YES];
