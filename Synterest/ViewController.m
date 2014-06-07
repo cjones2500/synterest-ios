@@ -460,7 +460,7 @@ sideBarActivationState;
                                    if (!granted)
                                        NSLog(@"Access to store not granted");
                                }];
-    
+        //TODO: if permission granted do this
         EKEvent *event  = [EKEvent eventWithEventStore:eventStore];
         event.calendar  = [eventStore defaultCalendarForNewEvents];
         event.title     = self.fbEventTitle.text;
@@ -2253,6 +2253,7 @@ sideBarActivationState;
     
     //[self updateTableView];
     
+    //check to see if the location manager is ready and if permission has been given
     //if((firstLoad != YES) && ([CLLocationManager])
     
     //[self reverseGeocodeLocation];
