@@ -54,6 +54,7 @@
     BOOL userTriggerRefresh;
     BOOL anotherSearchInProgress;
     BOOL userChosenLocation;
+    BOOL accessToCalenderGranted;
     NSDate *currentSelectedEventPickerDate;
 }
 
@@ -465,11 +466,12 @@ sideBarActivationState;
         [eventStore requestAccessToEntityType:EKEntityTypeEvent
                                completion:^(BOOL granted, NSError *error) {
                                    if (!granted){
+                                       accessToCalenderGranted = NO;
                                        NSLog(@"Access to store not granted");
                                    }
                                    else if (granted){
                                        NSLog(@"Access granted");
-                                       //TODO: if permission granted do this
+                                       accessToCalenderGranted = YES;
                                        EKEvent *event  = [EKEvent eventWithEventStore:eventStore];
                                        event.calendar  = [eventStore defaultCalendarForNewEvents];
                                        event.title     = self.fbEventTitle.text;
@@ -484,18 +486,36 @@ sideBarActivationState;
                                        NSLog(@" after format start date %@",formattedFacebookEventDate);
                                        event.startDate = formattedFacebookEventDate;
                                        event.endDate = endTimeOfEvent;
-                                       //event.allDay = YES;
                                        [eventStore saveEvent:event span:EKSpanThisEvent error:nil];
-                                       
-                                       UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Event Added"
-                                                                                       message:[NSString stringWithFormat:@"%@ has been added to your Calender",self.fbEventTitle.text]
-                                                                                      delegate:nil
-                                                                             cancelButtonTitle:@"OK"
-                                                                             otherButtonTitles:nil];
-                                       [alert show];
                                    }
+               
                                }];
-
+        
+        /*UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Event Added"
+                                                        message:[NSString stringWithFormat:@"%@ has been added to your Calender",self.fbEventTitle.text]
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];*/
+        
+        /*if(accessToCalenderGranted != NO){
+            EKEvent *event  = [EKEvent eventWithEventStore:eventStore];
+            event.calendar  = [eventStore defaultCalendarForNewEvents];
+            event.title     = self.fbEventTitle.text;
+            event.location  = self.fbEventAddress.text;
+            event.notes     = self.fbEventDescription.text;
+        
+            NSDateFormatter *formatFb = [[NSDateFormatter alloc] init];
+            [formatFb setDateFormat:@"dd/MM/yyyy HH:mm"];
+            NSLog(@"start date %@",self.fbEventDate.text);
+            NSDate *formattedFacebookEventDate = [formatFb dateFromString:self.fbEventDate.text];
+            NSDate *endTimeOfEvent = [formattedFacebookEventDate dateByAddingTimeInterval:3600];
+            NSLog(@" after format start date %@",formattedFacebookEventDate);
+            event.startDate = formattedFacebookEventDate;
+            event.endDate = endTimeOfEvent;
+            [eventStore saveEvent:event span:EKSpanThisEvent error:nil];
+        }*/
+        
     }
     @catch(NSException *e){
         NSLog(@"iCal Error %@",e);
@@ -1482,23 +1502,14 @@ sideBarActivationState;
 }
 
 - (void)extendAnnotationsOnMap:(NSString*)keywordString withCompletion:(myCompletion) compblock{
-    //finishedLoadingExtraData = NO;
     self.extraFacebookData = [[NSMutableArray alloc] initWithCapacity:100];
     NSLog(@"keyword %@",keywordString);
-    //[self performSelector:@selector(queryFacebookDb:) withObject:keyword];
-    //old way
-    //[self performSelectorOnMainThread:@selector(queryFacebookDb:) withObject:keywordString waitUntilDone:YES];
-    //new way
     __block BOOL waitingForInnerBlock = YES;
     [self queryFacebookDb:keywordString withCompletion:^(BOOL finished) {
         if(finished == YES){
             NSLog(@"success inner");
             NSLog(@"completion value inner");
             waitingForInnerBlock = NO;
-            //do somestuff
-            //[self addNewDataToMap:self.extraFacebookData];
-            // Assert the truth
-            //finished = YES;
         }
     }];
     
@@ -1593,7 +1604,7 @@ sideBarActivationState;
             //NSLog(@" string in question %@",self.currentCity);
         }
         else{
-            query =@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('London') AND (venue.city = 'London') AND (venue.street != '') AND start_time > now() ORDER BY rand() LIMIT 3";
+            query =@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('London') AND (venue.city = 'London') AND (venue.street != '') AND start_time > now() ORDER BY rand() LIMIT 100";
             NSLog(@"self.currentCity = null string");
         }
     }
@@ -1601,7 +1612,7 @@ sideBarActivationState;
         NSLog(@"Error appending string: %@",e);
         //NSLog(@" string in question %@",self.currentCity);
         //default the automatic search to London if there is uncertainty
-        query =@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('London') AND (venue.city = 'London') AND (venue.street != '') AND start_time > now() ORDER BY rand() LIMIT 3";
+        query =@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('London') AND (venue.city = 'London') AND (venue.street != '') AND start_time > now() ORDER BY rand() LIMIT 100";
     }
     
     AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
