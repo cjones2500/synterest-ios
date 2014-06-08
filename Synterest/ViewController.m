@@ -409,6 +409,15 @@ sideBarActivationState;
     NSLog(@"center of Map %f",newLocation.longitude);
     
     //TODO:Add the ability to prompt location services if not activated
+    BOOL locationAllowed = [CLLocationManager locationServicesEnabled];
+    if(locationAllowed == NO){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Location Service Disabled"
+                                                        message:@"To re-enable, please go to Settings and turn on Location Service for this app."
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+    }
     
     //Don't move unless there are real values
     if( (self.mapView.userLocation.location.coordinate.latitude == 0.0) || (self.mapView.userLocation.location.coordinate.latitude == 0.0)){
