@@ -408,9 +408,7 @@ sideBarActivationState;
     NSLog(@"center of Map %f",newLocation.latitude);
     NSLog(@"center of Map %f",newLocation.longitude);
     
-    //TODO:Add the ability to prompt location services if not activated
-    BOOL locationAllowed = [CLLocationManager locationServicesEnabled];
-    if(locationAllowed == NO){
+    if([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied){
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Location Service Disabled"
                                                         message:@"To re-enable, please go to Settings and turn on Location Service for this app."
                                                        delegate:nil
@@ -1511,7 +1509,6 @@ sideBarActivationState;
     }
 
     compblock(YES);
-    
 }
 
 -(void)queryFacebookDb:(NSString*)queryString withCompletion:(myCompletion2) compblock2{
