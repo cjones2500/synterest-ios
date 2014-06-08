@@ -466,33 +466,38 @@ sideBarActivationState;
     
         [eventStore requestAccessToEntityType:EKEntityTypeEvent
                                completion:^(BOOL granted, NSError *error) {
-                                   if (!granted)
+                                   if (!granted){
                                        NSLog(@"Access to store not granted");
+                                   }
+                                   else if (granted){
+                                       NSLog(@"Access granted");
+                                       //TODO: if permission granted do this
+                                       EKEvent *event  = [EKEvent eventWithEventStore:eventStore];
+                                       event.calendar  = [eventStore defaultCalendarForNewEvents];
+                                       event.title     = self.fbEventTitle.text;
+                                       event.location  = self.fbEventAddress.text;
+                                       event.notes     = self.fbEventDescription.text;
+                                       
+                                       NSDateFormatter *formatFb = [[NSDateFormatter alloc] init];
+                                       [formatFb setDateFormat:@"dd/MM/yyyy HH:mm"];
+                                       NSLog(@"start date %@",self.fbEventDate.text);
+                                       NSDate *formattedFacebookEventDate = [formatFb dateFromString:self.fbEventDate.text];
+                                       NSDate *endTimeOfEvent = [formattedFacebookEventDate dateByAddingTimeInterval:3600];
+                                       NSLog(@" after format start date %@",formattedFacebookEventDate);
+                                       event.startDate = formattedFacebookEventDate;
+                                       event.endDate = endTimeOfEvent;
+                                       //event.allDay = YES;
+                                       [eventStore saveEvent:event span:EKSpanThisEvent error:nil];
+                                       
+                                       UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Event Added"
+                                                                                       message:[NSString stringWithFormat:@"%@ has been added to your Calender",self.fbEventTitle.text]
+                                                                                      delegate:nil
+                                                                             cancelButtonTitle:@"OK"
+                                                                             otherButtonTitles:nil];
+                                       [alert show];
+                                   }
                                }];
-        //TODO: if permission granted do this
-        EKEvent *event  = [EKEvent eventWithEventStore:eventStore];
-        event.calendar  = [eventStore defaultCalendarForNewEvents];
-        event.title     = self.fbEventTitle.text;
-        event.location  = self.fbEventAddress.text;
-        event.notes     = self.fbEventDescription.text;
-    
-        NSDateFormatter *formatFb = [[NSDateFormatter alloc] init];
-        [formatFb setDateFormat:@"dd/MM/yyyy HH:mm"];
-        NSLog(@"start date %@",self.fbEventDate.text);
-        NSDate *formattedFacebookEventDate = [formatFb dateFromString:self.fbEventDate.text];
-        NSDate *endTimeOfEvent = [formattedFacebookEventDate dateByAddingTimeInterval:3600];
-        NSLog(@" after format start date %@",formattedFacebookEventDate);
-        event.startDate = formattedFacebookEventDate;
-        event.endDate = endTimeOfEvent;
-        //event.allDay = YES;
-        [eventStore saveEvent:event span:EKSpanThisEvent error:nil];
-    
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Event Added"
-                                                    message:[NSString stringWithFormat:@"%@ has been added to your Calender",self.fbEventTitle.text]
-                                                   delegate:nil
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil];
-        [alert show];
+
     }
     @catch(NSException *e){
         NSLog(@"iCal Error %@",e);
@@ -1520,17 +1525,14 @@ sideBarActivationState;
             query = [NSString stringWithFormat:@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('%@ %@') AND (venue.city = '%@') AND (venue.street != '') AND start_time > now() ORDER BY rand() LIMIT 100",newStr,queryString,newStr];
         }
         else{
-            query =@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('London') AND (venue.city = 'London') AND (venue.street != '') AND start_time > now() ORDER BY rand() LIMIT 3";
+            query =@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('London') AND (venue.city = 'London') AND (venue.street != '') AND start_time > now() ORDER BY rand() LIMIT 100";
             NSLog(@"self.currentCity = null string");
         }
     }
     @catch(NSException *e){
         NSLog(@"Error appending string: %@",e);
-        query =@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('London') AND (venue.city = 'London') AND (venue.street != '') AND start_time > now() ORDER BY rand() LIMIT 3";
+        query =@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('London') AND (venue.city = 'London') AND (venue.street != '') AND start_time > now() ORDER BY rand() LIMIT 100";
     }
-    //AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
-    //[FBSession setActiveSession:appDelegate.session];
-    //SynterestModel *aSynterestModel = [[SynterestModel alloc] init];
     NSDictionary *queryParam = @{ @"q": query };
     
     
