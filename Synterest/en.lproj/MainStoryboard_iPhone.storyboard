@@ -139,7 +139,7 @@
                                 <rect key="frame" x="29" y="90" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="question-icon.png" id="Pwg-3a-1k6" userLabel="imageViewQuestion">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="evappa-100.png" id="Pwg-3a-1k6" userLabel="imageViewQuestion">
                                 <rect key="frame" x="29" y="143" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -329,7 +329,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                         <dataDetectorType key="dataDetectorTypes" address="YES"/>
                                     </textView>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" id="Vsw-Ik-Rx7" userLabel="Helper View">
                                 <rect key="frame" x="20" y="26" width="280" height="506"/>
@@ -557,7 +557,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="location-50.png" width="50" height="50"/>
         <image name="logo.png" width="301" height="224"/>
         <image name="plus-50.png" width="50" height="50"/>
-        <image name="question-icon.png" width="128" height="128"/>
         <image name="reloadIcon2.png" width="512" height="512"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
