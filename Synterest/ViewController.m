@@ -877,12 +877,12 @@ sideBarActivationState;
             
             @try{
                 MyLocation* anAnnotation = annotation;
-                NSDate *testDate = [formatFb dateFromString:[anAnnotation fbEventDate]];
+                NSDate *setDate = [formatFb dateFromString:[anAnnotation fbEventDate]];
                 NSComparisonResult result1;
-                result1 = [testDate compare:customDatePlusOneDay];
+                result1 = [setDate compare:customDatePlusOneDay];
                 
                 NSComparisonResult result2;
-                result2 = [testDate compare:currentSelectedEventPickerDate];
+                result2 = [setDate compare:currentSelectedEventPickerDate];
                 
                 if(result1 != NSOrderedDescending){
                     if(result2 != NSOrderedAscending){
@@ -988,22 +988,18 @@ sideBarActivationState;
             @try{
                 MyLocation* anAnnotation = annotation;
                 
-                //NSLog(@"Facebook date:%@",[anAnnotation fbEventDate]);
-                NSDate *testDate = [formatFb dateFromString:[anAnnotation fbEventDate]];
-                //NSLog(@"TestDate: %@", testDate);
-                //NSLog(@"TomorrowDate: %@",tomorrowDate);
+                NSDate *setDate = [formatFb dateFromString:[anAnnotation fbEventDate]];
                 
                 NSComparisonResult result;
-                result = [testDate compare:nextWeek];
+                result = [setDate compare:nextWeek];
                 if(result==NSOrderedAscending){
-                    //NSLog(@"today is less");
+                    //do nothing
                 }
                 else if(result==NSOrderedDescending){
-                    //NSLog(@"newDate is less");
                     [_mapView removeAnnotation:annotation];
                 }
                 else{
-                    //NSLog(@"Both dates are same");
+                    //do nothing
                 }
             }
             @catch(NSException *e){
@@ -1092,10 +1088,10 @@ sideBarActivationState;
             @try{
                 MyLocation* anAnnotation = annotation;
         
-                NSDate *testDate = [formatFb dateFromString:[anAnnotation fbEventDate]];
+                NSDate *setDate = [formatFb dateFromString:[anAnnotation fbEventDate]];
 
                 NSComparisonResult result;
-                result = [testDate compare:tomorrowDate];
+                result = [setDate compare:tomorrowDate];
                 if(result==NSOrderedAscending){
                     //do nothing
                 }
@@ -1774,10 +1770,10 @@ sideBarActivationState;
                         NSTimeZone* destinationTimeZone = [NSTimeZone systemTimeZone];
                         float timeZoneOffset = [destinationTimeZone secondsFromGMTForDate:sourceDate] / 3600.0;
                         [formatFb setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:timeZoneOffset]];
-                        NSDate *testDate = [formatFb dateFromString:[annotation fbEventDate]];
+                        NSDate *setDate = [formatFb dateFromString:[annotation fbEventDate]];
                         
                         NSComparisonResult result;
-                        result = [testDate compare:tomorrowDate];
+                        result = [setDate compare:tomorrowDate];
                         if(result==NSOrderedAscending){
                             [_mapView addAnnotation:annotation];
                         }
@@ -1805,10 +1801,10 @@ sideBarActivationState;
                         NSTimeZone* destinationTimeZone = [NSTimeZone systemTimeZone];
                         float timeZoneOffset = [destinationTimeZone secondsFromGMTForDate:sourceDate] / 3600.0;
                         [formatFb setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:timeZoneOffset]];
-                        NSDate *testDate = [formatFb dateFromString:[annotation fbEventDate]];
+                        NSDate *setDate = [formatFb dateFromString:[annotation fbEventDate]];
                         
                         NSComparisonResult result;
-                        result = [testDate compare:tomorrowDate];
+                        result = [setDate compare:tomorrowDate];
                         if(result==NSOrderedAscending){
                             [_mapView addAnnotation:annotation];
                         }
@@ -1992,8 +1988,8 @@ sideBarActivationState;
     @try{
         double latitudeValue = self.mapView.centerCoordinate.latitude;
         double longitudeValue = self.mapView.centerCoordinate.longitude;
-        CLLocation *testLocation = [[CLLocation alloc] initWithLatitude:latitudeValue longitude:longitudeValue];
-        self.reverseGeocodeLocationValue = testLocation;
+        CLLocation *rgLocation = [[CLLocation alloc] initWithLatitude:latitudeValue longitude:longitudeValue];
+        self.reverseGeocodeLocationValue = rgLocation;
         CLGeocoder *reverseGeocoder = [[CLGeocoder alloc] init];
         [reverseGeocoder reverseGeocodeLocation:self.reverseGeocodeLocationValue completionHandler:^(NSArray *placemarks, NSError *error){
             if(error){
@@ -2026,8 +2022,8 @@ sideBarActivationState;
     @try{
         double latitudeValue = self.mapView.centerCoordinate.latitude;
         double longitudeValue = self.mapView.centerCoordinate.longitude;
-        CLLocation *testLocation = [[CLLocation alloc] initWithLatitude:latitudeValue longitude:longitudeValue];
-        self.reverseGeocodeLocationValue = testLocation;
+        CLLocation *rgLocation = [[CLLocation alloc] initWithLatitude:latitudeValue longitude:longitudeValue];
+        self.reverseGeocodeLocationValue = rgLocation;
         CLGeocoder *reverseGeocoder = [[CLGeocoder alloc] init];
         NSLog(@"reverse Geolocator %@",self.reverseGeocodeLocationValue);
         [reverseGeocoder reverseGeocodeLocation:self.reverseGeocodeLocationValue completionHandler:^(NSArray *placemarks, NSError *error){
