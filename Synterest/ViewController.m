@@ -593,20 +593,43 @@ sideBarActivationState;
         } else {
             annotationView.annotation = annotation;
         }
-
+        
+        
+    
         annotationView.enabled = YES;
         annotationView.canShowCallout = NO;
         
         if([[annotation eventType] intValue] == 0){
             //culture event
-            annotationView.image=[UIImage imageNamed:@"yellow.png"];
+            UIImage * annotationImage = [UIImage imageNamed:@"yellowv2.png"];
+            CGSize newSize = CGSizeMake(26, 48);  //whaterver size
+            UIGraphicsBeginImageContext(newSize);
+            [annotationImage drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+            UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+            UIGraphicsEndImageContext();
+            annotationView.image= newImage;
+            
         }
         else if ([[annotation eventType] intValue] == 1){
             //party event
+            /*UIImage * annotationImage = [UIImage imageNamed:@"greenv2.png"];
+            CGSize newSize = CGSizeMake(26, 48);  //whaterver size
+            UIGraphicsBeginImageContext(newSize);
+            [annotationImage drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+            UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+            UIGraphicsEndImageContext();
+            annotationView.image= newImage;*/
             annotationView.image=[UIImage imageNamed:@"green.png"];
         }
         else if ([[annotation eventType] intValue] == 2){
             //sport event
+            /*UIImage * annotationImage = [UIImage imageNamed:@"orange2v2.png"];
+            CGSize newSize = CGSizeMake(26, 48);  //whaterver size
+            UIGraphicsBeginImageContext(newSize);
+            [annotationImage drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+            UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+            UIGraphicsEndImageContext();
+            annotationView.image= newImage;*/
             annotationView.image=[UIImage imageNamed:@"orange.png"];
         }
         else if ([[annotation eventType] intValue] == 3){
@@ -615,10 +638,24 @@ sideBarActivationState;
         }
         else if ([[annotation eventType] intValue] == 4){
             //intellectual event
-            annotationView.image=[UIImage imageNamed:@"pink2.png"];
+            UIImage * annotationImage = [UIImage imageNamed:@"lightbluev2.png"];
+            CGSize newSize = CGSizeMake(26, 48);  //whaterver size
+            UIGraphicsBeginImageContext(newSize);
+            [annotationImage drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+            UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+            UIGraphicsEndImageContext();
+            annotationView.image= newImage;
+            //annotationView.image=[UIImage imageNamed:@"pink2.png"];
         }
         else if ([[annotation eventType] intValue] == 5){
             //food event
+            /*UIImage * annotationImage = [UIImage imageNamed:@"blue2v2.png"];
+            CGSize newSize = CGSizeMake(26, 48);  //whaterver size
+            UIGraphicsBeginImageContext(newSize);
+            [annotationImage drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+            UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+            UIGraphicsEndImageContext();
+            annotationView.image= newImage;*/
             annotationView.image=[UIImage imageNamed:@"blue.png"];
         }
         else{
@@ -701,11 +738,11 @@ sideBarActivationState;
     
     
     if(userTriggerRefresh == YES){
-        arrayOfKeywords= [NSArray arrayWithObjects:@"",@"music",@"society",@"night",@"band",@"experience",@"tickets",@"food",@"people",@"social",@"meeting",@"drink",@"gig",@"talk",@"party",@"club",@"sport",@"event",@"society",@"group",@"art",@"business",@"food",@"dinner",@"culture",@"festival",@"dance",@"cafe",@"jazz",@"tour",@"exhibition",@"show",@"bar",@"class",@"theatre",@"football",@"hockey",@"tournament",@"match",@"college",@"time",@"well",@"student",@"new",@"old",@"live",@"book",@"fair",@"big",@"little",@"project",@"happy",nil];
+        arrayOfKeywords= [NSArray arrayWithObjects:@"",@"music",@"society",@"night",@"band",@"experience",@"tickets",@"food",@"people",@"social",@"meeting",@"drink",@"gig",@"talk",@"party",@"club",@"sport",@"event",@"society",@"group",@"art",@"business",@"food",@"dinner",@"culture",@"festival",@"dance",@"jazz",@"tour",@"exhibition",@"show",@"theatre",@"football",@"time",@"well",@"student",@"new",@"old",@"live",@"book",@"fair",@"big",@"little",nil];
         userTriggerRefresh = NO;
     }
     else{
-        arrayOfKeywords= [NSArray arrayWithObjects:@"music",@"society",@"night",@"band",@"experience",@"tickets",@"food",@"people",@"social",@"meeting",@"drink",@"gig",@"talk",@"party",@"club",@"sport",@"event",@"society",@"group",@"art",@"business",@"food",@"dinner",@"culture",@"festival",@"dance",@"cafe",@"jazz",@"tour",@"exhibition",@"show",@"bar",@"class",@"theatre",@"football",@"hockey",@"tournament",@"match",@"college",@"time",@"well",@"student",@"new",@"old",@"live",@"book",@"fair",@"big",@"little",@"project",@"happy",nil];
+        arrayOfKeywords= [NSArray arrayWithObjects:@"music",@"society",@"night",@"band",@"experience",@"tickets",@"food",@"people",@"social",@"meeting",@"drink",@"gig",@"talk",@"party",@"club",@"sport",@"event",@"society",@"group",@"art",@"business",@"food",@"dinner",@"culture",@"festival",@"dance",@"jazz",@"tour",@"exhibition",@"show",@"theatre",@"time",@"well",@"student",@"new",@"old",@"live",@"book",@"fair",@"big",@"little",nil];
     }
     
     for(id keyword in arrayOfKeywords){
