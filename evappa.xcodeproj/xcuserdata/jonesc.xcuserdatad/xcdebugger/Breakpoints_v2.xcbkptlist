@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Synterest/ViewController.m"
-            timestampString = "423762641.982311"
+            timestampString = "424002697.320716"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2258"
-            endingLineNumber = "2258"
+            startingLineNumber = "2295"
+            endingLineNumber = "2295"
             landmarkName = "-viewWillAppear:"
             landmarkType = "5">
          </BreakpointContent>
@@ -42,12 +42,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Synterest/ViewController.m"
-            timestampString = "423762641.982311"
+            timestampString = "424002697.320716"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "729"
-            endingLineNumber = "729"
-            landmarkName = "-performHugeFacebookSearch"
+            startingLineNumber = "764"
+            endingLineNumber = "764"
+            landmarkName = "-refreshSearch"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
