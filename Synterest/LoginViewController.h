@@ -11,6 +11,5 @@
 
 @interface LoginViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityOfLogin;
-//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender;
 
 @end

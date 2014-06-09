@@ -26,6 +26,10 @@
 		DB48A2A71945D1E9004A4126 /* orangev2.png in Resources */ = {isa = PBXBuildFile; fileRef = DB48A29D1945D1E9004A4126 /* orangev2.png */; };
 		DB48A2A81945D1E9004A4126 /* blue2v2.png in Resources */ = {isa = PBXBuildFile; fileRef = DB48A29E1945D1E9004A4126 /* blue2v2.png */; };
 		DB48A2A91945D1E9004A4126 /* bluev2.png in Resources */ = {isa = PBXBuildFile; fileRef = DB48A29F1945D1E9004A4126 /* bluev2.png */; };
+		DB48A2AB1945ED3B004A4126 /* white2v2.png in Resources */ = {isa = PBXBuildFile; fileRef = DB48A2AA1945ED3B004A4126 /* white2v2.png */; };
+		DB48A2AD1945EDC7004A4126 /* greentake2v2.png in Resources */ = {isa = PBXBuildFile; fileRef = DB48A2AC1945EDC7004A4126 /* greentake2v2.png */; };
+		DB48A2AF1945EDEE004A4126 /* pink2v2.png in Resources */ = {isa = PBXBuildFile; fileRef = DB48A2AE1945EDEE004A4126 /* pink2v2.png */; };
+		DB48A2B11945EE1E004A4126 /* lightbluetake2v2.png in Resources */ = {isa = PBXBuildFile; fileRef = DB48A2B01945EE1E004A4126 /* lightbluetake2v2.png */; };
 		DB4B8AD018FA1DDB0063F3A3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB4B8ACF18FA1DDB0063F3A3 /* UIKit.framework */; };
 		DB4B8AD218FA1DDB0063F3A3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB4B8AD118FA1DDB0063F3A3 /* Foundation.framework */; };
 		DB4B8AD418FA1DDB0063F3A3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB4B8AD318FA1DDB0063F3A3 /* CoreGraphics.framework */; };
@@ -157,6 +161,10 @@
 		DB48A29D1945D1E9004A4126 /* orangev2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = orangev2.png; sourceTree = "<group>"; };
 		DB48A29E1945D1E9004A4126 /* blue2v2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blue2v2.png; sourceTree = "<group>"; };
 		DB48A29F1945D1E9004A4126 /* bluev2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bluev2.png; sourceTree = "<group>"; };
+		DB48A2AA1945ED3B004A4126 /* white2v2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = white2v2.png; sourceTree = "<group>"; };
+		DB48A2AC1945EDC7004A4126 /* greentake2v2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = greentake2v2.png; sourceTree = "<group>"; };
+		DB48A2AE1945EDEE004A4126 /* pink2v2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pink2v2.png; sourceTree = "<group>"; };
+		DB48A2B01945EE1E004A4126 /* lightbluetake2v2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lightbluetake2v2.png; sourceTree = "<group>"; };
 		DB4B8ACC18FA1DDB0063F3A3 /* Evappa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Evappa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB4B8ACF18FA1DDB0063F3A3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		DB4B8AD118FA1DDB0063F3A3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -367,7 +375,11 @@
 		DB4B8AD618FA1DDB0063F3A3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				DB48A2AC1945EDC7004A4126 /* greentake2v2.png */,
+				DB48A2B01945EE1E004A4126 /* lightbluetake2v2.png */,
+				DB48A2AE1945EDEE004A4126 /* pink2v2.png */,
 				DB48A2961945D1E9004A4126 /* lightblue2v2.png */,
+				DB48A2AA1945ED3B004A4126 /* white2v2.png */,
 				DB48A2971945D1E9004A4126 /* lightbluev2.png */,
 				DB48A2981945D1E9004A4126 /* green2v2.png */,
 				DB48A2991945D1E9004A4126 /* greenv2.png */,
@@ -611,6 +623,7 @@
 				DBC0CD52190DEB29002D3BF4 /* search-25.png in Resources */,
 				DBA50E631937664F00041095 /* whappener-96.png in Resources */,
 				DBAC749619389ACA002C19AC /* refreshIcon.png in Resources */,
+				DB48A2AF1945EDEE004A4126 /* pink2v2.png in Resources */,
 				DBD665771938A8E100677754 /* reloadIcon2.png in Resources */,
 				DB48A2A11945D1E9004A4126 /* lightbluev2.png in Resources */,
 				DBA50E441937664F00041095 /* Icon-Small-20.png in Resources */,
@@ -627,6 +640,7 @@
 				DBDDF4CC192BECC800C458AC /* search-75.png in Resources */,
 				DBD27BEE191310D5002F4556 /* plus-50.png in Resources */,
 				DBA50E491937664F00041095 /* Icon-Small-50@2x.png in Resources */,
+				DB48A2B11945EE1E004A4126 /* lightbluetake2v2.png in Resources */,
 				DBA50E12193764A400041095 /* listViewIcon.png in Resources */,
 				DBD27BE61912F8F7002F4556 /* blue.png in Resources */,
 				DBA50E571937664F00041095 /* whappener-30.png in Resources */,
@@ -652,6 +666,7 @@
 				DBA50E621937664F00041095 /* whappener-72.png in Resources */,
 				DBC0CD4E190DE9F1002D3BF4 /* exit-25.png in Resources */,
 				DBA50E4D1937664F00041095 /* Icon@2x.png in Resources */,
+				DB48A2AB1945ED3B004A4126 /* white2v2.png in Resources */,
 				DB2589F019109B85001EE5E2 /* calendar-50.png in Resources */,
 				DB48A2A21945D1E9004A4126 /* green2v2.png in Resources */,
 				DBA50E511937664F00041095 /* whappener-100.png in Resources */,
@@ -680,6 +695,7 @@
 				DB4B8AEC18FA1DDB0063F3A3 /* MainStoryboard_iPad.storyboard in Resources */,
 				DBD27BE41912F8E6002F4556 /* deeperBlue.png in Resources */,
 				DB2D4F4618FB66DA004DE5BB /* arrest.png in Resources */,
+				DB48A2AD1945EDC7004A4126 /* greentake2v2.png in Resources */,
 				DBA50E5B1937664F00041095 /* whappener-50.png in Resources */,
 				DB48A2A61945D1E9004A4126 /* orange2v2.png in Resources */,
 			);

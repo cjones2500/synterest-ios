@@ -12,7 +12,6 @@
 @interface SearchViewController : UIViewController<CLLocationManagerDelegate,UISearchBarDelegate,UITableViewDelegate, UITableViewDataSource>{
     IBOutlet UISearchBar *_searchBar;
     NSArray *searchValues;
-    //NSMutableArray *currentSearchViewInformation;
     NSArray *inforamtionToSendBacktoMainView;
 }
 @property (weak, nonatomic) IBOutlet UITableView *synterestTableView;

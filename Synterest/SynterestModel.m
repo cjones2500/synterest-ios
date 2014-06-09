@@ -137,34 +137,13 @@
     [keyWordsByTopic setObject:sportKeywords forKey:@"sport"];
     [keyWordsByTopic setObject:intellectualKeywords forKey:@"intellectual"];
  
-    
-    //NSLog(@"logging here..");
-    //NSLog(@"currentArray %@",foodKeywords);
-    //Loop through all topics with associated keywords
-    
     //counter to keep track of the number
     unsigned int counter = 0;
     
     for (id key in keyWordsByTopic){
-        //NSLog(@"currentArray %@",key);
         id currentArray = [keyWordsByTopic objectForKey:key];
     
         for(NSString* keyWordString2 in currentArray){
-            //NSLog(@"keyword %@",keyWordString2);
-            //NSLog(@"stringTosearch %@",stringToSearch);
-            /*NSRange searchResult = [stringToSearch rangeOfString:keyWordString2 options:NSCaseInsensitiveSearch];
-            if (searchResult.location == NSNotFound) {
-                //NSLog(@"didn't work");
-                //do nothing as the result isn't found
-            }
-            else{
-                NSLog(@" searchResult: %i",searchResult.length);
-                NSLog(@"%i - ",[[eventValueArray objectAtIndex:counter] intValue]);
-                [eventValueArray replaceObjectAtIndex:counter withObject:[NSNumber numberWithInt:[[eventValueArray objectAtIndex:counter]intValue]+1]];
-                NSLog(@"%i - ",[[eventValueArray objectAtIndex:counter] intValue]);
-            }
-            counter = counter +1;*/
-            
             NSUInteger count = 0, length = [stringToSearch length];
             NSRange range = NSMakeRange(0, length);
             while(range.location != NSNotFound)
@@ -183,15 +162,11 @@
         counter = counter +1;
     }
     
-    
-    
-    //NSLog(@"logging here..2");
     unsigned int eventSizeLoopCounter = 0;
     int indexOfLargestValue = 0;
     
     //find the largest value within the eventValueArray
     for(NSNumber *iterationValue in eventValueArray){
-        //NSLog(@" eventSizeLoopCounter: %i",eventSizeLoopCounter);
         int currentValue,currentLargestValue = 0;
         //assign the value of the current item in the iteration
         currentValue =[iterationValue intValue];
@@ -206,15 +181,8 @@
                 currentLargestValue = [iterationValue intValue];
             }
         }
-        
-        //assign a value to an
         eventSizeLoopCounter = eventSizeLoopCounter + 1;
     }
-    
-    
-    //outputString = [keyWordsByTopic
-    //NSLog(@"index %i",indexOfLargestValue);
-    //NSLog(@"eventValueArray : %@",eventValueArray);
     return indexOfLargestValue;
     
 }
@@ -224,64 +192,13 @@
 - (NSMutableArray*) parseFbFqlResult:(id)result
 {
     NSMutableArray* facebookResults;
-    //only allocate if there is nothing there
-    //if(facebookResults == nil){
-        facebookResults = [[NSMutableArray alloc] init];
-    //}
-    //else{
-    //    NSLog(@"extra data being loaded");
-        
-    //}
-    
-    /*if(self.checkEidList == nil){
-        self.checkEidList = [[NSMutableArray alloc] initWithCapacity:1];
-    }*/
-    
-    //Create the eid check list
-    //NSMutableArray * checkEidList = [[NSMutableArray alloc] initWithCapacity:1];
-    
-    // result is the json response from a successful request
+    facebookResults = [[NSMutableArray alloc] init];
     NSDictionary *dictionary = (NSDictionary *)result;
-    
-    //NSString *text;
-    // we pull the name property out, if there is one, and display it
-    //text = (NSString *)[dictionary objectForKey:@"data"];
-    
-    //NSLog(@"json dictionary %@",[[[dictionary objectForKey:@"data"] objectAtIndex:0] objectForKey:@"eid"]);
-    
     unsigned int i = 0;
     //count the number of objects in the request
     unsigned long cnt = [[dictionary objectForKey:@"data"] count];
-    
-    //eid, name,location,description, venue, start_time, update_time, end_time, pic
-    
-    
+
     for(i =0;i<cnt;i++){
-        
-        //skip if there is no start date 
-        /*if([[[dictionary objectForKey:@"data"] objectAtIndex:i] objectForKey:@"start_time"] == nil){
-            continue;
-        }
-        
-        //skip if there is no longitude
-        if([[[[dictionary objectForKey:@"data"] objectAtIndex:i] objectForKey:@"venue"] objectForKey:@"longitude"] == nil){
-            continue;
-        }
-        
-        //skip if there is no latitude
-        if([[[[dictionary objectForKey:@"data"] objectAtIndex:i] objectForKey:@"venue"] objectForKey:@"latitude"] == nil){
-            continue;
-        }*/
-        
-        //If the facebook entry is empty then continue
-        /*if([[[[[dictionary objectForKey:@"data"] objectAtIndex:i]  objectForKey:@"venue"]description] isEqualToString: @"0 objects"]){
-            NSLog(@"skipped %@",[[dictionary objectForKey:@"data"] objectAtIndex:i]);
-            continue;
-        }*/
-        
-        //NSMutableDictionary* singleResult = [[NSMutableDictionary alloc] init];
-        
-        //NSLog(@"event_type %i",[self assignEventType:[[dictionary objectForKey:@"data"] objectAtIndex:i]]);
         int eventTypeIntValue = [self assignEventType:[[dictionary objectForKey:@"data"] objectAtIndex:i]];
         NSNumber *eventType = [NSNumber numberWithInt:eventTypeIntValue];
         
@@ -306,31 +223,7 @@
         [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZ"];
         NSDate *dateFromString = [dateFormatter dateFromString:[singleResult objectForKey:@"start_time"]];
         NSDate *currentTime = [NSDate date];
-        //NSDate *dateInOneWeek =  [currentTime dateByAddingTimeInterval:60*60*24*14];
-        //NSTimeInterval *oneweek =
-        //NSdate *currentTimePlusWeek = [date ]
-        
-        //NSLog(@"string date: %@",dateFromString);
-        //NSLog(@"current date: %@",currentTime);
-        
-        /*NSString *currentEid = [singleResult objectForKey:@"eid"];
-        BOOL itemPresent = NO;
-        
-        //Loop through current eid check list and see if this is present
-        for(NSString* item in self.checkEidList)
-        {
-            if([currentEid isEqualToString:item]){
-                itemPresent = YES;
-            }
-        }
-        if(itemPresent == NO){
-            //add item to the check eid List
-            [self.checkEidList addObject:currentEid];
-        }*/
-        
 
-        
-        
         //filter the results of events
         if(dateFromString == nil){
             NSLog(@"null date");
@@ -338,14 +231,7 @@
         else if(currentTime < dateFromString){
             NSLog(@"event has already passed");
         }
-        /*else if(itemPresent == YES){
-            NSLog(@"This eid is already present");
-            //skip this item in the loop
-        }*/
-        //TODO: add the ability to add events within a certain time period
-        /*else if(dateInOneWeek > dateFromString){
-            NSLog(@"event is too far in the future");
-        }*/
+
         else if ([singleResult objectForKey:@"description"] == nil){
             NSLog(@"event description is empty");
         }

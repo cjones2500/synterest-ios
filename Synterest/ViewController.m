@@ -594,67 +594,69 @@ sideBarActivationState;
             annotationView.annotation = annotation;
         }
         
-        
-    
         annotationView.enabled = YES;
         annotationView.canShowCallout = NO;
         
         if([[annotation eventType] intValue] == 0){
             //culture event
-            /*UIImage * annotationImage = [UIImage imageNamed:@"bluev2.png"];
-            CGSize newSize = CGSizeMake(26, 48);  //whaterver size
-            UIGraphicsBeginImageContext(newSize);
-            [annotationImage drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
-            UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-            UIGraphicsEndImageContext();
-            annotationView.image= newImage;*/
-            
-            UIImage * annotationImage = [UIImage imageNamed:@"lightbluev2.png"];
-            CGSize newSize = CGSizeMake(26, 48);  //whaterver size
+            UIImage * annotationImage = [UIImage imageNamed:@"lightbluetake2v2.png"];
+            CGSize newSize = CGSizeMake(26*1.2, 48*1.2);  //whaterver size
             UIGraphicsBeginImageContext(newSize);
             [annotationImage drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
             UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
             UIGraphicsEndImageContext();
             annotationView.image= newImage;
-            
-            //annotationView.image=[UIImage imageNamed:@"blue.png"];
-            
             
         }
         else if ([[annotation eventType] intValue] == 1){
             //party event
-            annotationView.image=[UIImage imageNamed:@"green.png"];
-        }
-        else if ([[annotation eventType] intValue] == 2){
-            //sport event
-            UIImage * annotationImage = [UIImage imageNamed:@"bluev2.png"];
-             CGSize newSize = CGSizeMake(26, 48);  //whaterver size
-             UIGraphicsBeginImageContext(newSize);
-             [annotationImage drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
-             UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-             UIGraphicsEndImageContext();
-             annotationView.image= newImage;
-            //annotationView.image=[UIImage imageNamed:@"orange.png"];
-        }
-        else if ([[annotation eventType] intValue] == 3){
-            //music event
-            annotationView.image=[UIImage imageNamed:@"white.png"];
-        }
-        else if ([[annotation eventType] intValue] == 4){
-            //intellectual event
-            
-            annotationView.image=[UIImage imageNamed:@"pink2.png"];
-        }
-        else if ([[annotation eventType] intValue] == 5){
-            //food event
-            UIImage * annotationImage = [UIImage imageNamed:@"yellow2v2.png"];
-            CGSize newSize = CGSizeMake(26, 48);  //whaterver size
+            UIImage * annotationImage = [UIImage imageNamed:@"greentake2v2.png"];
+            CGSize newSize = CGSizeMake(26*1.2, 48*1.2);  //whaterver size
             UIGraphicsBeginImageContext(newSize);
             [annotationImage drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
             UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
             UIGraphicsEndImageContext();
             annotationView.image= newImage;
-            //annotationView.image=[UIImage imageNamed:@"blue.png"];
+        }
+        else if ([[annotation eventType] intValue] == 2){
+            //sport event
+            UIImage * annotationImage = [UIImage imageNamed:@"orange2v2.png"];
+            CGSize newSize = CGSizeMake(26*1.2, 48*1.2);  //whaterver size
+            UIGraphicsBeginImageContext(newSize);
+            [annotationImage drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+            UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+            UIGraphicsEndImageContext();
+            annotationView.image= newImage;
+        }
+        else if ([[annotation eventType] intValue] == 3){
+            //music event
+            UIImage * annotationImage = [UIImage imageNamed:@"white2v2.png"];
+            CGSize newSize = CGSizeMake(26*1.2, 48*1.2);  //whaterver size
+            UIGraphicsBeginImageContext(newSize);
+            [annotationImage drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+            UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+            UIGraphicsEndImageContext();
+            annotationView.image= newImage;
+        }
+        else if ([[annotation eventType] intValue] == 4){
+            //intellectual event
+            UIImage * annotationImage = [UIImage imageNamed:@"pink2v2.png"];
+            CGSize newSize = CGSizeMake(26*1.2, 48*1.2);  //whaterver size
+            UIGraphicsBeginImageContext(newSize);
+            [annotationImage drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+            UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+            UIGraphicsEndImageContext();
+            annotationView.image= newImage;
+        }
+        else if ([[annotation eventType] intValue] == 5){
+            //food event
+            UIImage * annotationImage = [UIImage imageNamed:@"yellow2v2.png"];
+            CGSize newSize = CGSizeMake(26*1.2, 48*1.2);  //whaterver size
+            UIGraphicsBeginImageContext(newSize);
+            [annotationImage drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+            UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+            UIGraphicsEndImageContext();
+            annotationView.image= newImage;
         }
         else{
             //use the default value
@@ -2118,14 +2120,20 @@ sideBarActivationState;
    
     [_mapView setRegion:viewRegion animated:YES];
 
-    if( (locationToZoom.longitude == -0.12750) || (locationToZoom.latitude== 51.50722)){
+    
+    if((locationToZoom.longitude == -0.12750) || (locationToZoom.latitude== 51.50722)){
+        if((firstLoad != YES) || ([backFromSearch boolValue] == YES)){
+            [self performSelectorOnMainThread:@selector(initReverseGeocodeLocation) withObject:nil waitUntilDone:YES];
+            [self updateTableView];
+        }
+    }
+    
+    if((firstLoad != YES) || ([backFromSearch boolValue] == YES)){
         [self performSelectorOnMainThread:@selector(initReverseGeocodeLocation) withObject:nil waitUntilDone:YES];
         [self updateTableView];
     }
-    else if((firstLoad != YES) || ([backFromSearch boolValue] == YES)){
-        [self performSelectorOnMainThread:@selector(initReverseGeocodeLocation) withObject:nil waitUntilDone:YES];
-        [self updateTableView];
-    }
+
+    
     
 }
 

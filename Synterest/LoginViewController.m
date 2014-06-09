@@ -12,9 +12,7 @@
 
 
 @interface LoginViewController ()
-//@property (weak, nonatomic) IBOutlet UIButton *startUpButton;
 @property (strong, nonatomic) IBOutlet UIButton *buttonLoginLogout;
-//- (IBAction)startUpButtonAction:(id)sender;
 - (IBAction)buttonClickHandler:(id)sender;
 @end
 
@@ -68,19 +66,6 @@
 - (NSUInteger)supportedInterfaceOrientations {
     return UIInterfaceOrientationMaskPortrait;
 }
-
-/*- (IBAction)startUpButtonAction:(id)sender
-{
-    //ViewController *mainMapView = [[UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil]
-                                    instantiateViewControllerWithIdentifier:@"ViewController"];
-    //[self.navigationController pushViewController:mainMapView animated:YES];
-    
-    
-    //[self performSegueWithIdentifier:@"showWebServiceViewController" sender:nil];
-    
-    //This works quite well
-    //[self performSegueWithIdentifier:@"login_sucess" sender:self];
-}*/
 
 // FBSample logic
 // handler for button click, logs sessions in or out
@@ -152,38 +137,6 @@
         [[segue destinationViewController] setFirstViewFlag:firstViewFlag];
     }
 }
-
-//#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-/*- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([[segue identifier] isEqualToString:@"login_sucess"])
-    {
-        ViewController *yourVC = [segue destinationViewController];
-    }
-    NSLog(@"in prepare segue");
-    if ([segue.identifier isEqualToString:@"login_sucess"]) {
-        ViewController *mapViewController = [[ViewController alloc] init];
-        mapViewController =[segue destinationViewController];
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-    }
-    
-    //if ([[segue identifier] isEqualToString:@"login_sucess"]) {
-        
-        // Get destination view
-    //ViewController *mapViewController = [[ViewController alloc] init];
-    //mapViewController =[segue destinationViewController];
-        
-        // Get button tag number (or do whatever you need to do here, based on your object
-        //NSInteger tagIndex = [(UIButton *)sender tag];
-        
-        // Pass the information to your destination view
-        //[vc setSelectedButton:tagIndex];
-    //}
-    
-}*/
 
 
 @end
