@@ -601,43 +601,14 @@ sideBarActivationState;
         
         if([[annotation eventType] intValue] == 0){
             //culture event
-            UIImage * annotationImage = [UIImage imageNamed:@"yellowv2.png"];
+            /*UIImage * annotationImage = [UIImage imageNamed:@"bluev2.png"];
             CGSize newSize = CGSizeMake(26, 48);  //whaterver size
             UIGraphicsBeginImageContext(newSize);
             [annotationImage drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
             UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
             UIGraphicsEndImageContext();
-            annotationView.image= newImage;
+            annotationView.image= newImage;*/
             
-        }
-        else if ([[annotation eventType] intValue] == 1){
-            //party event
-            /*UIImage * annotationImage = [UIImage imageNamed:@"greenv2.png"];
-            CGSize newSize = CGSizeMake(26, 48);  //whaterver size
-            UIGraphicsBeginImageContext(newSize);
-            [annotationImage drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
-            UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-            UIGraphicsEndImageContext();
-            annotationView.image= newImage;*/
-            annotationView.image=[UIImage imageNamed:@"green.png"];
-        }
-        else if ([[annotation eventType] intValue] == 2){
-            //sport event
-            /*UIImage * annotationImage = [UIImage imageNamed:@"orange2v2.png"];
-            CGSize newSize = CGSizeMake(26, 48);  //whaterver size
-            UIGraphicsBeginImageContext(newSize);
-            [annotationImage drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
-            UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-            UIGraphicsEndImageContext();
-            annotationView.image= newImage;*/
-            annotationView.image=[UIImage imageNamed:@"orange.png"];
-        }
-        else if ([[annotation eventType] intValue] == 3){
-            //music event
-            annotationView.image=[UIImage imageNamed:@"white.png"];
-        }
-        else if ([[annotation eventType] intValue] == 4){
-            //intellectual event
             UIImage * annotationImage = [UIImage imageNamed:@"lightbluev2.png"];
             CGSize newSize = CGSizeMake(26, 48);  //whaterver size
             UIGraphicsBeginImageContext(newSize);
@@ -645,18 +616,45 @@ sideBarActivationState;
             UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
             UIGraphicsEndImageContext();
             annotationView.image= newImage;
-            //annotationView.image=[UIImage imageNamed:@"pink2.png"];
+            
+            //annotationView.image=[UIImage imageNamed:@"blue.png"];
+            
+            
+        }
+        else if ([[annotation eventType] intValue] == 1){
+            //party event
+            annotationView.image=[UIImage imageNamed:@"green.png"];
+        }
+        else if ([[annotation eventType] intValue] == 2){
+            //sport event
+            UIImage * annotationImage = [UIImage imageNamed:@"bluev2.png"];
+             CGSize newSize = CGSizeMake(26, 48);  //whaterver size
+             UIGraphicsBeginImageContext(newSize);
+             [annotationImage drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+             UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+             UIGraphicsEndImageContext();
+             annotationView.image= newImage;
+            //annotationView.image=[UIImage imageNamed:@"orange.png"];
+        }
+        else if ([[annotation eventType] intValue] == 3){
+            //music event
+            annotationView.image=[UIImage imageNamed:@"white.png"];
+        }
+        else if ([[annotation eventType] intValue] == 4){
+            //intellectual event
+            
+            annotationView.image=[UIImage imageNamed:@"pink2.png"];
         }
         else if ([[annotation eventType] intValue] == 5){
             //food event
-            /*UIImage * annotationImage = [UIImage imageNamed:@"blue2v2.png"];
+            UIImage * annotationImage = [UIImage imageNamed:@"yellow2v2.png"];
             CGSize newSize = CGSizeMake(26, 48);  //whaterver size
             UIGraphicsBeginImageContext(newSize);
             [annotationImage drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
             UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
             UIGraphicsEndImageContext();
-            annotationView.image= newImage;*/
-            annotationView.image=[UIImage imageNamed:@"blue.png"];
+            annotationView.image= newImage;
+            //annotationView.image=[UIImage imageNamed:@"blue.png"];
         }
         else{
             //use the default value
