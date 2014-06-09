@@ -6,8 +6,6 @@
 //  Copyright (c) 2014 Chris Jones. All rights reserved.
 //
 
-//appDelegate.session.accessTokenData.accessToken - this is the accessor for the accessToken 
-
 #import "AppDelegate.h"
 #import "ViewController.h"
 #import <FacebookSDK/FacebookSDK.h>
@@ -633,17 +631,6 @@ sideBarActivationState;
     return nil;
 }
 
-/*- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation  {
-    
-    CLLocationCoordinate2D loc = [newLocation coordinate];
-    //if this is initial view then do this
-    if([firstViewFlag boolValue] == YES){
-        NSLog(@"First View");
-        [self.mapView setCenterCoordinate:loc];
-    }
-    
-}*/
-
 -(IBAction)clickOnFacebook:(id)sender{
 
     userTriggerRefresh = YES;
@@ -660,17 +647,6 @@ sideBarActivationState;
     }
     [self refreshSearch];
 }
-
-/*- (void)mapViewDidFinishRenderingMap:(MKMapView *)mapView fullyRendered:(BOOL)fullyRendered
-{
-    if(firstLoad == YES){
-        if(hasInitialFacebookDataBeenSource == YES){
-            firstLoad = NO;
-            NSLog(@"loading here");
-            [self performHugeFacebookSearch];
-        }
-    }
-}*/
 
 - (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views
 {
@@ -700,24 +676,11 @@ sideBarActivationState;
 
 -(void)goToFacebookEventPage
 {
-
     [loadingDataWheel stopAnimating];
-    //[self unhideFacebookView];
     //open up a browser with the facebook event page
     @try{
-        /*UIImageView *facebookImageSubViewer = [[UIImageView alloc] initWithImage:facebookImage];
-        facebookImageSubViewer.layer.cornerRadius = facebookImage.size.width / 2;
-        facebookImageSubViewer.layer.masksToBounds = YES;
-        [self.facebookImageSubView addSubview:facebookImageSubViewer];*/
-        
-        //UIWebView *tempWebview = [[UIWebView alloc]initWithFrame:self.fbWebView.frame];
         NSString * urlStringToFb = [NSString stringWithFormat:@"https://www.facebook.com/events/%@",self.fbEidText];
-        //NSURL *url = [NSURL URLWithString:urlStringToFb];
-        //NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
-        //[self.fbWebView loadRequest:requestObj];
-        //self.fbWebView = tempWebview;
-        //self.fbWebView.delegate = self;
-        //self.fbEidText = nil;
+        
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStringToFb]];
     }
     @catch(NSException *e)
@@ -733,10 +696,7 @@ sideBarActivationState;
     [loadingDataWheel startAnimating];
     //have a counter that adds the facebook events at a certain point
     int facebookEventLoadCounter = 0;
-    
-    //List of keywords to search within facebook
-    //NSArray *arrayOfKeywords = [NSArray arrayWithObjects:@"music",@"food",@"night",@"culture",@"social",@"meeting", nil];
-    //NSArray *arrayOfKeywords = [NSArray arrayWithObjects:@"music",@"food",@"gig",@"drink",@"art",@"culture",@"new",@"book",@"big",@"little",@"social",@"business",@"gig",@"talk",@"party",@"club",@"sport",@"event",@"society",@"group",nil];
+
     NSArray *arrayOfKeywords;
     
     
@@ -762,7 +722,6 @@ sideBarActivationState;
         
         facebookEventLoadCounter = facebookEventLoadCounter + 1;
         
-        //[self performSelector:@selector(performFacebookSearch:) onThread:[NSThread currentThread] withObject:keyword waitUntilDone:YES];
         NSLog(@"keyword outer: %@",keyword);
         if(anotherSearchInProgress == YES){
             anotherSearchInProgress = NO;
@@ -773,10 +732,6 @@ sideBarActivationState;
         [self performFacebookSearch:keyword];
     }
     
-    //add events at the end
-    //SynterestModel *aSynterestModel = [[SynterestModel alloc] init];
-    //NSMutableArray* savedFacebookData =[aSynterestModel loadLocalData];
-    //[self plotFacebookData:savedFacebookData withReset:NO];
 }
 
 
@@ -785,10 +740,7 @@ sideBarActivationState;
 {
     //have a counter that adds the facebook events at a certain point
     int facebookEventLoadCounter = 0;
-    
-    //List of keywords to search within facebook
-    //NSArray *arrayOfKeywords = [NSArray arrayWithObjects:@"music",@"food",@"night",@"culture",@"social",@"meeting", nil];
-    //NSArray *arrayOfKeywords = [NSArray arrayWithObjects:@"music",@"food",@"gig",@"drink",@"art",@"culture",@"new",@"book",@"big",@"little",@"social",@"business",@"gig",@"talk",@"party",@"club",@"sport",@"event",@"society",@"group",nil];
+
     NSArray *arrayOfKeywords;
     
     
@@ -814,8 +766,7 @@ sideBarActivationState;
         }
         
         facebookEventLoadCounter = facebookEventLoadCounter + 1;
-        
-        //[self performSelector:@selector(performFacebookSearch:) onThread:[NSThread currentThread] withObject:keyword waitUntilDone:YES];
+
         NSLog(@"keyword outer: %@",keyword);
         if(stopExtraFacebookDataFlag == YES){
             stopExtraFacebookDataFlag = NO;
@@ -824,27 +775,15 @@ sideBarActivationState;
         
         [self performFacebookSearch:keyword];
     }
-    
-    //add events at the end
-    //SynterestModel *aSynterestModel = [[SynterestModel alloc] init];
-    //NSMutableArray* savedFacebookData =[aSynterestModel loadLocalData];
-    //[self plotFacebookData:savedFacebookData withReset:NO];
 }
 
 - (void) performFacebookSearch:(NSString*)keyword
 {
     __block BOOL waitingForBlock = YES;
         // Set the flag to YES
-        //NSLog(@"keyword: %@",keyword);
         [self extendAnnotationsOnMap:keyword withCompletion:^(BOOL finished) {
             if(finished){
-                //NSLog(@"success");
-                //NSLog(@"completion value outer block");
                 waitingForBlock = NO;
-                //do somestuff
-                //[self addNewDataToMap:self.extraFacebookData];
-                // Assert the truth
-                //finished = YES;
             }
         }];
         
@@ -854,13 +793,6 @@ sideBarActivationState;
                                      beforeDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
         }
 }
-
-//changes when the user location is updated or changed
-/*-(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
-{
-    [self.mapView setCenterCoordinate: userLocation.location.coordinate animated: NO];
-    [self reverseGeocodeLocation];
-}*/
 
 -(IBAction)onChooseADate:(id)sender
 {
@@ -1151,10 +1083,6 @@ sideBarActivationState;
         tomorrowIsActive = NO;
         customDateIsActive = NO;
         
-        //[self stopExtraFacebookData]; //this just sets a flag in the loop
-    
-        //self.nextTwoDaysButton.backgroundColor = [UIColor lightGrayColor];
-        
         NSDate *tomorrowDate = [todayDate dateByAddingTimeInterval:60.0*60.0*24.0*2.0];
     
         //implement a mask for this
@@ -1164,22 +1092,18 @@ sideBarActivationState;
             @try{
                 MyLocation* anAnnotation = annotation;
         
-                //NSLog(@"Facebook date:%@",[anAnnotation fbEventDate]);
                 NSDate *testDate = [formatFb dateFromString:[anAnnotation fbEventDate]];
-                //NSLog(@"TestDate: %@", testDate);
-                //NSLog(@"TomorrowDate: %@",tomorrowDate);
-            
+
                 NSComparisonResult result;
                 result = [testDate compare:tomorrowDate];
                 if(result==NSOrderedAscending){
-                    //NSLog(@"today is less");
+                    //do nothing
                 }
                 else if(result==NSOrderedDescending){
-                    //NSLog(@"newDate is less");
                     [_mapView removeAnnotation:annotation];
                 }
                 else{
-                    //NSLog(@"Both dates are same");
+                    //do nothing
                 }
             }
             @catch(NSException *e){
@@ -1196,9 +1120,6 @@ sideBarActivationState;
         self.nextWeekButton.backgroundColor = [UIColor whiteColor];
         self.nextDateButton.backgroundColor = [UIColor whiteColor];
         self.nextTwoDaysButton.backgroundColor = [UIColor whiteColor];
-        
-        //self.nextTwoDaysButton.backgroundColor = [UIColor whiteColor];
-        
         
         @try{
             SynterestModel *aSynterestModel = [[SynterestModel alloc] init];
@@ -1331,9 +1252,6 @@ sideBarActivationState;
     gradientCalView.colors = [NSArray arrayWithObjects:(id)[UIColor colorWithRed:(186/255.0) green:(255/255.0) blue:(141/255.0) alpha:1],(id)[[UIColor whiteColor] CGColor],nil];
     gradientCalView.locations = locations;
     [self.calenderMainView.layer insertSublayer:gradientCalView atIndex:0];
-    
-    //add a gradient to the background to the date picker
-    //self.eventDatePicker.backgroundColor = [UIColor colorWithRed:(186/255.0) green:(255/255.0) blue:(141/255.0) alpha:1];
     
     self.eventDatePicker.backgroundColor = [UIColor whiteColor];
 
@@ -1578,8 +1496,6 @@ sideBarActivationState;
     }
     NSDictionary *queryParam = @{ @"q": query };
     
-    
-    //NSLog(@"in here with query string %@",query);
     // Make the API request that uses FQL
     [FBRequestConnection startWithGraphPath:@"/fql"
                                  parameters:queryParam
@@ -1604,19 +1520,13 @@ sideBarActivationState;
 -(void)addNewDataToMap:(NSMutableArray*)newFacebookData
 {
     NSLog(@"add data to map");
-    //NSLog(@"new facebook data: %@",newFacebookData);
     SynterestModel *aSynterestModel = [[SynterestModel alloc] init];
-    //self.additionalFacebookData = [aSynterestModel performSelector:@selector(parseFbFqlResult:) onThread:[NSThread currentThread] withObject:self.extraFacebookData[0] waitUntilDone:YES];
-    
+
     self.additionalFacebookData =[aSynterestModel performSelector:@selector(parseFbFqlResult:) withObject:self.extraFacebookData[0]];
-    //[aSynterestModel performSelector:@selector(saveAdditionalLocalData:) onThread:[NSThread currentThread] withObject:self.additionalFacebookData waitUntilDone:YES];
+
     [aSynterestModel performSelector:@selector(saveAdditionalLocalData:) withObject:self.additionalFacebookData];
     
     NSMutableArray* savedFacebookData =[aSynterestModel loadLocalData];
-    //[aSynterestModel loadLocalData];
-    //[self performSelector:@selector(plotFacebookData:) onThread:[NSThread currentThread] withObject:savedFacebookData waitUntilDone:YES];
-    
-    //[self plotFacebookData:savedFacebookData withReset:NO];
     self.extraFacebookData = nil;
 }
 
@@ -1637,7 +1547,6 @@ sideBarActivationState;
         //avoid using null values of currentCity
         if(self.currentCity != nil){
             query = [NSString stringWithFormat:@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('%@') AND (venue.city = '%@') AND (venue.street != '') AND start_time > now() ORDER BY rand() LIMIT 500",newStr,newStr];
-            //NSLog(@" string in question %@",self.currentCity);
         }
         else{
             query =[NSString stringWithFormat:@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('London') AND (venue.city = 'London') AND (venue.street != '') AND start_time > now() ORDER BY rand() LIMIT 100"];
@@ -1646,7 +1555,6 @@ sideBarActivationState;
     }
     @catch(NSException *e){
         NSLog(@"Error appending string: %@",e);
-        //NSLog(@" string in question %@",self.currentCity);
         //default the automatic search to London if there is uncertainty
         query =[NSString stringWithFormat:@"SELECT eid, name,location,description, venue, start_time, update_time, end_time, pic FROM event WHERE contains('London') AND (venue.city = 'London') AND (venue.street != '') AND start_time > now() ORDER BY rand() LIMIT 100"];
     }
@@ -1687,51 +1595,16 @@ sideBarActivationState;
                                   }
                                   
                               } else {
-                                  
-                                  //do things with the result here
-                                  //NSLog(@"Result: %@",[connection description]);
-                                  
-                                  // result is the json response from a successful request
-                                  //NSDictionary *dictionary = (NSDictionary *)result;
-                                  
-                                  //NSString *text;
-                                  // we pull the name property out, if there is one, and display it
-                                  //text = (NSString *)[dictionary objectForKey:@"data"];
-                                  
-                                  //@try{
-                                  //NSLog(@"in here before facebookData assigned");
-                                  //NSLog(@"connection %@",connection);
-                                  //NSLog(@"result %@",result);
-                                  
                                   //this required the selection to wait
                                   self.facebookData =[aSynterestModel performSelector:@selector(parseFbFqlResult:) withObject:result];
-                                  
-                                  //self.facebookData = [aSynterestModel parseFbFqlResult:result];
-                                  //NSLog(@"facebookData : %@",[aSynterestModel parseFbFqlResult:result]);
-                                  //NSLog(@"facebookData : %@",self.facebookData);
-                                  //self.facebookData = [aSynterestModel parseFbFqlResult:result];
-                                  //}
-                                  //NSLog(@"after parseFbFqlResult call");
-                                  //@catch (NSException *exception) {
-                                     // NSLog(@"Exception Post annotation:%@ ",exception);
-                                  //}
-                                  //@finally {
-                                      //continue
-                                  //}
-                                  
-                                  //place a thread in here
-                                  
+
                                   //Save the facebook Data
                                   [aSynterestModel saveLocalData:facebookData];
-                                  //NSLog(@"after saveLocalData call");
                                   
                                   //Load back the saved facebook Data
                                   NSMutableArray* savedFacebookData =[aSynterestModel loadLocalData];
-                                  //NSLog(@"after loadLocalData call");
                                   hasInitialFacebookDataBeenSource = YES;
                                   [self plotFacebookData:savedFacebookData withReset:YES];
-                                  //NSLog(@"after plotFacebookData call");
-                                  //NSLog(@"json dictionary %@",[[[dictionary objectForKey:@"data"] objectAtIndex:0] objectForKey:@"eid"]);
                                   
                               }
                           }];
@@ -1758,8 +1631,6 @@ sideBarActivationState;
 
 - (void)searchAnnotationsForKeyword:(NSString*)keyword
 {
-    //reset the listViewAnnotations
-    //self.listViewAnnotations = nil;
     
     NSMutableArray *newListObjects = [[NSMutableArray alloc] initWithCapacity:100];
     
@@ -1861,13 +1732,6 @@ sideBarActivationState;
     
     for (NSMutableDictionary *singlePoint in responseData)
     {
-        //NSLog(@"latitude : %@",[[singlePoint objectForKey:@"venue"] objectForKey:@"latitude"]);
-        //NSLog(@"descp. :%@",singlePoint);
-
-        //this is for events that have no start time
-        /*if([singlePoint objectForKey:@"start_time"] == NULL){
-            continue;
-        }*/
         int eventType;
         double latitude,longitude;
         NSString *facebookDateString;
@@ -1882,18 +1746,10 @@ sideBarActivationState;
         }
         @finally {
             @try{
-                //NSLog(@"start_time : %@",[singlePoint objectForKey:@"start_time"]);
-                //NSLog(@"latitude : %@",[[singlePoint objectForKey:@"venue"] objectForKey:@"latitude"]);
                 CLLocationCoordinate2D coordinates;
                 coordinates.latitude = latitude;
                 coordinates.longitude = longitude;
-                //NSLog(@"logging...");
-                //NSLog(@" coordinates %f",coordinates.latitude);
-                //InitWithName gives a description
-                //NSLog(@" pic value %@",[singlePoint objectForKey:@"venue"]);
-                //NSDate *dateFromString = [dateFormatter dateFromString:isoFacebookDateString];
-            
-                
+
                 NSString *fbAdress = [self buildAddressToShow:[singlePoint objectForKey:@"venue"]];
             
                 MyLocation *annotation = [[MyLocation alloc] initWithName:[singlePoint objectForKey:@"name"]
@@ -1924,15 +1780,12 @@ sideBarActivationState;
                         result = [testDate compare:tomorrowDate];
                         if(result==NSOrderedAscending){
                             [_mapView addAnnotation:annotation];
-                            //NSLog(@"today is less");
                         }
                         else if(result==NSOrderedDescending){
-                            //NSLog(@"newDate is less");
                             [_mapView removeAnnotation:annotation];
                         }
                         else{
                             [_mapView addAnnotation:annotation];
-                            //NSLog(@"Both dates are same");
                         }
                     }
                     @catch(NSException *e){
@@ -1958,15 +1811,12 @@ sideBarActivationState;
                         result = [testDate compare:tomorrowDate];
                         if(result==NSOrderedAscending){
                             [_mapView addAnnotation:annotation];
-                            //NSLog(@"today is less");
                         }
                         else if(result==NSOrderedDescending){
-                            //NSLog(@"newDate is less");
                             [_mapView removeAnnotation:annotation];
                         }
                         else{
                             [_mapView addAnnotation:annotation];
-                            //NSLog(@"Both dates are same");
                         }
                     }
                     @catch(NSException *e){
@@ -1986,22 +1836,17 @@ sideBarActivationState;
                 NSLog(@"Exception Post annotation:%@ ",exception);
             }
             @finally {
-                //[loadingDataWheel stopAnimating];
                 continue;
             }
         }//end of main outer try loop
     }
     [loadingDataWheel stopAnimating];
-    
-    //self.loadingDataWheel.hidden = YES;
 }
 
 
 //Convert the Facebook Date String into a human-readable format
 -(NSString*)getDateInfoFromFb:(NSString*)isoFacebookDateString
 {
-    //NSLog(@"date value:%@",isoFacebookDateString);
-    //NSLog(@"date value:%i",[isoFacebookDateString length]);
     NSString * stringToReturn = [[NSString alloc] init];
     
     //fix for facebook dates that are in non-ISO format and non-null
@@ -2060,31 +1905,9 @@ sideBarActivationState;
 
 - (NSString*)buildAddressToShow:(NSMutableDictionary*)venueInfo
 {
-    //NSLog(@" test: %@",[venueInfo objectForKey:@"name"]);
     NSString *addressAsAString = [[NSString alloc] init];
     NSString *nameString;
     nameString = [venueInfo objectForKey:@"name"];
-    
-    //NSLog(@"venue Info %@",venueInfo);
-    
-    //NSLog(@"venueInfo before : %@",venueInfo);
-    
-    /*for (id item in venueInfo){
-        NSLog(@"value : %@",item);
-        NSString *newItem = [item stringByReplacingOccurrencesOfString:@"," withString:@",/n"];
-        NSLog(@"newItem : %@",newItem);
-        //[venueInfo setObject:newItem forKey:item];
-    }
-    NSLog(@"venueInfo : %@",venueInfo);*/
-    
-    //[venueInfo setObject:[ç forKey:@"name"];
-    //[venueInfo setObject:[[venueInfo objectForKey:@"street"] stringByReplacingOccurrencesOfString:@"," withString:@",/n"] forKey:@"street"];
-    //[venueInfo setObject:[[venueInfo objectForKey:@"city"] stringByReplacingOccurrencesOfString:@"," withString:@",/n"] forKey:@"city"];
-    //[venueInfo setObject:[[venueInfo objectForKey:@"zip"] stringByReplacingOccurrencesOfString:@"," withString:@",/n"] forKey:@"zip"];
-    //[venueInfo setObject:[[venueInfo objectForKey:@"country"] stringByReplacingOccurrencesOfString:@"," withString:@",/n"] forKey:@"country"];
-    
-    //@try{
-    //see if the name field is present, if so add this
     if( nameString != nil){
         addressAsAString = [addressAsAString stringByAppendingString:nameString];
     }
@@ -2102,14 +1925,6 @@ sideBarActivationState;
             NSString * newString = [[venueInfo objectForKey:@"street"] stringByReplacingOccurrencesOfString:@", " withString:@"\n"];
             addressAsAString = [addressAsAString stringByAppendingFormat:@"%@",newString];
         }
-        
-        //if(addressAsAString != nil){
-            //add an end line if the string is empty
-            //addressAsAString = [addressAsAString stringByAppendingFormat:@",\n"];
-            //add the street information
-        
-        //}
-
     }
     
     //see if the city field if present
@@ -2153,14 +1968,6 @@ sideBarActivationState;
             addressAsAString = [addressAsAString stringByAppendingFormat:@"%@",[venueInfo objectForKey:@"country"]];
         }
     }
-    //}//end of try statement
-    //@catch (NSException *exception) {
-    //    NSLog(@"Exception fbAddress annotation:%@ ",exception);
-    ///}
-    //@finally {
-    //    return nil;
-    //}
-    
     return addressAsAString;
     
 }
@@ -2168,7 +1975,6 @@ sideBarActivationState;
 - (void)viewDidUnload
 {
     self.buttonLoginLogout = nil;
-    
     [super viewDidUnload];
 }
 
@@ -2178,12 +1984,6 @@ sideBarActivationState;
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    // Return YES for supported orientations
-    /*if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
-    } else {
-        return YES;
-    }*/
     return NO;
 }
 
@@ -2213,9 +2013,7 @@ sideBarActivationState;
                     [self queryButtonAction];
                 }
             }
-            //NSLog(@"current city inside block: %@",self.currentCity);
         }];
-        //NSLog(@"current city outside block: %@",self.currentCity);
     }
     @catch(NSException *e){
         NSLog(@"Error in reverse Geocoder: %@",e);
@@ -2231,7 +2029,6 @@ sideBarActivationState;
         CLLocation *testLocation = [[CLLocation alloc] initWithLatitude:latitudeValue longitude:longitudeValue];
         self.reverseGeocodeLocationValue = testLocation;
         CLGeocoder *reverseGeocoder = [[CLGeocoder alloc] init];
-        //[NSThread sleepForTimeInterval:4.0];
         NSLog(@"reverse Geolocator %@",self.reverseGeocodeLocationValue);
         [reverseGeocoder reverseGeocodeLocation:self.reverseGeocodeLocationValue completionHandler:^(NSArray *placemarks, NSError *error){
             if(error){
@@ -2259,9 +2056,7 @@ sideBarActivationState;
                 NSLog(@"Placemark is nil");
                 [self initReverseGeocodeLocation];
             }
-            //NSLog(@"current city inside block: %@",self.currentCity);
         }];
-        //NSLog(@"current city outside block: %@",self.currentCity);
     }
     @catch(NSException *e){
         NSLog(@"Error in reverse Geocoder: %@",e);
@@ -2281,40 +2076,22 @@ sideBarActivationState;
 }
 
 - (void)setMapCenterWithCoords:(CLLocationCoordinate2D)coords{
-    //MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 0.5*METERS_PER_MILE, 0.5*METERS_PER_MILE);
-    //[_mapView setRegion:viewRegion animated:YES];
-    
     self.mapView.centerCoordinate = coords;
     
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    //CLLocationCoordinate2D setZoomLocation;
-    // 1
-    //setZoomLocation.latitude = 51.50722;
-    //setZoomLocation.longitude= -0.12750;
-    //NSLog(@"location to zoom %f",locationToZoom.latitude);
-    //self.mapView. = locationToZoom;
-
-    
-    //[self performSelectorOnMainThread:@selector(checkLocationPosition) withObject:nil waitUntilDone:YES];
-    
-    // 2
     NSLog(@"location to Zoom: %f",locationToZoom.latitude);
     MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(locationToZoom, 0.5*METERS_PER_MILE, 0.5*METERS_PER_MILE);
-    
-    
-    
-    // 3
+   
     [_mapView setRegion:viewRegion animated:YES];
-    
-    //[self updateTableView];
-    
-    //TODO: check to see if the location manager is ready and if permission has been given
-    
-    //[self reverseGeocodeLocation];
-    if((firstLoad != YES) || ([backFromSearch boolValue] == YES)){
+
+    if( (locationToZoom.longitude == -0.12750) || (locationToZoom.latitude== 51.50722)){
+        [self performSelectorOnMainThread:@selector(initReverseGeocodeLocation) withObject:nil waitUntilDone:YES];
+        [self updateTableView];
+    }
+    else if((firstLoad != YES) || ([backFromSearch boolValue] == YES)){
         [self performSelectorOnMainThread:@selector(initReverseGeocodeLocation) withObject:nil waitUntilDone:YES];
         [self updateTableView];
     }
