@@ -8,6 +8,25 @@
 
 /* Begin PBXBuildFile section */
 		8397BEA819338F3200305F5A /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8397BEA719338F3200305F5A /* EventKit.framework */; };
+		DB09EA3B1945F4DE001232C6 /* evappa-100.png in Resources */ = {isa = PBXBuildFile; fileRef = DB09EA281945F4DE001232C6 /* evappa-100.png */; };
+		DB09EA3C1945F4DE001232C6 /* evappa-1024.png in Resources */ = {isa = PBXBuildFile; fileRef = DB09EA291945F4DE001232C6 /* evappa-1024.png */; };
+		DB09EA3D1945F4DE001232C6 /* evappa-114.png in Resources */ = {isa = PBXBuildFile; fileRef = DB09EA2A1945F4DE001232C6 /* evappa-114.png */; };
+		DB09EA3E1945F4DE001232C6 /* evappa-144.png in Resources */ = {isa = PBXBuildFile; fileRef = DB09EA2B1945F4DE001232C6 /* evappa-144.png */; };
+		DB09EA3F1945F4DE001232C6 /* evappa-20.png in Resources */ = {isa = PBXBuildFile; fileRef = DB09EA2C1945F4DE001232C6 /* evappa-20.png */; };
+		DB09EA401945F4DE001232C6 /* evappa-29.png in Resources */ = {isa = PBXBuildFile; fileRef = DB09EA2D1945F4DE001232C6 /* evappa-29.png */; };
+		DB09EA411945F4DE001232C6 /* evappa-30.png in Resources */ = {isa = PBXBuildFile; fileRef = DB09EA2E1945F4DE001232C6 /* evappa-30.png */; };
+		DB09EA421945F4DE001232C6 /* evappa-320.png in Resources */ = {isa = PBXBuildFile; fileRef = DB09EA2F1945F4DE001232C6 /* evappa-320.png */; };
+		DB09EA431945F4DE001232C6 /* evappa-40.png in Resources */ = {isa = PBXBuildFile; fileRef = DB09EA301945F4DE001232C6 /* evappa-40.png */; };
+		DB09EA441945F4DE001232C6 /* evappa-48.png in Resources */ = {isa = PBXBuildFile; fileRef = DB09EA311945F4DE001232C6 /* evappa-48.png */; };
+		DB09EA451945F4DE001232C6 /* evappa-50.png in Resources */ = {isa = PBXBuildFile; fileRef = DB09EA321945F4DE001232C6 /* evappa-50.png */; };
+		DB09EA461945F4DE001232C6 /* evappa-512.png in Resources */ = {isa = PBXBuildFile; fileRef = DB09EA331945F4DE001232C6 /* evappa-512.png */; };
+		DB09EA471945F4DE001232C6 /* evappa-57.png in Resources */ = {isa = PBXBuildFile; fileRef = DB09EA341945F4DE001232C6 /* evappa-57.png */; };
+		DB09EA481945F4DE001232C6 /* evappa-58.png in Resources */ = {isa = PBXBuildFile; fileRef = DB09EA351945F4DE001232C6 /* evappa-58.png */; };
+		DB09EA491945F4DE001232C6 /* evappa-60.png in Resources */ = {isa = PBXBuildFile; fileRef = DB09EA361945F4DE001232C6 /* evappa-60.png */; };
+		DB09EA4A1945F4DE001232C6 /* evappa-64.png in Resources */ = {isa = PBXBuildFile; fileRef = DB09EA371945F4DE001232C6 /* evappa-64.png */; };
+		DB09EA4B1945F4DE001232C6 /* evappa-640.png in Resources */ = {isa = PBXBuildFile; fileRef = DB09EA381945F4DE001232C6 /* evappa-640.png */; };
+		DB09EA4C1945F4DE001232C6 /* evappa-72.png in Resources */ = {isa = PBXBuildFile; fileRef = DB09EA391945F4DE001232C6 /* evappa-72.png */; };
+		DB09EA4D1945F4DE001232C6 /* evappa-96.png in Resources */ = {isa = PBXBuildFile; fileRef = DB09EA3A1945F4DE001232C6 /* evappa-96.png */; };
 		DB2589EE19109B7C001EE5E2 /* calendar-25.png in Resources */ = {isa = PBXBuildFile; fileRef = DB2589ED19109B7C001EE5E2 /* calendar-25.png */; };
 		DB2589F019109B85001EE5E2 /* calendar-50.png in Resources */ = {isa = PBXBuildFile; fileRef = DB2589EF19109B85001EE5E2 /* calendar-50.png */; };
 		DB2589F219109BD2001EE5E2 /* location-32.png in Resources */ = {isa = PBXBuildFile; fileRef = DB2589F119109BD2001EE5E2 /* location-32.png */; };
@@ -142,6 +161,25 @@
 
 /* Begin PBXFileReference section */
 		8397BEA719338F3200305F5A /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
+		DB09EA281945F4DE001232C6 /* evappa-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "evappa-100.png"; sourceTree = "<group>"; };
+		DB09EA291945F4DE001232C6 /* evappa-1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "evappa-1024.png"; sourceTree = "<group>"; };
+		DB09EA2A1945F4DE001232C6 /* evappa-114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "evappa-114.png"; sourceTree = "<group>"; };
+		DB09EA2B1945F4DE001232C6 /* evappa-144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "evappa-144.png"; sourceTree = "<group>"; };
+		DB09EA2C1945F4DE001232C6 /* evappa-20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "evappa-20.png"; sourceTree = "<group>"; };
+		DB09EA2D1945F4DE001232C6 /* evappa-29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "evappa-29.png"; sourceTree = "<group>"; };
+		DB09EA2E1945F4DE001232C6 /* evappa-30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "evappa-30.png"; sourceTree = "<group>"; };
+		DB09EA2F1945F4DE001232C6 /* evappa-320.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "evappa-320.png"; sourceTree = "<group>"; };
+		DB09EA301945F4DE001232C6 /* evappa-40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "evappa-40.png"; sourceTree = "<group>"; };
+		DB09EA311945F4DE001232C6 /* evappa-48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "evappa-48.png"; sourceTree = "<group>"; };
+		DB09EA321945F4DE001232C6 /* evappa-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "evappa-50.png"; sourceTree = "<group>"; };
+		DB09EA331945F4DE001232C6 /* evappa-512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "evappa-512.png"; sourceTree = "<group>"; };
+		DB09EA341945F4DE001232C6 /* evappa-57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "evappa-57.png"; sourceTree = "<group>"; };
+		DB09EA351945F4DE001232C6 /* evappa-58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "evappa-58.png"; sourceTree = "<group>"; };
+		DB09EA361945F4DE001232C6 /* evappa-60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "evappa-60.png"; sourceTree = "<group>"; };
+		DB09EA371945F4DE001232C6 /* evappa-64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "evappa-64.png"; sourceTree = "<group>"; };
+		DB09EA381945F4DE001232C6 /* evappa-640.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "evappa-640.png"; sourceTree = "<group>"; };
+		DB09EA391945F4DE001232C6 /* evappa-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "evappa-72.png"; sourceTree = "<group>"; };
+		DB09EA3A1945F4DE001232C6 /* evappa-96.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "evappa-96.png"; sourceTree = "<group>"; };
 		DB2589ED19109B7C001EE5E2 /* calendar-25.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calendar-25.png"; sourceTree = "<group>"; };
 		DB2589EF19109B85001EE5E2 /* calendar-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calendar-50.png"; sourceTree = "<group>"; };
 		DB2589F119109BD2001EE5E2 /* location-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "location-32.png"; sourceTree = "<group>"; };
@@ -310,6 +348,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DB09EA271945F4DE001232C6 /* sizes */ = {
+			isa = PBXGroup;
+			children = (
+				DB09EA281945F4DE001232C6 /* evappa-100.png */,
+				DB09EA291945F4DE001232C6 /* evappa-1024.png */,
+				DB09EA2A1945F4DE001232C6 /* evappa-114.png */,
+				DB09EA2B1945F4DE001232C6 /* evappa-144.png */,
+				DB09EA2C1945F4DE001232C6 /* evappa-20.png */,
+				DB09EA2D1945F4DE001232C6 /* evappa-29.png */,
+				DB09EA2E1945F4DE001232C6 /* evappa-30.png */,
+				DB09EA2F1945F4DE001232C6 /* evappa-320.png */,
+				DB09EA301945F4DE001232C6 /* evappa-40.png */,
+				DB09EA311945F4DE001232C6 /* evappa-48.png */,
+				DB09EA321945F4DE001232C6 /* evappa-50.png */,
+				DB09EA331945F4DE001232C6 /* evappa-512.png */,
+				DB09EA341945F4DE001232C6 /* evappa-57.png */,
+				DB09EA351945F4DE001232C6 /* evappa-58.png */,
+				DB09EA361945F4DE001232C6 /* evappa-60.png */,
+				DB09EA371945F4DE001232C6 /* evappa-64.png */,
+				DB09EA381945F4DE001232C6 /* evappa-640.png */,
+				DB09EA391945F4DE001232C6 /* evappa-72.png */,
+				DB09EA3A1945F4DE001232C6 /* evappa-96.png */,
+			);
+			path = sizes;
+			sourceTree = "<group>";
+		};
 		DB4B8AC318FA1DDB0063F3A3 = {
 			isa = PBXGroup;
 			children = (
@@ -395,6 +459,7 @@
 				DBAC749519389ACA002C19AC /* refreshIcon.png */,
 				DB48A2901945CE64004A4126 /* rsz_bluev2.png */,
 				DB48A2911945CE64004A4126 /* rsz_greenv2.png */,
+				DB09EA271945F4DE001232C6 /* sizes */,
 				DBA50E131937664F00041095 /* wonmap */,
 				DBA50E11193764A400041095 /* listViewIcon.png */,
 				DBA50E0F1937637500041095 /* locIcon.png */,
@@ -602,7 +667,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB09EA3B1945F4DE001232C6 /* evappa-100.png in Resources */,
+				DB09EA401945F4DE001232C6 /* evappa-29.png in Resources */,
 				DBC0CD4A190DE4FE002D3BF4 /* Images.xcassets in Resources */,
+				DB09EA411945F4DE001232C6 /* evappa-30.png in Resources */,
 				DBA50E611937664F00041095 /* whappener-640.png in Resources */,
 				DBD665751938A8B300677754 /* reloadIcon.png in Resources */,
 				DBD27BE21912F8E2002F4556 /* green.png in Resources */,
@@ -610,6 +678,7 @@
 				DBA50E451937664F00041095 /* Icon-Small-20@2x.png in Resources */,
 				DBD27BDC1912E4A6002F4556 /* pink.png in Resources */,
 				DBA50E4B1937664F00041095 /* Icon-Small@2x.png in Resources */,
+				DB09EA3C1945F4DE001232C6 /* evappa-1024.png in Resources */,
 				DB4B8ADA18FA1DDB0063F3A3 /* InfoPlist.strings in Resources */,
 				DBC0CD4C190DE9C6002D3BF4 /* exit-50.png in Resources */,
 				DBA50E5D1937664F00041095 /* whappener-57.png in Resources */,
@@ -617,12 +686,14 @@
 				DBDDF4D5192BED0C00C458AC /* align_center-32.png in Resources */,
 				DBD27BEC191310CF002F4556 /* plus-75.png in Resources */,
 				DBD27BDE1912E53F002F4556 /* white.png in Resources */,
+				DB09EA471945F4DE001232C6 /* evappa-57.png in Resources */,
 				DBA50E431937664F00041095 /* Icon-72@2x.png in Resources */,
 				DBA50E531937664F00041095 /* whappener-114.png in Resources */,
 				DB48A2931945CE64004A4126 /* rsz_greenv2.png in Resources */,
 				DBC0CD52190DEB29002D3BF4 /* search-25.png in Resources */,
 				DBA50E631937664F00041095 /* whappener-96.png in Resources */,
 				DBAC749619389ACA002C19AC /* refreshIcon.png in Resources */,
+				DB09EA431945F4DE001232C6 /* evappa-40.png in Resources */,
 				DB48A2AF1945EDEE004A4126 /* pink2v2.png in Resources */,
 				DBD665771938A8E100677754 /* reloadIcon2.png in Resources */,
 				DB48A2A11945D1E9004A4126 /* lightbluev2.png in Resources */,
@@ -633,6 +704,7 @@
 				DBDDF4DA192BED1800C458AC /* logo.png in Resources */,
 				DB2589EE19109B7C001EE5E2 /* calendar-25.png in Resources */,
 				DBD27BF21913382F002F4556 /* define_location-50.png in Resources */,
+				DB09EA491945F4DE001232C6 /* evappa-60.png in Resources */,
 				DB4B8AE218FA1DDB0063F3A3 /* Default.png in Resources */,
 				DB48A2A01945D1E9004A4126 /* lightblue2v2.png in Resources */,
 				DBA50E5F1937664F00041095 /* whappener-60.png in Resources */,
@@ -645,9 +717,12 @@
 				DBD27BE61912F8F7002F4556 /* blue.png in Resources */,
 				DBA50E571937664F00041095 /* whappener-30.png in Resources */,
 				DBA50E421937664F00041095 /* Icon-72.png in Resources */,
+				DB09EA481945F4DE001232C6 /* evappa-58.png in Resources */,
 				DBA50E4E1937664F00041095 /* iTunesArtwork.png in Resources */,
+				DB09EA4A1945F4DE001232C6 /* evappa-64.png in Resources */,
 				DB48A2A81945D1E9004A4126 /* blue2v2.png in Resources */,
 				DB4B8AE418FA1DDB0063F3A3 /* Default@2x.png in Resources */,
+				DB09EA4C1945F4DE001232C6 /* evappa-72.png in Resources */,
 				DB48A2A51945D1E9004A4126 /* yellowv2.png in Resources */,
 				DBA50E601937664F00041095 /* whappener-64.png in Resources */,
 				DBA50E401937664F00041095 /* apple-touch-icon-72x72-precomposed.png in Resources */,
@@ -655,6 +730,9 @@
 				DBDDF4D6192BED0C00C458AC /* align_center-50.png in Resources */,
 				DBA50E461937664F00041095 /* Icon-Small-30.png in Resources */,
 				DB48A2921945CE64004A4126 /* rsz_bluev2.png in Resources */,
+				DB09EA4D1945F4DE001232C6 /* evappa-96.png in Resources */,
+				DB09EA3D1945F4DE001232C6 /* evappa-114.png in Resources */,
+				DB09EA3E1945F4DE001232C6 /* evappa-144.png in Resources */,
 				DBA50E581937664F00041095 /* whappener-320.png in Resources */,
 				DB4B8AE618FA1DDB0063F3A3 /* Default-568h@2x.png in Resources */,
 				DBD27BE81912F8FC002F4556 /* pink2.png in Resources */,
@@ -663,11 +741,13 @@
 				DBA50E521937664F00041095 /* whappener-1024.png in Resources */,
 				DBA50E591937664F00041095 /* whappener-40.png in Resources */,
 				DBA50E5E1937664F00041095 /* whappener-58.png in Resources */,
+				DB09EA4B1945F4DE001232C6 /* evappa-640.png in Resources */,
 				DBA50E621937664F00041095 /* whappener-72.png in Resources */,
 				DBC0CD4E190DE9F1002D3BF4 /* exit-25.png in Resources */,
 				DBA50E4D1937664F00041095 /* Icon@2x.png in Resources */,
 				DB48A2AB1945ED3B004A4126 /* white2v2.png in Resources */,
 				DB2589F019109B85001EE5E2 /* calendar-50.png in Resources */,
+				DB09EA421945F4DE001232C6 /* evappa-320.png in Resources */,
 				DB48A2A21945D1E9004A4126 /* green2v2.png in Resources */,
 				DBA50E511937664F00041095 /* whappener-100.png in Resources */,
 				DBA50E101937637500041095 /* locIcon.png in Resources */,
@@ -678,13 +758,17 @@
 				DBD27BEA1912F902002F4556 /* yellow.png in Resources */,
 				DBA50E3F1937664F00041095 /* apple-touch-icon-144x144-precomposed.png in Resources */,
 				DBA50E411937664F00041095 /* apple-touch-icon-precomposed.png in Resources */,
+				DB09EA441945F4DE001232C6 /* evappa-48.png in Resources */,
+				DB09EA3F1945F4DE001232C6 /* evappa-20.png in Resources */,
 				DBA50E561937664F00041095 /* whappener-29.png in Resources */,
+				DB09EA461945F4DE001232C6 /* evappa-512.png in Resources */,
 				DBA50E501937664F00041095 /* READ_ME.html in Resources */,
 				DB2589F419109BDC001EE5E2 /* location-50.png in Resources */,
 				DBA50E5A1937664F00041095 /* whappener-48.png in Resources */,
 				DB4B8AE918FA1DDB0063F3A3 /* MainStoryboard_iPhone.storyboard in Resources */,
 				DB48A2A31945D1E9004A4126 /* greenv2.png in Resources */,
 				DBA50E4A1937664F00041095 /* Icon-Small.png in Resources */,
+				DB09EA451945F4DE001232C6 /* evappa-50.png in Resources */,
 				DBA50E481937664F00041095 /* Icon-Small-50.png in Resources */,
 				DBA50E5C1937664F00041095 /* whappener-512.png in Resources */,
 				DBDDF4CA192BECAA00C458AC /* location-services.png in Resources */,
