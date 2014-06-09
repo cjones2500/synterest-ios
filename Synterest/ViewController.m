@@ -27,7 +27,6 @@
 
 - (IBAction)buttonClickHandler:(id)sender;
 - (void)updateView;
-- (IBAction)fqlQueryAction:(id)sender;
 - (void)queryButtonAction;
 - (IBAction)quitButtonAction:(id)sender;
 - (IBAction)goToLocationAction:(id)sender;
@@ -1450,13 +1449,6 @@ sideBarActivationState;
     }
 }
 
-- (IBAction)fqlQueryAction:(id)sender
-{
-    //[NSThread detachNewThreadSelector:@selector(queryButtonAction) toTarget:self withObject:nil];
-    
-    [self queryButtonAction];
-}
-
 - (IBAction)searchButtonAction:(id)sender
 {
     
@@ -1647,7 +1639,6 @@ sideBarActivationState;
     }
     else{
         //do nothing all is good
-        //NSLog(@"Access token is here %@",appDelegate.session.accessTokenData);
     }
     
 }
