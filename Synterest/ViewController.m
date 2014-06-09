@@ -1215,7 +1215,6 @@ sideBarActivationState;
     [self.view addSubview:self.listView];
     [self.view addSubview:self.fbPageView];
     [self.view addSubview:self.helperView];
-    //[self.view addSubview:self.calenderPickerView];
     
     [self.view insertSubview:self.sideBarView atIndex:2];
     [self.view insertSubview:self.searchButtonSubView atIndex:3];
@@ -1224,11 +1223,12 @@ sideBarActivationState;
     [self.view insertSubview:self.listImageView atIndex:2];
     [self.view insertSubview:self.questionImageView atIndex:2];
     [self.view insertSubview:self.calenderMainView atIndex:2];
-    
     [self.view insertSubview:self.helperView atIndex:6];
     
     [self.view insertSubview:self.eventDatePicker atIndex:5];
     [self.view insertSubview:self.fbPageView atIndex:10];
+    
+    self.annotationBarView.layer.backgroundColor = [UIColor whiteColor].CGColor;
     
     self.eventDatePicker.hidden = YES;
     self.fbPageView.hidden = YES;
