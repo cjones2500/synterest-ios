@@ -1214,6 +1214,7 @@ sideBarActivationState;
     [self.view addSubview:self.annotationBarView];
     [self.view addSubview:self.listView];
     [self.view addSubview:self.fbPageView];
+    [self.view addSubview:self.helperView];
     //[self.view addSubview:self.calenderPickerView];
     
     [self.view insertSubview:self.sideBarView atIndex:2];
@@ -1221,8 +1222,10 @@ sideBarActivationState;
     [self.view insertSubview:self.annotationBarView atIndex:4];
     [self.view insertSubview:self.listView atIndex:4];
     [self.view insertSubview:self.listImageView atIndex:2];
-    //[self.view insertSubview:self.calenderImageView atIndex:2];
+    [self.view insertSubview:self.questionImageView atIndex:2];
     [self.view insertSubview:self.calenderMainView atIndex:2];
+    
+    [self.view insertSubview:self.helperView atIndex:6];
     
     [self.view insertSubview:self.eventDatePicker atIndex:5];
     [self.view insertSubview:self.fbPageView atIndex:10];
@@ -1230,10 +1233,24 @@ sideBarActivationState;
     self.eventDatePicker.hidden = YES;
     self.fbPageView.hidden = YES;
     self.fbPageView.layer.masksToBounds = YES;
+    
     //be very careful with the indexes as they might prevent gesture functions from working
     
     //keeps items within the view
     self.annotationBarView.layer.masksToBounds = YES;
+    
+    self.helperView.hidden = YES;
+    self.helperView.layer.masksToBounds = YES;
+    self.helperView.layer.borderColor = [UIColor blackColor].CGColor;
+    self.helperView.layer.borderWidth = 2.0;
+    self.helperView.layer.cornerRadius = 25.0f;
+    
+    //Set up behaviour if for the listImageView
+    UITapGestureRecognizer *singleTapOnHelperImageView = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onClickToLeaveLegend)];
+    singleTapOnHelperImageView.numberOfTapsRequired = 1;
+    self.helperView.userInteractionEnabled = YES;
+    [self.helperView addGestureRecognizer:singleTapOnHelperImageView];
+    
     
     //Format the search button subView
     _searchButtonSubView.layer.masksToBounds = YES;
@@ -1254,6 +1271,19 @@ sideBarActivationState;
     singleTapOnListImageView.numberOfTapsRequired = 1;
     _listImageView.userInteractionEnabled = YES;
     [_listImageView addGestureRecognizer:singleTapOnListImageView];
+    
+    //Format the list icon button
+    _questionImageView.layer.masksToBounds = YES;
+    _questionImageView.backgroundColor = [UIColor whiteColor];
+    _questionImageView.layer.borderColor = [UIColor blackColor].CGColor;
+    _questionImageView.layer.borderWidth = 1.5;
+    _questionImageView.layer.cornerRadius = 19.0f;
+    
+    //Set up behaviour if for the questionImageView
+    UITapGestureRecognizer *singleTapOnQuestionImageView = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onClickQuestionButton)];
+    singleTapOnQuestionImageView.numberOfTapsRequired = 1;
+    _questionImageView.userInteractionEnabled = YES;
+    [_questionImageView addGestureRecognizer:singleTapOnQuestionImageView];
     
     //Format the ListView
     _listView.layer.masksToBounds = YES;
@@ -1297,9 +1327,6 @@ sideBarActivationState;
     
     //delegate listViewSearchBar to itself
     self.listViewSearchBar.delegate = self;
-    
-    //start the sidebar in the deactivated state
-    //[self toggleSideBarView];
     
     //Set up behaviour if for the imageView
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapOnSearchDetected)];
@@ -1357,6 +1384,19 @@ sideBarActivationState;
     }
     
 }
+
+-(void) onClickQuestionButton
+{
+    //make the icon information view visible
+    self.helperView.hidden = NO;
+}
+
+-(void) onClickToLeaveLegend
+{
+    self.helperView.hidden = YES;
+}
+
+
 - (IBAction)onGoBackAction:(id)sender
 {
     [self hideAnnotationView];

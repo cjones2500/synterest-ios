@@ -58,8 +58,11 @@
 @property (weak,nonatomic) NSNumber *backFromSearch;
 @property (weak,nonatomic) NSNumber *firstViewFlag;
 
+@property (weak, nonatomic) IBOutlet UIView *helperView;
+
 //List view of events
 @property (weak, nonatomic) IBOutlet UIImageView *listImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *questionImageView;
 @property (weak, nonatomic) IBOutlet UIView *listView;
 @property (weak, nonatomic) IBOutlet UIButton *goBackFromListView;
 @property (weak, nonatomic) IBOutlet UITableView *listTableView;
