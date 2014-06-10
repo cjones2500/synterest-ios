@@ -1451,8 +1451,8 @@ sideBarActivationState;
 -(void)setUpListView
 {
     NSLog(@"unhide listView");
+    
     [self performSelectorOnMainThread:@selector(updateTableView) withObject:self waitUntilDone:YES];
-    //[self updateTableView];
     [self unhideListView];
 }
 
@@ -2159,13 +2159,6 @@ sideBarActivationState;
    
     [_mapView setRegion:viewRegion animated:YES];
 
-    
-    if((locationToZoom.longitude == -0.12750) || (locationToZoom.latitude== 51.50722)){
-        if((firstLoad != YES) || ([backFromSearch boolValue] == YES)){
-            [self performSelectorOnMainThread:@selector(initReverseGeocodeLocation) withObject:nil waitUntilDone:YES];
-            [self updateTableView];
-        }
-    }
     
     if((firstLoad != YES) || ([backFromSearch boolValue] == YES)){
         [self performSelectorOnMainThread:@selector(initReverseGeocodeLocation) withObject:nil waitUntilDone:YES];
