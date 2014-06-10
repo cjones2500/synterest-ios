@@ -447,13 +447,18 @@ sideBarActivationState;
     self.fbEventAddress.text = @"";
     self.fbEidText = nil;
     
-    MyLocation* anAnnotation =[view annotation];
-    self.fbEidText = [anAnnotation fbEid];
-    [NSThread detachNewThreadSelector:@selector(loadFacebookPicture:) toTarget:self withObject:[anAnnotation facebookPic]];
-    self.fbEventAddress.text = [anAnnotation fbLocData];
-    self.fbEventDate.text = [anAnnotation fbEventDate];
-    self.fbEventDescription.text = [anAnnotation fbDescription];
-    self.fbEventTitle.text = [anAnnotation name];
+    @try{
+        MyLocation* anAnnotation =[view annotation];
+        self.fbEidText = [anAnnotation fbEid];
+        [NSThread detachNewThreadSelector:@selector(loadFacebookPicture:) toTarget:self withObject:[anAnnotation facebookPic]];
+        self.fbEventAddress.text = [anAnnotation fbLocData];
+        self.fbEventDate.text = [anAnnotation fbEventDate];
+        self.fbEventDescription.text = [anAnnotation fbDescription];
+        self.fbEventTitle.text = [anAnnotation name];
+    }
+    @catch(NSException *e){
+        NSLog(@"Error in the mapView %@",e);
+    }
     [self unHideAnnotationView];
 }
 
@@ -763,7 +768,6 @@ sideBarActivationState;
             anotherSearchInProgress = NO;
             break;
         }
-        
         
         [self performFacebookSearch:keyword];
     }
@@ -1499,9 +1503,8 @@ sideBarActivationState;
 
 - (IBAction)searchButtonAction:(id)sender
 {
-    
     [self performSegueWithIdentifier:@"search_screen_segue" sender:self];
-    [self stopExtraFacebookData];
+    anotherSearchInProgress = NO;
 }
 
 - (IBAction)quitButtonAction:(id)sender
