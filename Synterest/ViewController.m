@@ -194,11 +194,11 @@ sideBarActivationState;
     }
     self.listViewAnnotations = [ NSMutableArray arrayWithCapacity:1];
     
-    for (id<MKAnnotation> annotation in _mapView.annotations)
+    /*for (id<MKAnnotation> annotation in _mapView.annotations)
     {
         MyLocation *anAnnotation = annotation;
         [self.listViewAnnotations addObject:anAnnotation];
-    }
+    }*/
     
     
     @try{
@@ -796,6 +796,7 @@ sideBarActivationState;
             SynterestModel *aSynterestModel = [[SynterestModel alloc] init];
             NSMutableArray* savedFacebookData =[aSynterestModel loadLocalData];
             [self plotFacebookData:savedFacebookData withReset:NO];
+            [self updateTableView];
             
             //reset the facebookCounter
             facebookEventLoadCounter = 0;
@@ -963,7 +964,7 @@ sideBarActivationState;
     else{
         NSLog(@"TodayIsActive Flag not set");
     }
-    //[self updateTableView];
+    [self updateTableView];
 }
 
 -(IBAction)onClickTomorrowAction:(id)sender
@@ -1064,7 +1065,7 @@ sideBarActivationState;
     else{
         NSLog(@"TodayIsActive Flag not set");
     }
-    //[self updateTableView];
+    [self updateTableView];
 }
 
 -(IBAction)onClickTodayAction:(id)sender
@@ -1168,7 +1169,7 @@ sideBarActivationState;
         NSLog(@"TodayIsActive Flag not set");
     }
     
-    //[self updateTableView];
+    [self updateTableView];
 }
 
 //only updates location if the user has changed position by over 500m
@@ -1242,8 +1243,8 @@ sideBarActivationState;
     self.helperView.hidden = YES;
     self.helperView.layer.masksToBounds = YES;
     self.helperView.layer.borderColor = [UIColor blackColor].CGColor;
-    self.helperView.layer.borderWidth = 2.0;
-    self.helperView.layer.cornerRadius = 25.0f;
+    self.helperView.layer.borderWidth = 0.5;
+    self.helperView.layer.cornerRadius = 10.0f;
     
     //Set up behaviour if for the listImageView
     UITapGestureRecognizer *singleTapOnHelperImageView = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onClickToLeaveLegend)];
@@ -1291,7 +1292,6 @@ sideBarActivationState;
     //Format the sideBarView
     _sideBarView.layer.masksToBounds = YES;
     _sideBarView.layer.cornerRadius = 19.0f;
-    //_sideBarView.backgroundColor = [UIColor whiteColor];
     _sideBarView.layer.borderColor = [UIColor blackColor].CGColor;
     _sideBarView.layer.borderWidth = 1.5f;
     
@@ -1306,6 +1306,14 @@ sideBarActivationState;
     gradient.colors = [NSArray arrayWithObjects:(id)[UIColor colorWithRed:(186/255.0) green:(255/255.0) blue:(141/255.0) alpha:1],(id)[[UIColor whiteColor] CGColor],nil];
     gradient.locations = locations;
     [_sideBarView.layer insertSublayer:gradient atIndex:0];
+    
+    //add a gradient to the helperView
+    CAGradientLayer *gradientHelperView= [CAGradientLayer layer];
+    gradientHelperView.frame = self.helperView.bounds;
+    gradientHelperView.colors = [NSArray arrayWithObjects:(id)[UIColor colorWithRed:(186/255.0) green:(255/255.0) blue:(141/255.0) alpha:1],(id)[[UIColor whiteColor] CGColor],nil];
+    gradientHelperView.locations = locations;
+    
+    [self.helperView.layer insertSublayer:gradientHelperView atIndex:0];
     
     
     //add a gradient to the calenderView
