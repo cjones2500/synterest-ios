@@ -581,6 +581,9 @@ sideBarActivationState;
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([[segue identifier] isEqualToString:@"search_screen_segue"]) {
+        /*if (![self.presentedViewController isBeingDismissed]) {
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }*/
         [[segue destinationViewController] setCurrentSearchViewInformation:self.locationToSend];
     
     }
@@ -675,7 +678,9 @@ sideBarActivationState;
 -(IBAction)clickOnFacebook:(id)sender{
 
     userTriggerRefresh = YES;
-    stopExtraFacebookDataFlag = YES;
+    stopExtraFacebookDataFlag = NO;
+    anotherSearchInProgress = NO;
+    
     for (id<MKAnnotation> annotation in _mapView.annotations) {
         
         @try{
@@ -785,11 +790,11 @@ sideBarActivationState;
     
     
     if(userTriggerRefresh == YES){
-        arrayOfKeywords= [NSArray arrayWithObjects:@"",@"music",@"society",@"night",@"band",@"experience",@"tickets",@"food",@"people",@"social",@"meeting",@"drink",@"gig",@"talk",@"party",@"club",@"sport",@"event",@"society",@"group",@"art",@"business",@"food",@"dinner",@"culture",@"festival",@"dance",@"cafe",@"jazz",@"tour",@"exhibition",@"show",@"bar",@"class",@"theatre",@"football",@"hockey",@"tournament",@"match",@"college",@"time",@"well",@"student",@"new",@"old",@"live",@"book",@"fair",@"big",@"little",@"project",@"happy",nil];
+        arrayOfKeywords= [NSArray arrayWithObjects:@"",@"music",@"society",@"night",@"band",@"experience",@"tickets",@"food",@"people",@"social",@"meeting",@"drink",@"gig",@"talk",@"party",@"club",@"sport",@"event",@"society",@"group",@"art",@"business",@"food",@"dinner",@"culture",@"festival",@"dance",@"jazz",@"exhibition",@"show",@"theatre",@"football",@"hockey",@"tournament",@"match",@"college",@"time",@"well",@"student",@"new",@"old",@"live",@"book",@"fair",@"big",@"little",@"project",@"happy",nil];
         userTriggerRefresh = NO;
     }
     else{
-        arrayOfKeywords= [NSArray arrayWithObjects:@"",@"music",@"society",@"night",@"band",@"experience",@"tickets",@"food",@"people",@"social",@"meeting",@"drink",@"gig",@"talk",@"party",@"club",@"sport",@"event",@"society",@"group",@"art",@"business",@"food",@"dinner",@"culture",@"festival",@"dance",@"cafe",@"jazz",@"tour",@"exhibition",@"show",@"bar",@"class",@"theatre",@"football",@"hockey",@"tournament",@"match",@"college",@"time",@"well",@"student",@"new",@"old",@"live",@"book",@"fair",@"big",@"little",@"project",@"happy",nil];
+        arrayOfKeywords= [NSArray arrayWithObjects:@"",@"music",@"society",@"night",@"band",@"experience",@"tickets",@"food",@"people",@"social",@"meeting",@"drink",@"gig",@"talk",@"party",@"club",@"sport",@"event",@"society",@"group",@"art",@"business",@"food",@"dinner",@"culture",@"festival",@"dance",@"jazz",@"exhibition",@"show",@"theatre",@"football",@"hockey",@"match",@"college",@"time",@"well",@"student",@"new",@"old",@"live",@"book",@"fair",@"big",@"little",@"project",@"happy",nil];
     }
     
     for(id keyword in arrayOfKeywords){
@@ -1503,8 +1508,11 @@ sideBarActivationState;
 
 - (IBAction)searchButtonAction:(id)sender
 {
-    [self performSegueWithIdentifier:@"search_screen_segue" sender:self];
-    anotherSearchInProgress = NO;
+    [self stopExtraFacebookData];
+    //[self dismissViewControllerAnimated:YES completion:^{
+        //anotherSearchInProgress = NO;
+        [self performSegueWithIdentifier:@"search_screen_segue" sender:self];
+   // }];
 }
 
 - (IBAction)quitButtonAction:(id)sender
@@ -1660,7 +1668,7 @@ sideBarActivationState;
                                   
                                   @try{
                                       UIAlertView *fbAlert = [[UIAlertView alloc] initWithTitle:@"Network/Facebook Error"
-                                                                                    message:[NSString stringWithFormat:@"%@",[error localizedDescription]]
+                                                                                    message:[NSString stringWithFormat:@"Please toggle airplane mode to reset your Facebook connection"]
                                                                                    delegate:self
                                                                           cancelButtonTitle:@"OK"
                                                                           otherButtonTitles:nil];
