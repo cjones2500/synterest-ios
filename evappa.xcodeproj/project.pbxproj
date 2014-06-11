@@ -75,11 +75,27 @@
 		DB4B8B4318FA3C2C0063F3A3 /* SynterestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DB4B8B4218FA3C2C0063F3A3 /* SynterestModel.m */; };
 		DB78135B1945FBFA00C0F13D /* question_shield-128.png in Resources */ = {isa = PBXBuildFile; fileRef = DB78135A1945FBFA00C0F13D /* question_shield-128.png */; };
 		DB78135F1945FD5900C0F13D /* question-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = DB78135E1945FD5900C0F13D /* question-icon.png */; };
+		DB824D7319487D3000795151 /* evap-20.png in Resources */ = {isa = PBXBuildFile; fileRef = DB824D6319487D3000795151 /* evap-20.png */; };
+		DB824D7419487D3000795151 /* evap-29.png in Resources */ = {isa = PBXBuildFile; fileRef = DB824D6419487D3000795151 /* evap-29.png */; };
+		DB824D7519487D3000795151 /* evap-30.png in Resources */ = {isa = PBXBuildFile; fileRef = DB824D6519487D3000795151 /* evap-30.png */; };
+		DB824D7619487D3000795151 /* evap-40.png in Resources */ = {isa = PBXBuildFile; fileRef = DB824D6619487D3000795151 /* evap-40.png */; };
+		DB824D7719487D3000795151 /* evap-48.png in Resources */ = {isa = PBXBuildFile; fileRef = DB824D6719487D3000795151 /* evap-48.png */; };
+		DB824D7819487D3000795151 /* evap-50.png in Resources */ = {isa = PBXBuildFile; fileRef = DB824D6819487D3000795151 /* evap-50.png */; };
+		DB824D7919487D3000795151 /* evap-57.png in Resources */ = {isa = PBXBuildFile; fileRef = DB824D6919487D3000795151 /* evap-57.png */; };
+		DB824D7A19487D3000795151 /* evap-58.png in Resources */ = {isa = PBXBuildFile; fileRef = DB824D6A19487D3000795151 /* evap-58.png */; };
+		DB824D7B19487D3000795151 /* evap-60.png in Resources */ = {isa = PBXBuildFile; fileRef = DB824D6B19487D3000795151 /* evap-60.png */; };
+		DB824D7C19487D3000795151 /* evap-64.png in Resources */ = {isa = PBXBuildFile; fileRef = DB824D6C19487D3000795151 /* evap-64.png */; };
+		DB824D7D19487D3000795151 /* evap-72.png in Resources */ = {isa = PBXBuildFile; fileRef = DB824D6D19487D3000795151 /* evap-72.png */; };
+		DB824D7E19487D3000795151 /* evap-96.png in Resources */ = {isa = PBXBuildFile; fileRef = DB824D6E19487D3000795151 /* evap-96.png */; };
+		DB824D7F19487D3000795151 /* evap-100.png in Resources */ = {isa = PBXBuildFile; fileRef = DB824D6F19487D3000795151 /* evap-100.png */; };
+		DB824D8019487D3000795151 /* evap-114.png in Resources */ = {isa = PBXBuildFile; fileRef = DB824D7019487D3000795151 /* evap-114.png */; };
+		DB824D8119487D3000795151 /* evap-144.png in Resources */ = {isa = PBXBuildFile; fileRef = DB824D7119487D3000795151 /* evap-144.png */; };
+		DB824D8219487D3000795151 /* evap-320.png in Resources */ = {isa = PBXBuildFile; fileRef = DB824D7219487D3000795151 /* evap-320.png */; };
+		DB824D8419487E5D00795151 /* evap-1024.png in Resources */ = {isa = PBXBuildFile; fileRef = DB824D8319487E5D00795151 /* evap-1024.png */; };
 		DBA50E101937637500041095 /* locIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = DBA50E0F1937637500041095 /* locIcon.png */; };
 		DBA50E12193764A400041095 /* listViewIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = DBA50E11193764A400041095 /* listViewIcon.png */; };
 		DBAC749619389ACA002C19AC /* refreshIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = DBAC749519389ACA002C19AC /* refreshIcon.png */; };
 		DBAC749819389B7C002C19AC /* refresher.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = DBAC749719389B7C002C19AC /* refresher.jpeg */; };
-		DBB5C209194877910009BBDF /* evap-icons in Resources */ = {isa = PBXBuildFile; fileRef = DBB5C208194877910009BBDF /* evap-icons */; };
 		DBC0CD45190D7AC5002D3BF4 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBC0CD44190D7AC5002D3BF4 /* LoginViewController.m */; };
 		DBC0CD48190D8E2A002D3BF4 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB4B8AEE18FA1DDB0063F3A3 /* ViewController.m */; };
 		DBC0CD4A190DE4FE002D3BF4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBC0CD49190DE4FE002D3BF4 /* Images.xcassets */; };
@@ -201,12 +217,28 @@
 		DB4B8B4218FA3C2C0063F3A3 /* SynterestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SynterestModel.m; sourceTree = "<group>"; };
 		DB78135A1945FBFA00C0F13D /* question_shield-128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "question_shield-128.png"; sourceTree = "<group>"; };
 		DB78135E1945FD5900C0F13D /* question-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "question-icon.png"; sourceTree = "<group>"; };
+		DB824D6319487D3000795151 /* evap-20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "evap-20.png"; sourceTree = "<group>"; };
+		DB824D6419487D3000795151 /* evap-29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "evap-29.png"; sourceTree = "<group>"; };
+		DB824D6519487D3000795151 /* evap-30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "evap-30.png"; sourceTree = "<group>"; };
+		DB824D6619487D3000795151 /* evap-40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "evap-40.png"; sourceTree = "<group>"; };
+		DB824D6719487D3000795151 /* evap-48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "evap-48.png"; sourceTree = "<group>"; };
+		DB824D6819487D3000795151 /* evap-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "evap-50.png"; sourceTree = "<group>"; };
+		DB824D6919487D3000795151 /* evap-57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "evap-57.png"; sourceTree = "<group>"; };
+		DB824D6A19487D3000795151 /* evap-58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "evap-58.png"; sourceTree = "<group>"; };
+		DB824D6B19487D3000795151 /* evap-60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "evap-60.png"; sourceTree = "<group>"; };
+		DB824D6C19487D3000795151 /* evap-64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "evap-64.png"; sourceTree = "<group>"; };
+		DB824D6D19487D3000795151 /* evap-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "evap-72.png"; sourceTree = "<group>"; };
+		DB824D6E19487D3000795151 /* evap-96.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "evap-96.png"; sourceTree = "<group>"; };
+		DB824D6F19487D3000795151 /* evap-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "evap-100.png"; sourceTree = "<group>"; };
+		DB824D7019487D3000795151 /* evap-114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "evap-114.png"; sourceTree = "<group>"; };
+		DB824D7119487D3000795151 /* evap-144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "evap-144.png"; sourceTree = "<group>"; };
+		DB824D7219487D3000795151 /* evap-320.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "evap-320.png"; sourceTree = "<group>"; };
+		DB824D8319487E5D00795151 /* evap-1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "evap-1024.png"; sourceTree = "<group>"; };
 		DB9FDC99190CC0B900881F86 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		DBA50E0F1937637500041095 /* locIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = locIcon.png; sourceTree = "<group>"; };
 		DBA50E11193764A400041095 /* listViewIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = listViewIcon.png; sourceTree = "<group>"; };
 		DBAC749519389ACA002C19AC /* refreshIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refreshIcon.png; sourceTree = "<group>"; };
 		DBAC749719389B7C002C19AC /* refresher.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = refresher.jpeg; sourceTree = "<group>"; };
-		DBB5C208194877910009BBDF /* evap-icons */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "evap-icons"; sourceTree = "<group>"; };
 		DBC0CD43190D7AC5002D3BF4 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		DBC0CD44190D7AC5002D3BF4 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		DBC0CD49190DE4FE002D3BF4 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -279,6 +311,23 @@
 		DB09EA271945F4DE001232C6 /* sizes */ = {
 			isa = PBXGroup;
 			children = (
+				DB824D8319487E5D00795151 /* evap-1024.png */,
+				DB824D6319487D3000795151 /* evap-20.png */,
+				DB824D6419487D3000795151 /* evap-29.png */,
+				DB824D6519487D3000795151 /* evap-30.png */,
+				DB824D6619487D3000795151 /* evap-40.png */,
+				DB824D6719487D3000795151 /* evap-48.png */,
+				DB824D6819487D3000795151 /* evap-50.png */,
+				DB824D6919487D3000795151 /* evap-57.png */,
+				DB824D6A19487D3000795151 /* evap-58.png */,
+				DB824D6B19487D3000795151 /* evap-60.png */,
+				DB824D6C19487D3000795151 /* evap-64.png */,
+				DB824D6D19487D3000795151 /* evap-72.png */,
+				DB824D6E19487D3000795151 /* evap-96.png */,
+				DB824D6F19487D3000795151 /* evap-100.png */,
+				DB824D7019487D3000795151 /* evap-114.png */,
+				DB824D7119487D3000795151 /* evap-144.png */,
+				DB824D7219487D3000795151 /* evap-320.png */,
 				DB09EA281945F4DE001232C6 /* evappa-100.png */,
 				DB09EA291945F4DE001232C6 /* evappa-1024.png */,
 				DB09EA2A1945F4DE001232C6 /* evappa-114.png */,
@@ -389,7 +438,6 @@
 				DBAC749519389ACA002C19AC /* refreshIcon.png */,
 				DB48A2901945CE64004A4126 /* rsz_bluev2.png */,
 				DB48A2911945CE64004A4126 /* rsz_greenv2.png */,
-				DBB5C208194877910009BBDF /* evap-icons */,
 				DB09EA271945F4DE001232C6 /* sizes */,
 				DBA50E11193764A400041095 /* listViewIcon.png */,
 				DBA50E0F1937637500041095 /* locIcon.png */,
@@ -536,15 +584,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				DB09EA3B1945F4DE001232C6 /* evappa-100.png in Resources */,
+				DB824D7C19487D3000795151 /* evap-64.png in Resources */,
 				DB09EA401945F4DE001232C6 /* evappa-29.png in Resources */,
+				DB824D7719487D3000795151 /* evap-48.png in Resources */,
 				DBC0CD4A190DE4FE002D3BF4 /* Images.xcassets in Resources */,
 				DB09EA411945F4DE001232C6 /* evappa-30.png in Resources */,
+				DB824D7319487D3000795151 /* evap-20.png in Resources */,
+				DB824D7B19487D3000795151 /* evap-60.png in Resources */,
 				DBD665751938A8B300677754 /* reloadIcon.png in Resources */,
+				DB824D8419487E5D00795151 /* evap-1024.png in Resources */,
 				DBD27BE21912F8E2002F4556 /* green.png in Resources */,
 				DBD27BE01912F8D6002F4556 /* orange.png in Resources */,
 				DBD27BDC1912E4A6002F4556 /* pink.png in Resources */,
 				DB09EA3C1945F4DE001232C6 /* evappa-1024.png in Resources */,
 				DB4B8ADA18FA1DDB0063F3A3 /* InfoPlist.strings in Resources */,
+				DB824D7819487D3000795151 /* evap-50.png in Resources */,
 				DBC0CD4C190DE9C6002D3BF4 /* exit-50.png in Resources */,
 				DBD27BF11913382F002F4556 /* define_location-75.png in Resources */,
 				DB78135F1945FD5900C0F13D /* question-icon.png in Resources */,
@@ -556,7 +610,11 @@
 				DB48A2931945CE64004A4126 /* rsz_greenv2.png in Resources */,
 				DBC0CD52190DEB29002D3BF4 /* search-25.png in Resources */,
 				DBAC749619389ACA002C19AC /* refreshIcon.png in Resources */,
+				DB824D8019487D3000795151 /* evap-114.png in Resources */,
+				DB824D8219487D3000795151 /* evap-320.png in Resources */,
 				DB09EA431945F4DE001232C6 /* evappa-40.png in Resources */,
+				DB824D7D19487D3000795151 /* evap-72.png in Resources */,
+				DB824D7919487D3000795151 /* evap-57.png in Resources */,
 				DB48A2AF1945EDEE004A4126 /* pink2v2.png in Resources */,
 				DBD665771938A8E100677754 /* reloadIcon2.png in Resources */,
 				DB48A2A11945D1E9004A4126 /* lightbluev2.png in Resources */,
@@ -564,16 +622,19 @@
 				DB2589EE19109B7C001EE5E2 /* calendar-25.png in Resources */,
 				DBD27BF21913382F002F4556 /* define_location-50.png in Resources */,
 				DB09EA491945F4DE001232C6 /* evappa-60.png in Resources */,
+				DB824D7519487D3000795151 /* evap-30.png in Resources */,
 				DB4B8AE218FA1DDB0063F3A3 /* Default.png in Resources */,
 				DB48A2A01945D1E9004A4126 /* lightblue2v2.png in Resources */,
 				DBDDF4CC192BECC800C458AC /* search-75.png in Resources */,
 				DBD27BEE191310D5002F4556 /* plus-50.png in Resources */,
+				DB824D7419487D3000795151 /* evap-29.png in Resources */,
 				DB48A2B11945EE1E004A4126 /* lightbluetake2v2.png in Resources */,
 				DBA50E12193764A400041095 /* listViewIcon.png in Resources */,
 				DBD27BE61912F8F7002F4556 /* blue.png in Resources */,
 				DB09EA481945F4DE001232C6 /* evappa-58.png in Resources */,
 				DB09EA4A1945F4DE001232C6 /* evappa-64.png in Resources */,
 				DB48A2A81945D1E9004A4126 /* blue2v2.png in Resources */,
+				DB824D7E19487D3000795151 /* evap-96.png in Resources */,
 				DB4B8AE418FA1DDB0063F3A3 /* Default@2x.png in Resources */,
 				DB09EA4C1945F4DE001232C6 /* evappa-72.png in Resources */,
 				DB48A2A51945D1E9004A4126 /* yellowv2.png in Resources */,
@@ -585,6 +646,8 @@
 				DB09EA3E1945F4DE001232C6 /* evappa-144.png in Resources */,
 				DB4B8AE618FA1DDB0063F3A3 /* Default-568h@2x.png in Resources */,
 				DBD27BE81912F8FC002F4556 /* pink2.png in Resources */,
+				DB824D7A19487D3000795151 /* evap-58.png in Resources */,
+				DB824D8119487D3000795151 /* evap-144.png in Resources */,
 				DBC0CD50190DEA63002D3BF4 /* about-25.png in Resources */,
 				DB09EA4B1945F4DE001232C6 /* evappa-640.png in Resources */,
 				DBC0CD4E190DE9F1002D3BF4 /* exit-25.png in Resources */,
@@ -597,6 +660,7 @@
 				DBDDF4D7192BED0C00C458AC /* list-75.png in Resources */,
 				DB48A2A91945D1E9004A4126 /* bluev2.png in Resources */,
 				DBD27BEA1912F902002F4556 /* yellow.png in Resources */,
+				DB824D7619487D3000795151 /* evap-40.png in Resources */,
 				DB09EA441945F4DE001232C6 /* evappa-48.png in Resources */,
 				DB09EA3F1945F4DE001232C6 /* evappa-20.png in Resources */,
 				DB09EA461945F4DE001232C6 /* evappa-512.png in Resources */,
@@ -609,11 +673,11 @@
 				DB48A2A71945D1E9004A4126 /* orangev2.png in Resources */,
 				DB2589F219109BD2001EE5E2 /* location-32.png in Resources */,
 				DB4B8AEC18FA1DDB0063F3A3 /* MainStoryboard_iPad.storyboard in Resources */,
+				DB824D7F19487D3000795151 /* evap-100.png in Resources */,
 				DBD27BE41912F8E6002F4556 /* deeperBlue.png in Resources */,
 				DB2D4F4618FB66DA004DE5BB /* arrest.png in Resources */,
 				DB48A2AD1945EDC7004A4126 /* greentake2v2.png in Resources */,
 				DB48A2A61945D1E9004A4126 /* orange2v2.png in Resources */,
-				DBB5C209194877910009BBDF /* evap-icons in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
