@@ -73,6 +73,7 @@
 		DB4B8B3C18FA29900063F3A3 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB4B8B3B18FA29900063F3A3 /* FacebookSDK.framework */; };
 		DB4B8B3D18FA29900063F3A3 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB4B8B3B18FA29900063F3A3 /* FacebookSDK.framework */; };
 		DB4B8B4318FA3C2C0063F3A3 /* SynterestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DB4B8B4218FA3C2C0063F3A3 /* SynterestModel.m */; };
+		DB6828591948923D001483C2 /* evap-120.png in Resources */ = {isa = PBXBuildFile; fileRef = DB6828581948923D001483C2 /* evap-120.png */; };
 		DB78135B1945FBFA00C0F13D /* question_shield-128.png in Resources */ = {isa = PBXBuildFile; fileRef = DB78135A1945FBFA00C0F13D /* question_shield-128.png */; };
 		DB78135F1945FD5900C0F13D /* question-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = DB78135E1945FD5900C0F13D /* question-icon.png */; };
 		DB824D7319487D3000795151 /* evap-20.png in Resources */ = {isa = PBXBuildFile; fileRef = DB824D6319487D3000795151 /* evap-20.png */; };
@@ -215,6 +216,7 @@
 		DB4B8B3B18FA29900063F3A3 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		DB4B8B4118FA3C2B0063F3A3 /* SynterestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynterestModel.h; sourceTree = "<group>"; };
 		DB4B8B4218FA3C2C0063F3A3 /* SynterestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SynterestModel.m; sourceTree = "<group>"; };
+		DB6828581948923D001483C2 /* evap-120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "evap-120.png"; sourceTree = "<group>"; };
 		DB78135A1945FBFA00C0F13D /* question_shield-128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "question_shield-128.png"; sourceTree = "<group>"; };
 		DB78135E1945FD5900C0F13D /* question-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "question-icon.png"; sourceTree = "<group>"; };
 		DB824D6319487D3000795151 /* evap-20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "evap-20.png"; sourceTree = "<group>"; };
@@ -469,6 +471,7 @@
 				DBC0CD4F190DEA63002D3BF4 /* about-25.png */,
 				DBC0CD4D190DE9F1002D3BF4 /* exit-25.png */,
 				DBC0CD4B190DE9C6002D3BF4 /* exit-50.png */,
+				DB6828581948923D001483C2 /* evap-120.png */,
 				DBC0CD51190DEB29002D3BF4 /* search-25.png */,
 				DBC0CD49190DE4FE002D3BF4 /* Images.xcassets */,
 				DB9FDC99190CC0B900881F86 /* logo.png */,
@@ -559,6 +562,11 @@
 				LastTestingUpgradeCheck = 0510;
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Chris Jones";
+				TargetAttributes = {
+					DB4B8ACB18FA1DDB0063F3A3 = {
+						DevelopmentTeam = A99967Y4X7;
+					};
+				};
 			};
 			buildConfigurationList = DB4B8AC718FA1DDB0063F3A3 /* Build configuration list for PBXProject "evappa" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -585,6 +593,7 @@
 			files = (
 				DB09EA3B1945F4DE001232C6 /* evappa-100.png in Resources */,
 				DB824D7C19487D3000795151 /* evap-64.png in Resources */,
+				DB6828591948923D001483C2 /* evap-120.png in Resources */,
 				DB09EA401945F4DE001232C6 /* evappa-29.png in Resources */,
 				DB824D7719487D3000795151 /* evap-48.png in Resources */,
 				DBC0CD4A190DE4FE002D3BF4 /* Images.xcassets in Resources */,
@@ -848,6 +857,7 @@
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -857,6 +867,7 @@
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				INFOPLIST_FILE = "Synterest/evappa-Info.plist";
 				PRODUCT_NAME = Evappa;
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -866,7 +877,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Chris Jones (HR9Y65KBML)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Chris Jones (HR9Y65KBML)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -876,6 +888,7 @@
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				INFOPLIST_FILE = "Synterest/evappa-Info.plist";
 				PRODUCT_NAME = Evappa;
+				PROVISIONING_PROFILE = "F52D6BC6-1BD7-4D83-BEF1-18CD1604BBB1";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
