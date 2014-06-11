@@ -14,15 +14,15 @@
 		<dict>
 			<key>CFBundleIconFiles</key>
 			<array>
-				<string>evappa-58</string>
-				<string>evappa-29</string>
-				<string>evappa-114</string>
-				<string>evappa-57</string>
-				<string>evappa-57</string>
-				<string>evappa-29</string>
-				<string>evappa-144</string>
-				<string>evappa-114</string>
-				<string>evappa-57</string>
+				<string>evap-58</string>
+				<string>evap-29</string>
+				<string>evap-114</string>
+				<string>evap-57</string>
+				<string>evap-57</string>
+				<string>evap-29</string>
+				<string>evap-144</string>
+				<string>evap-114</string>
+				<string>evap-57</string>
 			</array>
 		</dict>
 	</dict>
