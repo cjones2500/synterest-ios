@@ -168,7 +168,6 @@
                                         <state key="normal" title=" " image="define_location-50.png"/>
                                         <connections>
                                             <action selector="searchButtonAction:" destination="o97-z1-owW" eventType="touchUpInside" id="JSe-Mm-wqt"/>
-                                            <segue destination="1JQ-AT-j6V" kind="modal" identifier="search_screen_segue" id="n3Q-bJ-8GC"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BeM-5C-dyv">
@@ -488,6 +487,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <outlet property="searchButtonSubView" destination="Rcr-C8-Zvr" id="cP6-dE-br7"/>
                         <outlet property="sideBarView" destination="u14-0w-RJC" id="m3u-Z1-QGI"/>
                         <segue destination="2" kind="modal" identifier="logout_sucess" id="YuM-0e-9ne"/>
+                        <segue destination="1JQ-AT-j6V" kind="modal" identifier="search_screen_segue" id="SVW-Ex-TOq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WHp-QZ-ND1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -610,6 +610,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="0wx-kF-YYX"/>
+        <segue reference="fZb-Mm-o0W"/>
     </inferredMetricsTieBreakers>
 </document>
