@@ -1,4 +1,4 @@
-//
+		//
 //  SearchViewController.m
 //  Synterest
 //
@@ -202,8 +202,7 @@
 
 //called when a cell is selected
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSLog(@"@indexPath: %i",indexPath.row);
+{	
     inforamtionToSendBacktoMainView = [NSArray arrayWithObject:[_freshSearchViewInformation objectAtIndexedSubscript:indexPath.row]];
     [self performSegueWithIdentifier:@"back_from_search" sender:inforamtionToSendBacktoMainView];
 }

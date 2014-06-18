@@ -35,7 +35,7 @@
 
 //#define METERS_PER_MILE 1609.344
 #define METERS_PER_MILE 10000.0
-#define MAXIMUM_NUMBER_ANNOTATIONS 3000
+#define MAXIMUM_NUMBER_ANNOTATIONS 2500
 
 
 @implementation ViewController{
@@ -1811,8 +1811,6 @@ sideBarActivationState;
         return;
     }
     
-    NSLog(@"num of dataPoints %u",[responseData count]);
-    
     for (NSMutableDictionary *singlePoint in responseData)
     {
         int eventType;
@@ -1944,44 +1942,46 @@ sideBarActivationState;
     NSCalendarUnit units = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit;
     NSDateComponents *components = [calendar components:units fromDate:dateFromString];
     
+        //Add the date (dd:mm:yyyy)
+        if([components day] < 10){
+            stringToReturn = [stringToReturn stringByAppendingString:[NSString stringWithFormat:@"0%d",[components day]]];
+        }
+        
+        else{
+            stringToReturn = [stringToReturn stringByAppendingString:[NSString stringWithFormat:@"%d",[components day]]];
+        }
+        
+        stringToReturn = [stringToReturn stringByAppendingString:@"/"];
+        
+        if([components month] < 10){
+            stringToReturn = [stringToReturn stringByAppendingString:[NSString stringWithFormat:@"0%d",[components month]]];
+        }
+        
+        else{
+            stringToReturn = [stringToReturn stringByAppendingString:[NSString stringWithFormat:@"%d",[components month]]];
+        }
+        stringToReturn = [stringToReturn stringByAppendingString:@"/"];
+        stringToReturn = [stringToReturn stringByAppendingString:[NSString stringWithFormat:@"%d",[components year]]];
+        
+        //Add the time in 24 hr (hour:minute)
+        stringToReturn = [stringToReturn stringByAppendingString:@" "];
+        if([components hour] < 10){
+            stringToReturn = [stringToReturn stringByAppendingString:[NSString stringWithFormat:@"0%d",[components hour]]];
+        }
+        
+        else{
+            stringToReturn = [stringToReturn stringByAppendingString:[NSString stringWithFormat:@"%d",[components hour]]];
+        }
+        stringToReturn = [stringToReturn stringByAppendingString:@":"];
+        if([components minute] < 10){
+            stringToReturn = [stringToReturn stringByAppendingString:[NSString stringWithFormat:@"0%d",[components minute]]];
+        }
+        
+        else{
+            stringToReturn = [stringToReturn stringByAppendingString:[NSString stringWithFormat:@"%d",[components minute]]];
+        }
+    
     //Add the date (dd:mm:yyyy)
-    if([components day] < 10){
-      stringToReturn = [stringToReturn stringByAppendingString:[NSString stringWithFormat:@"0%d",[components day]]];
-    }
-    
-    else{
-        stringToReturn = [stringToReturn stringByAppendingString:[NSString stringWithFormat:@"%d",[components day]]];
-    }
-    
-    stringToReturn = [stringToReturn stringByAppendingString:@"/"];
-    
-    if([components month] < 10){
-        stringToReturn = [stringToReturn stringByAppendingString:[NSString stringWithFormat:@"0%d",[components month]]];
-    }
-    
-    else{
-        stringToReturn = [stringToReturn stringByAppendingString:[NSString stringWithFormat:@"%d",[components month]]];
-    }
-    stringToReturn = [stringToReturn stringByAppendingString:@"/"];
-    stringToReturn = [stringToReturn stringByAppendingString:[NSString stringWithFormat:@"%d",[components year]]];
-    
-    //Add the time in 24 hr (hour:minute)
-    stringToReturn = [stringToReturn stringByAppendingString:@" "];
-    if([components hour] < 10){
-        stringToReturn = [stringToReturn stringByAppendingString:[NSString stringWithFormat:@"0%d",[components hour]]];
-    }
-    
-    else{
-        stringToReturn = [stringToReturn stringByAppendingString:[NSString stringWithFormat:@"%d",[components hour]]];
-    }
-    stringToReturn = [stringToReturn stringByAppendingString:@":"];
-    if([components minute] < 10){
-        stringToReturn = [stringToReturn stringByAppendingString:[NSString stringWithFormat:@"0%d",[components minute]]];
-    }
-    
-    else{
-        stringToReturn = [stringToReturn stringByAppendingString:[NSString stringWithFormat:@"%d",[components minute]]];
-    }
     
     return stringToReturn;
 }

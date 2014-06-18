@@ -144,7 +144,8 @@
         id currentArray = [keyWordsByTopic objectForKey:key];
     
         for(NSString* keyWordString2 in currentArray){
-            NSUInteger count = 0, length = [stringToSearch length];
+            int count = 0;
+            NSUInteger length = [stringToSearch length];
             NSRange range = NSMakeRange(0, length);
             while(range.location != NSNotFound)
             {
@@ -223,12 +224,12 @@
         [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZ"];
         NSDate *dateFromString = [dateFormatter dateFromString:[singleResult objectForKey:@"start_time"]];
         NSDate *currentTime = [NSDate date];
-
+        
         //filter the results of events
         if(dateFromString == nil){
             NSLog(@"null date");
         }
-        else if(currentTime < dateFromString){
+        else if([dateFromString compare:currentTime] == NSOrderedAscending){
             NSLog(@"event has already passed");
         }
 
