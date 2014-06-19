@@ -35,7 +35,7 @@
 
 //#define METERS_PER_MILE 1609.344
 #define METERS_PER_MILE 10000.0
-#define MAXIMUM_NUMBER_ANNOTATIONS 2500
+#define MAXIMUM_NUMBER_ANNOTATIONS 1500
 
 
 @implementation ViewController{
@@ -52,6 +52,7 @@
     BOOL anotherSearchInProgress;
     BOOL userChosenLocation;
     BOOL accessToCalenderGranted;
+    BOOL attemptedToAccessCalendar;
     NSDate *currentSelectedEventPickerDate;
 }
 
@@ -465,88 +466,39 @@ sideBarActivationState;
 //click on the annotation event date
 -(void)onClickAnnotationEventDate
 {
+    
     @try{
-        __block BOOL waitingForEventBlock = YES;
-
+        
+        attemptedToAccessCalendar = NO;
+    
         EKEventStore *eventStore = [[EKEventStore alloc] init];
-        EKAuthorizationStatus authorizationStatus = [EKEventStore authorizationStatusForEntityType:EKEntityTypeEvent];
-        BOOL needsToRequestAccessToEventStore = (authorizationStatus ==EKAuthorizationStatusNotDetermined);
+    
+        //@synchronized(eventStore){
         
-        if (needsToRequestAccessToEventStore) {
-            [eventStore requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError *error) {
-                if (granted) {
-                    // Access granted
-                    accessToCalenderGranted = YES;
-                    EKEvent *event  = [EKEvent eventWithEventStore:eventStore];
-                    event.calendar  = [eventStore defaultCalendarForNewEvents];
-                    event.title     = self.fbEventTitle.text;
-                    event.location  = self.fbEventAddress.text;
-                    event.notes     = self.fbEventDescription.text;
-                    
-                    NSDateFormatter *formatFb = [[NSDateFormatter alloc] init];
-                    [formatFb setDateFormat:@"dd/MM/yyyy bHH:mm"];
-                    NSLog(@"start date %@",self.fbEventDate.text);
-                    NSDate *formattedFacebookEventDate = [formatFb dateFromString:self.fbEventDate.text];
-                    NSDate *endTimeOfEvent = [formattedFacebookEventDate dateByAddingTimeInterval:3600];
-                    NSLog(@" after format start date %@",formattedFacebookEventDate);
-                    event.startDate = formattedFacebookEventDate;
-                    event.endDate = endTimeOfEvent;
-                    [eventStore saveEvent:event span:EKSpanThisEvent error:nil];
-                    
-                    waitingForEventBlock = NO;
-                } else {
-                    // Denied
-                    accessToCalenderGranted = NO;
-                    NSLog(@"Access to store not granted");
-                    waitingForEventBlock = NO;
-                }
-            }];
-        } else {
-            BOOL granted = (authorizationStatus == EKAuthorizationStatusAuthorized);
-            if (granted) {
-                // Access granted
-                accessToCalenderGranted = YES;
-                EKEvent *event  = [EKEvent eventWithEventStore:eventStore];
-                event.calendar  = [eventStore defaultCalendarForNewEvents];
-                event.title     = self.fbEventTitle.text;
-                event.location  = self.fbEventAddress.text;
-                event.notes     = self.fbEventDescription.text;
-                
-                NSDateFormatter *formatFb = [[NSDateFormatter alloc] init];
-                [formatFb setDateFormat:@"dd/MM/yyyy HH:mm"];
-                NSLog(@"start date %@",self.fbEventDate.text);
-                NSDate *formattedFacebookEventDate = [formatFb dateFromString:self.fbEventDate.text];
-                NSDate *endTimeOfEvent = [formattedFacebookEventDate dateByAddingTimeInterval:3600];
-                NSLog(@" after format start date %@",formattedFacebookEventDate);
-                event.startDate = formattedFacebookEventDate;
-                event.endDate = endTimeOfEvent;
-                [eventStore saveEvent:event span:EKSpanThisEvent error:nil];
-                
-                waitingForEventBlock = NO;
-            } else {
-                // Denied
-                accessToCalenderGranted = NO;
-                NSLog(@"Access to store not granted");
-                waitingForEventBlock = NO;
-            }
-        }
+        [eventStore requestAccessToEntityType:EKEntityTypeEvent
+                                   completion:^(BOOL granted, NSError *error) {
+                                       if(!granted){
+                                           //do nothing
+                                           accessToCalenderGranted = NO;
+                                           attemptedToAccessCalendar = YES;
+                                       }
+                                       else{
+                                           accessToCalenderGranted = YES;
+                                           attemptedToAccessCalendar = YES;
+                                           [self accessToEventStoreGranted];
+                                       }
+                                   }];
         
-        while(waitingForEventBlock) {
-            [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode
-                                     beforeDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
-        }
+        //}
         
-        if(accessToCalenderGranted == YES){
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Event Added"
-                                                        message:[NSString stringWithFormat:@"%@ has been added to your Calender",self.fbEventTitle.text]
-                                                       delegate:nil
-                                              cancelButtonTitle:@"OK"
-                                              otherButtonTitles:nil];
-            [alert show];
+        [NSThread sleepForTimeInterval:0.1];
+        
+        if((accessToCalenderGranted == NO) && (attemptedToAccessCalendar == YES)){
+            [self displayAccessDenied];
         }
         else{
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Event Not Added"
-                                                            message:[NSString stringWithFormat:@"Please give Evappa access to the Calendar"]
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Event Added"
+                                                            message:[NSString stringWithFormat:@"%@ has been added to your Calendar",self.fbEventTitle.text]
                                                            delegate:nil
                                                   cancelButtonTitle:@"OK"
                                                   otherButtonTitles:nil];
@@ -557,8 +509,47 @@ sideBarActivationState;
     @catch(NSException *e){
         NSLog(@"iCal Error %@",e);
     }
+        
     
 }
+
+-(void)accessToEventStoreGranted
+{
+    accessToCalenderGranted = YES;
+    EKEventStore *eventStore = [[EKEventStore alloc] init];
+    
+    EKEvent *event  = [EKEvent eventWithEventStore:eventStore];
+    event.calendar  = [eventStore defaultCalendarForNewEvents];
+    event.title     = self.fbEventTitle.text;
+    event.location  = self.fbEventAddress.text;
+    event.notes     = self.fbEventDescription.text;
+    
+    NSDateFormatter *formatFb = [[NSDateFormatter alloc] init];
+    [formatFb setDateFormat:@"dd/MM/yyyy HH:mm"];
+    NSLog(@"start date %@",self.fbEventDate.text);
+    NSDate *formattedFacebookEventDate = [formatFb dateFromString:self.fbEventDate.text];
+    NSDate *endTimeOfEvent = [formattedFacebookEventDate dateByAddingTimeInterval:3600];
+    NSLog(@" after format start date %@",formattedFacebookEventDate);
+    event.startDate = formattedFacebookEventDate;
+    event.endDate = endTimeOfEvent;
+    [eventStore saveEvent:event span:EKSpanThisEvent error:nil];
+}
+
+-(void)displayMessage:(NSString*)paraMessage{
+    
+    UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:nil
+                                                         message:paraMessage
+                                                        delegate:nil
+                                               cancelButtonTitle:nil
+                                               otherButtonTitles:@"OK", nil];
+    [alertView show];
+    
+}
+
+-(void)displayAccessDenied{
+    [self displayMessage:@"Please give Evappa access to your Calendar"];
+}
+
 
 
 -(void)loadFacebookPicture:(NSString*)eventFbPic
@@ -1371,10 +1362,6 @@ sideBarActivationState;
     [self.facebookImageSubView addGestureRecognizer:tapToFacebookEventLink];
     self.facebookImageSubView.userInteractionEnabled = YES;
     
-    UITapGestureRecognizer *tapToFacebookEventLink2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goToFacebookEventPage)];
-    tapToFacebookEventLink2.numberOfTapsRequired = 1;
-    [self.fbEventTitle addGestureRecognizer:tapToFacebookEventLink2];
-    self.fbEventTitle.userInteractionEnabled = YES;
     
     //Magic line that makes the mapView call the annotation script
     _mapView.delegate=self;
