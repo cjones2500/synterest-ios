@@ -35,7 +35,7 @@
 
 //#define METERS_PER_MILE 1609.344
 #define METERS_PER_MILE 10000.0
-#define MAXIMUM_NUMBER_ANNOTATIONS 1500
+#define MAXIMUM_NUMBER_ANNOTATIONS 500
 
 
 @implementation ViewController{
