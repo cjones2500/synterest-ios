@@ -224,6 +224,7 @@
         [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZ"];
         NSDate *dateFromString = [dateFormatter dateFromString:[singleResult objectForKey:@"start_time"]];
         NSDate *currentTime = [NSDate date];
+        NSDate *dateInThreeWeeks = [currentTime dateByAddingTimeInterval:3600.0*24.0*7.0*3.0];
         
         //filter the results of events
         if(dateFromString == nil){
@@ -231,6 +232,11 @@
         }
         else if([dateFromString compare:currentTime] == NSOrderedAscending){
             NSLog(@"event has already passed");
+        }
+        
+        //added in version 1.2 - don't include events that are older than a certain age
+        else if([dateFromString compare:dateInThreeWeeks] == NSOrderedDescending){
+            NSLog(@"event is too far away");
         }
 
         else if ([singleResult objectForKey:@"description"] == nil){

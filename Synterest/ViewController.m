@@ -35,7 +35,7 @@
 
 //#define METERS_PER_MILE 1609.344
 #define METERS_PER_MILE 10000.0
-#define MAXIMUM_NUMBER_ANNOTATIONS 500
+#define MAXIMUM_NUMBER_ANNOTATIONS 250
 
 
 @implementation ViewController{
@@ -53,6 +53,7 @@
     BOOL userChosenLocation;
     BOOL accessToCalenderGranted;
     BOOL attemptedToAccessCalendar;
+    BOOL eventPickerHidden;
     NSDate *currentSelectedEventPickerDate;
 }
 
@@ -93,12 +94,19 @@ sideBarActivationState;
 
 - (void)showEventPicker
 {
-    [self.view insertSubview:self.eventDatePicker atIndex:5];
+    self.eventDatePicker.hidden = NO;
+    //[self.view insertSubview:self.eventDatePicker atIndex:5];
+    eventPickerHidden = NO;
 }
 
 -(void)hideEventPicker
 {
-    [self.view insertSubview:self.eventDatePicker atIndex:-1];
+    if(eventPickerHidden ==YES){
+        [self showEventPicker];
+    }
+    self.eventDatePicker.hidden = YES;
+    //[self.view insertSubview:self.eventDatePicker atIndex:-1];
+    eventPickerHidden = YES;
 }
 
 -(void) setInitialLocationIfNull
@@ -1209,6 +1217,8 @@ sideBarActivationState;
     [super viewDidLoad];
     self.mapView.showsUserLocation=YES;
     
+    
+    
     //need to add the subviews first
     [self.view addSubview:self.sideBarView];
     [self.view addSubview:self.searchButtonSubView];
@@ -1251,6 +1261,12 @@ sideBarActivationState;
     singleTapOnHelperImageView.numberOfTapsRequired = 1;
     self.helperView.userInteractionEnabled = YES;
     [self.helperView addGestureRecognizer:singleTapOnHelperImageView];
+    
+    //Set up behaviour if for the listImageView
+    UITapGestureRecognizer *singleTapOnMap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideEventPicker)];
+    singleTapOnMap.numberOfTapsRequired = 1;
+    self.mapView.userInteractionEnabled = YES;
+    [self.mapView addGestureRecognizer:singleTapOnMap];
     
     
     //Format the search button subView
