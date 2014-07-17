@@ -54,6 +54,7 @@
     BOOL accessToCalenderGranted;
     BOOL attemptedToAccessCalendar;
     BOOL eventPickerHidden;
+    BOOL customDateInALoop;
     NSDate *currentSelectedEventPickerDate;
 }
 
@@ -127,6 +128,7 @@ sideBarActivationState;
     else{
         tomorrowIsActive = YES; //this causes the annotations to be added back
         customDateIsActive = NO;
+        customDateInALoop = NO;
         [self firedCustomEventChoice];
     }
 }
@@ -865,11 +867,17 @@ sideBarActivationState;
     else{
         NSLog(@"FirstDisplayOfEventPicker Flag error");
     }
+    customDateInALoop = NO;
     [self firedCustomEventChoice];
 }
 
+//firing of a custom event
 -(void) firedCustomEventChoice
 {
+    self.loadingDataWheel.hidesWhenStopped = NO;
+    self.loadingDataWheel.hidden = NO;
+    [loadingDataWheel startAnimating];
+    
     NSDateFormatter *formatFb = [[NSDateFormatter alloc] init];
     [formatFb setDateFormat:@"dd/MM/yyyy HH:mm"];
     NSDate *sourceDate = [NSDate dateWithTimeIntervalSinceNow:3600 * 24 * 60];
@@ -970,8 +978,10 @@ sideBarActivationState;
         }
     }
     else{
-        NSLog(@"TodayIsActive Flag not set");
+        NSLog(@"Default behaviour");
     }
+    self.loadingDataWheel.hidesWhenStopped = YES;
+    [loadingDataWheel stopAnimating];
     [self updateTableView];
 }
 
@@ -1236,7 +1246,7 @@ sideBarActivationState;
     [self.view insertSubview:self.calenderMainView atIndex:2];
     [self.view insertSubview:self.helperView atIndex:6];
     
-    [self.view insertSubview:self.eventDatePicker atIndex:5];
+    //[self.view insertSubview:self.eventDatePicker atIndex:5];
     [self.view insertSubview:self.fbPageView atIndex:10];
     
     self.annotationBarView.layer.backgroundColor = [UIColor whiteColor].CGColor;
@@ -1909,7 +1919,36 @@ sideBarActivationState;
                     
                 } //end of tomorrow filter
                 else if(customDateIsActive == YES){
-                    [self firedCustomEventChoice];
+                    //customDateInALoop = YES;
+                    //[self firedCustomEventChoice];
+                    //respect the next week filter
+                    @try{
+                        NSDate *todayDate = [NSDate date];
+                        NSDate *tomorrowDate = [currentSelectedEventPickerDate dateByAddingTimeInterval:60.0*60.0*24.0*1.0];
+                        //NSDate *tomorrowDate = [todayDate dateByAddingTimeInterval:60.0*60.0*24.0*7.0];
+                        NSDateFormatter *formatFb = [[NSDateFormatter alloc] init];
+                        [formatFb setDateFormat:@"dd/MM/yyyy HH:mm"];
+                        NSDate *sourceDate = [NSDate dateWithTimeIntervalSinceNow:3600 * 24 * 60];
+                        NSTimeZone* destinationTimeZone = [NSTimeZone systemTimeZone];
+                        float timeZoneOffset = [destinationTimeZone secondsFromGMTForDate:sourceDate] / 3600.0;
+                        [formatFb setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:timeZoneOffset]];
+                        NSDate *setDate = [formatFb dateFromString:[annotation fbEventDate]];
+                        
+                        NSComparisonResult result;
+                        result = [setDate compare:tomorrowDate];
+                        if(result==NSOrderedAscending){
+                            [_mapView addAnnotation:annotation];
+                        }
+                        else if(result==NSOrderedDescending){
+                            [_mapView removeAnnotation:annotation];
+                        }
+                        else{
+                            [_mapView addAnnotation:annotation];
+                        }
+                    }
+                    @catch(NSException *e){
+                        NSLog(@"Parse Error for Date Filter %@",e);
+                    }
                 }
                 else{
                     [_mapView addAnnotation:annotation];
